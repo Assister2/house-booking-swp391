@@ -55,7 +55,6 @@
 							<ul>
 								<li><a href="${pageContext.request.contextPath}/home" class="active">Home</a></li>
 								<li><a href="${pageContext.request.contextPath}/about">About</a></li>
-								<li><a href="${pageContext.request.contextPath}/error">Team</a></li>
 								<li><a href="${pageContext.request.contextPath}/booking">Book now</a></li>
 								<li><a href="${pageContext.request.contextPath}/access">Login</a></li>
 							</ul>
