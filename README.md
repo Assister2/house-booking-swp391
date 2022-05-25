@@ -11,3 +11,11 @@
 ## `Contact:`
 
 ## `GUI (Screenshot of project):`
+* **For Customer:** Modern, good-looking to attract customers
+  * Home page: 
+![image](https://user-images.githubusercontent.com/90202401/170193431-09b168d0-46a9-4682-ab6a-0b883db2b28f.png)
+* **For House owner:** Simple, convenient for observation and management
+
+* **For Admin:** 
+## `ER Diagram`
+![image](https://user-images.githubusercontent.com/90202401/170193278-7e275675-f618-4b81-9f45-6d399808b3b5.png)
