@@ -107,24 +107,23 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<div class="grids_bottom">
 		<div class="style-grids">
 			<div class="col-md-6 style-grid style-grid-1">
-				<img src="${pageContext.request.contextPath}/view/web/images/anh1.jpeg" alt="shoe">
+				<img class="img-responsive" src="${pageContext.request.contextPath}/view/web/images/anh1.jpeg" alt="shoe">
 			</div>
 		</div>
 		<div class="col-md-6 style-grid style-grid-2">
-			<div class="style-image-1_info">
+			<div style="background-image: linear-gradient(#48b1bf, #ffdde1); height: 412.5px;" class="style-image-1_info">
 				<div class="style-grid-2-text_info">
 					<h3>CARE YOUR TRIP</h3>
-					<p>Itaque earum rerum hic tenetur a sapiente delectus reiciendis maiores alias consequatur.sed quia non numquam eius modi
-						tempora incidunt ut labore et dolore .</p>
+					<p>Chỗ này thêm description nè, mấy fen thêm dô đi, tui k biết thêm j hết á!</p>
 					<div class="shop-button">
 						<a href="${pageContext.request.contextPath}/booking">Book now</a>
 					</div>
 				</div>
 			</div>
 			<div class="style-image-2">
-				<img src="${pageContext.request.contextPath}/view/web/images/anh2.jpg" alt="shoe">
+				<img class="img-responsive" src="${pageContext.request.contextPath}/view/web/images/anh2.jpg" alt="shoe">
 				<div class="style-grid-2-text">
-					<h3>Air force</h3>
+					<h3>Have a good time!!</h3>
 				</div>
 			</div>
 		</div>

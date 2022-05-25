@@ -16,6 +16,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	
 	
 	
+
 		addEventListener("load", function () {
 			setTimeout(hideURLbar, 0);
 		}, false);
@@ -27,8 +28,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 
 
+
 </script>
 <!-- //custom-theme -->
+<link href="${pageContext.request.contextPath}/view/web/css/blog.css"
+	rel="stylesheet" type="text/css" media="all" />
+<link href="${pageContext.request.contextPath}/view/web/css/rating.css"
+	rel="stylesheet" type="text/css" media="all" />
 <link
 	href="${pageContext.request.contextPath}/view/web/css/bootstrap.css"
 	rel="stylesheet" type="text/css" media="all" />
@@ -65,19 +71,21 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/ui-lightness/jquery-ui.css'
 	rel='stylesheet'>
 <style>
-		.ui-datepicker {
-			margin-top: 0px;
-			width: 20em;
-		}
-		h1{
-			color:green;
-		}
-		.ui-state-default, .ui-widget-content .ui-state-default{
-			border-radius: 0px;
-			height: fit-content;
-			width: 29.33px;
-		}
-	</style>
+.ui-datepicker {
+	margin-top: 0px;
+	width: 20em;
+}
+
+h1 {
+	color: green;
+}
+
+.ui-state-default, .ui-widget-content .ui-state-default {
+	border-radius: 0px;
+	height: fit-content;
+	width: 29.33px;
+}
+</style>
 
 </head>
 
@@ -165,17 +173,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 											class="form-control" required>
 									</div>
 									<div class="form-group">
-										<label>Giảm giá (%)</label> <input name="discount" type="text"
+										<label>Phone number</label> <input name="discount" type="text"
 											class="form-control" required>
 									</div>
 									<div class="form-group">
-										<label>Ngày hết hạn (yyyy-MM-dd)</label> <input name="dueDate"
-											type="text" class="form-control" required>
+										<label>Email</label> <input name="discount" type="text"
+											class="form-control" required>
 									</div>
-									<div class="form-group">
-										<label>Giảm tối đa</label> <input name="maxDiscount"
-											type="text" class="form-control" required>
-									</div>
+									
 									<div class="form-group">
 										<label>Start Date:</label> <input type="text"
 											id="my_date_picker1" class="form-control" required>
@@ -187,8 +192,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								</div>
 								<div class="modal-footer">
 									<input type="button" class="btn btn-default"
-										data-dismiss="modal" value="Hủy"> <input type="submit"
-										class="btn btn-success" value="Thêm">
+										data-dismiss="modal" value="Cancel"> <input type="submit"
+										class="btn btn-success" value="OK">
 								</div>
 							</form>
 						</div>
@@ -200,8 +205,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<div class="responsive_tabs">
 					<div id="horizontalTab">
 						<ul class="resp-tabs-list">
-							<li>Tiện nghi</li>
-							<li>Thông tin chi tiết</li>
+							<li>Convenients</li>
+							<li>More information</li>
+							<li>Rules</li>
 						</ul>
 						<div class="resp-tabs-container">
 							<!--/tab_one-->
@@ -261,6 +267,26 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									</table>
 								</div>
 							</div>
+							
+							<!-- tab 3 -->
+							<div class="tab3">
+								<div class="table-responsive">
+									<table class="table table-striped">
+										<tbody>
+											<tr>
+												<td>Giữ vệ sinh chung</td>
+											</tr>
+											<tr>
+												<td>Nếu làm hỏng hóc thiết bị phải bồi thường</td>
+											</tr>
+											<tr>
+												<td>Chủ nhà có thể đuổi bất cứ lúc nào thấy muốn:))</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+							
 						</div>
 					</div>
 				</div>
@@ -268,11 +294,96 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			</div>
 			<div class="clearfix"></div>
 			<!--/tabs-->
+			<hr>
+			<!-- /new_arrivals -->
+			<div class="container">
+				<div class="blog-single-post-thumb">
+					<div class="blog-comment">
+						<h3>Comments</h3>
+						<div class="media" style="margin-top: 20px;">
+							<div class="media-object pull-left">
+								<img src="${pageContext.request.contextPath}/view/web/images/author-image2.jpg"
+									
+									class="img-responsive img-circle" width="60" height="60"
+									alt="Blog Image 11">
+							</div>
+							<div class="media-body">
+								<h3 class="media-heading">Karim Benzema</h3>
+								<span style="font-size: 12px;">3 days ago</span>
+								<p>Nhà ok lắm, chị chủ nhà rất xinh.</p>
+							</div>
+						</div>
+						<div class="media" style="margin-top: 20px;">
+							<div class="media-object pull-left">
+								<img
+									src="${pageContext.request.contextPath}/view/web/images/comment-image1.jpg"
+									class="img-responsive img-circle" width="60px" height="60px"
+									alt="Blog Image 22">
+							</div>
+							<div class="media-body">
+								<h3 class="media-heading">Cristiano Ronaldo</h3>
+								<span style="font-size: 12px;">5 days ago</span>
+								<p>Ngày xưa có 1 chú chim cánh cụt thở bằng l* đ*t. Một hôm
+									chú ngồi xuống và chết</p>
+							</div>
+						</div>
+						<div class="media" style="margin-top: 20px;">
+							<div class="media-object pull-left">
+								<img
+									src="${pageContext.request.contextPath}/view/web/images/author-image1.jpg"
+									class="img-responsive img-circle" width="60px" height="60px"
+									alt="Blog Image 22">
+							</div>
+							<div class="media-body">
+								<h3 class="media-heading">Truong Giang</h3>
+								<span style="font-size: 12px;">5 days ago</span>
+								<p>Lời yêu thương truyền bằng phương thức Get <3</p>
+								<p>Nhận dáng hình qua địa chỉ IP.</p>
+							</div>
+						</div>
+						<div class="container">
+							<div style="text-align: right;">
+								<a href="#" class="previous round arrow">&#8250;</a>
+							</div>
+							<div style="text-align: left;">
+								<a href="#" class="previous round arrow">&#8249;</a>
+							</div>
 
+						</div>
+
+					</div>
+
+					<div class="blog-comment-form">
+						<h3>Leave a Comment</h3>
+						<form action="#" method="post">
+							<span class="star-rating"> <input type="radio"
+								name="rating1" value="1"><i></i> <input type="radio"
+								name="rating1" value="2"><i></i> <input type="radio"
+								name="rating1" value="3"><i></i> <input type="radio"
+								name="rating1" value="4"><i></i> <input type="radio"
+								name="rating1" value="5"><i></i>
+							</span> <input type="text" class="form-control" placeholder="Name"
+								name="name" required> <input type="email"
+								class="form-control" placeholder="Email" name="email" required>
+							<textarea name="message" rows="5" class="form-control"
+								id="message" placeholder="Message" message="message"
+								required="required"></textarea>
+							<div class="col-md-3 col-sm-4">
+								<input name="submit" type="submit" class="form-control"
+									id="submit" value="Post Your Comment">
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<!-- //womens -->
+			<div class="clearfix"></div>
+			<!--//comment zone-->
 			<!--//tabs-->
+			<hr>
 			<!-- /new_arrivals -->
 			<div class="new_arrivals">
-				<h3>Homestay cùng khu vực</h3>
+				<h3>Near this place</h3>
 				<!-- /womens -->
 				<div class="col-md-3 product-men women_two">
 					<div class="product-shoe-info shoe">
@@ -649,6 +760,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							})
 				})
 	</script>
+
+	<!-- Rating js -->
+	<script type="text/javascript"
+		src="${pageContext.request.contextPath}/view/web/js/rating.js"></script>
 
 </body>
 

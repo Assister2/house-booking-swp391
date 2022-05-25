@@ -53,11 +53,7 @@ input[type="submit"],
 a,
 .nbs-flexisel-nav-left,
 .nbs-flexisel-nav-right {
-    transition: .5s ease-in;
-    -webkit-transition: .5s ease-in;
-    -moz-transition: .5s ease-in;
-    -o-transition: .5s ease-in;
-    -ms-transition: .5s ease-in;
+   
 }
 
 a:hover {
@@ -1215,7 +1211,7 @@ color: #2fdab8;
 }
 /*-- //footer --*/
 .banner_top.innerpage {
-    background: url(https://baoloccity.vn/wp-content/uploads/2021/06/b.jpeg) no-repeat 0px -221px;
+    background: url(../images/nam.jpeg) no-repeat 0px -400px;
     background-size: cover;
     -webkit-background-size: cover;
     -moz-background-size: cover;
