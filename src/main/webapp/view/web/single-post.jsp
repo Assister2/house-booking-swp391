@@ -16,6 +16,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	
 	
 	
+	
+	
 
 		addEventListener("load", function () {
 			setTimeout(hideURLbar, 0);
@@ -25,6 +27,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			window.scrollTo(0, 1);
 		}
 	
+
+
 
 
 
@@ -142,10 +146,19 @@ h1 {
 				</div>
 			</div>
 			<div class="col-md-8 single-right-left simpleCart_shelfItem">
-				<h3 style="color: black;">Ten khach san - Loai phong(neu co)</h3>
+				<h2 style="color: black;">Khách sạn Vip Pro nhất Đà Lạt</h2>
+				<div class="rating" style="margin-top: 10px;">
+					<span class="fa fa-star checked"></span>
+					<span class="fa fa-star checked"></span>
+					<span class="fa fa-star checked"></span>
+					<span class="fa fa-star checked"></span>
+					<span class="fa fa-star-half-full"></span>
+					<span style="margin-left: 5px; margin-right: 3px;">| 240</span>
+					<span class="fa fa-user"></span>
+				</div>
 				<p>
-					<span class="item_price">$650/day</span>
-					<del>$1,199/day</del>
+					<span class="item_price">$650 /day</span>
+					<del>$1,199 /day</del>
 				</p>
 
 
@@ -180,7 +193,7 @@ h1 {
 										<label>Email</label> <input name="discount" type="text"
 											class="form-control" required>
 									</div>
-									
+
 									<div class="form-group">
 										<label>Start Date:</label> <input type="text"
 											id="my_date_picker1" class="form-control" required>
@@ -192,8 +205,8 @@ h1 {
 								</div>
 								<div class="modal-footer">
 									<input type="button" class="btn btn-default"
-										data-dismiss="modal" value="Cancel"> <input type="submit"
-										class="btn btn-success" value="OK">
+										data-dismiss="modal" value="Cancel"> <input
+										type="submit" class="btn btn-success" value="OK">
 								</div>
 							</form>
 						</div>
@@ -267,7 +280,7 @@ h1 {
 									</table>
 								</div>
 							</div>
-							
+
 							<!-- tab 3 -->
 							<div class="tab3">
 								<div class="table-responsive">
@@ -286,7 +299,7 @@ h1 {
 									</table>
 								</div>
 							</div>
-							
+
 						</div>
 					</div>
 				</div>
@@ -302,8 +315,8 @@ h1 {
 						<h3>Comments</h3>
 						<div class="media" style="margin-top: 20px;">
 							<div class="media-object pull-left">
-								<img src="${pageContext.request.contextPath}/view/web/images/author-image2.jpg"
-									
+								<img
+									src="${pageContext.request.contextPath}/view/web/images/author-image2.jpg"
 									class="img-responsive img-circle" width="60" height="60"
 									alt="Blog Image 11">
 							</div>
