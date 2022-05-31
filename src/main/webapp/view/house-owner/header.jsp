@@ -20,42 +20,24 @@
             <nav class="navbar-mobile">
                 <div class="container-fluid">
                     <ul class="navbar-mobile__list list-unstyled">
-                        <li class="has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="fas fa-tachometer-alt"></i>Dashboard</a>
-                            <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
-                                <li>
-                                    <a href="index.html">Dashboard 1</a>
-                                </li>
-                                <li>
-                                    <a href="index2.html">Dashboard 2</a>
-                                </li>
-                                <li>
-                                    <a href="index3.html">Dashboard 3</a>
-                                </li>
-                                <li>
-                                    <a href="index4.html">Dashboard 4</a>
-                                </li>
-                            </ul>
+                         <li>
+                            <a href="${pageContext.request.contextPath}/dashboard">
+                                 <i class="fas fa-tachometer-alt"></i>Dashboard</a>
                         </li>
-                        <!-- <li>
-                            <a href="chart.html">
-                                <i class="fas fa-chart-bar"></i>Charts</a>
-                        </li> -->
                         <li>
                             <a href="${pageContext.request.contextPath}/manage">
                                 <i class="fas fa-table"></i>Quản lý</a>
                         </li>
                         <li>
-                            <a href="form.html">
+                            <a href="${pageContext.request.contextPath}/post">
                                 <i class="far fa-check-square"></i>Đăng bài</a>
                         </li>
                         <li>
-                            <a href="form.html">
+                            <a href="${pageContext.request.contextPath}/request">
                                 <i class="fas fa-table"></i>Quản lý bill</a>
                         </li>
                         <li>
-                            <a href="form.html">
+                            <a href="${pageContext.request.contextPath}/information">
                                 <i class="fas fa-table"></i>Thông tin tài khoản</a>
                         </li>
                     </ul>
@@ -74,23 +56,9 @@
             <div class="menu-sidebar__content js-scrollbar1">
                 <nav class="navbar-sidebar">
                     <ul class="list-unstyled navbar__list">
-                        <li class="active has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="fas fa-tachometer-alt"></i>Dashboard</a>
-                            <ul class="list-unstyled navbar__sub-list js-sub-list">
-                                <li>
-                                    <a href="index.html">Dashboard 1</a>
-                                </li>
-                                <li>
-                                    <a href="index2.html">Dashboard 2</a>
-                                </li>
-                                <li>
-                                    <a href="index3.html">Dashboard 3</a>
-                                </li>
-                                <li>
-                                    <a href="index4.html">Dashboard 4</a>
-                                </li>
-                            </ul>
+                        <li>
+                            <a href="${pageContext.request.contextPath}/dashboard">
+                                 <i class="fas fa-tachometer-alt"></i>Dashboard</a>
                         </li>
                         
                         <li>
@@ -98,15 +66,15 @@
                                 <i class="fas fa-table"></i>Quản lý</a>
                         </li>
                         <li>
-                            <a href="form.html">
+                            <a href="${pageContext.request.contextPath}/post">
                                 <i class="far fa-check-square"></i>Đăng bài</a>
                         </li>
                         <li>
-                            <a href="form.html">
+                            <a href="${pageContext.request.contextPath}/request">
                                 <i class="fas fa-table"></i>Quản lý bill</a>
                         </li>
                         <li>
-                            <a href="form.html">
+                            <a href="${pageContext.request.contextPath}/information">
                                 <i class="fas fa-table"></i>Thông tin tài khoản</a>
                         </li>
                         
