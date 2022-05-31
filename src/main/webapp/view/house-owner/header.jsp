@@ -29,7 +29,7 @@
                                 <i class="fas fa-table"></i>Quản lý</a>
                         </li>
                         <li>
-                            <a href="${pageContext.request.contextPath}/post">
+                            <a href="${pageContext.request.contextPath}/owner-post">
                                 <i class="far fa-check-square"></i>Đăng bài</a>
                         </li>
                         <li>
@@ -66,7 +66,7 @@
                                 <i class="fas fa-table"></i>Quản lý</a>
                         </li>
                         <li>
-                            <a href="${pageContext.request.contextPath}/post">
+                            <a href="${pageContext.request.contextPath}/owner-post">
                                 <i class="far fa-check-square"></i>Đăng bài</a>
                         </li>
                         <li>
