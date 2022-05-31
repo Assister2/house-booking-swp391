@@ -18,4 +18,3 @@
 
 * **For Admin:** 
 ## `ER Diagram`
-![image](https://user-images.githubusercontent.com/90202401/170193278-7e275675-f618-4b81-9f45-6d399808b3b5.png)
