@@ -66,7 +66,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 		<jsp:include page="commontool.jsp"></jsp:include>
 	</div>
-
+	
 	<!-- //banner -->
 	<!-- top Products -->
 	<div class="ads-grid_shop">
@@ -248,13 +248,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									</div>
 									<div class="item-info-product">
 										<h4>
-											<a href="single.html">Homestay Đà Lạt</a>
+											<a href="single.html">${room.roomName}</a>
 										</h4>
 										<div class="info-product-price">
 											<div class="grid_meta">
 												<div class="product_price">
 													<div class="grid-price ">
-														<span class="money ">$100/day</span>
+														<span class="money ">$${room.price/1000 }k/day</span>
 													</div>
 												</div>
 												<ul class="stars">
@@ -269,8 +269,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 													<li><a href="#"><i class="fa fa-star-o"
 															aria-hidden="true"></i></a></li>
 												</ul>
-												<div>..., gần chợ Đà Lạt, tiện nghi cực đã, giá mềm, k
-													thuê phí cả đời</div>
+												<div>${room.roomDesc }</div>
 											</div>
 
 										</div>
