@@ -424,7 +424,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <!-- DATA TABLE -->
-                                <h3 class="title-5 m-b-35">Request table</h3>
+                                <h3 class="title-5 m-b-35">Chi tiết đặt phòng</h3>
                                 <div class="table-data__tool">
                                     <div class="table-data__tool-left">
                                         <div class="rs-select2--light rs-select2--md">
@@ -469,12 +469,12 @@
                                                         <span class="au-checkmark"></span>
                                                     </label>
                                                 </th>
-                                                <th>name</th>
-                                                <th>email</th>
-                                                <th>description</th>
-                                                <th>date</th>
-                                                <th>status</th>
-                                                <th>price</th>
+                                                <th>Bill ID</th>
+                                                <th>Room Name</th>
+                                                <th>Date</th>
+                                                <th>Description</th>
+                                                <th>Status</th>
+                                                <th>User</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
@@ -490,7 +490,7 @@
                                                 <td>
                                                     <span class="block-email">lori@example.com</span>
                                                 </td>
-                                                <td class="desc">Samsung S8 Black</td>
+                                                <td class="desc">Samsung S8fd Black</td>
                                                 <td>2018-09-27 02:12</td>
                                                 <td>
                                                     <span class="status--process">Processed</span>

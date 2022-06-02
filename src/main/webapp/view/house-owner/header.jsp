@@ -70,7 +70,7 @@
                                 <i class="far fa-check-square"></i>Đăng bài</a>
                         </li>
                         <li>
-                            <a href="${pageContext.request.contextPath}/request">
+                            <a href="${pageContext.request.contextPath}/manage-bill">
                                 <i class="fas fa-table"></i>Quản lý bill</a>
                         </li>
                         <li>

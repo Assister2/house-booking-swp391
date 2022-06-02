@@ -491,7 +491,7 @@
                                                     <span class="block-email">lori@example.com</span>
                                                 </td>
                                                 <td class="desc">Samsung S8 Black</td>
-                                                <td>2018-09-27 02:12</td>
+                                                <td>2018-09-27 02:12</td> 
                                                 <td>
                                                     <span class="status--process">Processed</span>
                                                 </td>
