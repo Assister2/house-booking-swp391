@@ -19,7 +19,15 @@ Drop table Users
 Drop table Room
 Go
 
+ALTER TABLE District
+DROP CONSTRAINT FK_District_City;
+Go
 
+ALTER TABLE Street
+DROP CONSTRAINT FK_Street_District;
+Go
+
+-- Create table
 Create table Room (
 	room_id varchar(20),
 	room_name nvarchar(100) not null,
