@@ -165,7 +165,7 @@ h1 {
 				<!-- Booking -->
 
 				<div>
-					<a style="background-color: #00BCD4;" href="#addEmployeeModal"
+					<a style="background-color: #00BCD4;" href="${pageContext.request.contextPath}/make-request"
 						class="btn btn-success" data-toggle="modal">Đặt phòng</a>
 				</div>
 
