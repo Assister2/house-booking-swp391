@@ -22,7 +22,8 @@
                     <li><a href="${pageContext.request.contextPath}/about">About</a></li>
                     <li><a href="${pageContext.request.contextPath}/error">Team</a></li>
                     <li><a href="${pageContext.request.contextPath}/booking">Book now</a></li>
-                    <li><a href="${pageContext.request.contextPath}/access">Login</a></li>
+                    <li><a href="${pageContext.request.contextPath}/login">Login</a></li>
+                    <li><a href="${pageContext.request.contextPath}/sign-up">Sign up</a></li>
                 </ul>
             </nav>
         </div>

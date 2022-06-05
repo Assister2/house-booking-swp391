@@ -42,7 +42,8 @@ Go
 
 Create table Room_Images(
 	room_id varchar(20),
-	room_images varbinary Not null,
+	image_name nvarchar(200),
+	room_images varbinary(MAX) Not null,
 	primary key(room_id, room_images)
 )
 Go
