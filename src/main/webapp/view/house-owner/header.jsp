@@ -24,9 +24,27 @@
                             <a href="${pageContext.request.contextPath}/dashboard">
                                  <i class="fas fa-tachometer-alt"></i>Dashboard</a>
                         </li>
+                         <li class="has-sub">
+                            <a class="js-arrow">
+                                <i class="fas fa-tachometer-alt"></i>Quản lý riêng</a>
+                            <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
+                                <li>
+                                    <a href="index.html">Nhà 1</a>
+                                </li>
+                                <li>
+                                    <a href="index2.html">Nhà 2</a>
+                                </li>
+                                <li>
+                                    <a href="index3.html">Nhà 3</a>
+                                </li>
+                                <li>
+                                    <a href="index4.html">Nhà 4</a>
+                                </li>
+                            </ul>
+                        </li>
                         <li>
                             <a href="${pageContext.request.contextPath}/manage">
-                                <i class="fas fa-table"></i>Quản lý</a>
+                                <i class="fas fa-table"></i>Quản lý chung</a>
                         </li>
                         <li>
                             <a href="${pageContext.request.contextPath}/owner-post">
@@ -61,9 +79,28 @@
                                  <i class="fas fa-tachometer-alt"></i>Dashboard</a>
                         </li>
                         
+                         <li class="has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-tachometer-alt"></i>Quản lý riêng</a>
+                            <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
+                                <li>
+                                    <a href="index.html">Nhà 1</a>
+                                </li>
+                                <li>
+                                    <a href="index2.html">Nhà 2</a>
+                                </li>
+                                <li>
+                                    <a href="index3.html">Nhà 3</a>
+                                </li>
+                                <li>
+                                    <a href="index4.html">Nhà 4</a>
+                                </li>
+                            </ul>
+                        </li>
+                        
                         <li>
                             <a href="${pageContext.request.contextPath}/manage">
-                                <i class="fas fa-table"></i>Quản lý</a>
+                                <i class="fas fa-table"></i>Quản lý chung</a>
                         </li>
                         <li>
                             <a href="${pageContext.request.contextPath}/owner-post">
