@@ -148,13 +148,13 @@ h1 {
 			<div class="col-md-8 single-right-left simpleCart_shelfItem">
 				<h2 style="color: black;">Khách sạn Vip Pro nhất Đà Lạt</h2>
 				<div class="rating" style="margin-top: 10px;">
-					<span class="fa fa-star checked"></span> <span
-						class="fa fa-star checked"></span> <span
-						class="fa fa-star checked"></span> <span
-						class="fa fa-star checked"></span> <span
-						class="fa fa-star-half-full"></span> <span
-						style="margin-left: 5px; margin-right: 3px;">| 240</span> <span
-						class="fa fa-user"></span>
+					<span class="fa fa-star checked"></span>
+					<span class="fa fa-star checked"></span>
+					<span class="fa fa-star checked"></span>
+					<span class="fa fa-star checked"></span>
+					<span class="fa fa-star-half-full"></span>
+					<span style="margin-left: 5px; margin-right: 3px;">| 240</span>
+					<span class="fa fa-user"></span>
 				</div>
 				<p>
 					<span class="item_price">$650 /day</span>
@@ -165,12 +165,7 @@ h1 {
 				<!-- Booking -->
 
 				<div>
-<<<<<<< HEAD
 					<a style="background-color: #00BCD4;" href="#addEmployeeModal"
-=======
-					<a style="background-color: #00BCD4;"
-						href="${pageContext.request.contextPath}/make-request"
->>>>>>> e6feaa1a7124b32eb9afd2223645ab9cdbe24d64
 						class="btn btn-success" data-toggle="modal">Đặt phòng</a>
 				</div>
 

@@ -33,8 +33,7 @@
 					</c:if>
 					<c:if test="${usersession == null }">
 						<li><a href="${pageContext.request.contextPath}/login">Login</a></li>
-						<li><a href="${pageContext.request.contextPath}/sign-up">Sign
-								up</a></li>
+						<li><a href="${pageContext.request.contextPath}/sign-up">Sign up</a></li>
 					</c:if>
 
 				</ul>
