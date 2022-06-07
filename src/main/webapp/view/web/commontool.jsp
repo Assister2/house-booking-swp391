@@ -1,6 +1,6 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
 <!-- search -->
 <div class="search_w3ls_agileinfo">
@@ -11,7 +11,8 @@
 	</div>
 	<div id="cd-search" class="cd-search">
 		<form action="#" method="post">
-			<input name="Search" type="search" placeholder="Click enter after typing...">
+			<input name="Search" type="search"
+				placeholder="Click enter after typing...">
 		</form>
 	</div>
 </div>

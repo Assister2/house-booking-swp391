@@ -81,6 +81,7 @@ public class RoomDAO implements IRoomDAO {
 		return room;
 	}
 	
+	
 	public int getNoOfRecords() {
 
         String sql = "SELECT COUNT(room_id) as noOfRecords FROM Room";

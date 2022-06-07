@@ -134,9 +134,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<c:set var="listConvenient"
 							value="${requestScope.listConvenient }"></c:set>
 						<c:forEach var="convenient" items="${listConvenient }">
-							<li><input id="${convenient.conveId }" type="checkbox" value="${convenient.conveId }" class="checked">
-							<span class="span"><label for="${convenient.conveId }"
-								style="font-weight: unset;">${convenient.conveName }</label></span></li>
+							<li><input id="${convenient.conveId }" type="checkbox"
+								value="${convenient.conveId }" class="checked"> <span
+								class="span"><label for="${convenient.conveId }"
+									style="font-weight: unset;">${convenient.conveName }</label></span></li>
 						</c:forEach>
 					</ul>
 				</div>
