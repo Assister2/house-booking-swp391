@@ -8,6 +8,7 @@ public class Room {
 	private String rule;
 	private String typeId;
 	private String buildingId;
+	private String typeName;
 	
 	public String getRoomId() {
 		return roomId;
@@ -50,6 +51,13 @@ public class Room {
 	}
 	public void setBuildingId(String buildingId) {
 		this.buildingId = buildingId;
+	}
+	
+	public String getTypeName() {
+		return typeName;
+	}
+	public void setTypeName(String typeName) {
+		this.typeName = typeName;
 	}
 	@Override
 	public String toString() {

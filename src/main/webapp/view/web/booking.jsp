@@ -20,6 +20,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	
 	
 	
+	
+	
+	
+	
+	
+	
 		addEventListener("load", function () {
 			setTimeout(hideURLbar, 0);
 		}, false);
@@ -28,6 +34,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			window.scrollTo(0, 1);
 		}
 	
+
+
+
+
+
+
 
 
 
@@ -103,14 +115,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				</div>
 				<!-- //price range -->
 				<hr>
-				<!-- discounts -->
+				<!-- Type -->
+				<c:set var="listType" value="${requestScope.listType }"></c:set>
 				<div class="left-side">
 					<h3 class="agileits-sear-head">Type of room</h3>
 					<select class="form-control">
-						<option>Vintage - Old school</option>
-						<option>Natural</option>
-						<option>Modern</option>
-						<option>...</option>
+						<c:forEach var="type" items="${listType }">
+							<option>${type.typeName}</option>
+						</c:forEach>
 					</select>
 				</div>
 				<!-- //discounts -->
@@ -119,21 +131,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<div class="left-side">
 					<h3 class="agileits-sear-head">Convenient</h3>
 					<ul>
-						<li><input id="parking-lot" type="checkbox" class="checked">
-							<span class="span"><label for="parking-lot"
-								style="font-weight: unset;">Parking Lots</label></span></li>
-						<li><input type="checkbox" class="checked"> <span
-							class="span">Pool</span></li>
-						<li><input type="checkbox" class="checked"> <span
-							class="span">Free wifi</span></li>
-						<li><input type="checkbox" class="checked"> <span
-							class="span">Pet care</span></li>
-						<li><input type="checkbox" class="checked"> <span
-							class="span">TV</span></li>
-						<li><input type="checkbox" class="checked"> <span
-							class="span">Washing machine</span></li>
-						<li><input type="checkbox" class="checked"> <span
-							class="span">microwave</span></li>
+						<c:set var="listConvenient"
+							value="${requestScope.listConvenient }"></c:set>
+						<c:forEach var="convenient" items="${listConvenient }">
+							<li><input id="${convenient.conveId }" type="checkbox" value="${convenient.conveId }" class="checked">
+							<span class="span"><label for="${convenient.conveId }"
+								style="font-weight: unset;">${convenient.conveName }</label></span></li>
+						</c:forEach>
 					</ul>
 				</div>
 				<!-- // preference -->
@@ -217,7 +221,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<div class="col-md-6 shop_left" style="margin-top: 6px;">
 						<!-- <img src="images/banner3.jpg" alt="">
 						<h6>40% off</h6> -->
-						There are 10 results
+						There are <span style="color: red;">${requestScope.totalRecords }</span>
+						results
 					</div>
 					<div class="col-md-6 shop_right">
 						<!-- <img src="images/banner2.jpg" alt="">
@@ -249,7 +254,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									<div class="product-shoe-info shoe">
 										<div class="men-pro-item">
 											<div class="men-thumb-item">
-												<img width="250" height="200"
+												<img width="240" height="190"
 													src="https://vinhomesland.vn/wp-content/uploads/2019/10/homestay.jpg"
 													alt="">
 												<div class="men-cart-pro">
@@ -265,7 +270,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									</div>
 								</div>
 								<div class="col-md-8 info-product-price">
-									<div class="item-info-product" style="text-align: left; margin-bottom: 15px;">
+									<div class="item-info-product"
+										style="text-align: left; margin-bottom: 15px;">
 										<h4>
 											<a href="single.html">${room.roomName }</a>
 										</h4>
@@ -289,6 +295,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 											<li><a href="#"><i class="fa fa-star-half-o"
 													aria-hidden="true"></i></a></li>
 										</ul>
+										<div>Loại phòng: ${room.typeName }</div>
 										<div>${room.roomDesc }</div>
 									</div>
 								</div>
@@ -296,36 +303,122 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							</div>
 						</c:forEach>
 
+						<!-- //paging -->
+						<c:choose>
 
+							<c:when test="${param.action == 'sort'}">
+								<ul class="pagination">
 
-						<!--  -->
+									<c:if test="${currentPage != 1}">
+										<li class="page-item"><a
+											href="product?action=sort&direction=${param.direction}&by=${param.by}&page=${currentPage - 1}">Previous</a></li>
+									</c:if>
+									<c:forEach begin="1" end="${noOfPages}" var="i">
+										<c:choose>
+											<c:when test="${currentPage eq i}">
+												<li class="page-item"><a class="page-link">${i}</a></li>
+											</c:when>
+											<c:otherwise>
+												<li class="page-item"><a
+													href="product?action=sort&direction=${param.direction}&by=${param.by}&page=${i}"
+													class="page-link">${i}</a></li>
+											</c:otherwise>
+										</c:choose>
+									</c:forEach>
+									<c:if test="${currentPage lt noOfPages}">
+										<li class="page-item"><a
+											href="product?action=sort&direction=${param.direction}&by=${param.by}&page=${currentPage + 1}">Next</a></li>
+									</c:if>
+								</ul>
+							</c:when>
 
-						<!-- //womens -->
+							<c:when test="${param.action == 'listBy'}">
+								<ul class="pagination">
 
-						<div class="clearfix"></div>
+									<c:if test="${currentPage != 1}">
+										<li class="page-item"><a
+											href="product?action=listBy&category=${param.category}&page=${currentPage - 1}">Previous</a></li>
+									</c:if>
+									<c:forEach begin="1" end="${noOfPages}" var="i">
+										<c:choose>
+											<c:when test="${currentPage eq i}">
+												<li class="page-item"><a class="page-link">${i}</a></li>
+											</c:when>
+											<c:otherwise>
+												<li class="page-item"><a
+													href="product?action=listBy&category=${param.category}&page=${i}"
+													class="page-link">${i}</a></li>
+											</c:otherwise>
+										</c:choose>
+									</c:forEach>
 
-						<div class="row text-center">
-							<ul class="pagination">
-								<li><a class="btn btn-primary" href="#" role="button">Previous</a></li>
-								<li><a href="#">1</a></li>
-								<li class="active"><a href="#">2</a></li>
-								<li><a href="#">3</a></li>
-								<li><a href="#">4</a></li>
-								<li><a href="#">5</a></li>
-								<li><a class="btn btn-primary" href="#" role="button">Next</a></li>
-							</ul>
-						</div>
+									<c:if test="${currentPage lt noOfPages}">
+										<li class="page-item"><a
+											href="product?action=listBy&category=${param.category}&page=${currentPage + 1}">Next</a></li>
+									</c:if>
+								</ul>
+							</c:when>
+
+							<c:when test="${param.action == 'search'}">
+								<ul class="pagination">
+
+									<c:if test="${currentPage != 1}">
+										<li class="page-item"><a
+											href="product?action=search&by=${param.by}&keyword=${param.keyword}&page=${currentPage - 1}">Previous</a></li>
+									</c:if>
+									<c:forEach begin="1" end="${noOfPages}" var="i">
+										<c:choose>
+											<c:when test="${currentPage eq i}">
+												<li class="page-item"><a class="page-link">${i}</a></li>
+											</c:when>
+											<c:otherwise>
+												<li class="page-item"><a
+													href="product?action=search&by=${param.by}&keyword=${param.keyword}&page=${i}"
+													class="page-link">${i}</a></li>
+											</c:otherwise>
+										</c:choose>
+									</c:forEach>
+
+									<c:if test="${currentPage lt noOfPages}">
+										<li class="page-item"><a
+											href="product?action=search&by=${param.by}&keyword=${param.keyword}&page=${currentPage + 1}">Next</a></li>
+									</c:if>
+								</ul>
+							</c:when>
+
+							<c:otherwise>
+								<div class="row text-center">
+									<ul class="pagination">
+										<c:if test="${currentPage != 1}">
+											<li class="page-item"><a
+												href="${path}?page=${currentPage - 1}">Previous</a></li>
+										</c:if>
+										<c:forEach begin="1" end="${noOfPages}" var="i">
+											<c:choose>
+												<c:when test="${currentPage eq i}">
+													<li class="page-item"><a class="page-link">${i}</a></li>
+												</c:when>
+												<c:otherwise>
+													<li class="page-item"><a href="${path}?page=${i}"
+														class="page-link">${i}</a></li>
+												</c:otherwise>
+											</c:choose>
+										</c:forEach>
+
+										<c:if test="${currentPage lt noOfPages}">
+											<li class="page-item"><a
+												href="${path}?page=${currentPage + 1}">Next</a></li>
+
+										</c:if>
+									</ul>
+								</div>
+							</c:otherwise>
+
+						</c:choose>
+
 					</div>
 
-					<!-- //product-sec1 -->
-					<!-- <div class="col-md-6 shop_left shp">
-						<img src="images/banner4.jpg" alt="">
-						<h6>21% off</h6>
-					</div>
-					<div class="col-md-6 shop_right shp">
-						<img src="images/banner1.jpg" alt="">
-						<h6>31% off</h6>
-					</div> -->
+
 					<div class="clearfix"></div>
 				</div>
 			</div>
