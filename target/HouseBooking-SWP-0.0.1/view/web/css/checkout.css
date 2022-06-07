@@ -6,12 +6,9 @@ body a {
 	-ms-transition: 0.5s all;
 }
 
-
 /*-- / --*/
 
-
 /*-- checkout --*/
-
 .checkout h2 {
 	font-size: 1em;
 	color: #212121;
@@ -40,8 +37,7 @@ table.timetable_sub {
 	border-right: 1px solid #ded2d2;
 }
 
-.timetable_sub th,
-.timetable_sub td {
+.timetable_sub th, .timetable_sub td {
 	text-align: center;
 	padding: 7px;
 	font-size: 14px;
@@ -61,27 +57,22 @@ td.invert-image a img {
 	position: relative;
 }
 
-.close1,
-.close2,
-.close3 {
+.close1, .close2, .close3 {
 	background: url('../images/close_1.jpg') no-repeat 0px 0px;
 	cursor: pointer;
-    width: 41px;
-    height: 39px;
-    position: absolute;
-    right: 36px;
-    top: -26px;
+	width: 41px;
+	height: 39px;
+	position: absolute;
+	right: 36px;
+	top: -26px;
 	-webkit-transition: color 0.2s ease-in-out;
 	-moz-transition: color 0.2s ease-in-out;
 	-o-transition: color 0.2s ease-in-out;
 	transition: color 0.2s ease-in-out;
 }
 
-
 /*-- quantity-starts --*/
-
-.value-minus,
-.value-plus {
+.value-minus, .value-plus {
 	height: 40px;
 	line-height: 24px;
 	width: 40px;
@@ -98,8 +89,8 @@ td.invert-image a img {
 	vertical-align: bottom;
 }
 
-.quantity-select .entry.value-minus:before,
-.quantity-select .entry.value-plus:before {
+.quantity-select .entry.value-minus:before, .quantity-select .entry.value-plus:before
+	{
 	content: "";
 	width: 13px;
 	height: 2px;
@@ -137,8 +128,8 @@ td.invert-image a img {
 	margin-right: 3px;
 }
 
-.quantity-select .entry.value-minus:hover,
-.quantity-select .entry.value-plus:hover {
+.quantity-select .entry.value-minus:hover, .quantity-select .entry.value-plus:hover
+	{
 	background: #E5E5E5;
 }
 
@@ -146,11 +137,8 @@ td.invert-image a img {
 	margin-left: 0;
 }
 
-
 /*-- quantity-end --*/
-
-.checkout-right h4,
-.address_form h4 {
+.checkout-right h4, .address_form h4 {
 	font-size: 1.1em;
 	margin: 1em 0;
 	letter-spacing: 1px;
@@ -211,7 +199,7 @@ td.invert-image a img {
 }
 
 .checkout-right-basket a:hover {
-	    background: #fb383b;
+	background: #fb383b;
 }
 
 .checkout-right-basket a span {
@@ -228,7 +216,7 @@ td.invert-image a img {
 }
 
 .information-wrapper input {
-	width: 100%!important;
+	width: 100% !important;
 }
 
 .check_box_one.cashon_delivery {
@@ -237,9 +225,7 @@ td.invert-image a img {
 	margin-bottom: 10px;
 }
 
-
 /*-- checkbox --*/
-
 .agileits-login label {
 	font-size: 1em;
 	color: #000;
@@ -307,31 +293,34 @@ input.checkbox:checked:after {
 	animation-fill-mode: forwards;
 }
 
-@keyframes rippling {
-	50% {
-		border-left-color: #fff;
-	}
-	100% {
-		border-bottom-color: #fff;
-		border-left-color: #fff;
-	}
+@
+keyframes rippling { 50% {
+	border-left-color: #fff;
 }
 
+100
+%
+{
+border-bottom-color
+:
+#fff;
+border-left-color
+:
+#fff;
+}
+}
 .vertical_post.check_box_agile {
 	padding-bottom: 1em;
 }
 
-.checkbox input[type="checkbox"],
-.checkbox-inline input[type="checkbox"] {
+.checkbox input[type="checkbox"], .checkbox-inline input[type="checkbox"]
+	{
 	margin-left: -29px;
 }
 
-
 /*-- //checkout --*/
-
-.check_tab2 input[type="email"],
-.check_tab2 input[type="password"],
-.creditly-wrapper .form-control {
+.check_tab2 input[type="email"], .check_tab2 input[type="password"],
+	.creditly-wrapper .form-control {
 	display: block;
 	width: 95.5%;
 	padding: 15px 10px;
@@ -343,22 +332,16 @@ input.checkbox:checked:after {
 	outline: none;
 }
 
-
 /*-- // --*/
-
 .pay_info {
 	padding: 3em 2em;
 }
 
-
 /*--/payment--*/
 
-
 /*-- Pay-page --*/
-
-.pay_info input[type="email"],
-.pay_info input[type="password"],
-.creditly-wrapper .form-control {
+.pay_info input[type="email"], .pay_info input[type="password"],
+	.creditly-wrapper .form-control {
 	display: block;
 	width: 95.5%;
 	padding: 15px 10px;
@@ -370,9 +353,8 @@ input.checkbox:checked:after {
 	outline: none;
 }
 
-.pay_info input[type="email"]:focus,
-.pay_info input[type="password"]:focus,
-.creditly-wrapper .form-control:focus {
+.pay_info input[type="email"]:focus, .pay_info input[type="password"]:focus,
+	.creditly-wrapper .form-control:focus {
 	border-color: #66afe9;
 	outline: 0;
 }
@@ -512,7 +494,7 @@ a.btn.btn-primary {
 	outline: none;
 	font-size: 16px;
 	margin-bottom: 0;
-	background:#fff;
+	background: #fff;
 	background-size: 4% !important;
 	-webkit-appearance: none;
 }
@@ -573,6 +555,5 @@ button.submit.check_out {
 .section_room_pay {
 	margin-bottom: 2em;
 }
-
 
 /*-- //Pay-page --*/
