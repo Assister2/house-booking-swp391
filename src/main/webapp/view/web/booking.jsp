@@ -17,6 +17,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	
 	
 	
+	
+	
+	
 		addEventListener("load", function () {
 			setTimeout(hideURLbar, 0);
 		}, false);
@@ -25,6 +28,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			window.scrollTo(0, 1);
 		}
 	
+
+
+
 
 
 
@@ -66,7 +72,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 		<jsp:include page="commontool.jsp"></jsp:include>
 	</div>
-	
+
 	<!-- //banner -->
 	<!-- top Products -->
 	<div class="ads-grid_shop">
@@ -137,8 +143,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<h3 class="agileits-sear-head">Rating</h3>
 					<div class="form-check">
 						<input class="form-check-input" type="radio" name="ratingbtn"
-							id="ratingbtn1" checked> <label style="font-weight: unset;"
-							class="form-check-label" for="ratingbtn1"> Very Satisfied </label>
+							id="ratingbtn1" checked> <label
+							style="font-weight: unset;" class="form-check-label"
+							for="ratingbtn1"> Very Satisfied </label>
 					</div>
 					<div class="form-check">
 						<input class="form-check-input" type="radio" name="ratingbtn"
@@ -158,9 +165,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<div class="form-check">
 						<input class="form-check-input" type="radio" name="ratingbtn"
 							id="ratingbtn5"> <label style="font-weight: unset;"
-							class="form-check-label" for="ratingbtn5"> Very Dissatisfied </label>
+							class="form-check-label" for="ratingbtn5"> Very
+							Dissatisfied </label>
 					</div>
-					
+
 				</div>
 				<!-- End rating -->
 
@@ -227,365 +235,86 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 					</div>
 					<div class="clearfix"></div>
-
+					<c:set var="listRoom" value="${requestScope.listRoom}" />
+					<c:set var="count" value="${1}" />
 					<!-- product-sec1 -->
 					<div class="product-sec1">
 						<!--/mens-->
-						<div class="col-md-4 product-men">
-							<div class="product-shoe-info shoe">
-								<div class="men-pro-item">
-									<div class="men-thumb-item">
-										<img width="269" height="221"
-											src="https://img.vietnamfinance.vn/webp-jpg/700x0/upload/news/ledinhnga/2021/8/31/VNF-rao-ban-homestay.webp"
-											alt="">
-										<div class="men-cart-pro">
-											<div class="inner-men-cart-pro">
-												<a href="${pageContext.request.contextPath}/single-post"
-													class="link-product-add-cart">View</a>
-											</div>
-										</div>
-										<span class="product-new-top">Còn phòng</span>
-									</div>
-									<div class="item-info-product">
-										<h4>
-											<a href="single.html">${room.roomName}</a>
-										</h4>
-										<div class="info-product-price">
-											<div class="grid_meta">
-												<div class="product_price">
-													<div class="grid-price ">
-														<span class="money ">$${room.price/1000 }k/day</span>
+						<!--  -->
+						<c:forEach var="room" items="${listRoom }">
+
+
+							<div class="row">
+								<div class="col-md-4 product-men women_two">
+									<div class="product-shoe-info shoe">
+										<div class="men-pro-item">
+											<div class="men-thumb-item">
+												<img width="250" height="200"
+													src="https://vinhomesland.vn/wp-content/uploads/2019/10/homestay.jpg"
+													alt="">
+												<div class="men-cart-pro">
+													<div class="inner-men-cart-pro">
+														<a href="${pageContext.request.contextPath}/single-post"
+															class="link-product-add-cart">View</a>
 													</div>
 												</div>
-												<ul class="stars">
-													<li><a href="#"><i class="fa fa-star"
-															aria-hidden="true"></i></a></li>
-													<li><a href="#"><i class="fa fa-star"
-															aria-hidden="true"></i></a></li>
-													<li><a href="#"><i class="fa fa-star"
-															aria-hidden="true"></i></a></li>
-													<li><a href="#"><i class="fa fa-star-half-o"
-															aria-hidden="true"></i></a></li>
-													<li><a href="#"><i class="fa fa-star-o"
-															aria-hidden="true"></i></a></li>
-												</ul>
-												<div>${room.roomDesc }</div>
+												<span class="product-new-top">Active</span>
 											</div>
 
 										</div>
-										<div class="clearfix"></div>
 									</div>
 								</div>
-							</div>
-						</div>
-						<div class="col-md-4 product-men">
-							<div class="product-shoe-info shoe">
-								<div class="men-pro-item">
-									<div class="men-thumb-item">
-										<img width="269" height="221"
-											src="https://reviewhomestay.vn/wp-content/uploads/2021/03/1.homestay-vietnam.jpg"
-											alt="">
-										<div class="men-cart-pro">
-											<div class="inner-men-cart-pro">
-												<a href="single.html" class="link-product-add-cart">View</a>
-											</div>
-										</div>
-										<span class="product-new-top">Còn phòng</span>
-									</div>
-									<div class="item-info-product">
+								<div class="col-md-8 info-product-price">
+									<div class="item-info-product" style="text-align: left; margin-bottom: 15px;">
 										<h4>
-											<a href="single.html">Homestay Đà Lạt</a>
+											<a href="single.html">${room.roomName }</a>
 										</h4>
-										<div class="info-product-price">
-											<div class="grid_meta">
-												<div class="product_price">
-													<div class="grid-price ">
-														<span class="money ">$150/day <del>$200/day</del></span>
-													</div>
-												</div>
-												<ul class="stars">
-													<li><a href="#"><i class="fa fa-star"
-															aria-hidden="true"></i></a></li>
-													<li><a href="#"><i class="fa fa-star"
-															aria-hidden="true"></i></a></li>
-													<li><a href="#"><i class="fa fa-star"
-															aria-hidden="true"></i></a></li>
-													<li><a href="#"><i class="fa fa-star-half-o"
-															aria-hidden="true"></i></a></li>
-													<li><a href="#"><i class="fa fa-star-o"
-															aria-hidden="true"></i></a></li>
-												</ul>
-												<div>..., gần chợ Đà Lạt, tiện nghi cực đã, giá mềm, k
-													thuê phí cả đời</div>
-											</div>
-											<!-- <div class="shoe single-item hvr-outline-out">
-												<form action="#" method="post">
-													<input type="hidden" name="cmd" value="_cart">
-													<input type="hidden" name="add" value="1">
-													<input type="hidden" name="shoe_item" value="Bella Toes">
-													<input type="hidden" name="amount" value="675.00">
-													<button type="submit" class="shoe-cart pshoe-cart"><i class="fa fa-cart-plus" aria-hidden="true"></i></button>
-
-													<a href="#" data-toggle="modal" data-target="#myModal1"></a>
-												</form>
-
-											</div> -->
-										</div>
 										<div class="clearfix"></div>
 									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-4 product-men">
-							<div class="product-shoe-info shoe">
-								<div class="men-pro-item">
-									<div class="men-thumb-item">
-										<img width="269" height="221"
-											src="https://vinhomesland.vn/wp-content/uploads/2019/10/homestay.jpg"
-											alt="">
-										<div class="men-cart-pro">
-											<div class="inner-men-cart-pro">
-												<a href="single.html" class="link-product-add-cart">View</a>
+									<div class="grid_meta">
+										<div class="product_price">
+											<div class="grid-price ">
+												<span class="money ">${room.price/1000 }k/day</span>
 											</div>
 										</div>
-										<span class="product-new-top">Còn phòng</span>
-									</div>
-									<div class="item-info-product">
-										<h4>
-											<a href="single.html">Homestay Đà Lạt</a>
-										</h4>
-										<div class="info-product-price">
-											<div class="grid_meta">
-												<div class="product_price">
-													<div class="grid-price ">
-														<span class="money ">$200/day</span>
-													</div>
-												</div>
-												<ul class="stars">
-													<li><a href="#"><i class="fa fa-star"
-															aria-hidden="true"></i></a></li>
-													<li><a href="#"><i class="fa fa-star"
-															aria-hidden="true"></i></a></li>
-													<li><a href="#"><i class="fa fa-star"
-															aria-hidden="true"></i></a></li>
-													<li><a href="#"><i class="fa fa-star"
-															aria-hidden="true"></i></a></li>
-													<li><a href="#"><i class="fa fa-star-half-o"
-															aria-hidden="true"></i></a></li>
-												</ul>
-												<div>..., gần chợ Đà Lạt, tiện nghi cực đã, giá mềm, k
-													thuê phí cả đời</div>
-											</div>
-											<!-- <div class="shoe single-item hvr-outline-out">
-												<form action="#" method="post">
-													<input type="hidden" name="cmd" value="_cart">
-													<input type="hidden" name="add" value="1">
-													<input type="hidden" name="shoe_item" value="Bella Toes">
-													<input type="hidden" name="amount" value="675.00">
-													<button type="submit" class="shoe-cart pshoe-cart"><i class="fa fa-cart-plus" aria-hidden="true"></i></button>
-
-													<a href="#" data-toggle="modal" data-target="#myModal1"></a>
-												</form>
-
-											</div> -->
-										</div>
-										<div class="clearfix"></div>
+										<ul class="stars">
+											<li><a href="#"><i class="fa fa-star"
+													aria-hidden="true"></i></a></li>
+											<li><a href="#"><i class="fa fa-star"
+													aria-hidden="true"></i></a></li>
+											<li><a href="#"><i class="fa fa-star"
+													aria-hidden="true"></i></a></li>
+											<li><a href="#"><i class="fa fa-star"
+													aria-hidden="true"></i></a></li>
+											<li><a href="#"><i class="fa fa-star-half-o"
+													aria-hidden="true"></i></a></li>
+										</ul>
+										<div>${room.roomDesc }</div>
 									</div>
 								</div>
+								<hr>
 							</div>
-						</div>
-						<div class="clearfix"></div>
-						<!-- //mens -->
-						<!-- /womens -->
-						<div class="col-md-4 product-men women_two">
-							<div class="product-shoe-info shoe">
-								<div class="men-pro-item">
-									<div class="men-thumb-item">
-										<img width="269" height="221"
-											src="https://vinhomesland.vn/wp-content/uploads/2019/10/homestay.jpg"
-											alt="">
-										<div class="men-cart-pro">
-											<div class="inner-men-cart-pro">
-												<a href="single.html" class="link-product-add-cart">View</a>
-											</div>
-										</div>
-										<span class="product-new-top">Còn phòng</span>
-									</div>
-									<div class="item-info-product">
-										<h4>
-											<a href="single.html">Homestay Đà Lạt</a>
-										</h4>
-										<div class="info-product-price">
-											<div class="grid_meta">
-												<div class="product_price">
-													<div class="grid-price ">
-														<span class="money ">$200/day</span>
-													</div>
-												</div>
-												<ul class="stars">
-													<li><a href="#"><i class="fa fa-star"
-															aria-hidden="true"></i></a></li>
-													<li><a href="#"><i class="fa fa-star"
-															aria-hidden="true"></i></a></li>
-													<li><a href="#"><i class="fa fa-star"
-															aria-hidden="true"></i></a></li>
-													<li><a href="#"><i class="fa fa-star"
-															aria-hidden="true"></i></a></li>
-													<li><a href="#"><i class="fa fa-star-half-o"
-															aria-hidden="true"></i></a></li>
-												</ul>
-												<div>..., gần chợ Đà Lạt, tiện nghi cực đã, giá mềm, k
-													thuê phí cả đời</div>
-											</div>
-											<!-- <div class="shoe single-item hvr-outline-out">
-												<form action="#" method="post">
-													<input type="hidden" name="cmd" value="_cart">
-													<input type="hidden" name="add" value="1">
-													<input type="hidden" name="shoe_item" value="Bella Toes">
-													<input type="hidden" name="amount" value="675.00">
-													<button type="submit" class="shoe-cart pshoe-cart"><i class="fa fa-cart-plus" aria-hidden="true"></i></button>
+						</c:forEach>
 
-													<a href="#" data-toggle="modal" data-target="#myModal1"></a>
-												</form>
 
-											</div> -->
-										</div>
-										<div class="clearfix"></div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-4 product-men women_two">
-							<div class="product-shoe-info shoe">
-								<div class="men-pro-item">
-									<div class="men-thumb-item">
-										<img width="269" height="221"
-											src="https://vinhomesland.vn/wp-content/uploads/2019/10/homestay.jpg"
-											alt="">
-										<div class="men-cart-pro">
-											<div class="inner-men-cart-pro">
-												<a href="single.html" class="link-product-add-cart">View</a>
-											</div>
-										</div>
-										<span class="product-new-top">Còn phòng</span>
-									</div>
-									<div class="item-info-product">
-										<h4>
-											<a href="single.html">Homestay Đà Lạt</a>
-										</h4>
-										<div class="info-product-price">
-											<div class="grid_meta">
-												<div class="product_price">
-													<div class="grid-price ">
-														<span class="money ">$200/day</span>
-													</div>
-												</div>
-												<ul class="stars">
-													<li><a href="#"><i class="fa fa-star"
-															aria-hidden="true"></i></a></li>
-													<li><a href="#"><i class="fa fa-star"
-															aria-hidden="true"></i></a></li>
-													<li><a href="#"><i class="fa fa-star"
-															aria-hidden="true"></i></a></li>
-													<li><a href="#"><i class="fa fa-star"
-															aria-hidden="true"></i></a></li>
-													<li><a href="#"><i class="fa fa-star-half-o"
-															aria-hidden="true"></i></a></li>
-												</ul>
-												<div>..., gần chợ Đà Lạt, tiện nghi cực đã, giá mềm, k
-													thuê phí cả đời</div>
-											</div>
-											<!-- <div class="shoe single-item hvr-outline-out">
-												<form action="#" method="post">
-													<input type="hidden" name="cmd" value="_cart">
-													<input type="hidden" name="add" value="1">
-													<input type="hidden" name="shoe_item" value="Bella Toes">
-													<input type="hidden" name="amount" value="675.00">
-													<button type="submit" class="shoe-cart pshoe-cart"><i class="fa fa-cart-plus" aria-hidden="true"></i></button>
 
-													<a href="#" data-toggle="modal" data-target="#myModal1"></a>
-												</form>
+						<!--  -->
 
-											</div> -->
-										</div>
-										<div class="clearfix"></div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-4 product-men women_two">
-							<div class="product-shoe-info shoe">
-								<div class="men-pro-item">
-									<div class="men-thumb-item">
-										<img width="269" height="221"
-											src="https://vinhomesland.vn/wp-content/uploads/2019/10/homestay.jpg"
-											alt="">
-										<div class="men-cart-pro">
-											<div class="inner-men-cart-pro">
-												<a href="single.html" class="link-product-add-cart">View</a>
-											</div>
-										</div>
-										<span class="product-new-top">Còn phòng</span>
-									</div>
-									<div class="item-info-product">
-										<h4>
-											<a href="single.html">Homestay Đà Lạt</a>
-										</h4>
-										<div class="info-product-price">
-											<div class="grid_meta">
-												<div class="product_price">
-													<div class="grid-price ">
-														<span class="money ">$200/day</span>
-													</div>
-												</div>
-												<ul class="stars">
-													<li><a href="#"><i class="fa fa-star"
-															aria-hidden="true"></i></a></li>
-													<li><a href="#"><i class="fa fa-star"
-															aria-hidden="true"></i></a></li>
-													<li><a href="#"><i class="fa fa-star"
-															aria-hidden="true"></i></a></li>
-													<li><a href="#"><i class="fa fa-star"
-															aria-hidden="true"></i></a></li>
-													<li><a href="#"><i class="fa fa-star-half-o"
-															aria-hidden="true"></i></a></li>
-												</ul>
-												<div>..., gần chợ Đà Lạt, tiện nghi cực đã, giá mềm, k
-													thuê phí cả đời</div>
-											</div>
-											<!-- <div class="shoe single-item hvr-outline-out">
-												<form action="#" method="post">
-													<input type="hidden" name="cmd" value="_cart">
-													<input type="hidden" name="add" value="1">
-													<input type="hidden" name="shoe_item" value="Bella Toes">
-													<input type="hidden" name="amount" value="675.00">
-													<button type="submit" class="shoe-cart pshoe-cart"><i class="fa fa-cart-plus" aria-hidden="true"></i></button>
-
-													<a href="#" data-toggle="modal" data-target="#myModal1"></a>
-												</form>
-
-											</div> -->
-										</div>
-										<div class="clearfix"></div>
-									</div>
-								</div>
-							</div>
-						</div>
 						<!-- //womens -->
-						
+
 						<div class="clearfix"></div>
-						
+
 						<div class="row text-center">
-			<ul class="pagination">
-				<li><a class="btn btn-primary" href="#" role="button">Previous</a></li>
-				<li><a href="#">1</a></li>
-				<li class="active"><a href="#">2</a></li>
-				<li><a href="#">3</a></li>
-				<li><a href="#">4</a></li>
-				<li><a href="#">5</a></li>
-				<li><a class="btn btn-primary" href="#" role="button">Next</a></li>
-			</ul>
-		</div>
+							<ul class="pagination">
+								<li><a class="btn btn-primary" href="#" role="button">Previous</a></li>
+								<li><a href="#">1</a></li>
+								<li class="active"><a href="#">2</a></li>
+								<li><a href="#">3</a></li>
+								<li><a href="#">4</a></li>
+								<li><a href="#">5</a></li>
+								<li><a class="btn btn-primary" href="#" role="button">Next</a></li>
+							</ul>
+						</div>
 					</div>
 
 					<!-- //product-sec1 -->

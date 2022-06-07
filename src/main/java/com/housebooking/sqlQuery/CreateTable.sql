@@ -4,19 +4,19 @@ Go
 Use HouseBooking;
 Go
 
-Drop table City
-Drop table District
-Drop table Street
-Drop table Building
-Drop table Room_Images
-Drop table Type_Of_Room
-Drop table Convenient
-Drop table Room_Convenient
-Drop table Feedback
-Drop table Bill_Detail
+Drop table Bill_Detail 
 Drop table Bill
-Drop table Users
+Drop table Feedback
+Drop table Room_Convenient
+Drop table Convenient
+Drop table Room_Images
 Drop table Room
+Drop table Type_Of_Room
+Drop table Building
+Drop table Street
+Drop table District
+Drop table City
+Drop table Users
 Go
 
 ALTER TABLE District
@@ -27,10 +27,15 @@ ALTER TABLE Street
 DROP CONSTRAINT FK_Street_District;
 Go
 
+ALTER TABLE Room
+DROP CONSTRAINT FK_Room_Building;
+Go
+
 -- Create table
 Create table Room (
 	room_id varchar(20),
 	room_name nvarchar(100) not null,
+	room_status nvarchar(100),
 	room_desc nvarchar(max),
 	room_price float not null,
 	room_rule nvarchar(max),
@@ -42,9 +47,9 @@ Go
 
 Create table Room_Images(
 	room_id varchar(20),
-	image_name nvarchar(200),
-	room_images varbinary(MAX) Not null,
-	primary key(room_id, room_images)
+	image_link varchar(200),
+	image_name nvarchar(MAX),
+	primary key(room_id, image_link)
 )
 Go
 
@@ -59,6 +64,7 @@ Create table Building(
 	building_id varchar(20),
 	building_desc nvarchar(max),
 	street_id varchar(20),
+	user_id varchar(20),
 	primary key(building_id)
 )
 Go
@@ -102,11 +108,11 @@ Go
 
 Create table Users(
 	user_id varchar(20),
-	user_name varchar(100),
+	user_name nvarchar(100),
 	role varchar(30) not null,
 	username varchar(20),
 	password varchar(20),
-	phone char(10),
+	phone varchar(10),
 	email varchar(40),
 	primary key(user_id)
 )
@@ -174,6 +180,11 @@ ADD CONSTRAINT FK_Building_Street
 FOREIGN KEY (street_id) REFERENCES Street(street_id);
 Go
 
+ALTER TABLE Building
+ADD CONSTRAINT FK_Building_User
+FOREIGN KEY (user_id) REFERENCES Users(user_id);
+Go
+
 ALTER TABLE Street
 ADD CONSTRAINT FK_Street_District
 FOREIGN KEY (district_id) REFERENCES District(district_id);
@@ -207,4 +218,21 @@ Go
 ALTER TABLE Feedback
 ADD CONSTRAINT FK_Feedback_Users
 FOREIGN KEY (user_id) REFERENCES Users(user_id);
+Go
+
+-- Delete
+
+Delete from City
+Delete from District
+Delete from Street
+Delete from Building
+Delete from Room_Images
+Delete from Type_Of_Room
+Delete from Convenient
+Delete from Room_Convenient
+Delete from Feedback
+Delete from Bill_Detail
+Delete from Bill
+Delete from Users
+Delete from Room
 Go

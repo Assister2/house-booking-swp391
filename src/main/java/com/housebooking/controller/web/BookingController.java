@@ -1,6 +1,7 @@
 package com.housebooking.controller.web;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -37,9 +38,9 @@ public class BookingController extends HttpServlet {
 	protected void doDisplay (HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 		IRoomDAO roomDAO = new RoomDAO();
-		Room room = roomDAO.find("Room_01");
+		List<Room> list = roomDAO.list();
 		
-		request.setAttribute("room", room);
+		request.setAttribute("listRoom", list);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/view/web/booking.jsp");
         rd.forward(request, response);

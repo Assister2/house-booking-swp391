@@ -31,7 +31,7 @@ public class AccessManager {
 	            	User user = new User();
 	            	user.setUserId(rs.getString("user_id"));
 	                user.setName(rs.getNString("user_name"));
-	                user.setRole(rs.getNString("role"));
+	                user.setRole(rs.getString("role"));
 	                user.setUsername(rs.getString("username"));
 	                user.setPassword(rs.getString("password"));
 	                user.setPhoneNumber(rs.getString("phone"));

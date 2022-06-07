@@ -46,13 +46,13 @@ public class LoginController extends HttpServlet {
 		if (us.getUser() != null) {
 			ss.setAttribute("usersession", us);
 			switch (us.getUser().getRole()) {
-			case "admin":
+			case "Admin":
 				response.sendRedirect(request.getContextPath() + "/admin");
 				break;
-			case "owner":
+			case "Owner":
 				response.sendRedirect(request.getContextPath() + "/dashboard");
 				break;
-			case "user":
+			case "User":
 				response.sendRedirect(request.getContextPath() + "/home");
 				break;
 			}
@@ -64,7 +64,7 @@ public class LoginController extends HttpServlet {
 
 	protected void doDisplay(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("views/common/login.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("view/common/login.jsp");
 		rd.forward(request, response);
 	}
 
