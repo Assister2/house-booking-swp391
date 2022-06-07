@@ -81,9 +81,15 @@
 					<li><a href="${pageContext.request.contextPath}/home"
 						class="active">Home</a></li>
 					<li><a href="${pageContext.request.contextPath}/about">About</a></li>
-					<li><a href="${pageContext.request.contextPath}/login">Login</a></li>
-					<li><a href="${pageContext.request.contextPath}/sign-up">Sign
-							up</a></li>
+					<li><a href="${pageContext.request.contextPath}/error">Team</a></li>
+					<c:if test="${usersession != null }">
+						<li><a href="${pageContext.request.contextPath}/log-out">Log
+								out</a></li>
+					</c:if>
+					<c:if test="${usersession == null }">
+						<li><a href="${pageContext.request.contextPath}/login">Login</a></li>
+						<li><a href="${pageContext.request.contextPath}/sign-up">Sign up</a></li>
+					</c:if>
 				</ul>
 			</nav>
 		</div>

@@ -38,7 +38,7 @@
 
 </head>
 
-<body class="animsition">
+<body>
     <div class="page-wrapper">
         <div class="page-content--bge5">
             <div class="container">
@@ -50,15 +50,17 @@
                             </a>
                         </div>
                         <div class="login-form">
-                            <form action="" method="post">
+                            <form action="login" method="post">
+                            	<input type="hidden" name="action" value="login">
                                 <div class="form-group">
                                     <label>Username</label>
-                                    <input class="au-input au-input--full" type="email" name="email" placeholder="Username">
+                                    <input class="au-input au-input--full" type="text" name="username" placeholder="Username">
                                 </div>
                                 <div class="form-group">
                                     <label>Password</label>
                                     <input class="au-input au-input--full" type="password" name="password" placeholder="Password">
                                 </div>
+                                <div style="color: #FF0000; padding-bottom: 15px;"> ${login_mess}</div>
                                 <div class="login-checkbox">
                                     <label>
                                         <input type="checkbox" name="remember">Remember Me
@@ -74,6 +76,7 @@
                                         <button style="background: red;" class="au-btn au-btn--block au-btn--blue2">sign in with google</button>
                                     </div>
                                 </div>
+                                
                             </form>
                             <div class="register-link">
                                 <p>
