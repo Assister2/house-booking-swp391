@@ -137,8 +137,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<h3 class="agileits-sear-head">Rating</h3>
 					<div class="form-check">
 						<input class="form-check-input" type="radio" name="ratingbtn"
-							id="ratingbtn1" checked> <label style="font-weight: unset;"
-							class="form-check-label" for="ratingbtn1"> Very Satisfied </label>
+							id="ratingbtn1" checked> <label
+							style="font-weight: unset;" class="form-check-label"
+							for="ratingbtn1"> Very Satisfied </label>
 					</div>
 					<div class="form-check">
 						<input class="form-check-input" type="radio" name="ratingbtn"
@@ -158,9 +159,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<div class="form-check">
 						<input class="form-check-input" type="radio" name="ratingbtn"
 							id="ratingbtn5"> <label style="font-weight: unset;"
-							class="form-check-label" for="ratingbtn5"> Very Dissatisfied </label>
+							class="form-check-label" for="ratingbtn5"> Very
+							Dissatisfied </label>
 					</div>
-					
+
 				</div>
 				<!-- End rating -->
 
@@ -573,20 +575,20 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							</div>
 						</div>
 						<!-- //womens -->
-						
+
 						<div class="clearfix"></div>
-						
+
 						<div class="row text-center">
-			<ul class="pagination">
-				<li><a class="btn btn-primary" href="#" role="button">Previous</a></li>
-				<li><a href="#">1</a></li>
-				<li class="active"><a href="#">2</a></li>
-				<li><a href="#">3</a></li>
-				<li><a href="#">4</a></li>
-				<li><a href="#">5</a></li>
-				<li><a class="btn btn-primary" href="#" role="button">Next</a></li>
-			</ul>
-		</div>
+							<ul class="pagination">
+								<li><a class="btn btn-primary" href="#" role="button">Previous</a></li>
+								<li><a href="#">1</a></li>
+								<li class="active"><a href="#">2</a></li>
+								<li><a href="#">3</a></li>
+								<li><a href="#">4</a></li>
+								<li><a href="#">5</a></li>
+								<li><a class="btn btn-primary" href="#" role="button">Next</a></li>
+							</ul>
+						</div>
 					</div>
 
 					<!-- //product-sec1 -->

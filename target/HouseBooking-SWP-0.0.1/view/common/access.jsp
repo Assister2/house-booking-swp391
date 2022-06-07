@@ -51,7 +51,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <link
 	href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800"
 	rel="stylesheet">
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/view/web/css/access.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/view/web/css/access.css">
 </head>
 
 <body>
@@ -63,9 +64,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 		<jsp:include page="../web/commontool.jsp"></jsp:include>
 	</div>
-	
-	 <!-- start top_bg -->
-	 <div class="taop_bg" style="margin-top: 5px;">
+
+	<!-- start top_bg -->
+	<div class="taop_bg" style="margin-top: 5px;">
 		<div class="wrap">
 			<div class="main_top">
 				<h4 class="style">Login/Sign up</h4>
@@ -83,11 +84,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<div class="registration">
 						<!-- [if IE] 
 							< link rel='stylesheet' type='text/css' href='ie.css'/>  
-						 [endif] -->  
+						 [endif] -->
 
 						<!-- [if lt IE 7]>  
 							< link rel='stylesheet' type='text/css' href='ie6.css'/>  
-						<! [endif] -->  
+						<! [endif] -->
 						<script>
 							(function () {
 
@@ -130,19 +131,21 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<div class="registration_form">
 								<!-- Form -->
 								<form id="registration_form" action="access" method="post">
-									<input type="hidden" name="action" value="login"/>
+									<input type="hidden" name="action" value="login" />
 									<div>
-										<label>
-											<input name="username" placeholder="Tên tài khoản" type="text" tabindex="1" required="">
+										<label> <input name="username"
+											placeholder="Tên tài khoản" type="text" tabindex="1"
+											required="">
 										</label>
 									</div>
 									<div>
-										<label>	
-											<input name="password" placeholder="Mật khẩu" type="password" tabindex="2" required="">
+										<label> <input name="password" placeholder="Mật khẩu"
+											type="password" tabindex="2" required="">
 										</label>
-									</div>									
+									</div>
 									<div>
-										<input type="submit" value="Xác nhận" id="register-submit"> <span style="color: red;">${login_mess}</span>
+										<input type="submit" value="Xác nhận" id="register-submit">
+										<span style="color: red;">${login_mess}</span>
 									</div>
 								</form>
 								<!-- /Form -->
@@ -151,47 +154,58 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					</div>
 					<!-- end registration -->
 				</div>
-				<div class="login_left" style="border: solid 1px green; margin-bottom: 40px;">
+				<div class="login_left"
+					style="border: solid 1px green; margin-bottom: 40px;">
 					<h3>Đăng kí thành viên</h3>
-					<p>Bằng cách tạo một tài khoản thành viên, bạn sẽ có thể thực hiện quá trình thanh toán nhanh hơn, lưu trữ nhiều địa chỉ giao hàng, xem và theo dõi đơn đặt hàng của bạn trong tài khoản của bạn và hơn thế nữa.</p>
+					<p>Bằng cách tạo một tài khoản thành viên, bạn sẽ có thể thực
+						hiện quá trình thanh toán nhanh hơn, lưu trữ nhiều địa chỉ giao
+						hàng, xem và theo dõi đơn đặt hàng của bạn trong tài khoản của bạn
+						và hơn thế nữa.</p>
 					<div class="registration_left">
 						<div class="registration_form">
 							<!-- Form -->
 							<form id="registration_form" action="access" method="post">
-								<input type="hidden" name="action" value="register"/>
+								<input type="hidden" name="action" value="register" />
 								<div>
-									<label>
-										<input name="register_name" placeholder="Tên Thành viên" type="text" tabindex="3" required="" autofocus="">
+									<label> <input name="register_name"
+										placeholder="Tên Thành viên" type="text" tabindex="3"
+										required="" autofocus="">
 									</label>
 								</div>
 
 								<div>
-									<label>
-										<input name="register_username" placeholder="Tên tài khoản" type="text" tabindex="4" required="">
+									<label> <input name="register_username"
+										placeholder="Tên tài khoản" type="text" tabindex="4"
+										required="">
 									</label>
 								</div>
 								<div>
-									<label>
-										<input name="register_password" placeholder="Mật khẩu" type="password" tabindex="5" required="">
-									</label>
-								</div>						
-								<div>
-									<label>
-										<input name="register_retypePassword" placeholder="Xác nhận mật khẩu" type="password" tabindex="6" required="">
+									<label> <input name="register_password"
+										placeholder="Mật khẩu" type="password" tabindex="5"
+										required="">
 									</label>
 								</div>
 								<div>
-									<label>
-										<input name="register_phoneNumber" placeholder="Số điện thoại" type="text" tabindex="7" required="">
+									<label> <input name="register_retypePassword"
+										placeholder="Xác nhận mật khẩu" type="password" tabindex="6"
+										required="">
 									</label>
 								</div>
 								<div>
-									<label>
-										<input name="register_address" placeholder="Địa chỉ liên hệ" type="text" tabindex="8" required="">
+									<label> <input name="register_phoneNumber"
+										placeholder="Số điện thoại" type="text" tabindex="7"
+										required="">
 									</label>
 								</div>
 								<div>
-									<input type="submit" value="Tạo tài khoản" id="register-submit"> <span style="color: #FF0000"> ${register_mess}</span>
+									<label> <input name="register_address"
+										placeholder="Địa chỉ liên hệ" type="text" tabindex="8"
+										required="">
+									</label>
+								</div>
+								<div>
+									<input type="submit" value="Tạo tài khoản" id="register-submit">
+									<span style="color: #FF0000"> ${register_mess}</span>
 								</div>
 
 							</form>
@@ -202,11 +216,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<div class="clear"></div>
 			</div>
 		</div>
-	</div>		
+	</div>
 
-			<div class="clearfix"></div>
+	<div class="clearfix"></div>
 
-		</div>
+	</div>
 	</div>
 
 

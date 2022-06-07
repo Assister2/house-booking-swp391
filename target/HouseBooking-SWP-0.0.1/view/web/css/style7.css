@@ -1,5 +1,4 @@
 /* Overlay style */
-
 .overlay {
 	position: fixed;
 	width: 20% !important;
@@ -9,34 +8,30 @@
 	z-index: 99999;
 }
 
-
 /* Overlay closing cross */
-
 .overlay .overlay-close {
-    width: 40px;
-    height: 40px;
-    position: absolute;
-    right: 20px;
-    top: 20px;
-    overflow: hidden;
-    background: none;
-    color: #100f0f;
-    border: 1px solid #dcddde;
+	width: 40px;
+	height: 40px;
+	position: absolute;
+	right: 20px;
+	top: 20px;
+	overflow: hidden;
+	background: none;
+	color: #100f0f;
+	border: 1px solid #dcddde;
 }
 
 button#trigger-overlay {
-    outline: none;
-    border: none;
-    background: none;
-    text-align: center;
-    color: #fbfdfb;
-    font-size: 1.65em;
-    padding: 0 8px;
+	outline: none;
+	border: none;
+	background: none;
+	text-align: center;
+	color: #fbfdfb;
+	font-size: 1.65em;
+	padding: 0 8px;
 }
 
-
 /* Menu style */
-
 .overlay nav {
 	text-align: center;
 	position: relative;
@@ -63,26 +58,22 @@ button#trigger-overlay {
 }
 
 .overlay ul li a {
-    font-size: 1em;
-    font-weight: 600;
-    display: block;
-    color: #333;
-    -webkit-transition: color 0.2s;
-    transition: color 0.2s;
-    letter-spacing: 1px;
-    padding: 0.5em 0;
+	font-size: 1em;
+	font-weight: 600;
+	display: block;
+	color: #333;
+	-webkit-transition: color 0.2s;
+	transition: color 0.2s;
+	letter-spacing: 1px;
+	padding: 0.5em 0;
 }
 
-.overlay ul li a:hover,
-.overlay ul li a:focus {
-    color: #fb383b;
+.overlay ul li a:hover, .overlay ul li a:focus {
+	color: #fb383b;
 }
-
 
 /* Effects */
-
-html,
-body {
+html, body {
 	overflow-x: hidden;
 }
 
@@ -91,6 +82,7 @@ body {
 	-webkit-transform: translateX(50%);
 	transform: translateX(50%);
 	/* Effects */
+	
 }
 
 .container::after {
@@ -102,7 +94,7 @@ body {
 	left: 0;
 	width: 100%;
 	height: 100%;
-	background:#fff;
+	background: #fff;
 	-webkit-transition: opacity 0.5s, visibility 0s 0.5s;
 	transition: opacity 0.5s, visibility 0s 0.5s;
 }
@@ -115,7 +107,7 @@ body {
 }
 
 .overlay-contentpush {
-	background:#fff;
+	background: #fff;
 	visibility: hidden;
 	-webkit-backface-visibility: hidden;
 	backface-visibility: hidden;
@@ -143,7 +135,7 @@ body {
 	}
 }
 
-@media (max-width:600px) {
+@media ( max-width :600px) {
 	.overlay ul li a {
 		font-size: 15px;
 	}
