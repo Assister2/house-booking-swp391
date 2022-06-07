@@ -55,21 +55,24 @@ public class BookingController extends HttpServlet {
         int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
         int totalRecords = ((RoomDAO)roomDAO).getTotalRecord();
         
-        List<Convenient> listConvenient = new ConvenientDAO().list();
-        
-		List<Room> listRoom = roomDAO.list((page - 1) * recordsPerPage, recordsPerPage);
+       	List<Room> listRoom = roomDAO.list((page - 1) * recordsPerPage, recordsPerPage);
 
-		List<TypeOfRoom> listTypeOfRoom = new TypeOfRoomDAO().list();
-
-		request.setAttribute("listConvenient", listConvenient);
 		request.setAttribute("totalRecords", totalRecords);
 		request.setAttribute("currentPage", page);
 		request.setAttribute("noOfPages", noOfPages);
 		request.setAttribute("listRoom", listRoom);
-		request.setAttribute("listType", listTypeOfRoom);
+		defaulItem(request, response);
 
 		RequestDispatcher rd = request.getRequestDispatcher("/view/web/booking.jsp");
 		rd.forward(request, response);
+	}
+	
+	protected void defaulItem(HttpServletRequest request, HttpServletResponse response) {
+		List<Convenient> listConvenient = new ConvenientDAO().list();
+		List<TypeOfRoom> listTypeOfRoom = new TypeOfRoomDAO().list();
+		
+		request.setAttribute("listConvenient", listConvenient);
+		request.setAttribute("listType", listTypeOfRoom);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

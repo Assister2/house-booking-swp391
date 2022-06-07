@@ -165,7 +165,7 @@ h1 {
 				<!-- Booking -->
 
 				<div>
-					<a style="background-color: #00BCD4;" href="${pageContext.request.contextPath}/make-request"
+					<a style="background-color: #00BCD4;" href="#addEmployeeModal"
 						class="btn btn-success" data-toggle="modal">Đặt phòng</a>
 				</div>
 
@@ -652,24 +652,7 @@ h1 {
 	<script type="text/javascript"
 		src="${pageContext.request.contextPath}/view/web/js/jquery-2.1.4.min.js"></script>
 	<!-- //js -->
-	<!-- cart-js -->
-	<script
-		src="${pageContext.request.contextPath}/view/web/js/minicart.js"></script>
-	<script>
-		shoe.render();
-
-		shoe.cart.on('shoe_checkout', function(evt) {
-			var items, len, i;
-
-			if (this.subtotal() > 0) {
-				items = this.items();
-
-				for (i = 0, len = items.length; i < len; i++) {
-				}
-			}
-		});
-	</script>
-	<!-- //cart-js -->
+	
 	<!-- /nav -->
 	<script
 		src="${pageContext.request.contextPath}/view/web/js/modernizr-2.6.2.min.js"></script>

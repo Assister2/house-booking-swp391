@@ -26,6 +26,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	
 	
 	
+	
 		addEventListener("load", function () {
 			setTimeout(hideURLbar, 0);
 		}, false);
@@ -34,6 +35,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			window.scrollTo(0, 1);
 		}
 	
+
 
 
 
@@ -98,88 +100,91 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<h3 class="agileits-sear-head">Search Here..</h3>
 					<form action="#" method="post">
 						<input type="search" placeholder="Where you want to go?"
-							name="search" required=""> <input type="submit" value=" ">
+							name="search"> <input type="submit">
 					</form>
 				</div>
 				<hr>
 				<!-- price range -->
-				<div class="range">
-					<h3 class="agileits-sear-head">Price range</h3>
-					<ul class="dropdown-menu6">
-						<li>
+				<form action="" method="post">
+					<div class="range">
+						<h3 class="agileits-sear-head">Price range</h3>
 
-							<div id="slider-range"></div> <input type="text" id="amount"
-							style="border: 0; color: #ffffff; font-weight: normal;" />
-						</li>
-					</ul>
-				</div>
+						<ul class="dropdown-menu6">
+							<li>
+								<div id="slider-range"></div> <input type="text" id="amount"
+								style="border: 0; color: #ffffff; font-weight: normal;" />
+							</li>
+						</ul>
+					</div>
+					
+				</form>
 				<!-- //price range -->
 				<hr>
 				<!-- Type -->
 				<c:set var="listType" value="${requestScope.listType }"></c:set>
 				<div class="left-side">
-					<h3 class="agileits-sear-head">Type of room</h3>
+					<h3 class="agileits-sear-head">Loại hình</h3>
 					<select class="form-control">
 						<c:forEach var="type" items="${listType }">
 							<option>${type.typeName}</option>
 						</c:forEach>
 					</select>
+					
 				</div>
 				<!-- //discounts -->
 				<hr>
 				<!--preference -->
 				<div class="left-side">
-					<h3 class="agileits-sear-head">Convenient</h3>
+					<h3 class="agileits-sear-head">Tiện nghi</h3>
 					<ul>
 						<c:set var="listConvenient"
 							value="${requestScope.listConvenient }"></c:set>
 						<c:forEach var="convenient" items="${listConvenient }">
-							<li><input id="${convenient.conveId }" type="checkbox" value="${convenient.conveId }" class="checked">
-							<span class="span"><label for="${convenient.conveId }"
-								style="font-weight: unset;">${convenient.conveName }</label></span></li>
+							<li><input id="${convenient.conveId }" type="checkbox"
+								value="${convenient.conveId }" class="checked"> <span
+								class="span"><label for="${convenient.conveId }"
+									style="font-weight: unset;">${convenient.conveName }</label></span></li>
 						</c:forEach>
 					</ul>
 				</div>
 				<!-- // preference -->
 
+				<hr>
 				<!-- rating -->
 				<div class="left-side">
-					<h3 class="agileits-sear-head">Rating</h3>
+					<h3 class="agileits-sear-head">Xếp hạng đánh giá</h3>
 					<div class="form-check">
 						<input class="form-check-input" type="radio" name="ratingbtn"
 							id="ratingbtn1" checked> <label
 							style="font-weight: unset;" class="form-check-label"
-							for="ratingbtn1"> Very Satisfied </label>
+							for="ratingbtn1"> Tuyệt vời (Từ 4 đến 5 <i style="color: rgb(223, 223, 47);" class="fa fa-star"
+													aria-hidden="true"></i>)</label>
 					</div>
 					<div class="form-check">
 						<input class="form-check-input" type="radio" name="ratingbtn"
 							id="ratingbtn2"> <label style="font-weight: unset;"
-							class="form-check-label" for="ratingbtn2"> Satisfied </label>
+							class="form-check-label" for="ratingbtn2"> Tốt (Từ 3 đến 4  <i style="color: rgb(223, 223, 47);" class="fa fa-star"
+													aria-hidden="true"></i>)</label>
 					</div>
 					<div class="form-check">
 						<input class="form-check-input" type="radio" name="ratingbtn"
 							id="ratingbtn3"> <label style="font-weight: unset;"
-							class="form-check-label" for="ratingbtn3"> Neutral </label>
+							class="form-check-label" for="ratingbtn3"> Bình Thường  (Từ 2 đến 3 <i style="color: rgb(223, 223, 47);" class="fa fa-star"
+													aria-hidden="true"></i>)</label>
 					</div>
 					<div class="form-check">
 						<input class="form-check-input" type="radio" name="ratingbtn"
 							id="ratingbtn4"> <label style="font-weight: unset;"
-							class="form-check-label" for="ratingbtn4"> Dissatisfied </label>
+							class="form-check-label" for="ratingbtn4"> Tệ (Dưới 3  <i style="color: rgb(223, 223, 47);" class="fa fa-star"
+													aria-hidden="true"></i>)</label>
 					</div>
-					<div class="form-check">
-						<input class="form-check-input" type="radio" name="ratingbtn"
-							id="ratingbtn5"> <label style="font-weight: unset;"
-							class="form-check-label" for="ratingbtn5"> Very
-							Dissatisfied </label>
-					</div>
-
 				</div>
 				<!-- End rating -->
 
 				<hr>
 				<div class="left-side">
-					<h3 class="agileits-sear-head">Location</h3>
-					<label style="font-weight: unset;">Province</label> <select
+					<h3 class="agileits-sear-head">Thành Phố</h3>
+					<select
 						class="form-control">
 						<option>Thành phố HCM</option>
 						<option>Lâm Đồng</option>
@@ -187,30 +192,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<option>Vũng Tàu</option>
 						<option>Huế</option>
 						<option>Hà Nội</option>
-					</select> <label style="font-weight: unset; margin-top: 10px;">City</label>
-					<select class="form-control">
-						<option>Thành phố Thủ Đức</option>
-						<option>Tân Bình</option>
-						<option>Phú Nhuận</option>
-						<option>Gò Vấp</option>
-						<option>Hốc môn</option>
-						<option>Quận 1</option>
-						<option>Quận ...</option>
-					</select> <label style="font-weight: unset; margin-top: 10px;">District</label>
-					<select class="form-control">
-						<option>...</option>
-						<option>...</option>
-						<option>...</option>
-						<option>...</option>
-						<option>...</option>
-						<option>...</option>
-						<option>...</option>
 					</select>
 				</div>
 				<div class="clearfix"></div>
 				<br>
 				<div style="text-align: right;">
-					<button type="button" class="btn btn-primary">Filter</button>
+					<button type="button" class="btn btn-primary">Xóa bộ lọc</button>
+					<button type="button" class="btn btn-primary" style="width: 100px;">Lọc</button>
 				</div>
 
 			</div>
@@ -292,7 +280,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 													aria-hidden="true"></i></a></li>
 											<li><a href="#"><i class="fa fa-star"
 													aria-hidden="true"></i></a></li>
-											<li><a href="#"><i class="fa fa-star-half-o"
+											<li><a href="#"><i class="fa fa-star	"
 													aria-hidden="true"></i></a></li>
 										</ul>
 										<div>Loại phòng: ${room.typeName }</div>
