@@ -1,3 +1,6 @@
+Drop database HouseBooking;
+Go
+
 Create database HouseBooking;
 Go
 
@@ -45,6 +48,14 @@ Create table Room (
 )
 Go
 
+Create table Room_Timeline(
+	room_id varchar(20),
+	startDate date,
+	endDate date,
+	primary key(room_id, startDate, endDate)
+)
+Go
+
 Create table Room_Images(
 	room_id varchar(20),
 	image_link varchar(200),
@@ -63,6 +74,7 @@ Go
 Create table Building(
 	building_id varchar(20),
 	building_desc nvarchar(max),
+	building_type varchar(20),
 	street_id varchar(20),
 	user_id varchar(20),
 	primary key(building_id)
