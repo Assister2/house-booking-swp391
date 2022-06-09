@@ -239,7 +239,7 @@ select::-ms-expand {
 					</div>
 
 					<div class="col-md-2" style="text-align: center; margin-top: 5px;">
-						<button type="submit" 9class="btn btn-danger btn-lg"
+						<button type="submit" class="btn btn-danger btn-lg"
 							style="text-align: center; height: 50px; width: 100px;">
 							<i class="fa fa-search-plus"></i>
 						</button>
@@ -256,42 +256,42 @@ select::-ms-expand {
 					<img class="img-responsive" style="border-radius: 50%;" alt=""
 						src="https://hoangviettravel.vn/wp-content/uploads/2020/05/tour-phu-quoc-3-ngay-2-dem-1-min.jpg">
 					<br>
-					<h4>Phú Quốc</h4>
+					<a href="">Phú Quốc</a>
 				</div>
 
 				<div class="col-md-2">
 					<img class="img-responsive" style="border-radius: 50%;" alt=""
 						src="https://dulich9.com/wp-content/uploads/2019/05/Diem-du-lich-Nha-Trang.jpg">
 					<br>
-					<h4>Nha Trang</h4>
+					<a href="">Nha Trang</a>
 				</div>
 
 				<div class="col-md-2">
 					<img class="img-responsive" style="border-radius: 50%;" alt=""
 						src="https://images.foody.vn/res/g10/97019/s800/foody-buu-dien-thanh-pho-ho-chi-minh-748-636527632924027650.jpg">
 					<br>
-					<h4>TP Hồ Chí Minh</h4>
+					<a href="">TP Hồ Chí Minh</a>
 				</div>
 
 				<div class="col-md-2">
 					<img class="img-responsive" style="border-radius: 50%;" alt=""
 						src="https://hoianit.com/wp-content/uploads/2021/07/hoa-giay-hoi-an-800x800.jpg">
 					<br>
-					<h4>Hội An</h4>
+					<a href="">Hội An</a>
 				</div>
 
 				<div class="col-md-2">
 					<img class="img-responsive" style="border-radius: 50%;" alt=""
 						src="http://reviewvilla.vn/wp-content/uploads/2022/03/art-homestay-vung-tau-8.jpg">
 					<br>
-					<h4>BR - VT</h4>
+					<a href="">BR - VT</a>
 				</div>
 
 				<div class="col-md-2">
 					<img class="img-responsive" style="border-radius: 50%;" alt=""
 						src="https://motogo.vn/wp-content/uploads/2020/02/O1HMsGK3ini3tjjM2jYmL00tRdfjrry8.jpeg">
 					<br>
-					<h4>Đà Lạt</h4>
+					<a href="">Đà Lạt</a>
 				</div>
 			</div>
 		</div>

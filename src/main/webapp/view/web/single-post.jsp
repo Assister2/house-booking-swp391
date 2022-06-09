@@ -355,13 +355,8 @@ h1 {
 							</div>
 						</div>
 						<div class="container">
-							<div style="text-align: right;">
-								<a href="#" class="previous round arrow">&#8250;</a>
-							</div>
-							<div style="text-align: left;">
-								<a href="#" class="previous round arrow">&#8249;</a>
-							</div>
-
+							
+							
 						</div>
 
 					</div>

@@ -30,6 +30,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	
 	
 	
+	
 		addEventListener("load", function () {
 			setTimeout(hideURLbar, 0);
 		}, false);
@@ -38,6 +39,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			window.scrollTo(0, 1);
 		}
 	
+
 
 
 
@@ -108,7 +110,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<!-- //tittle heading -->
 			<!-- product left -->
 			<div class="side-bar col-md-3">
-				<div class="search-hotel main-filter" style="padding: 10px 5px;">
+				<div class="search-hotel main-filter" style="padding: 10px 10px;">
 					<h3 class="agileits-sear-head">Điểm đến:</h3>
 					<form action="#" method="post">
 						<input type="search" placeholder="Chọn điểm đến" name="search">
@@ -153,12 +155,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<div class="left-side">
 					<h3 class="agileits-sear-head">Loại chỗ ở</h3>
 					<ul>
-					<c:forEach var="type" items="${listType }">
-						<li><input id="${type.typeId}" type="checkbox"
-								value="${type.typeId}" class="checked"> <span
-								class="span"><label for="${type.typeId}"
+						<c:forEach var="type" items="${listType }">
+							<li><input id="${type.typeId}" type="checkbox"
+								value="${type.typeId}" class="checked" name="buidingType">
+								<span class="span"><label for="${type.typeId}"
 									style="font-weight: unset;">${type.typeName}</label></span></li>
-					</c:forEach>
+						</c:forEach>
 					</ul>
 				</div>
 				<!-- //discounts -->
@@ -171,9 +173,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							value="${requestScope.listConvenient }"></c:set>
 						<c:forEach var="convenient" items="${listConvenient }">
 							<li><input id="${convenient.conveId }" type="checkbox"
-								value="${convenient.conveId }" class="checked"> <span
-								class="span"><label for="${convenient.conveId }"
-									style="font-weight: unset;">${convenient.conveName }</label></span></li>
+								value="${convenient.conveId }" class="checked"
+								name="convenientOption"> <span class="span"><label
+									for="${convenient.conveId }" style="font-weight: unset;">${convenient.conveName }</label></span></li>
 						</c:forEach>
 					</ul>
 				</div>
@@ -221,15 +223,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 				<hr>
 				<div class="left-side">
-					<h3 class="agileits-sear-head">Thành Phố</h3>
-					<select class="form-control">
-						<option>Thành phố HCM</option>
-						<option>Lâm Đồng</option>
-						<option>Đà Nẵng</option>
-						<option>Vũng Tàu</option>
-						<option>Huế</option>
-						<option>Hà Nội</option>
-					</select>
+					<h3 class="agileits-sear-head">Thành Phố/ Quận/ Huyện</h3>
+					<ul>
+						<c:set var="listDistrict" value="${requestScope.listDistrict }"></c:set>
+						<c:forEach var="district" items="${listDistrict }">
+							<li><input id="${district.districtId }" type="checkbox"
+								value="${district.districtId }" class="checked"
+								name="districtOption"> <span class="span"><label
+									for="${district.districtId }" style="font-weight: unset;">${district.districtName }</label></span></li>
+						</c:forEach>
+					</ul>
 				</div>
 				<div class="clearfix"></div>
 				<br>

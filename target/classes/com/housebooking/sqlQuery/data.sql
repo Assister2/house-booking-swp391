@@ -221,7 +221,7 @@ Go
 
 Insert into Room
 Values
-	('Room_09',N'La Beauté Bắc Hà',N'Homestay được xây dựng tại làng Tá Chài, Bắc Hà, Lào Cai, Việt Nam, CÓ WIFI',340000,N'Không hút thuốc trong khu vực nhà ở','type_1','370201_B01')
+	('Room_09',N'La Beauté Bắc Hà','active',N'Homestay được xây dựng tại làng Tá Chài, Bắc Hà, Lào Cai, Việt Nam, CÓ WIFI',340000,N'Không hút thuốc trong khu vực nhà ở','type_1','370201_B01')
 Go
 
 /*Insert into Room
@@ -236,7 +236,7 @@ Go
 
 Insert into Room
 Values
-	('Room_12',N'Lovely House',N'Hẻm 3 /4 Đường Đoàn Thị Điểm Phường 4 Thành phố Đà Lạt,Việt Nam',380000.00,N'Giữ gìn cảnh quan, cảnh vật xung quanh','type_3','350101_B01')
+	('Room_12',N'Lovely House','active',N'Hẻm 3 /4 Đường Đoàn Thị Điểm Phường 4 Thành phố Đà Lạt,Việt Nam',380000.00,N'Giữ gìn cảnh quan, cảnh vật xung quanh','type_3','350101_B01')
 Go
 
 Insert into Room
@@ -299,5 +299,5 @@ Go
 
 Insert into Bill_detail
 Values
-	('Room_01_Bill_01', 'Room_01', '2022-06-06', '2022-06-09', N'Chủ nhà liên hệ lại gấp giúp em')
+	('Room_01_Bill_01', 'Room_01', '2022-07-06', '2022-07-09',900000, null, 0)
 Go

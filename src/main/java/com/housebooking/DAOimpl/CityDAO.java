@@ -28,7 +28,6 @@ public class CityDAO {
 				City city = new City();
 				city.setCityId(rs.getString("city_id"));
 				city.setCityName(rs.getNString("city_name"));
-				System.out.println(city.getCityId());
 				list.add(city);
 			}
 

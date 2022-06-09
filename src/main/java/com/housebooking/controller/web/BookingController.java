@@ -1,7 +1,11 @@
 package com.housebooking.controller.web;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Locale;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,9 +16,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.housebooking.DAO.IRoomDAO;
 import com.housebooking.DAOimpl.ConvenientDAO;
+import com.housebooking.DAOimpl.DistrictDAO;
 import com.housebooking.DAOimpl.RoomDAO;
 import com.housebooking.DAOimpl.TypeOfRoomDAO;
 import com.housebooking.Model.Convenient;
+import com.housebooking.Model.District;
 import com.housebooking.Model.Room;
 import com.housebooking.Model.TypeOfRoom;
 
@@ -41,8 +47,25 @@ public class BookingController extends HttpServlet {
 
 	}
 
+	//Without filter
 	protected void doDisplay(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		String city = request.getParameter("city");
+		String startDate = request.getParameter("startDate");
+		String endDate = request.getParameter("endDate");
+		LocalDate date1 = LocalDate.now();
+		LocalDate date2 = LocalDate.now();
+		
+		if(!(startDate == null) && !(endDate == null)) {
+			try {
+		        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy", Locale.ENGLISH);
+		        date1 = LocalDate.parse(startDate, formatter);
+		        date2 = LocalDate.parse(endDate, formatter);
+			} catch (Exception e) {
+			}
+		}
+		
 		IRoomDAO roomDAO = new RoomDAO();
 		
 		int page = 1;
@@ -54,9 +77,19 @@ public class BookingController extends HttpServlet {
 		int noOfRecords = ((RoomDAO)roomDAO).getNoOfRecords();
         int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
         int totalRecords = ((RoomDAO)roomDAO).getTotalRecord();
+        List<Room> listRoom;
+        List<District> listDistrict;
         
-       	List<Room> listRoom = roomDAO.list((page - 1) * recordsPerPage, recordsPerPage);
-
+        if(city == null) {
+        	listRoom = roomDAO.list((page - 1) * recordsPerPage, recordsPerPage);
+        }
+        else {
+        	listRoom = ((RoomDAO)roomDAO).list(city, date1, date2, "", (page - 1) * recordsPerPage, recordsPerPage);
+        }
+      
+        listDistrict = new DistrictDAO().list(city);
+        
+        request.setAttribute("listDistrict", listDistrict);
 		request.setAttribute("totalRecords", totalRecords);
 		request.setAttribute("currentPage", page);
 		request.setAttribute("noOfPages", noOfPages);
