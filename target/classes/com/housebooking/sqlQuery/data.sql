@@ -31,86 +31,6 @@ Go
 --Inser dữ liệu
 Insert into Type_Of_Room
 Values
-	('type_1',N'Vintage cổ điển'),
-	('type_2',N'Hiện đại')
-Go
-
-Insert into City
-Values
-	('01', N'Hà Nội'),
-	('02', N'TP Hồ Chí Mình'),
-	('42', N'Lâm Đồng')
-Go
-
-Insert into District
-Values
-	('HCM_01', N'Quận 1', '02'),
-	('HCM_02', N'Quận 2', '02'),
-	('HCM_18', N'Quận Thủ Đức', '02'),
-	('HN_01', N'Quận Ba Đình', '01'),
-	('HN_02', N'Quận Hoàn Kiếm', '01'),
-	('LD_01', N'Thành phố Đà Lạt', '42')
-Go
-
-Insert into Street
-Values
-	('HCM_01_01', N'Nguyễn Huệ', 'HCM_01'),
-	('HCM_01_02', N'Nguyễn Hữu Cảnh', 'HCM_01'),
-	('HCM_02_01', N'Võ Trường Toản', 'HCM_02'),
-	('HCM_02_02', N'Thảo Điền', 'HCM_02'),
-	('HCM_18_01', N'Võ Vân Ngân', 'HCM_18'),
-	('HN_01_01', N'Phố Cửa Bắc', 'HN_01'),
-	('HN_02_01', N'Phố Hàng Nón', 'HN_02'),
-	('LD_01_01', N'Hàm Nghi', 'LD_01')
-Go
-
-Insert into Building
-Values
-	('HCM_01_01_01', N'Nhà to view đẹp', 'HCM_01_01'),
-	('HCM_01_02_01', N'Nhà to view đẹp hơn', 'HCM_01_02'),
-	('HCM_02_01_01', N'Nhà to view đẹp hơn nữa', 'HCM_02_01'),
-	('LD_01_01_01', N'Nhà view đẹp ở Đà Lạt', 'LD_01_01')
-Go
-
-Insert into Convenient
-Values
-	('Con_01',N'Bãi đỗ xe'),
-	('Con_02',N'Hồ bơi'),
-	('Con_03',N'Phòng xông hơi')
-Go
-
-Insert into Room
-Values
-	('Room_01',N'Trường Giang Dalat Homestay', N'Tọa lạc tại thành phố Đà Lạt, cách Vườn hoa Đà Lạt 1,3 km, Trường Giang Dalat Hotel cung cấp chỗ nghỉ với nhà hàng, chỗ đỗ xe riêng miễn phí, sảnh khách chung và khu vườn.', 900000, N'Giữ gìn vệ sinh, không xả rác','type_2', 'LD_01_01_01')
-Go
-
-Insert into Room_Convenient
-Values
-	('Room_01', 'Con_01'),
-	('Room_01', 'Con_02'),
-	('Room_01', 'Con_03')
-Go
-
-Insert into Users
-Values
-	('User_01', N'Nguyễn Trương Giang', 'Owner', 'Giang', '123', '0987654321', 'GiangNTSE150747@gfpt.edu.vn'),
-	('User_02', N'Nguyễn Trương Giang', 'User', 'Quang', '123', '0987654321', 'GiangNTSE150747@gfpt.edu.vn')
-Go
-
-Insert into Bill
-Values
-	('Room_01_Bill_01', '2022-06-01', 2700000, N'Chờ duyệt', 'User_01')
-Go
-
-Insert into Bill_detail
-Values
-	('Room_01_Bill_01', 'Room_01', '2022-06-06', '2022-06-09', N'Chủ nhà liên hệ lại gấp giúp em')
-Go
-
-
---Inser dữ liệu
-Insert into Type_Of_Room
-Values
 	('type_1',N'Cổ Điển'),
 	('type_2',N'Hiện Đại'),
 	('type_3',N'Thiên Nhiên')
@@ -212,71 +132,36 @@ Go
 
 Insert into Building
 Values
-	('350101_B00',N'Homestay Dành cho khác chỉ qua đêm','350101', 'User_01')
+	('350101_B00',N'Homestay Dành cho khác chỉ qua đêm', N'Homestay', '350101', 'User_01'),
+	('580101_B01',N'Hotel có phòng rộng gần với các địa điểm nổi tiếng', N'Hotel', '580101', 'User_01'),
+	('580101_B02',N'Hotel có phòng đọc sách nhà ăn, v.v', N'Hotel', '580101', 'User_01'),
+	('580202_B01',N'Khách Sạn có phòng ăn, phòng sách riêng', N'Hotel', '580202', 'User_01'),
+	('240102_B01',N'Nhà 2 tầng đầy đủ tiện nghi thích hợp cho gia đình du lịch nhiều ngày', N'Nhà nguyên căn', '240102', 'User_01'),
+	('240202_B01',N'Phòng cho gia đình có đầy đủ tiện nghi', N'Homestay', '240202', 'User_01'),
+	('220101_B01',N'Khu nhà qua đêm phong cách cổ điển', N'Nhà nguyên căn','220101', 'User_01'),
+	('430101_B01',N'Khách sạn phong cách hiện đại, đầy đủ tiện nghi, View đẹp', N'Hotel', '430101', 'User_01'),
+	('430201_B01',N'Nhà vườn, có hồ bơi bao bọc bởi cây cảnh', N'Nhà nguyên căn','430201',  'User_01')
 Go
 
 Insert into Building
 Values
-	('580101_B01',N'Hotel có phòng rộng gần với các địa điểm nổi tiếng','580101', 'User_01')
-Go
+	('370101_B01',N'Resort và spa có cảnh quan đẹp bao quanh bỏi hồ, vườn cảnh', N'Homestay', '370101', 'User_01'),
+	('370201_B01',N'Homestay phong cách cổ điển hài hoà với thiên nhiên', N'Homestay', '370201','User_01'),
 
-Insert into Building
-Values
-	('580101_B02',N'Hotel có phòng đọc sách nhà ăn, v.v','580101', 'User_01')
-Go
-
-Insert into Building
-Values
-	('580202_B01',N'Khách Sạn có phòng ăn, phòng sách riêng','580202', 'User_01')
-Go
-
-Insert into Building
-Values
-	('240102_B01',N'Nhà 2 tầng đầy đủ tiện nghi thích hợp cho gia đình du lịch nhiều ngày','240102', 'User_01')
-Go
-
-Insert into Building
-Values
-	('240202_B01',N'Phòng cho gia đình có đầy đủ tiện nghi','240202', 'User_01')
-Go
-
-Insert into Building
-Values
-	('220101_B01',N'Khu nhà qua đêm phong cách cổ điển','220101', 'User_01')
-Go
-/*Insert into Building
-Values
-	('220102_B01',N'Thiết kế theo phong cách xưa, với view nhìn ra núi đồi','220102')
-Go*/
-Insert into Building
-Values
-	('430101_B01',N'Khách sạn phong cách hiện đại, đầy đủ tiện nghi, View đẹp','430101', 'User_01')
-Go
-
-Insert into Building
-Values
-	('430201_B01',N'Nhà vườn, có hồ bơi bao bọc bởi cây cảnh','430201', 'User_01')
-Go
-
-Insert into Building
-Values
-	('370101_B01',N'Resort và spa có cảnh quan đẹp bao quanh bỏi hồ, vườn cảnh','370101', 'User_01'),
-	('370201_B01',N'Homestay phong cách cổ điển hài hoà với thiên nhiên','370201','User_01'),
-
-	('120201_B01',N'Resort bãi biển, mát mẻ','120201', 'User_01'),
-	('120101_B01',N'Nhà gô gần gũi với thiên nhiên','120101', 'User_01'),
+	('120201_B01',N'Resort bãi biển, mát mẻ', N'Homestay','120201',  'User_01'),
+	('120101_B01',N'Nhà gô gần gũi với thiên nhiên', N'Nhà nguyên căn','120101',  'User_01'),
 	
-	('350101_B01',N'Gần khu vườn, có thể dùng để mở tiệc BBQ','350101', 'User_01'),
-	('350201_B01',N'Khu vườn cạnh nhà, thân thiện thiện với thú cưng','350201', 'User_01'),
+	('350101_B01',N'Gần khu vườn, có thể dùng để mở tiệc BBQ', N'Homestay','350101',  'User_01'),
+	('350201_B01',N'Khu vườn cạnh nhà, thân thiện thiện với thú cưng', N'Homestay', '350201', 'User_01'),
 	
-	('110201_B01',N'Full căn hộ 84m2 có 3 phòng riêng','110201', 'User_01'),
-	('110101_B01',N'Homestay cho gia đình, đầy đủ tiện nghi','110101', 'User_01'),
+	('110201_B01',N'Full căn hộ 84m2 có 3 phòng riêng', N'Nhà nguyên căn','110201',  'User_01'),
+	('110101_B01',N'Homestay cho gia đình, đầy đủ tiện nghi',  N'Homestay', '110101', 'User_01'),
 
-	('150101_B01',N'Hotel có view nhìn ra thành phố','150101', 'User_01'),
-	('150201_B01',N'Chung cư gần biển','150201', 'User_01'),
+	('150101_B01',N'Hotel có view nhìn ra thành phố', N'Hotel', '150101', 'User_01'),
+	('150201_B01',N'Chung cư gần biển', N'Homestay','150201',  'User_01'),
 
-	('480101_B01',N'Khách sạn gần bãi biển','480101', 'User_01'),
-	('480201_B01',N'Homestay kiểu khu vườn','480201', 'User_01')
+	('480101_B01',N'Khách sạn gần bãi biển',  N'Hotel', '480101', 'User_01'),
+	('480201_B01',N'Homestay kiểu khu vườn', N'Homestay', '480201', 'User_01')
 Go
 
 Insert into Convenient

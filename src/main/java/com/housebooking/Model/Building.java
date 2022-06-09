@@ -3,6 +3,7 @@ package com.housebooking.Model;
 public class Building {
 	private String buildingId;
 	private String buildingDesc;
+	private String buildingType;
 	private String streetId;
 	private String userId;
 	
@@ -29,6 +30,12 @@ public class Building {
 	}
 	public void setUserId(String userId) {
 		this.userId = userId;
+	}
+	public String getBuildingType() {
+		return buildingType;
+	}
+	public void setBuildingType(String buildingType) {
+		this.buildingType = buildingType;
 	}
 	
 }

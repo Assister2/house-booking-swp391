@@ -145,7 +145,9 @@ Create table Bill_detail(
 	room_id varchar(20),
 	start_date date,
 	end_date date,
+	price float,
 	note nvarchar(max),
+	expense float,
 	primary key(bill_id,room_id)
 )
 Go
@@ -153,6 +155,7 @@ Go
 Create table Feedback(
 	feedback_id varchar(20),
 	comment nvarchar(max),
+	rating int,
 	status nvarchar(20),
 	feedback_date date,
 	room_id varchar(20),

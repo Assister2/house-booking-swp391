@@ -17,6 +17,11 @@
 	
 	
 	
+	
+	
+	
+	
+	
             addEventListener("load", function () {
             setTimeout(hideURLbar, 0);
             }, false);
@@ -24,6 +29,11 @@
             window.scrollTo(0, 1);
             }
         
+
+
+
+
+
 
 
 
@@ -200,39 +210,42 @@ select::-ms-expand {
 	<div class="fluid-container">
 		<p class="h1">Nhanh chóng - Tiện lợi - An toàn</p>
 		<div class="center">
-			<div class="row cpn1">
-				<div class="col-md-3" style="margin-left: 6%;">
-					<label class="lbDiadiem">Địa điểm</label>
-					<div style="font-weight: normal; line-height: 17px;">
-						<select class="form-control">
-							<option value="" disabled selected>Bạn sắp đi đâu?</option>
-							<option>Thành phố HCM</option>
-							<option>Lâm Đồng</option>
-							<option>Đà Nẵng</option>
-							<option>Vũng Tàu</option>
-							<option>Huế</option>
-							<option>Hà Nội</option>
-						</select>
+			<form action="booking" method="post">
+				<div class="row cpn1">
+					<div class="col-md-3" style="margin-left: 6%;">
+						<label class="lbDiadiem">Địa điểm</label>
+						<div style="font-weight: normal; line-height: 17px;">
+							<c:set var="listCity" value="${requestScope.listCity }"></c:set>
+							<select class="form-control">
+								<option value="" disabled selected>Bạn sắp đi đâu?</option>
+								<c:set var="listCity" value="${requestScope.listCity }"></c:set>
+								<c:forEach var="city" items="${listCity }">
+									<option value="${city.cityId }">${city.cityName }</option>
+								</c:forEach>
+							</select>
+						</div>
+					</div>
+
+					<div class="col-md-3">
+						<label class="lbDiadiem">Ngày đến</label> <input type="text"
+							id="my_date_picker1" class="form-control"
+							placeholder="__/__/____">
+					</div>
+
+					<div class="col-md-3">
+						<label class="lbDiadiem">Ngày về</label> <input type="text"
+							id="my_date_picker2" class="form-control"
+							placeholder="__/__/____">
+					</div>
+
+					<div class="col-md-2" style="text-align: center; margin-top: 5px;">
+						<button type="submit" 9class="btn btn-danger btn-lg"
+							style="text-align: center; height: 50px; width: 100px;">
+							<i class="fa fa-search-plus"></i>
+						</button>
 					</div>
 				</div>
-
-				<div class="col-md-3">
-					<label class="lbDiadiem">Ngày đến</label> <input type="text"
-						id="my_date_picker1" class="form-control" placeholder="__/__/____">
-				</div>
-
-				<div class="col-md-3">
-					<label class="lbDiadiem">Ngày về</label> <input type="text"
-						id="my_date_picker2" class="form-control" placeholder="__/__/____">
-				</div>
-
-				<div class="col-md-2" style="text-align: center; margin-top: 5px;">
-					<button type="button" class="btn btn-danger btn-lg"
-						style="text-align: center; height: 50px; width: 100px;">
-						<i class="fa fa-search-plus"></i>
-					</button>
-				</div>
-			</div>
+			</form>
 		</div>
 		<hr style="width: 50%; text-align: center;">
 		<div class="text-center" style="margin: 30px auto;">
@@ -367,6 +380,7 @@ select::-ms-expand {
 
 					$('#my_date_picker1').change(
 							function() {
+
 								startDate = $(this).datepicker('getDate');
 								$("#my_date_picker2").datepicker("option",
 										"minDate", startDate);

@@ -65,7 +65,7 @@
 
 </head>
 
-<body class="animsition">
+<body class="">
 	<div class="page-wrapper">
 		<jsp:include page="header.jsp"></jsp:include>
 		<!-- END HEADER DESKTOP-->

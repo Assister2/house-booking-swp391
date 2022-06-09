@@ -27,6 +27,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	
 	
 	
+	
+	
+	
 		addEventListener("load", function () {
 			setTimeout(hideURLbar, 0);
 		}, false);
@@ -35,6 +38,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			window.scrollTo(0, 1);
 		}
 	
+
+
+
 
 
 
@@ -75,6 +81,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <link
 	href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800"
 	rel="stylesheet">
+
+<style>
+.main-filter {
+	background: #b0a7a7;
+}
+</style>
 </head>
 
 <body>
@@ -96,13 +108,29 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<!-- //tittle heading -->
 			<!-- product left -->
 			<div class="side-bar col-md-3">
-				<div class="search-hotel">
-					<h3 class="agileits-sear-head">Search Here..</h3>
+				<div class="search-hotel main-filter" style="padding: 10px 5px;">
+					<h3 class="agileits-sear-head">Điểm đến:</h3>
 					<form action="#" method="post">
-						<input type="search" placeholder="Where you want to go?"
-							name="search"> <input type="submit">
+						<input type="search" placeholder="Chọn điểm đến" name="search">
+						<input type="submit">
 					</form>
+
+					<div style="margin-top: 15px;" class="form-group">
+						<label for="pwd">Ngày đến:</label> <input type="date"
+							class="form-control" id="pwd">
+					</div>
+
+					<div style="margin-top: 15px;" class="form-group">
+						<label for="pwd">Ngày về:</label> <input type="date"
+							class="form-control" id="pwd">
+					</div>
+
+					<div style="text-align: right;">
+						<button type="button" class="btn btn-primary"
+							style="width: 100px;">Lưu</button>
+					</div>
 				</div>
+
 				<hr>
 				<!-- price range -->
 				<form action="" method="post">
@@ -116,20 +144,22 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							</li>
 						</ul>
 					</div>
-					
+
 				</form>
 				<!-- //price range -->
 				<hr>
 				<!-- Type -->
 				<c:set var="listType" value="${requestScope.listType }"></c:set>
 				<div class="left-side">
-					<h3 class="agileits-sear-head">Loại hình</h3>
-					<select class="form-control">
-						<c:forEach var="type" items="${listType }">
-							<option>${type.typeName}</option>
-						</c:forEach>
-					</select>
-					
+					<h3 class="agileits-sear-head">Loại chỗ ở</h3>
+					<ul>
+					<c:forEach var="type" items="${listType }">
+						<li><input id="${type.typeId}" type="checkbox"
+								value="${type.typeId}" class="checked"> <span
+								class="span"><label for="${type.typeId}"
+									style="font-weight: unset;">${type.typeName}</label></span></li>
+					</c:forEach>
+					</ul>
 				</div>
 				<!-- //discounts -->
 				<hr>
@@ -157,26 +187,34 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<input class="form-check-input" type="radio" name="ratingbtn"
 							id="ratingbtn1" checked> <label
 							style="font-weight: unset;" class="form-check-label"
-							for="ratingbtn1"> Tuyệt vời (Từ 4 đến 5 <i style="color: rgb(223, 223, 47);" class="fa fa-star"
-													aria-hidden="true"></i>)</label>
+							for="ratingbtn1"> Tuyệt vời (Từ 4 đến 5 <i
+							style="color: rgb(223, 223, 47);" class="fa fa-star"
+							aria-hidden="true"></i>)
+						</label>
 					</div>
 					<div class="form-check">
 						<input class="form-check-input" type="radio" name="ratingbtn"
 							id="ratingbtn2"> <label style="font-weight: unset;"
-							class="form-check-label" for="ratingbtn2"> Tốt (Từ 3 đến 4  <i style="color: rgb(223, 223, 47);" class="fa fa-star"
-													aria-hidden="true"></i>)</label>
+							class="form-check-label" for="ratingbtn2"> Tốt (Từ 3 đến
+							4 <i style="color: rgb(223, 223, 47);" class="fa fa-star"
+							aria-hidden="true"></i>)
+						</label>
 					</div>
 					<div class="form-check">
 						<input class="form-check-input" type="radio" name="ratingbtn"
 							id="ratingbtn3"> <label style="font-weight: unset;"
-							class="form-check-label" for="ratingbtn3"> Bình Thường  (Từ 2 đến 3 <i style="color: rgb(223, 223, 47);" class="fa fa-star"
-													aria-hidden="true"></i>)</label>
+							class="form-check-label" for="ratingbtn3"> Bình Thường
+							(Từ 2 đến 3 <i style="color: rgb(223, 223, 47);"
+							class="fa fa-star" aria-hidden="true"></i>)
+						</label>
 					</div>
 					<div class="form-check">
 						<input class="form-check-input" type="radio" name="ratingbtn"
 							id="ratingbtn4"> <label style="font-weight: unset;"
-							class="form-check-label" for="ratingbtn4"> Tệ (Dưới 3  <i style="color: rgb(223, 223, 47);" class="fa fa-star"
-													aria-hidden="true"></i>)</label>
+							class="form-check-label" for="ratingbtn4"> Tệ (Dưới 3 <i
+							style="color: rgb(223, 223, 47);" class="fa fa-star"
+							aria-hidden="true"></i>)
+						</label>
 					</div>
 				</div>
 				<!-- End rating -->
@@ -184,8 +222,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<hr>
 				<div class="left-side">
 					<h3 class="agileits-sear-head">Thành Phố</h3>
-					<select
-						class="form-control">
+					<select class="form-control">
 						<option>Thành phố HCM</option>
 						<option>Lâm Đồng</option>
 						<option>Đà Nẵng</option>
@@ -384,7 +421,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 										<c:forEach begin="1" end="${noOfPages}" var="i">
 											<c:choose>
 												<c:when test="${currentPage eq i}">
-													<li class="page-item"><a class="page-link">${i}</a></li>
+													<li class="page-item"><a class="page-link active">${i}</a></li>
 												</c:when>
 												<c:otherwise>
 													<li class="page-item"><a href="${path}?page=${i}"
