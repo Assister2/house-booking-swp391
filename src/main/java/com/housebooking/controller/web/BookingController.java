@@ -59,7 +59,7 @@ public class BookingController extends HttpServlet {
 		
 		if(!(startDate == null) && !(endDate == null)) {
 			try {
-		        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy", Locale.ENGLISH);
+		        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy", Locale.ENGLISH);
 		        date1 = LocalDate.parse(startDate, formatter);
 		        date2 = LocalDate.parse(endDate, formatter);
 			} catch (Exception e) {
@@ -74,9 +74,9 @@ public class BookingController extends HttpServlet {
 			page = Integer.parseInt(request.getParameter("page"));
 		}
 		
-		int noOfRecords = ((RoomDAO)roomDAO).getNoOfRecords();
-        int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
-        int totalRecords = ((RoomDAO)roomDAO).getTotalRecord();
+		//int noOfRecords = ((RoomDAO)roomDAO).getNoOfRecords();
+		int totalRecords = ((RoomDAO)roomDAO).getTotalRecord();
+        
         List<Room> listRoom;
         List<District> listDistrict;
         
@@ -85,7 +85,10 @@ public class BookingController extends HttpServlet {
         }
         else {
         	listRoom = ((RoomDAO)roomDAO).list(city, date1, date2, "", (page - 1) * recordsPerPage, recordsPerPage);
+        	totalRecords = ((RoomDAO)roomDAO).getTotalRecord(city, date1, date2);
         }
+        
+        int noOfPages = (int) Math.ceil(totalRecords * 1.0 / recordsPerPage);
       
         listDistrict = new DistrictDAO().list(city);
         

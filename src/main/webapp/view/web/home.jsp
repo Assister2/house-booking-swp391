@@ -210,30 +210,30 @@ select::-ms-expand {
 	<div class="fluid-container">
 		<p class="h1">Nhanh chóng - Tiện lợi - An toàn</p>
 		<div class="center">
-			<form action="booking" method="post">
+			<form action="booking" method="get">
 				<div class="row cpn1">
 					<div class="col-md-3" style="margin-left: 6%;">
 						<label class="lbDiadiem">Địa điểm</label>
 						<div style="font-weight: normal; line-height: 17px;">
 							<c:set var="listCity" value="${requestScope.listCity }"></c:set>
-							<select class="form-control">
+							<select class="form-control" name="city">
 								<option value="" disabled selected>Bạn sắp đi đâu?</option>
 								<c:set var="listCity" value="${requestScope.listCity }"></c:set>
 								<c:forEach var="city" items="${listCity }">
-									<option value="${city.cityId }">${city.cityName }</option>
+									<option value="${city.cityName }">${city.cityName }</option>
 								</c:forEach>
 							</select>
 						</div>
 					</div>
 
 					<div class="col-md-3">
-						<label class="lbDiadiem">Ngày đến</label> <input type="text"
+						<label class="lbDiadiem">Ngày đến</label> <input type="text" name="startDate"
 							id="my_date_picker1" class="form-control"
 							placeholder="__/__/____">
 					</div>
 
 					<div class="col-md-3">
-						<label class="lbDiadiem">Ngày về</label> <input type="text"
+						<label class="lbDiadiem">Ngày về</label> <input type="text" name="endDate"
 							id="my_date_picker2" class="form-control"
 							placeholder="__/__/____">
 					</div>
@@ -256,42 +256,42 @@ select::-ms-expand {
 					<img class="img-responsive" style="border-radius: 50%;" alt=""
 						src="https://hoangviettravel.vn/wp-content/uploads/2020/05/tour-phu-quoc-3-ngay-2-dem-1-min.jpg">
 					<br>
-					<a href="">Phú Quốc</a>
+					<a href="${pageContext.request.contextPath}/booking?city=Phú+Quốc">Phú Quốc</a>
 				</div>
 
 				<div class="col-md-2">
 					<img class="img-responsive" style="border-radius: 50%;" alt=""
 						src="https://dulich9.com/wp-content/uploads/2019/05/Diem-du-lich-Nha-Trang.jpg">
 					<br>
-					<a href="">Nha Trang</a>
+					<a href="${pageContext.request.contextPath}/booking?city=Phú+Quốc">Nha Trang</a>
 				</div>
 
 				<div class="col-md-2">
 					<img class="img-responsive" style="border-radius: 50%;" alt=""
 						src="https://images.foody.vn/res/g10/97019/s800/foody-buu-dien-thanh-pho-ho-chi-minh-748-636527632924027650.jpg">
 					<br>
-					<a href="">TP Hồ Chí Minh</a>
+					<a href="${pageContext.request.contextPath}/booking?city=Hồ+Chí+Minh">TP Hồ Chí Minh</a>
 				</div>
 
 				<div class="col-md-2">
 					<img class="img-responsive" style="border-radius: 50%;" alt=""
 						src="https://hoianit.com/wp-content/uploads/2021/07/hoa-giay-hoi-an-800x800.jpg">
 					<br>
-					<a href="">Hội An</a>
+					<a href="${pageContext.request.contextPath}/booking?city=Hội+An">Hội An</a>
 				</div>
 
 				<div class="col-md-2">
 					<img class="img-responsive" style="border-radius: 50%;" alt=""
 						src="http://reviewvilla.vn/wp-content/uploads/2022/03/art-homestay-vung-tau-8.jpg">
 					<br>
-					<a href="">BR - VT</a>
+					<a href="${pageContext.request.contextPath}/booking?city=Vũng+Tàu">BR - VT</a>
 				</div>
 
 				<div class="col-md-2">
 					<img class="img-responsive" style="border-radius: 50%;" alt=""
 						src="https://motogo.vn/wp-content/uploads/2020/02/O1HMsGK3ini3tjjM2jYmL00tRdfjrry8.jpeg">
 					<br>
-					<a href="">Đà Lạt</a>
+					<a href="${pageContext.request.contextPath}/booking?city=Lâm+Đồng">Đà Lạt</a>
 				</div>
 			</div>
 		</div>

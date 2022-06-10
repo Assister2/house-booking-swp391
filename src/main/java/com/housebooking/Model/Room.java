@@ -1,5 +1,8 @@
 package com.housebooking.Model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Room {
 	private String roomId;
 	private String roomName;
@@ -9,6 +12,13 @@ public class Room {
 	private String typeId;
 	private String buildingId;
 	private String typeName;
+	private float rating;
+	private List<String> roomImages;
+	
+	public Room() {
+		super();
+		this.roomImages = new ArrayList<String>();
+	}
 	
 	public String getRoomId() {
 		return roomId;
@@ -52,17 +62,25 @@ public class Room {
 	public void setBuildingId(String buildingId) {
 		this.buildingId = buildingId;
 	}
-	
 	public String getTypeName() {
 		return typeName;
 	}
 	public void setTypeName(String typeName) {
 		this.typeName = typeName;
 	}
-	@Override
-	public String toString() {
-		return "Room [roomId=" + roomId + ", roomName=" + roomName + ", roomDesc=" + roomDesc + ", price=" + price
-				+ ", rule=" + rule + ", typeId=" + typeId + ", buildingId=" + buildingId + "]";
+	public List<String> getRoomImages() {
+		return roomImages;
+	}
+	public void setRoomImages(List<String> roomImages) {
+		this.roomImages = roomImages;
+	}
+
+	public float getRating() {
+		return rating;
+	}
+
+	public void setRating(float rating) {
+		this.rating = rating;
 	}
 	
 	

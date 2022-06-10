@@ -31,6 +31,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	
 	
 	
+	
+	
 		addEventListener("load", function () {
 			setTimeout(hideURLbar, 0);
 		}, false);
@@ -39,6 +41,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			window.scrollTo(0, 1);
 		}
 	
+
+
 
 
 
@@ -84,9 +88,31 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800"
 	rel="stylesheet">
 
+<!-- Linked datepicker -->
+<link
+	href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/ui-lightness/jquery-ui.css'
+	rel='stylesheet'>
+
 <style>
 .main-filter {
 	background: #b0a7a7;
+}
+
+.ui-datepicker {
+	margin-top: 0px;
+	margin-bottom: 0px;
+	width: 20em;
+}
+
+.ui-state-default, .ui-widget-content .ui-state-default {
+	border-radius: 0px;
+	height: fit-content;
+	width: 29.33px;
+
+}
+
+.ui-slider-handle{
+	display: none;
 }
 </style>
 </head>
@@ -112,25 +138,27 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<div class="side-bar col-md-3">
 				<div class="search-hotel main-filter" style="padding: 10px 10px;">
 					<h3 class="agileits-sear-head">Điểm đến:</h3>
-					<form action="#" method="post">
-						<input type="search" placeholder="Chọn điểm đến" name="search">
+					<form action="booking" method="get">
+						<input type="search" placeholder="${param.city!=null?param.city:'Chọn điểm đến' }" name="city" required>
 						<input type="submit">
+
+						<div style="margin-top: 15px;" class="form-group">
+							<label for="pwd">Ngày đến:</label> <input type="text"
+								name="startDate" id="my_date_picker1" class="form-control" 
+								placeholder="${param.city!=null?param.startDate:'MM/dd/yyyy' }" required>
+						</div>
+
+						<div style="margin-top: 15px;" class="form-group">
+							<label for="pwd">Ngày về:</label> <input type="text"
+								name="endDate" id="my_date_picker2" class="form-control"
+								placeholder="${param.city!=null?param.endDate:'MM/dd/yyyy' }" required>
+						</div>
+
+						<div style="text-align: right;">
+							<button type="submit" class="btn btn-primary"
+								style="width: 100px;">Lưu</button>
+						</div>
 					</form>
-
-					<div style="margin-top: 15px;" class="form-group">
-						<label for="pwd">Ngày đến:</label> <input type="date"
-							class="form-control" id="pwd">
-					</div>
-
-					<div style="margin-top: 15px;" class="form-group">
-						<label for="pwd">Ngày về:</label> <input type="date"
-							class="form-control" id="pwd">
-					</div>
-
-					<div style="text-align: right;">
-						<button type="button" class="btn btn-primary"
-							style="width: 100px;">Lưu</button>
-					</div>
 				</div>
 
 				<hr>
@@ -311,6 +339,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 												<span class="money ">${room.price/1000 }k/day</span>
 											</div>
 										</div>
+
 										<ul class="stars">
 											<li><a href="#"><i class="fa fa-star"
 													aria-hidden="true"></i></a></li>
@@ -323,6 +352,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 											<li><a href="#"><i class="fa fa-star	"
 													aria-hidden="true"></i></a></li>
 										</ul>
+										<div>Đánh giá: ${room.rating != 0?room.rating:'Chưa có đánh giá' }</div>
 										<div>Loại phòng: ${room.typeName }</div>
 										<div>${room.roomDesc }</div>
 									</div>
@@ -466,24 +496,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<script type="text/javascript"
 		src="${pageContext.request.contextPath}/view/web/js/jquery-2.1.4.min.js"></script>
 	<!-- //js -->
-	<!-- cart-js -->
-	<script
-		src="${pageContext.request.contextPath}/view/web/js/minicart.js"></script>
-	<script>
-		shoe.render();
 
-		shoe.cart.on('shoe_checkout', function(evt) {
-			var items, len, i;
-
-			if (this.subtotal() > 0) {
-				items = this.items();
-
-				for (i = 0, len = items.length; i < len; i++) {
-				}
-			}
-		});
-	</script>
-	<!-- //cart-js -->
 	<!-- /nav -->
 	<script
 		src="${pageContext.request.contextPath}/view/web/js/modernizr-2.6.2.min.js"></script>
@@ -539,7 +552,38 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<!-- //end-smoth-scrolling -->
 	<script type="text/javascript"
 		src="${pageContext.request.contextPath}/view/web/js/bootstrap-3.1.1.min.js"></script>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js">
+		
+	</script>
+	<script>
+		$(document).ready(
+				function() {
 
+					$(function() {
+						$("#my_date_picker1").datepicker({});
+					});
+
+					$(function() {
+						$("#my_date_picker2").datepicker({});
+					});
+
+					$('#my_date_picker1').change(
+							function() {
+
+								startDate = $(this).datepicker('getDate');
+								$("#my_date_picker2").datepicker("option",
+										"minDate", startDate);
+							})
+
+					$('#my_date_picker2').change(
+							function() {
+								endDate = $(this).datepicker('getDate');
+								$("#my_date_picker1").datepicker("option",
+										"maxDate", endDate);
+							})
+				})
+	</script>
 
 </body>
 
