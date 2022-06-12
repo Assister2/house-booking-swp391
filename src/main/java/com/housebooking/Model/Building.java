@@ -6,7 +6,14 @@ public class Building {
 	private String buildingType;
 	private String streetId;
 	private String userId;
+	private Address address;
 	
+	
+	
+	public Building() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	public String getBuildingId() {
 		return buildingId;
 	}
@@ -36,6 +43,12 @@ public class Building {
 	}
 	public void setBuildingType(String buildingType) {
 		this.buildingType = buildingType;
+	}
+	public Address getAddress() {
+		return address;
+	}
+	public void setAddress(Address address) {
+		this.address = address;
 	}
 	
 }

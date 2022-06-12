@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.housebooking.DAOimpl.CityDAO;
-import com.housebooking.DAOimpl.TypeOfRoomDAO;
+import com.housebooking.DAOimpl.web.CityDAO;
+import com.housebooking.DAOimpl.web.TypeOfRoomDAO;
 import com.housebooking.Model.City;
 import com.housebooking.Model.TypeOfRoom;
 

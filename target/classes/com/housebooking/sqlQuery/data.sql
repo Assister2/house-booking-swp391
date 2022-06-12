@@ -132,36 +132,36 @@ Go
 
 Insert into Building
 Values
-	('350101_B00',N'Homestay Dành cho khác chỉ qua đêm', N'Homestay', '350101', 'User_01'),
-	('580101_B01',N'Hotel có phòng rộng gần với các địa điểm nổi tiếng', N'Hotel', '580101', 'User_01'),
-	('580101_B02',N'Hotel có phòng đọc sách nhà ăn, v.v', N'Hotel', '580101', 'User_01'),
-	('580202_B01',N'Khách Sạn có phòng ăn, phòng sách riêng', N'Hotel', '580202', 'User_01'),
-	('240102_B01',N'Nhà 2 tầng đầy đủ tiện nghi thích hợp cho gia đình du lịch nhiều ngày', N'Nhà nguyên căn', '240102', 'User_01'),
-	('240202_B01',N'Phòng cho gia đình có đầy đủ tiện nghi', N'Homestay', '240202', 'User_01'),
-	('220101_B01',N'Khu nhà qua đêm phong cách cổ điển', N'Nhà nguyên căn','220101', 'User_01'),
-	('430101_B01',N'Khách sạn phong cách hiện đại, đầy đủ tiện nghi, View đẹp', N'Hotel', '430101', 'User_01'),
-	('430201_B01',N'Nhà vườn, có hồ bơi bao bọc bởi cây cảnh', N'Nhà nguyên căn','430201',  'User_01')
+	('350101_B00',N'Homestay Dành cho khác chỉ qua đêm', N'Homestay', 111,'350101', 'User_01'),
+	('580101_B01',N'Hotel có phòng rộng gần với các địa điểm nổi tiếng', N'Hotel',111, '580101', 'User_01'),
+	('580101_B02',N'Hotel có phòng đọc sách nhà ăn, v.v', N'Hotel',111, '580101', 'User_01'),
+	('580202_B01',N'Khách Sạn có phòng ăn, phòng sách riêng', N'Hotel',111, '580202', 'User_01'),
+	('240102_B01',N'Nhà 2 tầng đầy đủ tiện nghi thích hợp cho gia đình du lịch nhiều ngày', N'Nhà nguyên căn',111, '240102', 'User_01'),
+	('240202_B01',N'Phòng cho gia đình có đầy đủ tiện nghi', N'Homestay',111, '240202', 'User_01'),
+	('220101_B01',N'Khu nhà qua đêm phong cách cổ điển', N'Nhà nguyên căn',111,'220101', 'User_01'),
+	('430101_B01',N'Khách sạn phong cách hiện đại, đầy đủ tiện nghi, View đẹp', N'Hotel', 111,'430101', 'User_01'),
+	('430201_B01',N'Nhà vườn, có hồ bơi bao bọc bởi cây cảnh', N'Nhà nguyên căn',111,'430201',  'User_01')
 Go
 
 Insert into Building
 Values
-	('370101_B01',N'Resort và spa có cảnh quan đẹp bao quanh bỏi hồ, vườn cảnh', N'Homestay', '370101', 'User_01'),
-	('370201_B01',N'Homestay phong cách cổ điển hài hoà với thiên nhiên', N'Homestay', '370201','User_01'),
+	('370101_B01',N'Resort và spa có cảnh quan đẹp bao quanh bỏi hồ, vườn cảnh', N'Homestay', 111,'370101', 'User_01'),
+	('370201_B01',N'Homestay phong cách cổ điển hài hoà với thiên nhiên', N'Homestay', 111,'370201','User_01'),
 
-	('120201_B01',N'Resort bãi biển, mát mẻ', N'Homestay','120201',  'User_01'),
-	('120101_B01',N'Nhà gô gần gũi với thiên nhiên', N'Nhà nguyên căn','120101',  'User_01'),
+	('120201_B01',N'Resort bãi biển, mát mẻ', N'Homestay',111,'120201',  'User_01'),
+	('120101_B01',N'Nhà gô gần gũi với thiên nhiên', N'Nhà nguyên căn',111,'120101',  'User_01'),
 	
-	('350101_B01',N'Gần khu vườn, có thể dùng để mở tiệc BBQ', N'Homestay','350101',  'User_01'),
-	('350201_B01',N'Khu vườn cạnh nhà, thân thiện thiện với thú cưng', N'Homestay', '350201', 'User_01'),
+	('350101_B01',N'Gần khu vườn, có thể dùng để mở tiệc BBQ', N'Homestay',111,'350101',  'User_01'),
+	('350201_B01',N'Khu vườn cạnh nhà, thân thiện thiện với thú cưng', N'Homestay', 111,'350201', 'User_01'),
 	
-	('110201_B01',N'Full căn hộ 84m2 có 3 phòng riêng', N'Nhà nguyên căn','110201',  'User_01'),
-	('110101_B01',N'Homestay cho gia đình, đầy đủ tiện nghi',  N'Homestay', '110101', 'User_01'),
+	('110201_B01',N'Full căn hộ 84m2 có 3 phòng riêng', N'Nhà nguyên căn',111,'110201',  'User_01'),
+	('110101_B01',N'Homestay cho gia đình, đầy đủ tiện nghi',  N'Homestay',111, '110101', 'User_01'),
 
-	('150101_B01',N'Hotel có view nhìn ra thành phố', N'Hotel', '150101', 'User_01'),
-	('150201_B01',N'Chung cư gần biển', N'Homestay','150201',  'User_01'),
+	('150101_B01',N'Hotel có view nhìn ra thành phố', N'Hotel',111, '150101', 'User_01'),
+	('150201_B01',N'Chung cư gần biển', N'Homestay',111,'150201',  'User_01'),
 
-	('480101_B01',N'Khách sạn gần bãi biển',  N'Hotel', '480101', 'User_01'),
-	('480201_B01',N'Homestay kiểu khu vườn', N'Homestay', '480201', 'User_01')
+	('480101_B01',N'Khách sạn gần bãi biển',  N'Hotel', 111,'480101', 'User_01'),
+	('480201_B01',N'Homestay kiểu khu vườn', N'Homestay',111, '480201', 'User_01')
 Go
 
 Insert into Convenient

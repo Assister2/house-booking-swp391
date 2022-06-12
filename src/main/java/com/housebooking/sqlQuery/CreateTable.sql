@@ -7,6 +7,8 @@ Go
 Use HouseBooking;
 Go
 
+Drop table Building_Additional_service
+Drop table Additional_service
 Drop table Bill_Detail 
 Drop table Bill
 Drop table Feedback
@@ -48,14 +50,6 @@ Create table Room (
 )
 Go
 
-Create table Room_Timeline(
-	room_id varchar(20),
-	startDate date,
-	endDate date,
-	primary key(room_id, startDate, endDate)
-)
-Go
-
 Create table Room_Images(
 	room_id varchar(20),
 	image_link varchar(200),
@@ -75,6 +69,7 @@ Create table Building(
 	building_id varchar(20),
 	building_desc nvarchar(max),
 	building_type varchar(20),
+	building_number varchar(20),
 	street_id varchar(20),
 	user_id varchar(20),
 	primary key(building_id)
@@ -158,9 +153,28 @@ Create table Feedback(
 	rating int,
 	status nvarchar(20),
 	feedback_date date,
+	report int,
 	room_id varchar(20),
 	user_id varchar(20),
 	primary key(feedback_id)
+)
+Go
+
+Create table Additional_service(
+	add_serviceId varchar(20),
+	add_serviceName nvarchar(max),
+	add_serviceDesc nvarchar(max),
+	primary key(add_serviceId)
+)
+Go
+
+Create table Building_Additional_service
+(
+	building_id varchar(20),
+	add_serviceId varchar(20),
+	add_service_status varchar(20),
+	add_service_price float,
+	primary key(building_id,add_serviceId)
 )
 Go
 
@@ -235,6 +249,15 @@ ADD CONSTRAINT FK_Feedback_Users
 FOREIGN KEY (user_id) REFERENCES Users(user_id);
 Go
 
+ALTER TABLE Building_Additional_service
+ADD CONSTRAINT FK_Building_Additional_service_Building
+FOREIGN KEY (building_id) REFERENCES Building(building_id);
+Go
+
+ALTER TABLE Building_Additional_service
+ADD CONSTRAINT FK_Building_Additional_service_Additional_service
+FOREIGN KEY (add_serviceId) REFERENCES Additional_service(add_serviceId);
+Go
 -- Delete
 
 Delete from City

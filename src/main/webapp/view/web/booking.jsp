@@ -139,19 +139,19 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<div class="search-hotel main-filter" style="padding: 10px 10px;">
 					<h3 class="agileits-sear-head">Điểm đến:</h3>
 					<form action="booking" method="get">
-						<input type="search" placeholder="${param.city!=null?param.city:'Chọn điểm đến' }" name="city" required>
+						<input type="search" placeholder="${param.city!=null?param.city:'Chọn điểm đến' }" value="${param.city!=null?param.city:null }" name="city" required>
 						<input type="submit">
 
 						<div style="margin-top: 15px;" class="form-group">
 							<label for="pwd">Ngày đến:</label> <input type="text"
 								name="startDate" id="my_date_picker1" class="form-control" 
-								placeholder="${param.city!=null?param.startDate:'MM/dd/yyyy' }" required>
+								placeholder="${param.startDate!=null?param.startDate:'MM/dd/yyyy' }" value="${param.startDate!=null?param.startDate:null }" required>
 						</div>
 
 						<div style="margin-top: 15px;" class="form-group">
 							<label for="pwd">Ngày về:</label> <input type="text"
 								name="endDate" id="my_date_picker2" class="form-control"
-								placeholder="${param.city!=null?param.endDate:'MM/dd/yyyy' }" required>
+								placeholder="${param.endDate!=null?param.endDate:'MM/dd/yyyy' }" value="${param.endDate!=null?param.endDate:null }" required>
 						</div>
 
 						<div style="text-align: right;">

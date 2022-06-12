@@ -1,4 +1,4 @@
-package com.housebooking.DAOimpl;
+package com.housebooking.DAOimpl.web;
 
 import java.sql.Connection;
 import java.sql.Date;

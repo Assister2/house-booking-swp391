@@ -1,4 +1,4 @@
-package com.housebooking.DAOimpl;
+package com.housebooking.DAOimpl.web;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,19 +6,17 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.housebooking.DAO.IHouseOwnerDAO;
+import com.housebooking.Model.TypeOfRoom;
 import com.housebooking.Utils.DBUtils;
 
-public class HouseOwnerDAO implements IHouseOwnerDAO{
+public class TypeOfRoomDAO {
 
-	@Override
-	public List<String> list() {
-		ArrayList<String> list;
-		list = new ArrayList<String>();
+	public List<TypeOfRoom> list() {
+		ArrayList<TypeOfRoom> list;
+		list = new ArrayList<TypeOfRoom>();
 
-		String sql = "select room_name from Room where building_owner = ?";
+		String sql = "select * from Type_Of_Room";
 
-		
 		try {
 
 			Connection conn = DBUtils.getConnection();
@@ -28,9 +26,10 @@ public class HouseOwnerDAO implements IHouseOwnerDAO{
 			ResultSet rs = ps.executeQuery();
 
 			while (rs.next()) {
-				String name = rs.getString("room_name");
-				
-				list.add(name);
+				TypeOfRoom typeOfRoom = new TypeOfRoom();
+				typeOfRoom.setTypeId(rs.getString("type_id"));
+				typeOfRoom.setTypeName(rs.getNString("type_name"));
+				list.add(typeOfRoom);
 			}
 
 		} catch (Exception ex) {
@@ -38,8 +37,8 @@ public class HouseOwnerDAO implements IHouseOwnerDAO{
 			ex.printStackTrace();
 
 		}
-
+		
 		return list;
 	}
-
+	
 }

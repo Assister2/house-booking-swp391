@@ -15,10 +15,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.housebooking.DAO.IRoomDAO;
-import com.housebooking.DAOimpl.ConvenientDAO;
-import com.housebooking.DAOimpl.DistrictDAO;
-import com.housebooking.DAOimpl.RoomDAO;
-import com.housebooking.DAOimpl.TypeOfRoomDAO;
+import com.housebooking.DAOimpl.web.ConvenientDAO;
+import com.housebooking.DAOimpl.web.DistrictDAO;
+import com.housebooking.DAOimpl.web.RoomDAO;
+import com.housebooking.DAOimpl.web.TypeOfRoomDAO;
 import com.housebooking.Model.Convenient;
 import com.housebooking.Model.District;
 import com.housebooking.Model.Room;

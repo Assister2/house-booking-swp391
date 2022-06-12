@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.housebooking.DAOimpl.AccessManager;
+import com.housebooking.DAOimpl.web.AccessManager;
 import com.housebooking.Model.UserSession;
 
 @WebServlet("/login")

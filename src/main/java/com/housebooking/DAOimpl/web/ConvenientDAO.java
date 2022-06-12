@@ -1,4 +1,4 @@
-package com.housebooking.DAOimpl;
+package com.housebooking.DAOimpl.web;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.housebooking.Model.Convenient;
-import com.housebooking.Model.Room;
 import com.housebooking.Utils.DBUtils;
 
 public class ConvenientDAO {
