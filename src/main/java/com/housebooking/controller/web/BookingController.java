@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -15,10 +16,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.housebooking.DAO.IRoomDAO;
+import com.housebooking.DAOimpl.web.BuildingDAO;
 import com.housebooking.DAOimpl.web.ConvenientDAO;
 import com.housebooking.DAOimpl.web.DistrictDAO;
 import com.housebooking.DAOimpl.web.RoomDAO;
 import com.housebooking.DAOimpl.web.TypeOfRoomDAO;
+import com.housebooking.Model.Building;
 import com.housebooking.Model.Convenient;
 import com.housebooking.Model.District;
 import com.housebooking.Model.Room;
@@ -41,9 +44,7 @@ public class BookingController extends HttpServlet {
 
 		String filter = request.getParameter("filter");
 
-		if (filter == null) {
-			doDisplay(request, response);
-		}
+		doDisplay(request, response);
 
 	}
 
@@ -68,15 +69,40 @@ public class BookingController extends HttpServlet {
 		
 		IRoomDAO roomDAO = new RoomDAO();
 		
+		//Lay so trang hien tai
 		int page = 1;
 		int recordsPerPage = 6;
 		if (request.getParameter("page") != null) {
 			page = Integer.parseInt(request.getParameter("page"));
 		}
-		
-		//int noOfRecords = ((RoomDAO)roomDAO).getNoOfRecords();
 		int totalRecords = ((RoomDAO)roomDAO).getTotalRecord();
-        
+		
+		//Lay tham so loai cho o
+		String[] buildingType = null;
+		if (request.getParameterValues("buildingType") != null) {
+            buildingType = request.getParameterValues("buildingType");            
+        }
+		
+		//Lay concept
+		String[] concept = null;
+		if (request.getParameterValues("concept") != null) {
+            concept = request.getParameterValues("concept");
+        }
+		
+		//Lay loai tien nghi
+		String[] convenient = null;
+		if (request.getParameterValues("convenientOption") != null) {
+			convenient = request.getParameterValues("convenientOption");
+        }
+		
+		String rating = request.getParameter("rating");
+		
+		//Lay quan huyen
+		String[] district = null;
+		if (request.getParameterValues("districtOption") != null) {
+			district = request.getParameterValues("districtOption");
+        }
+		
         List<Room> listRoom;
         List<District> listDistrict;
         
@@ -84,14 +110,22 @@ public class BookingController extends HttpServlet {
         	listRoom = roomDAO.list((page - 1) * recordsPerPage, recordsPerPage);
         }
         else {
-        	listRoom = ((RoomDAO)roomDAO).list(city, date1, date2, "", (page - 1) * recordsPerPage, recordsPerPage);
+        	listRoom = ((RoomDAO)roomDAO).list(city, date1, date2, buildingType, 
+        			concept, convenient, 0, district, "", (page - 1) * recordsPerPage, recordsPerPage);
         	totalRecords = ((RoomDAO)roomDAO).getTotalRecord(city, date1, date2);
         }
         
+        // Tinh so trang
         int noOfPages = (int) Math.ceil(totalRecords * 1.0 / recordsPerPage);
       
         listDistrict = new DistrictDAO().list(city);
         
+        
+        request.setAttribute("districtChoose", district);
+        request.setAttribute("ratingScale", rating);
+        request.setAttribute("convenientChoose", convenient);
+        request.setAttribute("conceptChoose", concept);
+        request.setAttribute("buildingType", buildingType);
         request.setAttribute("listDistrict", listDistrict);
 		request.setAttribute("totalRecords", totalRecords);
 		request.setAttribute("currentPage", page);
@@ -106,7 +140,9 @@ public class BookingController extends HttpServlet {
 	protected void defaulItem(HttpServletRequest request, HttpServletResponse response) {
 		List<Convenient> listConvenient = new ConvenientDAO().list();
 		List<TypeOfRoom> listTypeOfRoom = new TypeOfRoomDAO().list();
+		List<Building> listBuildingType = new BuildingDAO().listBuildingType();		
 		
+		request.setAttribute("listBuildingType", listBuildingType);
 		request.setAttribute("listConvenient", listConvenient);
 		request.setAttribute("listType", listTypeOfRoom);
 	}

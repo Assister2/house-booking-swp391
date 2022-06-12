@@ -13,6 +13,7 @@ public class Room {
 	private String buildingId;
 	private String typeName;
 	private float rating;
+	private String address;
 	private List<String> roomImages;
 	
 	public Room() {
@@ -81,6 +82,14 @@ public class Room {
 
 	public void setRating(float rating) {
 		this.rating = rating;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
 	}
 	
 	

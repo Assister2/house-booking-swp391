@@ -11,6 +11,7 @@ import com.housebooking.Model.Building;
 import com.housebooking.Model.City;
 import com.housebooking.Model.District;
 import com.housebooking.Model.Street;
+import com.housebooking.Model.TypeOfRoom;
 import com.housebooking.Utils.DBUtils;
 
 public class BuildingDAO {
@@ -60,6 +61,36 @@ public class BuildingDAO {
 				list.add(building);
 			}
 			
+		} catch (Exception ex) {
+
+			ex.printStackTrace();
+
+		}
+		
+		return list;
+	}
+	
+	public List<Building> listBuildingType() {
+		ArrayList<Building> list;
+		list = new ArrayList<Building>();
+
+		String sql = "select distinct building_type\r\n"
+				+ " from Building";
+
+		try {
+
+			Connection conn = DBUtils.getConnection();
+
+			PreparedStatement ps = conn.prepareStatement(sql);
+
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				Building building = new Building();
+				building.setBuildingType(rs.getString("building_type"));
+				list.add(building);
+			}
+
 		} catch (Exception ex) {
 
 			ex.printStackTrace();

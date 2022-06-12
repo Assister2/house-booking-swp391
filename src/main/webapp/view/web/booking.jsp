@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <!DOCTYPE html>
 <html lang="eng">
@@ -33,6 +34,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 		addEventListener("load", function () {
 			setTimeout(hideURLbar, 0);
 		}, false);
@@ -41,6 +52,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			window.scrollTo(0, 1);
 		}
 	
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -108,10 +129,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	border-radius: 0px;
 	height: fit-content;
 	width: 29.33px;
-
 }
 
-.ui-slider-handle{
+.ui-slider-handle {
 	display: none;
 }
 </style>
@@ -139,19 +159,23 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<div class="search-hotel main-filter" style="padding: 10px 10px;">
 					<h3 class="agileits-sear-head">Điểm đến:</h3>
 					<form action="booking" method="get">
-						<input type="search" placeholder="${param.city!=null?param.city:'Chọn điểm đến' }" value="${param.city!=null?param.city:null }" name="city" required>
+						<input type="search" style="color: black;"
+							placeholder="${param.city!=null?param.city:'Chọn điểm đến' }"
+							value="${param.city!=null?param.city:null }" name="city" required>
 						<input type="submit">
 
 						<div style="margin-top: 15px;" class="form-group">
 							<label for="pwd">Ngày đến:</label> <input type="text"
-								name="startDate" id="my_date_picker1" class="form-control" 
-								placeholder="${param.startDate!=null?param.startDate:'MM/dd/yyyy' }" value="${param.startDate!=null?param.startDate:null }" required>
+								name="startDate" id="my_date_picker1" class="form-control"
+								placeholder="${param.startDate!=null?param.startDate:'MM/dd/yyyy' }"
+								value="${param.startDate!=null?param.startDate:null }" required>
 						</div>
 
 						<div style="margin-top: 15px;" class="form-group">
 							<label for="pwd">Ngày về:</label> <input type="text"
 								name="endDate" id="my_date_picker2" class="form-control"
-								placeholder="${param.endDate!=null?param.endDate:'MM/dd/yyyy' }" value="${param.endDate!=null?param.endDate:null }" required>
+								placeholder="${param.endDate!=null?param.endDate:'MM/dd/yyyy' }"
+								value="${param.endDate!=null?param.endDate:null }" required>
 						</div>
 
 						<div style="text-align: right;">
@@ -177,123 +201,164 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 				</form>
 				<!-- //price range -->
-				<hr>
-				<!-- Type -->
-				<c:set var="listType" value="${requestScope.listType }"></c:set>
-				<div class="left-side">
-					<h3 class="agileits-sear-head">Loại chỗ ở</h3>
-					<ul>
-						<c:forEach var="type" items="${listType }">
-							<li><input id="${type.typeId}" type="checkbox"
-								value="${type.typeId}" class="checked" name="buidingType">
-								<span class="span"><label for="${type.typeId}"
-									style="font-weight: unset;">${type.typeName}</label></span></li>
-						</c:forEach>
-					</ul>
-				</div>
-				<!-- //discounts -->
-				<hr>
-				<!--preference -->
-				<div class="left-side">
-					<h3 class="agileits-sear-head">Tiện nghi</h3>
-					<ul>
-						<c:set var="listConvenient"
-							value="${requestScope.listConvenient }"></c:set>
-						<c:forEach var="convenient" items="${listConvenient }">
-							<li><input id="${convenient.conveId }" type="checkbox"
-								value="${convenient.conveId }" class="checked"
-								name="convenientOption"> <span class="span"><label
-									for="${convenient.conveId }" style="font-weight: unset;">${convenient.conveName }</label></span></li>
-						</c:forEach>
-					</ul>
-				</div>
-				<!-- // preference -->
 
-				<hr>
-				<!-- rating -->
-				<div class="left-side">
-					<h3 class="agileits-sear-head">Xếp hạng đánh giá</h3>
-					<div class="form-check">
-						<input class="form-check-input" type="radio" name="ratingbtn"
-							id="ratingbtn1" checked> <label
-							style="font-weight: unset;" class="form-check-label"
-							for="ratingbtn1"> Tuyệt vời (Từ 4 đến 5 <i
-							style="color: rgb(223, 223, 47);" class="fa fa-star"
-							aria-hidden="true"></i>)
-						</label>
+				<form action="booking" method="post">
+					<input type="hidden" name="city" value="${param.city }"> <input
+						type="hidden" name="startDate" value="${param.startDate }">
+					<input type="hidden" name="endDate" value="${param.endDate }">
+					<!-- Loai cho o -->
+					<hr>
+					<!-- Type -->
+					<c:set var="listBuildingType"
+						value="${requestScope.listBuildingType }"></c:set>
+					<div class="left-side">
+						<h3 class="agileits-sear-head">Loại chỗ ở</h3>
+						<ul>
+							<c:forEach var="type" items="${listBuildingType }">
+								<li><input id="${type.buildingType}" type="checkbox"
+									value="${type.buildingType}" class="checked"
+									name="buildingType"
+									<c:forEach var="item" items="${buildingType}">
+										<c:if test="${item eq type.buildingType}">
+									    	checked
+									  	</c:if>
+									</c:forEach>>
+									<span class="span"> <label for="${type.buildingType}"
+										style="font-weight: unset;">${type.buildingType}</label></span></li>
+							</c:forEach>
+						</ul>
 					</div>
-					<div class="form-check">
-						<input class="form-check-input" type="radio" name="ratingbtn"
-							id="ratingbtn2"> <label style="font-weight: unset;"
-							class="form-check-label" for="ratingbtn2"> Tốt (Từ 3 đến
-							4 <i style="color: rgb(223, 223, 47);" class="fa fa-star"
-							aria-hidden="true"></i>)
-						</label>
-					</div>
-					<div class="form-check">
-						<input class="form-check-input" type="radio" name="ratingbtn"
-							id="ratingbtn3"> <label style="font-weight: unset;"
-							class="form-check-label" for="ratingbtn3"> Bình Thường
-							(Từ 2 đến 3 <i style="color: rgb(223, 223, 47);"
-							class="fa fa-star" aria-hidden="true"></i>)
-						</label>
-					</div>
-					<div class="form-check">
-						<input class="form-check-input" type="radio" name="ratingbtn"
-							id="ratingbtn4"> <label style="font-weight: unset;"
-							class="form-check-label" for="ratingbtn4"> Tệ (Dưới 3 <i
-							style="color: rgb(223, 223, 47);" class="fa fa-star"
-							aria-hidden="true"></i>)
-						</label>
-					</div>
-				</div>
-				<!-- End rating -->
 
-				<hr>
-				<div class="left-side">
-					<h3 class="agileits-sear-head">Thành Phố/ Quận/ Huyện</h3>
-					<ul>
-						<c:set var="listDistrict" value="${requestScope.listDistrict }"></c:set>
-						<c:forEach var="district" items="${listDistrict }">
-							<li><input id="${district.districtId }" type="checkbox"
-								value="${district.districtId }" class="checked"
-								name="districtOption"> <span class="span"><label
-									for="${district.districtId }" style="font-weight: unset;">${district.districtName }</label></span></li>
-						</c:forEach>
-					</ul>
-				</div>
-				<div class="clearfix"></div>
-				<br>
-				<div style="text-align: right;">
-					<button type="button" class="btn btn-primary">Xóa bộ lọc</button>
-					<button type="button" class="btn btn-primary" style="width: 100px;">Lọc</button>
-				</div>
+					<!-- Concept -->
+					<hr>
+					<!-- Type -->
+					<c:set var="listType" value="${requestScope.listType }"></c:set>
+					<div class="left-side">
+						<h3 class="agileits-sear-head">Concept</h3>
+						<ul>
+							<c:forEach var="type" items="${listType }">
+								<li><input id="${type.typeId}" type="checkbox"
+									value="${type.typeId}" class="checked" name="concept"
+									<c:forEach var="item" items="${conceptChoose}">
+										<c:if test="${item eq type.typeId}">
+									    	checked
+									  	</c:if>
+									</c:forEach>>
+									<span class="span"><label for="${type.typeId}"
+										style="font-weight: unset;">${type.typeName}</label></span></li>
+							</c:forEach>
+						</ul>
+					</div>
+					<!-- //discounts -->
+					<hr>
+					<!--preference -->
+					<div class="left-side">
+						<h3 class="agileits-sear-head">Tiện nghi</h3>
+						<ul>
+							<c:set var="listConvenient"
+								value="${requestScope.listConvenient }"></c:set>
+							<c:forEach var="convenient" items="${listConvenient }">
+								<li><input id="${convenient.conveId }" type="checkbox"
+									value="${convenient.conveId }" class="checked"
+									name="convenientOption" <c:forEach var="item" items="${convenientChoose}">
+										<c:if test="${item eq convenient.conveId}">
+									    	checked
+									  	</c:if>
+									</c:forEach>> 
+									<span class="span"><label
+										for="${convenient.conveId }" style="font-weight: unset;">${convenient.conveName }</label></span></li>
+							</c:forEach>
+						</ul>
+					</div>
+					<!-- // preference -->
 
+					<hr>
+					<!-- rating -->
+					<div class="left-side">
+						<h3 class="agileits-sear-head">Xếp hạng đánh giá</h3>
+						<div class="form-check">
+							<input class="form-check-input" type="radio" name="rating"
+								id="ratingbtn1" checked value="4.5"> <label
+								style="font-weight: unset;" class="form-check-label"
+								for="ratingbtn1"> Tuyệt vời (Từ 4 đến 5 <i
+								style="color: rgb(223, 223, 47);" class="fa fa-star"
+								aria-hidden="true"></i>)
+							</label>
+						</div>
+						<div class="form-check">
+							<input class="form-check-input" type="radio" name="rating"
+								id="ratingbtn2" value="3.5"> <label
+								style="font-weight: unset;" class="form-check-label"
+								for="ratingbtn2"> Tốt (Từ 3 đến 4 <i
+								style="color: rgb(223, 223, 47);" class="fa fa-star"
+								aria-hidden="true"></i>)
+							</label>
+						</div>
+						<div class="form-check">
+							<input class="form-check-input" type="radio" name="rating"
+								id="ratingbtn3" value="2.5"> <label
+								style="font-weight: unset;" class="form-check-label"
+								for="ratingbtn3"> Bình Thường (Từ 2 đến 3 <i
+								style="color: rgb(223, 223, 47);" class="fa fa-star"
+								aria-hidden="true"></i>)
+							</label>
+						</div>
+						<div class="form-check">
+							<input class="form-check-input" type="radio" name="rating"
+								id="ratingbtn4" value="1.5"> <label
+								style="font-weight: unset;" class="form-check-label"
+								for="ratingbtn4"> Tệ (Dưới 3 <i
+								style="color: rgb(223, 223, 47);" class="fa fa-star"
+								aria-hidden="true"></i>)
+							</label>
+						</div>
+					</div>
+					<!-- End rating -->
+
+					<hr>
+					<div class="left-side">
+						<h3 class="agileits-sear-head">Thành Phố/ Quận/ Huyện</h3>
+						<ul>
+							<c:set var="listDistrict" value="${requestScope.listDistrict }"></c:set>
+							<c:forEach var="district" items="${listDistrict }">
+								<li><input id="${district.districtId }" type="checkbox"
+									value="${district.districtId }" class="checked"
+									name="districtOption"> <span class="span"><label
+										for="${district.districtId }" style="font-weight: unset;">${district.districtName }</label></span></li>
+							</c:forEach>
+						</ul>
+					</div>
+					<div class="clearfix"></div>
+					<br>
+					<div style="text-align: right;">
+						<a type="button" href="#" class="btn btn-primary">Xóa bộ lọc</a>
+						<button type="submit" class="btn btn-primary"
+							style="width: 100px;">Lọc</button>
+					</div>
+				</form>
 			</div>
 			<!-- //product left -->
 			<!-- product right -->
 			<div class="left-ads-display col-md-9">
 				<div class="wrapper_top_shop">
-					<div class="col-md-6 shop_left" style="margin-top: 6px;">
+					<div class="col-md-8 shop_left" style="margin-top: 6px;">
 						<!-- <img src="images/banner3.jpg" alt="">
 						<h6>40% off</h6> -->
 						There are <span style="color: red;">${requestScope.totalRecords }</span>
 						results
 					</div>
-					<div class="col-md-6 shop_right">
-						<!-- <img src="images/banner2.jpg" alt="">
-						<h6>50% off</h6> -->
-						<div class="col-md-4" style="margin-top: 6px;">
-							<label>Sorted by:</label>
-						</div>
-						<div class="col-md-8">
-							<select class="form-control btn btn-default dropdown-toggle"
+					<div class="col-md-4">
+						<div class="dropdown">
+							<button style="width: 100%; background-color: gray;"
+								class="btn btn-primary dropdown-toggle" type="button"
 								data-toggle="dropdown">
-								<option value="">Increase in price</option>
-								<option value="">Decrease in price</option>
-							</select>
+								${param.sort!=null?param.sort:'Sắp xếp' } <span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu" style="width: 100%;">
+								<li><a href="#">Giá tăng dần</a></li>
+								<li><a href="#">Giá giảm dần </a></li>
+							</ul>
 						</div>
-
 					</div>
 					<div class="clearfix"></div>
 					<c:set var="listRoom" value="${requestScope.listRoom}" />
