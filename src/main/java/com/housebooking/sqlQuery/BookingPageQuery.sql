@@ -34,13 +34,15 @@ from Room r join Type_Of_Room t on r.type_id = t.type_id
 			left join Feedback f on r.room_id = f.room_id
 			JOIN Room_Convenient T2 ON r.room_id = T2.room_id AND T2.convenient_id like 'Con_02'
 Where ci.city_name like @city  AND r2.room_id is null 
-	AND ( b.building_type like N'%nhà nguyên căn%' OR b.building_type like N'%homestay%') AND con.convenient_id like 'Con_01'
+	AND ( b.building_type like N'%nhà nguyên căn%' OR b.building_type like N'%homestay%') 
+	AND con.convenient_id like 'Con_01'
+	AND rating between CAST(4 AS int) AND (CAST(4 AS int) + 1)
 Group by r.room_id, r.room_name, r.room_desc, r.room_price, r.room_status, r.room_rule, r.building_id, r.type_id, t.type_name
 Order by r.room_price ASC
 OFFSET @start ROWS FETCH NEXT @end ROWS ONLY
 Go
 
-
+SELECT CAST(25.45 AS int);
 -- Tesst
 SELECT T1.*
 FROM Room_Convenient T1
@@ -180,77 +182,17 @@ Go
 
 -------------
 
-DECLARE @startDate as date = ?
- DECLARE @endDate as date = ?
- DECLARE @city as nvarchar(100) = ?
- DECLARE @start as int = ?
- DECLARE @end as int = ?
- Select  r.*, t.type_name, ISNULL(Round(AVG(rating*1.0),1),0) as rating
- from Room r join Type_Of_Room t on r.type_id = t.type_id
+Select  r.*, t.type_name, ISNULL(Round(AVG(rating*1.0),1),0) as rating 
+from Room r join Type_Of_Room t on r.type_id = t.type_id
 	join Building b on r.building_id = b.building_id
-	join Street st on b.street_id = st.street_id
-	join District dis on st.district_id = dis.district_id
-	join City ci on ci.city_id = dis.city_id
- left join Room_Convenient con on r.room_id = con.room_id
-	left join (
-				Select r3.*
-					from Room r3 left join Bill_detail de on r3.room_id = de.room_id
-						left join Bill bi on de.bill_id = bi.bill_id
-					WHERE (
-						@startDate >= de.start_date
-						AND  @endDate <= de.end_date
-					)
-					OR(
-						@startDate Between de.start_date and de.end_date
-					)
-					OR(
-						 @endDate  Between de.start_date and de.end_date
-					)
-					OR(
-						@startDate <= de.start_date
-						AND  @endDate >= de.end_date
-					)
-			) as r2 on r.room_id = r2.room_id
-			left join Feedback f on r.room_id = f.room_id
- Where ci.city_name like @city  AND r2.room_id is null
- Group by r.room_id, r.room_name, r.room_desc, r.room_price, r.room_status, r.room_rule, r.building_id, r.type_id, t.type_name
- Order by r.room_price ASC
- OFFSET @start ROWS FETCH NEXT @end ROWS ONLY
- DECLARE @startDate as date = ?
- DECLARE @endDate as date = ?
- DECLARE @city as nvarchar(100) = ?
- DECLARE @start as int = ?
- DECLARE @end as int = ?
- Select  r.*, t.type_name, ISNULL(Round(AVG(rating*1.0),1),0) as rating
- from Room r join Type_Of_Room t on r.type_id = t.type_id
-	join Building b on r.building_id = b.building_id
-	join Street st on b.street_id = st.street_id
-	join District dis on st.district_id = dis.district_id
-	join City ci on ci.city_id = dis.city_id
- left join Room_Convenient con on r.room_id = con.room_id
-	left join (
-				Select r3.*
-					from Room r3 left join Bill_detail de on r3.room_id = de.room_id
-						left join Bill bi on de.bill_id = bi.bill_id
-					WHERE (
-						@startDate >= de.start_date
-						AND  @endDate <= de.end_date
-					)
-					OR(
-						@startDate Between de.start_date and de.end_date
-					)
-					OR(
-						 @endDate  Between de.start_date and de.end_date
-					)
-					OR(
-						@startDate <= de.start_date
-						AND  @endDate >= de.end_date
-					)
-			) as r2 on r.room_id = r2.room_id
-			left join Feedback f on r.room_id = f.room_id
- Where ci.city_name like @city  AND r2.room_id is null
- AND ( b.building_type like ? )
- AND ( t.type_id like ? )
- Group by r.room_id, r.room_name, r.room_desc, r.room_price, r.room_status, r.room_rule, r.building_id, r.type_id, t.type_name
- Order by r.room_price ASC
- OFFSET @start ROWS FETCH NEXT @end ROWS ONLY
+	left join Feedback f on r.room_id = f.room_id
+Where r.room_id like 'Room_01'
+Group by r.room_id, r.room_name, r.room_desc, r.room_price, r.room_status, r.room_rule, r.building_id, r.type_id, t.type_name
+Go
+
+---
+select con.* 
+from  Convenient con  join Room_Convenient rcon on con.convenient_id = rcon.convenient_id
+	join Room r on rcon.room_id = r.room_id
+Where r.room_id like 'Room_01'
+Go	

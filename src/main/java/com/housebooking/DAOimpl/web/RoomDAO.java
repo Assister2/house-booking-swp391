@@ -60,7 +60,12 @@ public class RoomDAO implements IRoomDAO {
 	@Override
 	public Room find(String roomId) {
 		Room room = new Room();
-		String sql = "SELECT * FROM Room WHERE room_id = ?";
+		String sql = " Select  r.*, t.type_name, ISNULL(Round(AVG(rating*1.0),1),0) as rating \r\n"
+				+ " from Room r join Type_Of_Room t on r.type_id = t.type_id\r\n"
+				+ "	join Building b on r.building_id = b.building_id\r\n"
+				+ "	left join Feedback f on r.room_id = f.room_id\r\n"
+				+ " Where r.room_id like ?\r\n"
+				+ " Group by r.room_id, r.room_name, r.room_desc, r.room_price, r.room_status, r.room_rule, r.building_id, r.type_id, t.type_name\r\n";
 
 		try {
 
@@ -236,9 +241,10 @@ public class RoomDAO implements IRoomDAO {
 	}
 
 	public List<Room> list(String city, LocalDate startDate, LocalDate endDate, String[] buildingType, String[] concept,
-			String[] convenient, int rating, String[] district, String direction, int start, int recordsPerPage) {
+			String[] convenient, int rating, String[] district, String sort, int start, int recordsPerPage) {
 		ArrayList<Room> list;
 		list = new ArrayList<Room>();
+		String direct = sort.equals("up") ? "ASC" : "DESC";
 
 		String sql = " DECLARE @startDate as date = ?\r\n" + " DECLARE @endDate as date = ?\r\n"
 				+ " DECLARE @city as nvarchar(100) = ?\r\n" + " DECLARE @start as int = ?\r\n"
@@ -301,11 +307,27 @@ public class RoomDAO implements IRoomDAO {
 		if (convenient != null) {
 			sql += " AND con.convenient_id like ? \r\n";
 		}
+		
+		if (rating != 0) {
+			sql += " AND rating between CAST(? AS int) AND (CAST(? AS int) + 1)\r\n";
+		}
+		
+		if (district != null) {
+			sql += " AND (";
+			for (int i = 0; i <= district.length - 1; i++) {
+
+				sql += " dis.district_id like ? ";
+				if (i != district.length - 1) {
+					sql += " OR ";
+				}
+			}
+			sql += ")\r\n";
+		}
 
 		sql += " Group by r.room_id, r.room_name, r.room_desc, r.room_price, r.room_status, r.room_rule, r.building_id, r.type_id, t.type_name\r\n"
-				+ " Order by r.room_price ASC\r\n" + " OFFSET @start ROWS FETCH NEXT @end ROWS ONLY";
+				+ " Order by r.room_price " + direct + "\r\n" + " OFFSET @start ROWS FETCH NEXT @end ROWS ONLY";
 
-		 System.out.println(sql);
+		//System.out.println(sql);
 		try {
 
 			Connection conn = DBUtils.getConnection();
@@ -340,9 +362,21 @@ public class RoomDAO implements IRoomDAO {
 				}
 			}
 			
-			System.out.println(count);
+			//System.out.println(count);
 			if (convenient != null) {
 				ps.setString(count++,convenient[0]);
+			}
+			
+			if(rating != 0) {
+				ps.setInt(count++, rating);
+				ps.setInt(count++, rating);
+			}
+			
+			if (district != null) {
+				for (int i = 0; i <= district.length - 1; i++) {
+					ps.setString(count++, district[i]);
+					//System.out.println(count++);
+				}
 			}
 
 			ResultSet rs = ps.executeQuery();

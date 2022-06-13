@@ -216,7 +216,7 @@ select::-ms-expand {
 						<label class="lbDiadiem">Địa điểm</label>
 						<div style="font-weight: normal; line-height: 17px;">
 							<c:set var="listCity" value="${requestScope.listCity }"></c:set>
-							<select class="form-control" name="city">
+							<select class="form-control" name="city" required>
 								<option value="" disabled selected>Bạn sắp đi đâu?</option>
 								<c:set var="listCity" value="${requestScope.listCity }"></c:set>
 								<c:forEach var="city" items="${listCity }">
@@ -229,13 +229,13 @@ select::-ms-expand {
 					<div class="col-md-3">
 						<label class="lbDiadiem">Ngày đến</label> <input type="text" name="startDate"
 							id="my_date_picker1" class="form-control"
-							placeholder="__/__/____">
+							placeholder="__/__/____" required>
 					</div>
 
 					<div class="col-md-3">
 						<label class="lbDiadiem">Ngày về</label> <input type="text" name="endDate"
 							id="my_date_picker2" class="form-control"
-							placeholder="__/__/____">
+							placeholder="__/__/____" required>
 					</div>
 
 					<div class="col-md-2" style="text-align: center; margin-top: 5px;">

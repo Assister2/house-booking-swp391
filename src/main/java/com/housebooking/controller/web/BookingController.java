@@ -42,7 +42,7 @@ public class BookingController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 
-		String filter = request.getParameter("filter");
+		//String filter = request.getParameter("filter");
 
 		doDisplay(request, response);
 
@@ -95,13 +95,17 @@ public class BookingController extends HttpServlet {
 			convenient = request.getParameterValues("convenientOption");
         }
 		
-		String rating = request.getParameter("rating");
+		double rating = request.getParameter("rating")==null?0:Double.parseDouble(request.getParameter("rating"));
+		//System.out.println((int)rating);
 		
 		//Lay quan huyen
 		String[] district = null;
 		if (request.getParameterValues("districtOption") != null) {
 			district = request.getParameterValues("districtOption");
         }
+		
+		//Lay huong sort
+		String sort = request.getParameter("sort")==null?"":request.getParameter("sort");
 		
         List<Room> listRoom;
         List<District> listDistrict;
@@ -111,7 +115,7 @@ public class BookingController extends HttpServlet {
         }
         else {
         	listRoom = ((RoomDAO)roomDAO).list(city, date1, date2, buildingType, 
-        			concept, convenient, 0, district, "", (page - 1) * recordsPerPage, recordsPerPage);
+        			concept, convenient, (int)rating, district, sort, (page - 1) * recordsPerPage, recordsPerPage);
         	totalRecords = ((RoomDAO)roomDAO).getTotalRecord(city, date1, date2);
         }
         

@@ -44,6 +44,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	
 	
 	
+	
+	
+	
+	
 		addEventListener("load", function () {
 			setTimeout(hideURLbar, 0);
 		}, false);
@@ -52,6 +56,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			window.scrollTo(0, 1);
 		}
 	
+
+
+
+
 
 
 
@@ -165,8 +173,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<input type="submit">
 
 						<div style="margin-top: 15px;" class="form-group">
-							<label for="pwd">Ngày đến:</label> <input type="text"
-								name="startDate" id="my_date_picker1" class="form-control"
+							<label for="pwd">Ngày đến:</label> <input autocomplete="false"
+								type="text" name="startDate" id="my_date_picker1"
+								class="form-control"
 								placeholder="${param.startDate!=null?param.startDate:'MM/dd/yyyy' }"
 								value="${param.startDate!=null?param.startDate:null }" required>
 						</div>
@@ -202,10 +211,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				</form>
 				<!-- //price range -->
 
-				<form action="booking" method="post">
+				<form action="booking" method="get">
 					<input type="hidden" name="city" value="${param.city }"> <input
 						type="hidden" name="startDate" value="${param.startDate }">
 					<input type="hidden" name="endDate" value="${param.endDate }">
+					<input type="hidden" name="filter" value="true">
 					<!-- Loai cho o -->
 					<hr>
 					<!-- Type -->
@@ -260,26 +270,29 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<c:forEach var="convenient" items="${listConvenient }">
 								<li><input id="${convenient.conveId }" type="checkbox"
 									value="${convenient.conveId }" class="checked"
-									name="convenientOption" <c:forEach var="item" items="${convenientChoose}">
+									name="convenientOption"
+									<c:forEach var="item" items="${convenientChoose}">
 										<c:if test="${item eq convenient.conveId}">
 									    	checked
 									  	</c:if>
-									</c:forEach>> 
-									<span class="span"><label
-										for="${convenient.conveId }" style="font-weight: unset;">${convenient.conveName }</label></span></li>
+									</c:forEach>>
+									<span class="span"><label for="${convenient.conveId }"
+										style="font-weight: unset;">${convenient.conveName }</label></span></li>
 							</c:forEach>
 						</ul>
 					</div>
 					<!-- // preference -->
-
 					<hr>
 					<!-- rating -->
 					<div class="left-side">
 						<h3 class="agileits-sear-head">Xếp hạng đánh giá</h3>
 						<div class="form-check">
 							<input class="form-check-input" type="radio" name="rating"
-								id="ratingbtn1" checked value="4.5"> <label
-								style="font-weight: unset;" class="form-check-label"
+								id="ratingbtn1" value="4.5"
+								<c:if test="${requestScope.ratingScale >=4 }">
+									checked
+								</c:if>>
+							<label style="font-weight: unset;" class="form-check-label"
 								for="ratingbtn1"> Tuyệt vời (Từ 4 đến 5 <i
 								style="color: rgb(223, 223, 47);" class="fa fa-star"
 								aria-hidden="true"></i>)
@@ -287,8 +300,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						</div>
 						<div class="form-check">
 							<input class="form-check-input" type="radio" name="rating"
-								id="ratingbtn2" value="3.5"> <label
-								style="font-weight: unset;" class="form-check-label"
+								id="ratingbtn2" value="3.5"
+								<c:if test="${requestScope.ratingScale >=3 and  requestScope.ratingScale <4}">
+									checked
+								</c:if>>
+							<label style="font-weight: unset;" class="form-check-label"
 								for="ratingbtn2"> Tốt (Từ 3 đến 4 <i
 								style="color: rgb(223, 223, 47);" class="fa fa-star"
 								aria-hidden="true"></i>)
@@ -296,8 +312,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						</div>
 						<div class="form-check">
 							<input class="form-check-input" type="radio" name="rating"
-								id="ratingbtn3" value="2.5"> <label
-								style="font-weight: unset;" class="form-check-label"
+								id="ratingbtn3" value="2.5"
+								<c:if test="${requestScope.ratingScale >=2 and  requestScope.ratingScale <3}">
+									checked
+								</c:if>>
+							<label style="font-weight: unset;" class="form-check-label"
 								for="ratingbtn3"> Bình Thường (Từ 2 đến 3 <i
 								style="color: rgb(223, 223, 47);" class="fa fa-star"
 								aria-hidden="true"></i>)
@@ -305,9 +324,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						</div>
 						<div class="form-check">
 							<input class="form-check-input" type="radio" name="rating"
-								id="ratingbtn4" value="1.5"> <label
-								style="font-weight: unset;" class="form-check-label"
-								for="ratingbtn4"> Tệ (Dưới 3 <i
+								id="ratingbtn4" value="1.5"
+								<c:if test="${requestScope.ratingScale <2 and requestScope.ratingScale != 0}">
+									checked
+								</c:if>>
+							<label style="font-weight: unset;" class="form-check-label"
+								for="ratingbtn4"> Tệ (Dưới 2 <i
 								style="color: rgb(223, 223, 47);" class="fa fa-star"
 								aria-hidden="true"></i>)
 							</label>
@@ -323,21 +345,58 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<c:forEach var="district" items="${listDistrict }">
 								<li><input id="${district.districtId }" type="checkbox"
 									value="${district.districtId }" class="checked"
-									name="districtOption"> <span class="span"><label
-										for="${district.districtId }" style="font-weight: unset;">${district.districtName }</label></span></li>
+									name="districtOption"
+									<c:forEach var="item" items="${districtChoose}">
+										<c:if test="${item eq district.districtId}">
+									    	checked
+									  	</c:if>
+									</c:forEach>>
+									<span class="span"><label for="${district.districtId }"
+										style="font-weight: unset;">${district.districtName }</label></span></li>
 							</c:forEach>
 						</ul>
 					</div>
 					<div class="clearfix"></div>
 					<br>
 					<div style="text-align: right;">
-						<a type="button" href="#" class="btn btn-primary">Xóa bộ lọc</a>
+						<a type="button"
+							href="${pageContext.request.contextPath}/booking?city=${param.city}&startDate=${param.startDate}&endDate=${param.endDate}"
+							class="btn btn-primary">Xóa bộ lọc</a>
 						<button type="submit" class="btn btn-primary"
 							style="width: 100px;">Lọc</button>
 					</div>
 				</form>
 			</div>
 			<!-- //product left -->
+
+			<c:url var="SortUrl" value="booking">
+				<c:param name="city" value="${param.city}" />
+				
+				<c:param name="startDate" value="${param.startDate}" />
+				
+				<c:param name="endDate" value="${param.endDate}" />
+				
+				<c:forEach var="item" items="${buildingType}">
+					<c:param name="buildingType" value="${item}" />
+				</c:forEach>
+				
+				<c:forEach var="item" items="${conceptChoose}">
+					<c:param name="concept" value="${item}" />
+				</c:forEach>
+				
+				<c:forEach var="item" items="${convenientChoose}">
+					<c:param name="convenientOption" value="${item}" />
+				</c:forEach>
+				
+				<c:if test="${ratingScale != 0 }">
+					<c:param name="rating" value="${ratingScale}" />
+				</c:if>
+				
+				<c:forEach var="item" items="${districtChoose}">
+					<c:param name="districtOption" value="${item}" />
+				</c:forEach>
+			</c:url>
+			
 			<!-- product right -->
 			<div class="left-ads-display col-md-9">
 				<div class="wrapper_top_shop">
@@ -352,11 +411,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<button style="width: 100%; background-color: gray;"
 								class="btn btn-primary dropdown-toggle" type="button"
 								data-toggle="dropdown">
-								${param.sort!=null?param.sort:'Sắp xếp' } <span class="caret"></span>
+								${param.sort=='down'?'Sắp xếp giá giảm dần':'Sắp xếp giá tăng dần' } <span class="caret"></span>
 							</button>
 							<ul class="dropdown-menu" style="width: 100%;">
-								<li><a href="#">Giá tăng dần</a></li>
-								<li><a href="#">Giá giảm dần </a></li>
+								<li><a href="${SortUrl}&sort=up">Sắp xếp giá tăng dần</a></li>
+								<li><a href="${SortUrl}&sort=down">Sắp xếp giá giảm dần </a></li>
 							</ul>
 						</div>
 					</div>
@@ -381,10 +440,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 												<div class="men-cart-pro">
 													<div class="inner-men-cart-pro">
 														<a href="${pageContext.request.contextPath}/single-post"
-															class="link-product-add-cart">View</a>
+															class="link-product-add-cart">Xem chi tiết</a>
 													</div>
 												</div>
-												<span class="product-new-top">Active</span>
+												<!--  <span class="product-new-top">Active</span>-->
 											</div>
 
 										</div>

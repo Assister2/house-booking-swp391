@@ -18,6 +18,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	
 	
 	
+	
 
 		addEventListener("load", function () {
 			setTimeout(hideURLbar, 0);
@@ -27,6 +28,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			window.scrollTo(0, 1);
 		}
 	
+
 
 
 
@@ -69,27 +71,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <link
 	href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800"
 	rel="stylesheet">
-
-<!-- Linked datepicker -->
-<link
-	href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/ui-lightness/jquery-ui.css'
-	rel='stylesheet'>
-<style>
-.ui-datepicker {
-	margin-top: 0px;
-	width: 20em;
-}
-
-h1 {
-	color: green;
-}
-
-.ui-state-default, .ui-widget-content .ui-state-default {
-	border-radius: 0px;
-	height: fit-content;
-	width: 29.33px;
-}
-</style>
 
 </head>
 
@@ -146,21 +127,27 @@ h1 {
 				</div>
 			</div>
 			<div class="col-md-8 single-right-left simpleCart_shelfItem">
-				<h2 style="color: black;">Khách sạn Vip Pro nhất Đà Lạt</h2>
+				<h2 style="color: black;">${room.roomName }</h2>
 				<div class="rating" style="margin-top: 10px;">
-					<span class="fa fa-star checked"></span>
-					<span class="fa fa-star checked"></span>
-					<span class="fa fa-star checked"></span>
-					<span class="fa fa-star checked"></span>
-					<span class="fa fa-star-half-full"></span>
-					<span style="margin-left: 5px; margin-right: 3px;">| 240</span>
-					<span class="fa fa-user"></span>
+					<span class="fa fa-star checked"></span> <span
+						class="fa fa-star checked"></span> <span
+						class="fa fa-star checked"></span> <span
+						class="fa fa-star checked"></span> <span
+						class="fa fa-star-half-full"></span> <span
+						style="margin-left: 5px; margin-right: 3px;">| 240</span> <span
+						class="fa fa-user"></span>
 				</div>
 				<p>
-					<span class="item_price">$650 /day</span>
-					<del>$1,199 /day</del>
+					<span class="item_price">${room.price/1000 }k per day</span>
 				</p>
-
+				<div>
+					<p>
+						Concept của phòng: ${room.typeName }
+					</p>
+					<p>
+						Mô tả: ${room.roomDesc }
+					</p>
+				</div>
 
 				<!-- Booking -->
 
@@ -354,10 +341,7 @@ h1 {
 								<p>Nhận dáng hình qua địa chỉ IP.</p>
 							</div>
 						</div>
-						<div class="container">
-							
-							
-						</div>
+						<div class="container"></div>
 
 					</div>
 
@@ -647,7 +631,7 @@ h1 {
 	<script type="text/javascript"
 		src="${pageContext.request.contextPath}/view/web/js/jquery-2.1.4.min.js"></script>
 	<!-- //js -->
-	
+
 	<!-- /nav -->
 	<script
 		src="${pageContext.request.contextPath}/view/web/js/modernizr-2.6.2.min.js"></script>
@@ -720,37 +704,7 @@ h1 {
 	<script type="text/javascript"
 		src="${pageContext.request.contextPath}/view/web/js/bootstrap-3.1.1.min.js"></script>
 
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js">
-		
-	</script>
-	<script>
-		$(document).ready(
-				function() {
 
-					$(function() {
-						$("#my_date_picker1").datepicker({});
-					});
-
-					$(function() {
-						$("#my_date_picker2").datepicker({});
-					});
-
-					$('#my_date_picker1').change(
-							function() {
-								startDate = $(this).datepicker('getDate');
-								$("#my_date_picker2").datepicker("option",
-										"minDate", startDate);
-							})
-
-					$('#my_date_picker2').change(
-							function() {
-								endDate = $(this).datepicker('getDate');
-								$("#my_date_picker1").datepicker("option",
-										"maxDate", endDate);
-							})
-				})
-	</script>
 
 	<!-- Rating js -->
 	<script type="text/javascript"

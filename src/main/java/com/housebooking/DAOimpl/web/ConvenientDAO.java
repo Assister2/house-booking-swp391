@@ -39,4 +39,38 @@ public class ConvenientDAO {
 
 		return list;
 	}
+	
+	public List<Convenient> list(String roomId) {
+		ArrayList<Convenient> list;
+		list = new ArrayList<Convenient>();
+
+		String sql = " select con.* \r\n"
+				+ " from  Convenient con  join Room_Convenient rcon on con.convenient_id = rcon.convenient_id\r\n"
+				+ "	join Room r on rcon.room_id = r.room_id\r\n"
+				+ " Where r.room_id like 'Room_01'\r\n"
+				+ "Go	";
+
+		try {
+
+			Connection conn = DBUtils.getConnection();
+
+			PreparedStatement ps = conn.prepareStatement(sql);
+
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				Convenient convenient = new Convenient();
+				convenient.setConveId(rs.getString("convenient_id"));
+				convenient.setConveName(rs.getNString("convenient_name"));
+				list.add(convenient);
+			}
+
+		} catch (Exception ex) {
+
+			ex.printStackTrace();
+
+		}
+
+		return list;
+	}
 }
