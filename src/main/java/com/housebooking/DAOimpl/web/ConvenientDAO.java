@@ -47,14 +47,15 @@ public class ConvenientDAO {
 		String sql = " select con.* \r\n"
 				+ " from  Convenient con  join Room_Convenient rcon on con.convenient_id = rcon.convenient_id\r\n"
 				+ "	join Room r on rcon.room_id = r.room_id\r\n"
-				+ " Where r.room_id like 'Room_01'\r\n"
-				+ "Go	";
+				+ " Where r.room_id like ?\r\n";
 
 		try {
 
 			Connection conn = DBUtils.getConnection();
 
 			PreparedStatement ps = conn.prepareStatement(sql);
+			
+			ps.setString(1, roomId);
 
 			ResultSet rs = ps.executeQuery();
 

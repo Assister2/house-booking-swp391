@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <!DOCTYPE html>
 <html lang="eng">
@@ -19,6 +20,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	
 	
 	
+	
 
 		addEventListener("load", function () {
 			setTimeout(hideURLbar, 0);
@@ -28,6 +30,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			window.scrollTo(0, 1);
 		}
 	
+
 
 
 
@@ -141,12 +144,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<span class="item_price">${room.price/1000 }k per day</span>
 				</p>
 				<div>
-					<p>
-						Concept của phòng: ${room.typeName }
+					<p style="font-size: 16px;">Concept của phòng: ${room.typeName }
 					</p>
-					<p>
-						Mô tả: ${room.roomDesc }
-					</p>
+					<p style="font-size: 16px;">Mô tả: ${room.roomDesc }</p>
 				</div>
 
 				<!-- Booking -->
@@ -154,50 +154,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<div>
 					<a style="background-color: #00BCD4;" href="#addEmployeeModal"
 						class="btn btn-success" data-toggle="modal">Đặt phòng</a>
-				</div>
-
-
-				<div id="addEmployeeModal" class="modal fade">
-					<div class="modal-dialog">
-						<div class="modal-content">
-							<form action="voucher" method="post">
-								<input type="hidden" name="action" value="add" />
-								<div class="modal-header">
-									<h4 class="modal-title">Information</h4>
-									<button type="button" class="close" data-dismiss="modal"
-										aria-hidden="true">&times;</button>
-								</div>
-								<div class="modal-body">
-									<div class="form-group">
-										<label>Customer:</label> <input name="voucherId" type="text"
-											class="form-control" required>
-									</div>
-									<div class="form-group">
-										<label>Phone number</label> <input name="discount" type="text"
-											class="form-control" required>
-									</div>
-									<div class="form-group">
-										<label>Email</label> <input name="discount" type="text"
-											class="form-control" required>
-									</div>
-
-									<div class="form-group">
-										<label>Start Date:</label> <input type="text"
-											id="my_date_picker1" class="form-control" required>
-									</div>
-									<div class="form-group">
-										<label>End Date:</label> <input type="text"
-											id="my_date_picker2" class="form-control" required>
-									</div>
-								</div>
-								<div class="modal-footer">
-									<input type="button" class="btn btn-default"
-										data-dismiss="modal" value="Cancel"> <input
-										type="submit" class="btn btn-success" value="OK">
-								</div>
-							</form>
-						</div>
-					</div>
 				</div>
 
 				<!-- ENd Booking -->
@@ -214,29 +170,31 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<div class="table-responsive">
 								<table class="table table-striped">
 									<tbody>
-										<tr>
-											<td>Bãi đỗ xe</td>
-											<td>Lò vi sóng</td>
-											<td>Tủ lạnh</td>
-										</tr>
+										<c:set var="count" value="${1 }"></c:set>
+										<c:if test="${listConvenient[0] == null}">
+											<td>Phòng chưa có tiện nghi nào :((</td>
+										</c:if>
+										<c:forEach var="item" items="${listConvenient }">
 
-										<tr>
-											<td>Ban công</td>
-											<td>Mạng không dây</td>
-											<td>Phòng tắm</td>
-										</tr>
+											<c:if test="${count%3 == 1 }">
+												<tr>
+											</c:if>
+											<td>${item.conveName}</td>
+											<c:if test="${count%3 == 0}">
+												</tr>
+											</c:if>
 
-										<tr>
-											<td>Bàn làm việc</td>
-											<td>Máy điều hoà</td>
-											<td>Tủ quần áo</td>
-										</tr>
-
-										<tr>
-											<td>Bồn nước nóng</td>
-											<td>Máy giặt</td>
-											<td>Giường</td>
-										</tr>
+											<c:set var="count" value="${count + 1 }"></c:set>
+										</c:forEach>
+										<c:if test="${count%3 == 2}">
+											<td></td>
+											<td></td>
+											</tr>
+										</c:if>
+										<c:if test="${count%3 == 0}">
+											<td></td>
+											</tr>
+										</c:if>
 									</tbody>
 								</table>
 							</div>
@@ -274,13 +232,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									<table class="table table-striped">
 										<tbody>
 											<tr>
-												<td>Giữ vệ sinh chung</td>
-											</tr>
-											<tr>
-												<td>Nếu làm hỏng hóc thiết bị phải bồi thường</td>
-											</tr>
-											<tr>
-												<td>Chủ nhà có thể đuổi bất cứ lúc nào thấy muốn:))</td>
+												<td>${room.rule }</td>
 											</tr>
 										</tbody>
 									</table>
@@ -295,54 +247,37 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<div class="clearfix"></div>
 			<!--/tabs-->
 			<hr>
+			
 			<!-- /new_arrivals -->
-			<div class="container">
-				<div class="blog-single-post-thumb">
+			<div style="width: 100%;">
+				<div class="blog-single-post-thumb"
+					style="width: 80%; margin: auto;">
 					<div class="blog-comment">
 						<h3>Comments</h3>
-						<div class="media" style="margin-top: 20px;">
-							<div class="media-object pull-left">
-								<img
-									src="${pageContext.request.contextPath}/view/web/images/author-image2.jpg"
-									class="img-responsive img-circle" width="60" height="60"
-									alt="Blog Image 11">
+						<c:forEach var="item" items="${listFeedback }">
+							<div class="media" style="margin-top: 20px;">
+								<div class="media-object pull-left">
+									<img style="width: 5.5em;"
+										src="${pageContext.request.contextPath}/view/web/images/avatar.png"
+										class="img-responsive img-circle" width="40" height="40"
+										alt="Blog Image 11">
+								</div>
+								<div class="media-body">
+									<h3 class="media-heading"> ${item.userName }</h3>
+									<span style="font-size: 12px;"> ${item.feedbackDate }</span>
+									<p> ${item.comment } </p>
+									<form action="single-post">
+										<input type="hidden" name="rommId" value="${param.roomId }">
+										<input type="hidden" name="feedbackId" value="${item.feedbackId }">
+										<button type="submit" class="btn btn-danger btn-sm" style="padding: unset; margin-top: 5px;" >Report!</button>
+									</form>
+								</div>
 							</div>
-							<div class="media-body">
-								<h3 class="media-heading">Karim Benzema</h3>
-								<span style="font-size: 12px;">3 days ago</span>
-								<p>Nhà ok lắm, chị chủ nhà rất xinh.</p>
-							</div>
-						</div>
-						<div class="media" style="margin-top: 20px;">
-							<div class="media-object pull-left">
-								<img
-									src="${pageContext.request.contextPath}/view/web/images/comment-image1.jpg"
-									class="img-responsive img-circle" width="60px" height="60px"
-									alt="Blog Image 22">
-							</div>
-							<div class="media-body">
-								<h3 class="media-heading">Cristiano Ronaldo</h3>
-								<span style="font-size: 12px;">5 days ago</span>
-								<p>Ngày xưa có 1 chú chim cánh cụt thở bằng l* đ*t. Một hôm
-									chú ngồi xuống và chết</p>
-							</div>
-						</div>
-						<div class="media" style="margin-top: 20px;">
-							<div class="media-object pull-left">
-								<img
-									src="${pageContext.request.contextPath}/view/web/images/author-image1.jpg"
-									class="img-responsive img-circle" width="60px" height="60px"
-									alt="Blog Image 22">
-							</div>
-							<div class="media-body">
-								<h3 class="media-heading">Truong Giang</h3>
-								<span style="font-size: 12px;">5 days ago</span>
-								<p>Lời yêu thương truyền bằng phương thức Get <3</p>
-								<p>Nhận dáng hình qua địa chỉ IP.</p>
-							</div>
-						</div>
-						<div class="container"></div>
+						</c:forEach>
 
+						<div class="text-center">
+							<a type="button" href="#">Xem tất cả bình luận</a>
+						</div>
 					</div>
 
 					<div class="blog-comment-form">
@@ -417,18 +352,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 										<div>..., gần chợ Đà Lạt, tiện nghi cực đã, giá mềm, k
 											thuê phí cả đời</div>
 									</div>
-									<!-- <div class="shoe single-item hvr-outline-out">
-										<form action="#" method="post">
-											<input type="hidden" name="cmd" value="_cart">
-											<input type="hidden" name="add" value="1">
-											<input type="hidden" name="shoe_item" value="Bella Toes">
-											<input type="hidden" name="amount" value="675.00">
-											<button type="submit" class="shoe-cart pshoe-cart"><i class="fa fa-cart-plus" aria-hidden="true"></i></button>
-
-											<a href="#" data-toggle="modal" data-target="#myModal1"></a>
-										</form>
-
-									</div> -->
 								</div>
 								<div class="clearfix"></div>
 							</div>
@@ -475,18 +398,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 										<div>..., gần chợ Đà Lạt, tiện nghi cực đã, giá mềm, k
 											thuê phí cả đời</div>
 									</div>
-									<!-- <div class="shoe single-item hvr-outline-out">
-										<form action="#" method="post">
-											<input type="hidden" name="cmd" value="_cart">
-											<input type="hidden" name="add" value="1">
-											<input type="hidden" name="shoe_item" value="Bella Toes">
-											<input type="hidden" name="amount" value="675.00">
-											<button type="submit" class="shoe-cart pshoe-cart"><i class="fa fa-cart-plus" aria-hidden="true"></i></button>
-
-											<a href="#" data-toggle="modal" data-target="#myModal1"></a>
-										</form>
-
-									</div> -->
 								</div>
 								<div class="clearfix"></div>
 							</div>

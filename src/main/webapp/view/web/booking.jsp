@@ -439,7 +439,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 													alt="">
 												<div class="men-cart-pro">
 													<div class="inner-men-cart-pro">
-														<a href="${pageContext.request.contextPath}/single-post"
+														<a href="${pageContext.request.contextPath}/single-post?roomId=${room.roomId}"
 															class="link-product-add-cart">Xem chi tiết</a>
 													</div>
 												</div>

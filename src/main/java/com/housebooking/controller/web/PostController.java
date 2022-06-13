@@ -1,6 +1,7 @@
 package com.housebooking.controller.web;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,7 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.housebooking.DAO.IRoomDAO;
+import com.housebooking.DAOimpl.web.ConvenientDAO;
+import com.housebooking.DAOimpl.web.FeedbackDAO;
 import com.housebooking.DAOimpl.web.RoomDAO;
+import com.housebooking.Model.Convenient;
+import com.housebooking.Model.Feedback;
 import com.housebooking.Model.Room;
 
 @WebServlet("/single-post")
@@ -32,6 +37,14 @@ public class PostController extends HttpServlet {
 		
 		Room room = roomDAO.find(roomId);
 		
+		ConvenientDAO convenientDAO = new ConvenientDAO();
+		
+		List<Convenient> listConvenient = convenientDAO.list(roomId);
+		
+		List<Feedback> listFeedback = new FeedbackDAO().list(roomId);
+		
+		request.setAttribute("listFeedback", listFeedback);
+		request.setAttribute("listConvenient", listConvenient);
 		request.setAttribute("room", room);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/view/web/single-post.jsp");
