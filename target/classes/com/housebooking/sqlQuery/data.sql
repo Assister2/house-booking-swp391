@@ -124,10 +124,10 @@ Go
 
 Insert into Users
 Values
-	('User_01', N'Nguyễn Trường Giang', 'Owner', 'Giang', '123', '0987654321', 'GiangNTSE150747@gfpt.edu.vn'),
-	('User_02', N'Trần Nhựt Hào', 'User', 'haotn', '123', '0369663031', 'haotnse150564@fpt.edu.vn'),
-	('User_03', N'Nguyễn Quang', 'User', 'Quang', '123', '0987654321', 'GiangNTSE1507471@gfpt.edu.vn'),
-	('User_04', N'Nguyễn Hoàng Duy', 'Admin', 'duycute', '456', '0987654321', 'DuyNHSE15073@gfpt.edu.vn')
+	('User_01', N'Nguyễn Trường Giang', null,'Owner', 'Giang', '123', '0987654321', 'GiangNTSE150747@gfpt.edu.vn'),
+	('User_02', N'Trần Nhựt Hào',null, 'User', 'haotn', '123', '0369663031', 'haotnse150564@fpt.edu.vn'),
+	('User_03', N'Nguyễn Quang',null, 'User',  'Quang', '123', '0987654321', 'GiangNTSE1507471@gfpt.edu.vn'),
+	('User_04', N'Nguyễn Hoàng Duy', null, 'Admin', 'duycute', '456', '0987654321', 'DuyNHSE15073@gfpt.edu.vn')
 Go
 
 Insert into Building
@@ -177,112 +177,84 @@ Go
 
 Insert into Room
 Values
-	('Room_01',N'Trường Giang Dalat Homestay', 'active', N'Tọa lạc tại thành phố Đà Lạt, cách Vườn hoa Đà Lạt 1,3 km, Trường Giang Dalat Hotel cung cấp chỗ nghỉ với nhà hàng, chỗ đỗ xe riêng miễn phí, sảnh khách chung và khu vườn.', 900000, N'Giữ gìn vệ sinh, không xả rác','type_2', '350101_B00')
+	('Room_01',N'Trường Giang Dalat Homestay', 'active', N'Tọa lạc tại thành phố Đà Lạt, cách Vườn hoa Đà Lạt 1,3 km, Trường Giang Dalat Hotel cung cấp chỗ nghỉ với nhà hàng, chỗ đỗ xe riêng miễn phí, sảnh khách chung và khu vườn.', 900000, 'type_2', '350101_B00')
 Go
 
 Insert into Room
 Values
-	('Room_02',N'ACE Hotel - Bến Thành', 'active', N'139H Nguyễn Trãi, Quận 1, TP. Hồ Chí Minh, cách chợ Bến Thành 5 phút đi bộ',450000.00,N'Không có yêu cầu','type_2','580101_B01')
+	('Room_02',N'ACE Hotel - Bến Thành', 'active', N'139H Nguyễn Trãi, Quận 1, TP. Hồ Chí Minh, cách chợ Bến Thành 5 phút đi bộ',450000.00,'type_2','580101_B01')
 Go
 
 Insert into Room
 Values
-	('Room_03',N'Calista Sai Gon Hotel', 'active', N'247-249, Lý Tự Trọng, Phường Bến Thành Quận 1, TP. Hồ Chí Minh',750000.00,N'Không được mang sách về phòng hay lấy trộm sách','type_2','580101_B02')
+	('Room_03',N'Calista Sai Gon Hotel', 'active', N'247-249, Lý Tự Trọng, Phường Bến Thành Quận 1, TP. Hồ Chí Minh',750000.00,'type_2','580101_B02')
 Go
 
 Insert into Room
 Values
-	('Room_22',N'Common Inn Thao Dien', 'active', N'19, Đường 38, Phường Thảo Điền, Quận 2, TP.HCM', 780000.00,N'Không lấy trộm sách, bảo vệ tài sản trong phòng','type_2','580202_B01')
+	('Room_22',N'Common Inn Thao Dien', 'active', N'19, Đường 38, Phường Thảo Điền, Quận 2, TP.HCM', 780000.00,'type_2','580202_B01')
 Go
 
 Insert into Room
 Values
-	('Room_04',N'WECOZY HANOI - Railway Side, The Old Quarter', 'active', N'20 Tống Duy Tân, Quận Hoàn Kiếm, Hà Nội, Việt Nam ',1000000.00,N'Cấm hút thuốc','type_2','240102_B01')
+	('Room_04',N'WECOZY HANOI - Railway Side, The Old Quarter', 'active', N'20 Tống Duy Tân, Quận Hoàn Kiếm, Hà Nội, Việt Nam ',1000000.00,'type_2','240102_B01')
 Go
 
 Insert into Room
 Values
-	('Room_05',N'Lakeside House', 'active', N'135 đường Đội Cấn, quận Ba Đình, Hà Nội',325000.00,N'Không được hút thuốc, có thể mang theo thú cưng','type_2','240202_B01')
+	('Room_05',N'Lakeside House', 'active', N'135 đường Đội Cấn, quận Ba Đình, Hà Nội',325000.00,'type_2','240202_B01')
 Go
 
 Insert into Room
 Values
-	('Room_06',N'Ancient Town 29 Phố Cổ', 'active', N'29 tổ 3 (Phố Cổ), Đồng Văn, Việt Nam',330000.00,N'Không dùng những vật dụng dễ bắt lửa trong phòng','type_1','220101_B01')
-Go
-
-/*Insert into Room
-Values
-	('Room_07',N'O Chau Meo Vac Homestay',N'Toạ lạc tại Pả Vi, Mèo Vạc, Hà Giang',380000.00,N'Không hút thuốc hay sử dụng vật dễ bắt lửa trong phòng','type_1','220201_B01')
-Go*/
-Insert into Room
-Values
-	('Room_08',N'Sapa Catcat Hills Resort & Spa', 'active', N'86 Fansipan, Sapa, Việt Nam, cách ga cáp treo Fansipan Legend 14 phút đi bộ',187800.00,N'Không có yêu cầu','type_3','370101_B01')
+	('Room_06',N'Ancient Town 29 Phố Cổ', 'active', N'29 tổ 3 (Phố Cổ), Đồng Văn, Việt Nam',330000.00,'type_1','220101_B01')
 Go
 
 Insert into Room
 Values
-	('Room_09',N'La Beauté Bắc Hà','active',N'Homestay được xây dựng tại làng Tá Chài, Bắc Hà, Lào Cai, Việt Nam, CÓ WIFI',340000,N'Không hút thuốc trong khu vực nhà ở','type_1','370201_B01')
-Go
-
-/*Insert into Room
-Values
-	('Room_10',N'THƯ DUY Resort',N'323 Lý Thường Kiệt, phường 6, Cà Mau, Việt Nam, Cách bờ biển 1 phút đi bộ',812000.00,N'Giữ vệ sinh chung','type_03','120201_B01')
-Go*/
-
-Insert into Room
-Values
-	('Room_11',N'Nhà gỗ - Farmstay Hoa Rừng U Minh', 'active', N'Ấp 15, xã Khánh An, Huyện U Minh, tỉnh Cà Mau, Cách Cà Mau 20.9km ',360000.00,N'Giữ gìn vệ sinh quanh nhà','type_3','120101_B01')
+	('Room_08',N'Sapa Catcat Hills Resort & Spa', 'active', N'86 Fansipan, Sapa, Việt Nam, cách ga cáp treo Fansipan Legend 14 phút đi bộ',187800.00,'type_3','370101_B01')
 Go
 
 Insert into Room
 Values
-	('Room_12',N'Lovely House','active',N'Hẻm 3 /4 Đường Đoàn Thị Điểm Phường 4 Thành phố Đà Lạt,Việt Nam',380000.00,N'Giữ gìn cảnh quan, cảnh vật xung quanh','type_3','350101_B01')
+	('Room_09',N'La Beauté Bắc Hà','active',N'Homestay được xây dựng tại làng Tá Chài, Bắc Hà, Lào Cai, Việt Nam, CÓ WIFI',340000,'type_1','370201_B01')
 Go
 
 Insert into Room
 Values
-	('Room_13',N'Raon Valley Villa', 'active', N'44D Trần Khánh Dư, Phường 8, Da Lat, Việt Nam, Cách Vườn Hoa Đà Lạt 17 phút đi bộ',400000.00,N'Giữa vệ sinh, cảnh quan, cây cảnh','type_3','350101_B01')
+	('Room_11',N'Nhà gỗ - Farmstay Hoa Rừng U Minh', 'active', N'Ấp 15, xã Khánh An, Huyện U Minh, tỉnh Cà Mau, Cách Cà Mau 20.9km ',360000.00,'type_3','120101_B01')
 Go
 
 Insert into Room
 Values
-	('Room_14',N'Muong Thanh Luxury Phu Tho', 'active', N'Toạ lạc tại CC17 Unit, Hung Vuong Square, Việt Trì, Việt Nam ',146100.00,N'Giữ gìn vệ sinh trong phòng','type_2','430101_B01')
+	('Room_12',N'Lovely House','active',N'Hẻm 3 /4 Đường Đoàn Thị Điểm Phường 4 Thành phố Đà Lạt,Việt Nam',380000.00,'type_3','350101_B01')
 Go
-
-/*Insert into Room
-Values
-	('Room_15',N'Bavi Homestead',N'Nằm tại xã Văn Hoà, Huyện Ba Vì, Phú Thọ',300000.00,N'Không có yêu cầu','tpye_3','430201_B01')
-Go*/
-
-/*Insert into Room
-Values
-	('Room_16',N'Fisherman Village Boutique Villas - Beachfront',N'Đường số 18, Hàm Tân, Bình Thuận, cách bãi biển 2 phút đi bộ',3154000.00 ,N'Giữ vệ sinh, bảo vệ tài sản trong phòng','tpye_1','150201_B01')
-Go*/
 
 Insert into Room
 Values
-	('Room_17',N'Chunlii Homestay', 'active', N'Mũi Kê Gà, xã Tân Thành, Thành Thuận Nam, Bình Thuận',444000.00,N'Giữ vệ sinh chung','type_2','110101_B01')
+	('Room_13',N'Raon Valley Villa', 'active', N'44D Trần Khánh Dư, Phường 8, Da Lat, Việt Nam, Cách Vườn Hoa Đà Lạt 17 phút đi bộ',400000.00,'type_3','350101_B01')
+Go
+
+Insert into Room
+Values
+	('Room_14',N'Muong Thanh Luxury Phu Tho', 'active', N'Toạ lạc tại CC17 Unit, Hung Vuong Square, Việt Trì, Việt Nam ',146100.00,'type_2','430101_B01')
+Go
+
+Insert into Room
+Values
+	('Room_17',N'Chunlii Homestay', 'active', N'Mũi Kê Gà, xã Tân Thành, Thành Thuận Nam, Bình Thuận',444000.00,'type_2','110101_B01')
 Go
 
 Insert into Room
 Values	
-	('Room_18',N'Cosmos Hotel Danang', 'active', N'117-119 Ngô Thì Sỹ, Phường Mỹ An, Ngũ Hành Sơn, Đà Nẵng, Việt Nam, Cách Biển Mỹ Khê 300m và Biển Bắc Mỹ An 450m',737000.00,N'Giữ gìn vệ sinh, không xả rác','type_2','150101_B01')
+	('Room_18',N'Cosmos Hotel Danang', 'active', N'117-119 Ngô Thì Sỹ, Phường Mỹ An, Ngũ Hành Sơn, Đà Nẵng, Việt Nam, Cách Biển Mỹ Khê 300m và Biển Bắc Mỹ An 450m',737000.00,'type_2','150101_B01')
 Go
 
-/*Insert into Room
-Values
-	('Room_19',N'Dan Oasis Hotel and Apartment',N'A2.3, Đường Hoàng Sa, Đà Nẵng, Việt Nam ',626000.00,N'Giữ vệ chung','type_2','150102_B01')
-Go*/
 
 Insert into Room
 Values
-	('Room_20',N'Grand Pearl Minh Chau', 'active', N'Xã Minh Châu, Đảo Quan Lạn, Huyện Vân Đồn, Tỉnh Quảng Ninh, Cách bãi biển 1 phút đi bộ',2041000.00,N'Giữ vệ sinh chung','type_2','480101_B01')
+	('Room_20',N'Grand Pearl Minh Chau', 'active', N'Xã Minh Châu, Đảo Quan Lạn, Huyện Vân Đồn, Tỉnh Quảng Ninh, Cách bãi biển 1 phút đi bộ',2041000.00,'type_2','480101_B01')
 Go
-
-/*Insert into Room
-Values
-	('Room_21',N'Coto Center Homestay',N'Vũ Văn Hiếu, Đảo Cô Tô, Việt Nam, Cách bãi biển 12 phút đi bộ, có nhà hàng',696000.00,N'Giữ vệ sinh chung, không ngắt hoa cỏ trong vườn','type_3','480102_B01')
-Go*/
 
 Insert into Room_Convenient
 Values
@@ -290,6 +262,22 @@ Values
 	('Room_01', 'Con_02'),
 	('Room_01', 'Con_03'),
 	('Room_02', 'Con_04')
+Go
+
+Insert into Rules
+Values
+	(1, N'Giữ gìn vệ sinh, không xả rác'),
+	(2, N'Cấm hút thuốc'),
+	(3, N'Không về trễ quá 11h đêm'),
+	(4, N'Không mang theo thú cưng')
+Go
+
+Insert into Building_Rules
+Values
+	('350101_B00', 1),
+	('350101_B00', 2),
+	('350101_B00', 3),
+	('350101_B00', 4)
 Go
 
 Insert into Bill

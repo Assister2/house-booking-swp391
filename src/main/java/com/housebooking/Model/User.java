@@ -3,6 +3,7 @@ package com.housebooking.Model;
 public class User {
 	private String userId;
 	private String name;
+	private String avatar;
 	private String role;
 	private String username;
 	private String password;
@@ -12,6 +13,16 @@ public class User {
 	public String getUserId() {
 		return userId;
 	}
+
+	public String getAvatar() {
+		return avatar;
+	}
+
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
+	}
+
+
 
 	public void setUserId(String userId) {
 		this.userId = userId;

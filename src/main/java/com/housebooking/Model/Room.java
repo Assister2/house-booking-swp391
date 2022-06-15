@@ -8,7 +8,6 @@ public class Room {
 	private String roomName;
 	private String roomDesc;
 	private float price;
-	private String rule;
 	private String typeId;
 	private String buildingId;
 	private String typeName;
@@ -44,12 +43,6 @@ public class Room {
 	}
 	public void setPrice(float price) {
 		this.price = price;
-	}
-	public String getRule() {
-		return rule;
-	}
-	public void setRule(String rule) {
-		this.rule = rule;
 	}
 	public String getTypeId() {
 		return typeId;

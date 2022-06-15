@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.housebooking.Model.Feedback;
+import com.housebooking.Model.User;
 import com.housebooking.Utils.DBUtils;
 
 public class FeedbackDAO {
@@ -15,10 +16,10 @@ public class FeedbackDAO {
 		ArrayList<Feedback> list;
 		list = new ArrayList<Feedback>();
 
-		String sql = "Select fb.*, us.user_name\r\n"
-				+ "From Feedback fb join Room r on fb.room_id = r.room_id\r\n"
+		String sql = "Select fb.*, us.user_name, us.avatar\r\n"
+				+ " From Feedback fb join Room r on fb.room_id = r.room_id\r\n"
 				+ "	join Users us on fb.user_id = us.user_id\r\n"
-				+ "Where r.room_id like ? AND fb.status like 'on' ";
+				+ " Where r.room_id like ? AND fb.status like 'on'";
 
 		try {
 
@@ -40,9 +41,14 @@ public class FeedbackDAO {
 				feedback.setFeedbackDate(rs.getDate("feedback_date"));
 				feedback.setReport(rs.getInt("report"));
 				feedback.setRoom_id(rs.getString("room_id"));
-				feedback.setUserId(rs.getString("user_id"));
-				feedback.setUserName(rs.getNString("user_name"));
-				System.out.println(feedback.getComment());
+				
+				User user = new User();				 
+				user.setUserId(rs.getString("user_id"));
+				user.setName(rs.getNString("user_name"));
+				user.setAvatar(rs.getString("avatar"));
+				
+				feedback.setUser(user);
+				
 				list.add(feedback);
 			}
 

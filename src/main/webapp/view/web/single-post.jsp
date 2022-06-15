@@ -231,9 +231,31 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<div class="table-responsive">
 									<table class="table table-striped">
 										<tbody>
-											<tr>
-												<td>${room.rule }</td>
+											<c:set var="count" value="${1 }"></c:set>
+										<c:if test="${listRule[0] == null}">
+											<td>Phòng không có luật lệ</td>
+										</c:if>
+										<c:forEach var="item" items="${listRule }">
+
+											<c:if test="${count%3 == 1 }">
+												<tr>
+											</c:if>
+											<td>${item.ruleContent}</td>
+											<c:if test="${count%3 == 0}">
+												</tr>
+											</c:if>
+
+											<c:set var="count" value="${count + 1 }"></c:set>
+										</c:forEach>
+										<c:if test="${count%3 == 2}">
+											<td></td>
+											<td></td>
 											</tr>
+										</c:if>
+										<c:if test="${count%3 == 0}">
+											<td></td>
+											</tr>
+										</c:if>
 										</tbody>
 									</table>
 								</div>
@@ -253,17 +275,19 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<div class="blog-single-post-thumb"
 					style="width: 80%; margin: auto;">
 					<div class="blog-comment">
+					
 						<h3>Comments</h3>
 						<c:forEach var="item" items="${listFeedback }">
 							<div class="media" style="margin-top: 20px;">
 								<div class="media-object pull-left">
+								
 									<img style="width: 5.5em;"
-										src="${pageContext.request.contextPath}/view/web/images/avatar.png"
+										src="${pageContext.request.contextPath }${item.user.avatar }"
 										class="img-responsive img-circle" width="40" height="40"
 										alt="Blog Image 11">
 								</div>
 								<div class="media-body">
-									<h3 class="media-heading"> ${item.userName }</h3>
+									<h3 class="media-heading"> ${item.user.name }</h3>
 									<span style="font-size: 12px;"> ${item.feedbackDate }</span>
 									<p> ${item.comment } </p>
 									<form action="single-post">

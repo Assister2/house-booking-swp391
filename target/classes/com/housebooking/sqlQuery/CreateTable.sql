@@ -43,7 +43,6 @@ Create table Room (
 	room_status nvarchar(100),
 	room_desc nvarchar(max),
 	room_price float not null,
-	room_rule nvarchar(max),
 	type_id varchar(20),
 	building_id varchar(20),
 	primary key(room_id)
@@ -116,6 +115,7 @@ Go
 Create table Users(
 	user_id varchar(20),
 	user_name nvarchar(100),
+	avatar varchar(max),
 	role varchar(30) not null,
 	username varchar(20),
 	password varchar(20),
@@ -172,9 +172,23 @@ Create table Building_Additional_service
 (
 	building_id varchar(20),
 	add_serviceId varchar(20),
-	add_service_status varchar(20),
+	add_service_status bit,
 	add_service_price float,
 	primary key(building_id,add_serviceId)
+)
+Go
+
+Create table Rules(
+	ruleId int,
+	rule_content nvarchar(max),
+	primary key(ruleId)
+)
+Go
+
+Create table Building_Rules(
+	building_id varchar(20),
+	ruleId int,
+	primary key(building_id,ruleId)
 )
 Go
 
@@ -257,6 +271,16 @@ Go
 ALTER TABLE Building_Additional_service
 ADD CONSTRAINT FK_Building_Additional_service_Additional_service
 FOREIGN KEY (add_serviceId) REFERENCES Additional_service(add_serviceId);
+Go
+
+ALTER TABLE Building_Rules
+ADD CONSTRAINT FK_Building_Rules_Rules
+FOREIGN KEY (ruleId) REFERENCES Rules(ruleId);
+Go
+
+ALTER TABLE Building_Rules
+ADD CONSTRAINT FK_Building_Rules_Building
+FOREIGN KEY (building_id) REFERENCES Building(building_id);
 Go
 -- Delete
 

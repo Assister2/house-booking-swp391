@@ -10,8 +10,8 @@ public class Feedback {
 	private Date feedbackDate;
 	private int report;
 	private String room_id;
-	private String userId;
-	private String userName;
+	private User user;
+	
 	public String getFeedbackId() {
 		return feedbackId;
 	}
@@ -54,17 +54,10 @@ public class Feedback {
 	public void setRoom_id(String room_id) {
 		this.room_id = room_id;
 	}
-	public String getUserId() {
-		return userId;
+	public User getUser() {
+		return user;
 	}
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setUser(User user) {
+		this.user = user;
 	}
-	public String getUserName() {
-		return userName;
-	}
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-	
 }

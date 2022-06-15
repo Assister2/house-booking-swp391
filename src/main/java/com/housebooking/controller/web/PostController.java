@@ -14,9 +14,11 @@ import com.housebooking.DAO.IRoomDAO;
 import com.housebooking.DAOimpl.web.ConvenientDAO;
 import com.housebooking.DAOimpl.web.FeedbackDAO;
 import com.housebooking.DAOimpl.web.RoomDAO;
+import com.housebooking.DAOimpl.web.RuleDAO;
 import com.housebooking.Model.Convenient;
 import com.housebooking.Model.Feedback;
 import com.housebooking.Model.Room;
+import com.housebooking.Model.Rule;
 
 @WebServlet("/single-post")
 public class PostController extends HttpServlet {
@@ -43,6 +45,9 @@ public class PostController extends HttpServlet {
 		
 		List<Feedback> listFeedback = new FeedbackDAO().list(roomId);
 		
+		List<Rule> listRule = new RuleDAO().list(roomId);
+		
+		request.setAttribute("listRule", listRule);
 		request.setAttribute("listFeedback", listFeedback);
 		request.setAttribute("listConvenient", listConvenient);
 		request.setAttribute("room", room);

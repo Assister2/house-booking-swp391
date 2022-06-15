@@ -173,7 +173,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<input type="submit">
 
 						<div style="margin-top: 15px;" class="form-group">
-							<label for="pwd">Ngày đến:</label> <input autocomplete="false"
+							<label for="pwd">Ngày đến:</label> <input autocomplete="off"
 								type="text" name="startDate" id="my_date_picker1"
 								class="form-control"
 								placeholder="${param.startDate!=null?param.startDate:'MM/dd/yyyy' }"
@@ -184,8 +184,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<label for="pwd">Ngày về:</label> <input type="text"
 								name="endDate" id="my_date_picker2" class="form-control"
 								placeholder="${param.endDate!=null?param.endDate:'MM/dd/yyyy' }"
-								value="${param.endDate!=null?param.endDate:null }" required>
-						</div>
+								value="${param.endDate!=null?param.endDate:null }" required autocomplete="off">
+						</div> 
 
 						<div style="text-align: right;">
 							<button type="submit" class="btn btn-primary"
@@ -435,7 +435,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 										<div class="men-pro-item">
 											<div class="men-thumb-item">
 												<img width="240" height="190"
-													src="https://vinhomesland.vn/wp-content/uploads/2019/10/homestay.jpg"
+													src="${room.roomImages[0]==null?'https://vinhomesland.vn/wp-content/uploads/2019/10/homestay.jpg':room.roomImages[0] }"
 													alt="">
 												<div class="men-cart-pro">
 													<div class="inner-men-cart-pro">

@@ -5,13 +5,14 @@ DECLARE @endDate as date = '2022-06-18'
 DECLARE @city as nvarchar(100) = N'%Lâm Đồng%'
 DECLARE @start as int = 0
 DECLARE @end as int = 6
-Select  r.*, t.type_name, ISNULL(Round(AVG(rating*1.0),1),0) as rating 
+Select  r.*, t.type_name, ISNULL(Round(AVG(rating*1.0),1),0) as rating, rm.image_link
 from Room r join Type_Of_Room t on r.type_id = t.type_id
 	join Building b on r.building_id = b.building_id
 	join Street st on b.street_id = st.street_id
 	join District dis on st.district_id = dis.district_id
 	join City ci on ci.city_id = dis.city_id
 	left join Room_Convenient con on r.room_id = con.room_id
+	join Room_Images rm on r.room_id= rm.room_id
 	left join (
 				Select r3.*
 					from Room r3 left join Bill_detail de on r3.room_id = de.room_id
@@ -34,12 +35,18 @@ from Room r join Type_Of_Room t on r.type_id = t.type_id
 			left join Feedback f on r.room_id = f.room_id
 			JOIN Room_Convenient T2 ON r.room_id = T2.room_id AND T2.convenient_id like 'Con_02'
 Where ci.city_name like @city  AND r2.room_id is null 
+	AND rm.image_link like '%_01.jpg%' Or rm.image_link like '%_01.jpeg%'
 	AND ( b.building_type like N'%nhà nguyên căn%' OR b.building_type like N'%homestay%') 
 	AND con.convenient_id like 'Con_01'
-	AND rating between CAST(4 AS int) AND (CAST(4 AS int) + 1)
-Group by r.room_id, r.room_name, r.room_desc, r.room_price, r.room_status, r.room_rule, r.building_id, r.type_id, t.type_name
+	AND rating between CAST(4 AS int) AND (CAST(4 AS int) + 1)	
+Group by r.room_id, r.room_name, r.room_desc, r.room_price, r.room_status, r.building_id, r.type_id, t.type_name, rm.image_link
 Order by r.room_price ASC
 OFFSET @start ROWS FETCH NEXT @end ROWS ONLY
+Go
+
+Select *
+from Room r join Room_Images rm on r.room_id= rm.room_id
+Where rm.image_link like '%_01.jpg%' Or rm.image_link like '%_01.jpeg%'
 Go
 
 SELECT CAST(25.45 AS int);

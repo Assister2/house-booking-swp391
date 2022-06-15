@@ -229,13 +229,13 @@ select::-ms-expand {
 					<div class="col-md-3">
 						<label class="lbDiadiem">Ngày đến</label> <input type="text" name="startDate"
 							id="my_date_picker1" class="form-control"
-							placeholder="__/__/____" required>
+							placeholder="__/__/____" required autocomplete="off">
 					</div>
 
 					<div class="col-md-3">
 						<label class="lbDiadiem">Ngày về</label> <input type="text" name="endDate"
 							id="my_date_picker2" class="form-control"
-							placeholder="__/__/____" required>
+							placeholder="__/__/____" required autocomplete="off">
 					</div>
 
 					<div class="col-md-2" style="text-align: center; margin-top: 5px;">
@@ -371,21 +371,22 @@ select::-ms-expand {
 				function() {
 
 					$(function() {
-						$("#my_date_picker1").datepicker({});
+						$("#my_date_picker1").datepicker({ minDate: 0 });
 					});
 
 					$(function() {
-						$("#my_date_picker2").datepicker({});
+						$("#my_date_picker2").datepicker({ minDate: 0 });
 					});
 
 					$('#my_date_picker1').change(
-							function() {
-
+							 function() {
 								startDate = $(this).datepicker('getDate');
+								 
 								$("#my_date_picker2").datepicker("option",
 										"minDate", startDate);
+								
 							})
-
+							
 					$('#my_date_picker2').change(
 							function() {
 								endDate = $(this).datepicker('getDate');
