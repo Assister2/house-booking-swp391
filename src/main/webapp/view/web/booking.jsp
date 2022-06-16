@@ -213,8 +213,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 				<form action="booking" method="get">
 					<input type="hidden" name="city" value="${param.city }"> <input
-						type="hidden" name="startDate" value="${param.startDate }">
-					<input type="hidden" name="endDate" value="${param.endDate }">
+						type="hidden" name="startDate" value="${param.startDate }" autocomplete="off">
+					<input type="hidden" name="endDate" value="${param.endDate }" autocomplete="off">
 					<input type="hidden" name="filter" value="true">
 					<!-- Loai cho o -->
 					<hr>
@@ -434,8 +434,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									<div class="product-shoe-info shoe">
 										<div class="men-pro-item">
 											<div class="men-thumb-item">
+											<c:set var="image" value="${pageContext.request.contextPath }${room.roomImages[0] }"></c:set>
+											<c:set var="defaultImage" value="https://vinhomesland.vn/wp-content/uploads/2019/10/homestay.jpg"></c:set>
 												<img width="240" height="190"
-													src="${room.roomImages[0]==null?'https://vinhomesland.vn/wp-content/uploads/2019/10/homestay.jpg':room.roomImages[0] }"
+													src="${room.roomImages[0]==null?defaultImage:image }"
 													alt="">
 												<div class="men-cart-pro">
 													<div class="inner-men-cart-pro">
@@ -685,11 +687,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				function() {
 
 					$(function() {
-						$("#my_date_picker1").datepicker({});
+						$("#my_date_picker1").datepicker({ minDate: 0 });
 					});
 
 					$(function() {
-						$("#my_date_picker2").datepicker({});
+						$("#my_date_picker2").datepicker({ minDate: 0 });
 					});
 
 					$('#my_date_picker1').change(

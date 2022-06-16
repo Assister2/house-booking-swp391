@@ -12,7 +12,7 @@ from Room r join Type_Of_Room t on r.type_id = t.type_id
 	join District dis on st.district_id = dis.district_id
 	join City ci on ci.city_id = dis.city_id
 	left join Room_Convenient con on r.room_id = con.room_id
-	join Room_Images rm on r.room_id= rm.room_id
+	left join Room_Images rm on  r.room_id = rm.room_id
 	left join (
 				Select r3.*
 					from Room r3 left join Bill_detail de on r3.room_id = de.room_id
@@ -32,13 +32,8 @@ from Room r join Type_Of_Room t on r.type_id = t.type_id
 						AND  @endDate >= de.end_date
 					)
 			) as r2 on r.room_id = r2.room_id
-			left join Feedback f on r.room_id = f.room_id
-			JOIN Room_Convenient T2 ON r.room_id = T2.room_id AND T2.convenient_id like 'Con_02'
-Where ci.city_name like @city  AND r2.room_id is null 
-	AND rm.image_link like '%_01.jpg%' Or rm.image_link like '%_01.jpeg%'
-	AND ( b.building_type like N'%nhà nguyên căn%' OR b.building_type like N'%homestay%') 
-	AND con.convenient_id like 'Con_01'
-	AND rating between CAST(4 AS int) AND (CAST(4 AS int) + 1)	
+			left join Feedback f on r.room_id = f.room_id			
+Where ci.city_name like @city  AND r2.room_id is null AND (rm.image_link like '%_01.jpg%' Or rm.image_link like '%_01.jpeg%')
 Group by r.room_id, r.room_name, r.room_desc, r.room_price, r.room_status, r.building_id, r.type_id, t.type_name, rm.image_link
 Order by r.room_price ASC
 OFFSET @start ROWS FETCH NEXT @end ROWS ONLY
