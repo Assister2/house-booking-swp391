@@ -165,7 +165,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<li>More information</li>
 							<li>Rules</li>
 						</ul>
-						<div class="resp-tabs-container">
+						<div class="resp-tabs-container" style="height: 160px;">
 							<!--/tab_one-->
 							<div class="table-responsive">
 								<table class="table table-striped">
@@ -291,7 +291,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									<span style="font-size: 12px;"> ${item.feedbackDate }</span>
 									<p> ${item.comment } </p>
 									<form action="single-post">
-										<input type="hidden" name="rommId" value="${param.roomId }">
+										<input type="hidden" name="roomId" value="${param.roomId }">
 										<input type="hidden" name="feedbackId" value="${item.feedbackId }">
 										<button type="submit" class="btn btn-danger btn-sm" style="padding: unset; margin-top: 5px;" >Report!</button>
 									</form>
@@ -300,7 +300,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						</c:forEach>
 
 						<div class="text-center">
-							<a type="button" href="#">Xem tất cả bình luận</a>
+							<form action="">
+								<input type="hidden" name="roomId" value="${param.roomId }">
+							</form>
+							<a type="button" href="sss">Xem tất cả bình luận</a>
 						</div>
 					</div>
 

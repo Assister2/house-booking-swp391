@@ -139,6 +139,13 @@ public class RoomDAO implements IRoomDAO {
 		}
 		return 0;
 	}
+	
+	public int getTotalRecord(String city, LocalDate startDate, LocalDate endDate, String[] buildingType, String[] concept,
+			String[] convenient, int rating, String[] district, String sort, int start, int recordsPerPage) {
+		
+		return list(city, startDate, endDate, buildingType, concept, convenient, rating, district, sort, start, recordsPerPage).size();
+		
+	}
 
 	@Override
 	public List<Room> list(int start, int recordsPerPage) {
@@ -248,6 +255,7 @@ public class RoomDAO implements IRoomDAO {
 
 		return list;
 	}
+	
 
 	public List<Room> list(String city, LocalDate startDate, LocalDate endDate, String[] buildingType, String[] concept,
 			String[] convenient, int rating, String[] district, String sort, int start, int recordsPerPage) {

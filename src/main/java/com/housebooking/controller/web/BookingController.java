@@ -116,7 +116,8 @@ public class BookingController extends HttpServlet {
         else {
         	listRoom = ((RoomDAO)roomDAO).list(city, date1, date2, buildingType, 
         			concept, convenient, (int)rating, district, sort, (page - 1) * recordsPerPage, recordsPerPage);
-        	totalRecords = ((RoomDAO)roomDAO).getTotalRecord(city, date1, date2);
+        	totalRecords = ((RoomDAO)roomDAO).getTotalRecord(city, date1, date2, buildingType, 
+        			concept, convenient, (int)rating, district, sort, (page - 1) * recordsPerPage, recordsPerPage);
         }
         
         // Tinh so trang

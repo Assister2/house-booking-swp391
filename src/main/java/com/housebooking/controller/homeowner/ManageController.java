@@ -28,7 +28,7 @@ public class ManageController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("/view/house-owner/manage.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/view/house-owner/building.jsp");
         rd.forward(request, response);
 	}
 
