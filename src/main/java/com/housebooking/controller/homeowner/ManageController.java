@@ -29,6 +29,7 @@ public class ManageController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher rd = request.getRequestDispatcher("/view/house-owner/manage.jsp");
+		System.out.println("aaaaaaaaaaaa");
         rd.forward(request, response);
 	}
 
