@@ -233,7 +233,7 @@
 													</p>
 													<p>
 														<span style="font-weight: bolder;">Mô tả:</span> Nhà đẹp
-														vãi cức, gần sông suối, chợ, trường học, thuận tiện cho
+														lắm, gần sông suối, chợ, trường học, thuận tiện cho
 														việc du lịch ngắn hạn, mại dô! Raw denim you probably
 														haven't heard of them jean shorts Austin.
 													</p>

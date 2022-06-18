@@ -55,6 +55,34 @@ public class RoomDAO implements IRoomDAO {
 		room.setTypeName(rs.getNString("type_name"));
 		room.setRating(rs.getFloat("rating"));
 	}
+	
+	private List<String> findImages(String roomId) throws SQLException {
+		List<String> list = new ArrayList<>();
+		String sql = " Select rm.image_link\r\n"
+				+ " From Room r join Room_Images rm on r.room_id = rm.room_id\r\n"
+				+ " Where r.room_id like ?";
+
+		try {
+
+			Connection conn = DBUtils.getConnection();
+
+			PreparedStatement ps = conn.prepareStatement(sql);
+
+			ps.setString(1, roomId);
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				list.add(rs.getString("image_link"));
+			}
+
+		} catch (Exception ex) {
+
+			ex.printStackTrace();
+
+		}
+
+		return list;
+	}
 
 	@Override
 	public Room find(String roomId) {
@@ -77,6 +105,8 @@ public class RoomDAO implements IRoomDAO {
 			while (rs.next()) {
 				fillDataInRoom(rs, room);
 			}
+			
+			room.setRoomImages(findImages(roomId));
 
 		} catch (Exception ex) {
 
@@ -441,5 +471,6 @@ public class RoomDAO implements IRoomDAO {
 		}
 		return 0;
 	}
+	
 
 }
