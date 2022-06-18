@@ -6,8 +6,8 @@
             <div class="header-mobile__bar">
                 <div class="container-fluid">
                     <div class="header-mobile-inner">
-                        <a class="logo" href="index.html">
-                            <img src="${pageContext.request.contextPath}/view/house-owner/images/icon/logo.png" alt="CoolAdmin" />
+                        <a class="logo" href="${pageContext.request.contextPath}/dashboard">
+                            <img width="100px;" class="img-responsive" src="${pageContext.request.contextPath}/view/common/image/logo.png" alt="CoolAdmin" />
                         </a>
                         <button class="hamburger hamburger--slider" type="button">
                             <span class="hamburger-box">
@@ -50,8 +50,8 @@
         <!-- MENU SIDEBAR-->
         <aside class="menu-sidebar d-none d-lg-block">
             <div class="logo">
-                <a href="#">
-                    <img src="${pageContext.request.contextPath}/view/house-owner/images/icon/logo.png" alt="Cool Admin" />
+                <a href="${pageContext.request.contextPath}/dashboard">
+                    <img width="180px;" style="margin-left: 20px;" src="${pageContext.request.contextPath}/view/common/image/logo.png" alt="Cool Admin" />
                 </a>
             </div>
             <div class="menu-sidebar__content js-scrollbar1">

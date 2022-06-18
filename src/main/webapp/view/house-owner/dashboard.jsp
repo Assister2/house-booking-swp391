@@ -135,7 +135,7 @@
                         
                         <div class="row">
                             <div class="col-lg-9">
-                                <h2 class="title-1 m-b-25">Earnings By Items</h2>
+                                <h2 class="title-1 m-b-25">Doanh thu theo nhà</h2>
                                 <div class="table-responsive table--no-card m-b-40">
                                     <table class="table table-borderless table-striped table-earning">
                                         <thead>

@@ -256,6 +256,11 @@ Values
 	('Room_20',N'Grand Pearl Minh Chau', 'active', N'Xã Minh Châu, Đảo Quan Lạn, Huyện Vân Đồn, Tỉnh Quảng Ninh, Cách bãi biển 1 phút đi bộ',2041000.00,'type_2','480101_B01')
 Go
 
+Insert into Room
+Values
+	('Room_23',N'Lavie Villa', 'active', N'Nằm cách Hồ Xuân Hương 2,7 km, Lavie Villa có sảnh khách chung, vườn cũng như chỗ nghỉ gắn máy điều hòa với ban công và WiFi miễn phí.',500000,'type_2','480101_B01'),
+Go
+
 Insert into Room_Convenient
 Values
 	('Room_01', 'Con_01'),
