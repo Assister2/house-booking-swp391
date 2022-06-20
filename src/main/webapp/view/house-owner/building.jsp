@@ -198,8 +198,8 @@
 										<div class="nav nav-tabs" id="nav-tab" role="tablist">
 											<a class="nav-item nav-link active" id="nav-home-tab"
 												data-toggle="tab" href="#nav-home" role="tab"
-												aria-controls="nav-home" aria-selected="true">Nhà A</a> <a
-												class="nav-item nav-link" id="nav-profile-tab"
+												aria-controls="nav-home" aria-selected="true">Nhà A</a> 
+											<a class="nav-item nav-link" id="nav-profile-tab"
 												data-toggle="tab" href="#nav-profile" role="tab"
 												aria-controls="nav-profile" aria-selected="false">Nhà B</a>
 											<a class="nav-item nav-link" id="nav-contact-tab"
@@ -233,9 +233,9 @@
 													</p>
 													<p>
 														<span style="font-weight: bolder;">Mô tả:</span> Nhà đẹp
-														lắm, gần sông suối, chợ, trường học, thuận tiện cho
-														việc du lịch ngắn hạn, mại dô! Raw denim you probably
-														haven't heard of them jean shorts Austin.
+														lắm, gần sông suối, chợ, trường học, thuận tiện cho việc
+														du lịch ngắn hạn, mại dô! Raw denim you probably haven't
+														heard of them jean shorts Austin.
 													</p>
 													Số lượng phòng: <span
 														style="font-weight: bold; padding-left: 5px; padding-right: 5px;">3

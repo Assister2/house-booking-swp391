@@ -214,23 +214,23 @@
                                 <div class="account-wrap">
                                     <div class="account-item clearfix js-item-menu">
                                         <div class="image">
-                                            <img src="${pageContext.request.contextPath}/view/house-owner/images/icon/avatar-01.jpg" alt="John Doe" />
+                                            <img src="${pageContext.request.contextPath}/view/web/images/avatar/Giang.jpg" alt="John Doe" />
                                         </div>
                                         <div class="content">
-                                            <a class="js-acc-btn" href="#">john doe</a>
+                                            <a class="js-acc-btn" href="#">Truong Giang</a>
                                         </div>
                                         <div class="account-dropdown js-dropdown">
                                             <div class="info clearfix">
                                                 <div class="image">
                                                     <a href="#">
-                                                        <img src="${pageContext.request.contextPath}/view/house-owner/images/icon/avatar-01.jpg" alt="John Doe" />
+                                                        <img src="${pageContext.request.contextPath}/view/web/images/avatar/Giang.jpg" alt="John Doe" />
                                                     </a>
                                                 </div>
                                                 <div class="content">
                                                     <h5 class="name">
-                                                        <a href="#">john doe</a>
+                                                        <a href="#">Truong Giang</a>
                                                     </h5>
-                                                    <span class="email">johndoe@example.com</span>
+                                                    <span class="email">GiangNTSE@fpt.edu.vn</span>
                                                 </div>
                                             </div>
                                             <div class="account-dropdown__body">
