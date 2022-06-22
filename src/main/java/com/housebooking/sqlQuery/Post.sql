@@ -40,3 +40,19 @@ Where ci.city_name like @city  AND r2.room_id is null
 	AND rm.image_link like '%_01.jpg%' Or rm.image_link like '%_01.jpeg%'
 Group by r.room_id, r.room_name, r.room_desc, r.room_price, r.room_status, r.building_id, r.type_id, t.type_name, rm.image_link
 Order by r.room_price ASC OFFSET @start ROWS FETCH NEXT @end ROWS ONLY
+Go
+
+--Query hình ảnh phòng
+Select  r.*, t.type_name, ISNULL(Round(AVG(rating*1.0),1),0) as rating, rm.image_link
+from Room r join Type_Of_Room t on r.type_id = t.type_id
+join Building b on r.building_id = b.building_id
+left join Feedback f on r.room_id = f.room_id 
+join Room_Images rm on r.room_id = rm.room_id
+Where r.room_id like 'Room_01'
+Group by r.room_id, r.room_name, r.room_desc, r.room_price, r.room_status, r.building_id, r.type_id, t.type_name, rm.image_link
+Go
+
+Select rm.image_link
+From Room r join Room_Images rm on r.room_id = rm.room_id
+Where r.room_id like 'Room_01'
+Go

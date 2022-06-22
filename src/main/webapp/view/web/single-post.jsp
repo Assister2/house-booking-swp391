@@ -91,7 +91,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	</div>
 
 	<!-- //banner -->
-
+	
 	<!-- top Products -->
 	<div class="ads-grid_shop">
 		<div class="shop_inner_inf">
@@ -101,26 +101,26 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 						<ul class="slides">
 							<li
-								data-thumb="https://chefjob.vn/wp-content/uploads/2020/04/homestay-duoc-nhieu-du-khach-lua-chon.jpg">
+								data-thumb="${pageContext.request.contextPath}${room.roomImages[0] }">
 								<div class="thumb-image">
 									<img
-										src="https://chefjob.vn/wp-content/uploads/2020/04/homestay-duoc-nhieu-du-khach-lua-chon.jpg"
+										src="${pageContext.request.contextPath}${room.roomImages[0] }"
 										data-imagezoom="true" class="img-responsive">
 								</div>
 							</li>
 							<li
-								data-thumb="https://cafefcdn.com/zoom/700_438/203337114487263232/2021/8/15/photo1629000329714-1629000329917385190227.jpeg">
+								data-thumb="${pageContext.request.contextPath}${room.roomImages[1] }">
 								<div class="thumb-image">
 									<img
-										src="https://cafefcdn.com/zoom/700_438/203337114487263232/2021/8/15/photo1629000329714-1629000329917385190227.jpeg"
+										src="${pageContext.request.contextPath}${room.roomImages[1] }"
 										data-imagezoom="true" class="img-responsive">
 								</div>
 							</li>
 							<li
-								data-thumb="https://cafefcdn.com/zoom/700_438/203337114487263232/2021/8/15/photo1629000329714-1629000329917385190227.jpeg">
+								data-thumb="${pageContext.request.contextPath}${room.roomImages[2] }">
 								<div class="thumb-image">
 									<img
-										src="https://cafefcdn.com/zoom/700_438/203337114487263232/2021/8/15/photo1629000329714-1629000329917385190227.jpeg"
+										src="${pageContext.request.contextPath}${room.roomImages[2] }"
 										data-imagezoom="true" class="img-responsive">
 								</div>
 							</li>
@@ -233,7 +233,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 										<tbody>
 											<c:set var="count" value="${1 }"></c:set>
 										<c:if test="${listRule[0] == null}">
-											<td>Phòng không có luật lệ</td>
+											<td>Phòng không có nội quy</td>
 										</c:if>
 										<c:forEach var="item" items="${listRule }">
 
@@ -303,28 +303,31 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<form action="">
 								<input type="hidden" name="roomId" value="${param.roomId }">
 							</form>
-							<a type="button" href="sss">Xem tất cả bình luận</a>
+							<a type="button" href="#">Xem tất cả bình luận</a>
 						</div>
 					</div>
-
+					
 					<div class="blog-comment-form">
 						<h3>Leave a Comment</h3>
-						<form action="#" method="post">
+						<form action="single-post" method="post">
+							<input type="hidden" name="roomId" value="${param.roomId }">
 							<span class="star-rating"> <input type="radio"
 								name="rating1" value="1"><i></i> <input type="radio"
 								name="rating1" value="2"><i></i> <input type="radio"
 								name="rating1" value="3"><i></i> <input type="radio"
 								name="rating1" value="4"><i></i> <input type="radio"
 								name="rating1" value="5"><i></i>
-							</span> <input type="text" class="form-control" placeholder="Name"
-								name="name" required> <input type="email"
+							</span> 
+							<input type="text" class="form-control" placeholder="Name"
+								name="name" required> 
+							<input type="email"
 								class="form-control" placeholder="Email" name="email" required>
 							<textarea name="message" rows="5" class="form-control"
 								id="message" placeholder="Message" message="message"
 								required="required"></textarea>
 							<div class="col-md-3 col-sm-4">
 								<input name="submit" type="submit" class="form-control"
-									id="submit" value="Post Your Comment">
+									id="submit" value="Post Your Comment">									
 							</div>
 						</form>
 					</div>

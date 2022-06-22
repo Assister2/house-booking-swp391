@@ -40,8 +40,9 @@ OFFSET @start ROWS FETCH NEXT @end ROWS ONLY
 Go
 
 Select *
-from Room r join Room_Images rm on r.room_id= rm.room_id
-Where rm.image_link like '%_01.jpg%' Or rm.image_link like '%_01.jpeg%'
+from Room r
+Order by r.room_price ASC
+OFFSET 3 ROWS FETCH NEXT 6 ROWS ONLY
 Go
 
 SELECT CAST(25.45 AS int);

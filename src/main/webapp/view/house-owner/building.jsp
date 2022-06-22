@@ -197,6 +197,7 @@
 									<nav>
 
 										<div class="nav nav-tabs" id="nav-tab" role="tablist">
+<<<<<<< HEAD
 											<c:forEach var="i" begin="1" end="${listBuilding.size() }">
 												<c:if test="${i==1 }">
 													<a class="nav-item nav-link active" id="nav-home-tab"
@@ -213,6 +214,17 @@
 												</c:if>
 
 											</c:forEach>
+=======
+											<a class="nav-item nav-link active" id="nav-home-tab"
+												data-toggle="tab" href="#nav-home" role="tab"
+												aria-controls="nav-home" aria-selected="true">Nhà A</a> 
+											<a class="nav-item nav-link" id="nav-profile-tab"
+												data-toggle="tab" href="#nav-profile" role="tab"
+												aria-controls="nav-profile" aria-selected="false">Nhà B</a>
+											<a class="nav-item nav-link" id="nav-contact-tab"
+												data-toggle="tab" href="#nav-contact" role="tab"
+												aria-controls="nav-contact" aria-selected="false">Nhà C</a>
+>>>>>>> main
 											<a class="nav-item nav-link" id="nav-contact-tab"
 												data-toggle="tab" href="#nav-add" role="tab"
 												aria-controls="nav-contact" aria-selected="false">Thêm +</a>
@@ -245,8 +257,15 @@
 														${listBuilding[a-1].buildingAddress }
 													</p>
 													<p>
+<<<<<<< HEAD
 														<span style="font-weight: bolder;">Mô tả:</span> 
 														${listBuilding[a-1].buildingDesc }
+=======
+														<span style="font-weight: bolder;">Mô tả:</span> Nhà đẹp
+														lắm, gần sông suối, chợ, trường học, thuận tiện cho việc
+														du lịch ngắn hạn, mại dô! Raw denim you probably haven't
+														heard of them jean shorts Austin.
+>>>>>>> main
 													</p>
 													Số lượng phòng: <span
 														style="font-weight: bold; padding-left: 5px; padding-right: 5px;">
