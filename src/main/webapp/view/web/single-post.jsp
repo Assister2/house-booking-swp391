@@ -309,22 +309,25 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					
 					<div class="blog-comment-form">
 						<h3>Leave a Comment</h3>
-						<form action="#" method="post">
+						<form action="single-post" method="post">
+							<input type="hidden" name="roomId" value="${param.roomId }">
 							<span class="star-rating"> <input type="radio"
 								name="rating1" value="1"><i></i> <input type="radio"
 								name="rating1" value="2"><i></i> <input type="radio"
 								name="rating1" value="3"><i></i> <input type="radio"
 								name="rating1" value="4"><i></i> <input type="radio"
 								name="rating1" value="5"><i></i>
-							</span> <input type="text" class="form-control" placeholder="Name"
-								name="name" required> <input type="email"
+							</span> 
+							<input type="text" class="form-control" placeholder="Name"
+								name="name" required> 
+							<input type="email"
 								class="form-control" placeholder="Email" name="email" required>
 							<textarea name="message" rows="5" class="form-control"
 								id="message" placeholder="Message" message="message"
 								required="required"></textarea>
 							<div class="col-md-3 col-sm-4">
 								<input name="submit" type="submit" class="form-control"
-									id="submit" value="Post Your Comment">
+									id="submit" value="Post Your Comment">									
 							</div>
 						</form>
 					</div>
