@@ -22,5 +22,10 @@ public class Address {
 	public void setStreet(Street street) {
 		this.street = street;
 	}
-	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		String msg = street.toString()+", " + district.toString() +", "+ city.toString() + "\n";
+		return msg;
+	}
 }

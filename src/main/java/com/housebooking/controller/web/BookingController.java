@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.housebooking.DAO.IRoomDAO;
-import com.housebooking.DAOimpl.web.BuildingDAO;
+import com.housebooking.DAOimpl.houseowner.BuildingDAO;
 import com.housebooking.DAOimpl.web.ConvenientDAO;
 import com.housebooking.DAOimpl.web.DistrictDAO;
 import com.housebooking.DAOimpl.web.RoomDAO;

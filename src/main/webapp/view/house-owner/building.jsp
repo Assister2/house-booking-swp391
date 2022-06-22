@@ -195,7 +195,26 @@
 							<div class="card-body">
 								<div class="default-tab">
 									<nav>
+
 										<div class="nav nav-tabs" id="nav-tab" role="tablist">
+<<<<<<< HEAD
+											<c:forEach var="i" begin="1" end="${listBuilding.size() }">
+												<c:if test="${i==1 }">
+													<a class="nav-item nav-link active" id="nav-home-tab"
+														data-toggle="tab" href="#nav-${i }" role="tab"
+														aria-controls="nav-home${i }" aria-selected="true">Nhà ${i }</a>
+												</c:if>
+
+
+												<c:if test="${i !=1 }">
+													<a class="nav-item nav-link" id="nav-profile-tab"
+														data-toggle="tab" href="#nav-${i }" role="tab"
+														aria-controls="nav-profile" aria-selected="false">Nhà
+														${i }</a>
+												</c:if>
+
+											</c:forEach>
+=======
 											<a class="nav-item nav-link active" id="nav-home-tab"
 												data-toggle="tab" href="#nav-home" role="tab"
 												aria-controls="nav-home" aria-selected="true">Nhà A</a> 
@@ -205,14 +224,20 @@
 											<a class="nav-item nav-link" id="nav-contact-tab"
 												data-toggle="tab" href="#nav-contact" role="tab"
 												aria-controls="nav-contact" aria-selected="false">Nhà C</a>
+>>>>>>> main
 											<a class="nav-item nav-link" id="nav-contact-tab"
 												data-toggle="tab" href="#nav-add" role="tab"
 												aria-controls="nav-contact" aria-selected="false">Thêm +</a>
+
 										</div>
+
 									</nav>
+																		
 									<div class="tab-content pl-3 pt-2" id="nav-tabContent">
-										<div class="tab-pane fade show active" id="nav-home"
-											role="tabpanel" aria-labelledby="nav-home-tab">
+									<c:forEach var="a" begin="1" end="${listBuilding.size() }">
+										<c:if test="${a == 1 }">
+											<div class="tab-pane fade show active" id="nav-${a }"
+											role="tabpanel" aria-labelledby="nav-home${a }">
 											<br>
 											<div class="row">
 
@@ -222,23 +247,311 @@
 														alt="">
 												</div>
 												<div class="col-8">
-													<h3>Tên nhà</h3>
+													<h3>${listBuilding[a-1].buildingId }</h3>
 													<p>
 														<span style="font-weight: bolder;">Loại cho thuê:</span>
-														Homestay
+														${listBuilding[a-1].buildingType }
 													</p>
 													<p>
-														<span style="font-weight: bolder;">Địa chỉ:</span> ABC,
-														Huyện XYZ, Tỉnh Lâm Đồng
+														<span style="font-weight: bolder;">Địa chỉ:</span>
+														${listBuilding[a-1].buildingAddress }
 													</p>
 													<p>
+<<<<<<< HEAD
+														<span style="font-weight: bolder;">Mô tả:</span> 
+														${listBuilding[a-1].buildingDesc }
+=======
 														<span style="font-weight: bolder;">Mô tả:</span> Nhà đẹp
 														lắm, gần sông suối, chợ, trường học, thuận tiện cho việc
 														du lịch ngắn hạn, mại dô! Raw denim you probably haven't
 														heard of them jean shorts Austin.
+>>>>>>> main
 													</p>
 													Số lượng phòng: <span
-														style="font-weight: bold; padding-left: 5px; padding-right: 5px;">3
+														style="font-weight: bold; padding-left: 5px; padding-right: 5px;">
+														${listBuilding[a-1].numRoom }
+													</span> <a href="#">Xem chi tiết</a>
+												</div>
+											</div>
+											<hr>
+											<div class="row">
+												<div class="col-6">
+													<!-- USER DATA-->
+													<div class="user-data m-b-30" style="padding-top: 0px;">
+														<div
+															style="background-color: #e5e5e5; padding-top: 30px; padding-bottom: 0.5px;">
+															<h3 class="title-3 m-b-30">
+																<i class="zmdi zmdi-account-calendar"></i>Quản lý dịch
+																vụ
+															</h3>
+														</div>
+
+
+														<div class="table-responsive table-data">
+															<table class="table">
+																<thead>
+																	<tr>
+
+																		<td>Dịch vụ</td>
+																		<td>Giá</td>
+																		<td style="text-align: right;">Action</td>
+																	</tr>
+																</thead>
+																<tbody>
+																	<tr>
+
+																		<td>
+																			<div class="table-data__info">
+																				<h6>lori lynch</h6>
+																			</div>
+																		</td>
+																		<td>
+																			<div class="table-data__info">
+																				<h6>700k</h6>
+																			</div>
+																		</td>
+																		<td class="table-data-feature">
+																			<button class="item" data-toggle="tooltip"
+																				data-placement="top" title="Edit">
+																				<i class="zmdi zmdi-edit"></i>
+																			</button>
+																			<button class="item" data-toggle="tooltip"
+																				data-placement="top" title="Edit">
+																				<i class="zmdi zmdi-delete"></i>
+																			</button>
+																		</td>
+
+																	</tr>
+																	<tr>
+
+																		<td>
+																			<div class="table-data__info">
+																				<h6>lori lynch</h6>
+																			</div>
+																		</td>
+																		<td>
+																			<div class="table-data__info">
+																				<h6>700k</h6>
+																			</div>
+																		</td>
+																		<td class="table-data-feature">
+																			<button class="item" data-toggle="tooltip"
+																				data-placement="top" title="Edit">
+																				<i class="zmdi zmdi-edit"></i>
+																			</button>
+																			<button class="item" data-toggle="tooltip"
+																				data-placement="top" title="Edit">
+																				<i class="zmdi zmdi-delete"></i>
+																			</button>
+																		</td>
+
+																	</tr>
+																	<tr>
+
+																		<td>
+																			<div class="table-data__info">
+																				<h6>lori lynch</h6>
+																			</div>
+																		</td>
+																		<td>
+																			<div class="table-data__info">
+																				<h6>700k</h6>
+																			</div>
+																		</td>
+																		<td class="table-data-feature">
+																			<button class="item" data-toggle="tooltip"
+																				data-placement="top" title="Edit">
+																				<i class="zmdi zmdi-edit"></i>
+																			</button>
+																			<button class="item" data-toggle="tooltip"
+																				data-placement="top" title="Edit">
+																				<i class="zmdi zmdi-delete"></i>
+																			</button>
+																		</td>
+
+																	</tr>
+																	<tr>
+
+																		<td>
+																			<div class="table-data__info">
+																				<h6>lori lynch</h6>
+																			</div>
+																		</td>
+																		<td>
+																			<div class="table-data__info">
+																				<h6>700k</h6>
+																			</div>
+																		</td>
+																		<td class="table-data-feature">
+																			<button class="item" data-toggle="tooltip"
+																				data-placement="top" title="Edit">
+																				<i class="zmdi zmdi-edit"></i>
+																			</button>
+																			<button class="item" data-toggle="tooltip"
+																				data-placement="top" title="Edit">
+																				<i class="zmdi zmdi-delete"></i>
+																			</button>
+																		</td>
+
+																	</tr>
+																	<tr>
+
+																		<td>
+																			<div class="table-data__info">
+																				<h6>lori lynch</h6>
+																			</div>
+																		</td>
+																		<td>
+																			<div class="table-data__info">
+																				<h6>700k</h6>
+																			</div>
+																		</td>
+																		<td class="table-data-feature">
+																			<button class="item" data-toggle="tooltip"
+																				data-placement="top" title="Edit">
+																				<i class="zmdi zmdi-edit"></i>
+																			</button>
+																			<button class="item" data-toggle="tooltip"
+																				data-placement="top" title="Edit">
+																				<i class="zmdi zmdi-delete"></i>
+																			</button>
+																		</td>
+
+																	</tr>
+
+																</tbody>
+															</table>
+														</div>
+														<div class="user-data__footer">
+															<button class="au-btn au-btn-load" data-toggle="modal"
+																data-target="#ModalDichVu">Thêm dịch vụ</button>
+														</div>
+													</div>
+
+
+												</div>
+
+												<!-- END USER DATA-->
+												<div class="col-6">
+													<!-- USER DATA-->
+													<div class="user-data m-b-30" style="padding-top: 0px;">
+														<div
+															style="background-color: #e5e5e5; padding-top: 30px; padding-bottom: 0.5px;">
+															<h3 class="title-3 m-b-30">
+																<i class="zmdi zmdi-account-calendar"></i>Nội quy
+															</h3>
+														</div>
+
+
+														<div class="table-responsive table-data">
+															<table class="table">
+																<thead>
+																	<tr>
+
+																		<td>Nội quy</td>
+																		<td style="text-align: right;">Action</td>
+																	</tr>
+																</thead>
+																<tbody>
+																	<tr>
+																		<td>
+																			<div class="table-data__info">
+																				<h6>Không xả rác bừa bãi, giữ vệ sinh chung</h6>
+																			</div>
+																		</td>
+																		<td class="table-data-feature">
+																			<button class="item" data-toggle="tooltip"
+																				data-placement="top" title="Edit">
+																				<i class="zmdi zmdi-delete"></i>
+																			</button>
+																		</td>
+
+																	</tr>
+																	<tr>
+																		<td>
+																			<div class="table-data__info">
+																				<h6>Không mang theo thú cưng</h6>
+																			</div>
+																		</td>
+																		<td class="table-data-feature">
+																			<button class="item" data-toggle="tooltip"
+																				data-placement="top" title="Edit">
+																				<i class="zmdi zmdi-delete"></i>
+																			</button>
+																		</td>
+
+																	</tr>
+																	<tr>
+																		<td>
+																			<div class="table-data__info">
+																				<h6>Không về trễ quá 11h đêm</h6>
+																			</div>
+																		</td>
+																		<td class="table-data-feature">
+																			<button class="item" data-toggle="tooltip"
+																				data-placement="top" title="Edit">
+																				<i class="zmdi zmdi-delete"></i>
+																			</button>
+																		</td>
+
+																	</tr>
+																	<tr>
+																		<td>
+																			<div class="table-data__info">
+																				<h6>Bồi thường theo giá trị tương ứng vật phẩm
+																					bị làm hư hại</h6>
+																			</div>
+																		</td>
+																		<td class="table-data-feature">
+																			<button class="item" data-toggle="tooltip"
+																				data-placement="top" title="Edit">
+																				<i class="zmdi zmdi-delete"></i>
+																			</button>
+																		</td>
+
+																	</tr>
+
+																</tbody>
+															</table>
+														</div>
+														<div class="user-data__footer">
+															<button class="au-btn au-btn-load" data-toggle="modal"
+																data-target="#ModalNoiQuy">Thêm Nội quy</button>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										</c:if>
+										<c:if test="${a != 1 }">
+											<div class="tab-pane fade" id="nav-${a }" role="tabpanel"
+											aria-labelledby="nav-home${a }">
+											<br>
+											<div class="row">
+
+												<div class="col-4">
+													<img class="img-responsive img-thumbnail"
+														src="https://media.istockphoto.com/photos/beauty-on-the-plateau-hills-of-dalat-picture-id520621666?k=20&m=520621666&s=612x612&w=0&h=UWUIul9FOpaX5GGRlWF9qMSYODgeU3ktb6xWgd4kSRU="
+														alt="">
+												</div>
+
+												<div class="col-8">
+													<h3>${listBuilding[a-1].buildingId }</h3>
+													<p>
+														<span style="font-weight: bolder;">Loại cho thuê:</span>
+														${listBuilding[a-1].buildingType }
+													</p>
+													<p>
+														<span style="font-weight: bolder;">Địa chỉ:</span>
+														${listBuilding[a-1].buildingAddress }
+													</p>
+													<p>
+														<span style="font-weight: bolder;">Mô tả:</span> 
+														${listBuilding[a-1].buildingDesc }
+													</p>
+													Số lượng phòng: <span
+														style="font-weight: bold; padding-left: 5px; padding-right: 5px;">
+														${listBuilding[a-1].numRoom }
 													</span> <a href="#">Xem chi tiết</a>
 												</div>
 											</div>
@@ -491,6 +804,11 @@
 												</div>
 											</div>
 										</div>
+										</c:if>
+										
+										
+											
+										</c:forEach>
 										<!-- END USER DATA-->
 										<div class="tab-pane fade" id="nav-profile" role="tabpanel"
 											aria-labelledby="nav-profile-tab">
