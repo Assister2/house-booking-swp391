@@ -124,44 +124,44 @@ Go
 
 Insert into Users
 Values
-	('User_01', N'Nguyễn Trường Giang', null,'Owner', 'Giang', '123', '0987654321', 'GiangNTSE150747@gfpt.edu.vn'),
-	('User_02', N'Trần Nhựt Hào',null, 'User', 'haotn', '123', '0369663031', 'haotnse150564@fpt.edu.vn'),
+	('User_01', N'Nguyễn Trường Giang', '/view/web/images/avatar/Giang.jpg','Owner', 'Giang', '123', '0987654321', 'GiangNTSE150747@gfpt.edu.vn'),
+	('User_02', N'Trần Nhựt Hào','/view/web/images/avatar/Hao.jpg', 'User', 'haotn', '123', '0369663031', 'haotnse150564@fpt.edu.vn'),
 	('User_03', N'Nguyễn Quang',null, 'User',  'Quang', '123', '0987654321', 'GiangNTSE1507471@gfpt.edu.vn'),
-	('User_04', N'Nguyễn Hoàng Duy', null, 'Admin', 'duycute', '456', '0987654321', 'DuyNHSE15073@gfpt.edu.vn')
+	('User_04', N'Nguyễn Hoàng Duy', '/view/web/images/avatar/Duy.jpg', 'Admin', 'duycute', '456', '0987654321', 'DuyNHSE15073@gfpt.edu.vn')
 Go
 
 Insert into Building
 Values
-	('350101_B00',N'Homestay Dành cho khác chỉ qua đêm', N'Homestay', 111,'350101', 'User_01'),
-	('580101_B01',N'Hotel có phòng rộng gần với các địa điểm nổi tiếng', N'Hotel',111, '580101', 'User_01'),
-	('580101_B02',N'Hotel có phòng đọc sách nhà ăn, v.v', N'Hotel',111, '580101', 'User_01'),
-	('580202_B01',N'Khách Sạn có phòng ăn, phòng sách riêng', N'Hotel',111, '580202', 'User_01'),
-	('240102_B01',N'Nhà 2 tầng đầy đủ tiện nghi thích hợp cho gia đình du lịch nhiều ngày', N'Nhà nguyên căn',111, '240102', 'User_01'),
-	('240202_B01',N'Phòng cho gia đình có đầy đủ tiện nghi', N'Homestay',111, '240202', 'User_01'),
-	('220101_B01',N'Khu nhà qua đêm phong cách cổ điển', N'Nhà nguyên căn',111,'220101', 'User_01'),
-	('430101_B01',N'Khách sạn phong cách hiện đại, đầy đủ tiện nghi, View đẹp', N'Hotel', 111,'430101', 'User_01'),
-	('430201_B01',N'Nhà vườn, có hồ bơi bao bọc bởi cây cảnh', N'Nhà nguyên căn',111,'430201',  'User_01')
+	('350101_B00',null,N'Homestay Dành cho khác chỉ qua đêm', N'Homestay', 111,'350101', 'User_01'),
+	('580101_B01',null,N'Hotel có phòng rộng gần với các địa điểm nổi tiếng', N'Hotel',111, '580101', 'User_01'),
+	('580101_B02',null,N'Hotel có phòng đọc sách nhà ăn, v.v', N'Hotel',111, '580101', 'User_01'),
+	('580202_B01',null,N'Khách Sạn có phòng ăn, phòng sách riêng', N'Hotel',111, '580202', 'User_01'),
+	('240102_B01',null,N'Nhà 2 tầng đầy đủ tiện nghi thích hợp cho gia đình du lịch nhiều ngày', N'Nhà nguyên căn',111, '240102', 'User_01'),
+	('240202_B01',null,N'Phòng cho gia đình có đầy đủ tiện nghi', N'Homestay',111, '240202', 'User_01'),
+	('220101_B01',null,N'Khu nhà qua đêm phong cách cổ điển', N'Nhà nguyên căn',111,'220101', 'User_01'),
+	('430101_B01',null,N'Khách sạn phong cách hiện đại, đầy đủ tiện nghi, View đẹp', N'Hotel', 111,'430101', 'User_01'),
+	('430201_B01',null,N'Nhà vườn, có hồ bơi bao bọc bởi cây cảnh', N'Nhà nguyên căn',111,'430201',  'User_01')
 Go
 
 Insert into Building
 Values
-	('370101_B01',N'Resort và spa có cảnh quan đẹp bao quanh bỏi hồ, vườn cảnh', N'Homestay', 111,'370101', 'User_01'),
-	('370201_B01',N'Homestay phong cách cổ điển hài hoà với thiên nhiên', N'Homestay', 111,'370201','User_01'),
+	('370101_B01',null,N'Resort và spa có cảnh quan đẹp bao quanh bỏi hồ, vườn cảnh', N'Homestay', 111,'370101', 'User_01'),
+	('370201_B01',null,N'Homestay phong cách cổ điển hài hoà với thiên nhiên', N'Homestay', 111,'370201','User_01'),
 
-	('120201_B01',N'Resort bãi biển, mát mẻ', N'Homestay',111,'120201',  'User_01'),
-	('120101_B01',N'Nhà gô gần gũi với thiên nhiên', N'Nhà nguyên căn',111,'120101',  'User_01'),
+	('120201_B01',null,N'Resort bãi biển, mát mẻ', N'Homestay',111,'120201',  'User_01'),
+	('120101_B01',null,N'Nhà gô gần gũi với thiên nhiên', N'Nhà nguyên căn',111,'120101',  'User_01'),
 	
-	('350101_B01',N'Gần khu vườn, có thể dùng để mở tiệc BBQ', N'Homestay',111,'350101',  'User_01'),
-	('350201_B01',N'Khu vườn cạnh nhà, thân thiện thiện với thú cưng', N'Homestay', 111,'350201', 'User_01'),
+	('350101_B01',null,N'Gần khu vườn, có thể dùng để mở tiệc BBQ', N'Homestay',111,'350101',  'User_01'),
+	('350201_B01',null,N'Khu vườn cạnh nhà, thân thiện thiện với thú cưng', N'Homestay', 111,'350201', 'User_01'),
 	
-	('110201_B01',N'Full căn hộ 84m2 có 3 phòng riêng', N'Nhà nguyên căn',111,'110201',  'User_01'),
-	('110101_B01',N'Homestay cho gia đình, đầy đủ tiện nghi',  N'Homestay',111, '110101', 'User_01'),
+	('110201_B01',null,N'Full căn hộ 84m2 có 3 phòng riêng', N'Nhà nguyên căn',111,'110201',  'User_01'),
+	('110101_B01',null,N'Homestay cho gia đình, đầy đủ tiện nghi',  N'Homestay',111, '110101', 'User_01'),
 
-	('150101_B01',N'Hotel có view nhìn ra thành phố', N'Hotel',111, '150101', 'User_01'),
-	('150201_B01',N'Chung cư gần biển', N'Homestay',111,'150201',  'User_01'),
+	('150101_B01',null,N'Hotel có view nhìn ra thành phố', N'Hotel',111, '150101', 'User_01'),
+	('150201_B01',null,N'Chung cư gần biển', N'Homestay',111,'150201',  'User_01'),
 
-	('480101_B01',N'Khách sạn gần bãi biển',  N'Hotel', 111,'480101', 'User_01'),
-	('480201_B01',N'Homestay kiểu khu vườn', N'Homestay',111, '480201', 'User_01')
+	('480101_B01',null,N'Khách sạn gần bãi biển',  N'Hotel', 111,'480101', 'User_01'),
+	('480201_B01',null,N'Homestay kiểu khu vườn', N'Homestay',111, '480201', 'User_01')
 Go
 
 Insert into Convenient
@@ -258,7 +258,7 @@ Go
 
 Insert into Room
 Values
-	('Room_23',N'Lavie Villa', 'active', N'Nằm cách Hồ Xuân Hương 2,7 km, Lavie Villa có sảnh khách chung, vườn cũng như chỗ nghỉ gắn máy điều hòa với ban công và WiFi miễn phí.',500000,'type_2','480101_B01'),
+	('Room_23',N'Lavie Villa', 'active', N'Nằm cách Hồ Xuân Hương 2,7 km, Lavie Villa có sảnh khách chung, vườn cũng như chỗ nghỉ gắn máy điều hòa với ban công và WiFi miễn phí.',500000,'type_2','480101_B01')
 Go
 
 Insert into Room_Convenient
@@ -293,4 +293,27 @@ Go
 Insert into Bill_detail
 Values
 	('Room_01_Bill_01', 'Room_01', '2022-07-06', '2022-07-09',900000, null, 0)
+Go
+
+Insert into Room_Images
+Values
+	('Room_01', '/view/web/resourse/room_01_01.jpg','image-1'),
+	('Room_01', '/view/web/resourse/room_01_02.jpg','image-2'),
+	('Room_01', '/view/web/resourse/room_01_03.jpg','image-3'),
+	('Room_02', '/view/web/resourse/room_02_01.jpg','image-1'),
+	('Room_03', '/view/web/resourse/room_03_01.jpg','image-1'),
+	('Room_04', '/view/web/resourse/room_04_01.jpg','image-1'),
+	('Room_05', '/view/web/resourse/room_05_01.jpg','image-1'),
+	('Room_06', '/view/web/resourse/room_06_01.jpg','image-1'),
+	('Room_07', '/view/web/resourse/room_07_01.jpg','image-1'),
+	('Room_08', '/view/web/resourse/room_08_01.jpg','image-1'),
+	('Room_09', '/view/web/resourse/room_09_01.jpg','image-1'),
+	('Room_10', '/view/web/resourse/room_10_01.jpg','image-1'),
+	('Room_11', '/view/web/resourse/room_11_01.jpg','image-1'),
+	('Room_12', '/view/web/resourse/room_12_01.jpg','image-1'),
+	('Room_13', '/view/web/resourse/room_13_01.jpg','image-1'),
+	('Room_14', '/view/web/resourse/room_14_01.jpg','image-1'),
+	('Room_15', '/view/web/resourse/room_15_01.jpg','image-1'),
+	('Room_16', '/view/web/resourse/room_16_01.jpg','image-1'),
+	('Room_17', '/view/web/resourse/room_17_01.jpg','image-1')
 Go

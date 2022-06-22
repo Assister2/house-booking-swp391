@@ -455,7 +455,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									<div class="item-info-product"
 										style="text-align: left; margin-bottom: 15px;">
 										<h4>
-											<a href="single.html">${room.roomName }</a>
+											<a href="${pageContext.request.contextPath}/single-post?roomId=${room.roomId}">${room.roomName }</a>
 										</h4>
 										<div class="clearfix"></div>
 									</div>

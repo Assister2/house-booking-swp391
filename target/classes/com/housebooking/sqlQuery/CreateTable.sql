@@ -38,19 +38,19 @@ Go
 
 -- Create table
 Create table Room (
-	room_id varchar(20),
+	room_id varchar(50),
 	room_name nvarchar(100) not null,
 	room_status nvarchar(100),
 	room_desc nvarchar(max),
 	room_price float not null,
-	type_id varchar(20),
-	building_id varchar(20),
+	type_id varchar(50),
+	building_id varchar(50),
 	primary key(room_id)
 )
 Go
 
 Create table Room_Images(
-	room_id varchar(20),
+	room_id varchar(50),
 	image_link varchar(200),
 	image_name nvarchar(MAX),
 	primary key(room_id, image_link)
@@ -58,67 +58,68 @@ Create table Room_Images(
 Go
 
 Create table Type_Of_Room(
-	type_id varchar(20),
+	type_id varchar(50),
 	type_name nvarchar(100) not null,
 	primary key(type_id)
 )
 Go
 
 Create table Building(
-	building_id varchar(20),
+	building_id varchar(50),
+	building_name nvarchar(max),
 	building_desc nvarchar(max),
-	building_type varchar(20),
-	building_number varchar(20),
-	street_id varchar(20),
-	user_id varchar(20),
+	building_type varchar(50),
+	building_number varchar(50),
+	street_id varchar(50),
+	user_id varchar(50),
 	primary key(building_id)
 )
 Go
 
 Create table Street(
-	street_id varchar(20),
+	street_id varchar(50),
 	street_name nvarchar(100) not null,
-	district_id varchar(20),
+	district_id varchar(50),
 	primary key(street_id)
 )
 Go
 
 Create table District(
-	district_id varchar(20),
+	district_id varchar(50),
 	district_name nvarchar(100) not null,
-	city_id varchar(20),
+	city_id varchar(50),
 	primary key(district_id)
 )
 Go
 
 Create table City(
-	city_id varchar(20),
+	city_id varchar(50),
 	city_name nvarchar(100) not null,
 	primary key(city_id)
 )
 Go
 
 Create table Convenient(
-	convenient_id varchar(20),
+	convenient_id varchar(50),
 	convenient_name nvarchar(100),
 	primary key(convenient_id)
 )
 Go
 
 Create table Room_Convenient(
-	room_id varchar(20),
-	convenient_id varchar(20),
+	room_id varchar(50),
+	convenient_id varchar(50),
 	primary key(room_id,convenient_id)
 )
 Go
 
 Create table Users(
-	user_id varchar(20),
+	user_id varchar(50),
 	user_name nvarchar(100),
 	avatar varchar(max),
 	role varchar(30) not null,
-	username varchar(20),
-	password varchar(20),
+	username varchar(50),
+	password varchar(50),
 	phone varchar(10),
 	email varchar(40),
 	primary key(user_id)
@@ -126,18 +127,18 @@ Create table Users(
 Go
 
 Create table Bill(
-	bill_id varchar(20),
+	bill_id varchar(50),
 	date date,
 	total float,
 	status nvarchar(50),
-	user_id varchar(20),
+	user_id varchar(50),
 	primary key(bill_id)
 )
 Go
 
 Create table Bill_detail(
-	bill_id varchar(20),
-	room_id varchar(20),
+	bill_id varchar(50),
+	room_id varchar(50),
 	start_date date,
 	end_date date,
 	price float,
@@ -148,20 +149,20 @@ Create table Bill_detail(
 Go
 
 Create table Feedback(
-	feedback_id varchar(20),
+	feedback_id varchar(50),
 	comment nvarchar(max),
 	rating int,
 	status nvarchar(20),
 	feedback_date date,
 	report int,
-	room_id varchar(20),
-	user_id varchar(20),
+	room_id varchar(50),
+	user_id varchar(50),
 	primary key(feedback_id)
 )
 Go
 
 Create table Additional_service(
-	add_serviceId varchar(20),
+	add_serviceId varchar(50),
 	add_serviceName nvarchar(max),
 	add_serviceDesc nvarchar(max),
 	primary key(add_serviceId)
@@ -170,8 +171,8 @@ Go
 
 Create table Building_Additional_service
 (
-	building_id varchar(20),
-	add_serviceId varchar(20),
+	building_id varchar(50),
+	add_serviceId varchar(50),
 	add_service_status bit,
 	add_service_price float,
 	primary key(building_id,add_serviceId)
@@ -186,7 +187,7 @@ Create table Rules(
 Go
 
 Create table Building_Rules(
-	building_id varchar(20),
+	building_id varchar(50),
 	ruleId int,
 	primary key(building_id,ruleId)
 )

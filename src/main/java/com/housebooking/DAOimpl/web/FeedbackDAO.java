@@ -19,7 +19,9 @@ public class FeedbackDAO {
 		String sql = "Select fb.*, us.user_name, us.avatar\r\n"
 				+ " From Feedback fb join Room r on fb.room_id = r.room_id\r\n"
 				+ "	join Users us on fb.user_id = us.user_id\r\n"
-				+ " Where r.room_id like ? AND fb.status like 'on'";
+				+ " Where r.room_id like ? AND fb.status like 'on'\r\n"
+				+ " Order by fb.feedback_id DESC\r\n"
+				+ " OFFSET 0 ROWS FETCH NEXT 3 ROWS ONLY";
 
 		try {
 
@@ -60,4 +62,36 @@ public class FeedbackDAO {
 
 		return list;
 	}
+	
+	 public boolean add(Feedback feedback) {
+         String sql = "INSERT INTO Feedback "
+                + " VALUES(?,?,?,?,?,?,?,?)";
+
+        try {
+
+            Connection conn = DBUtils.getConnection();
+
+            PreparedStatement ps = conn.prepareStatement(sql);
+            
+            ps.setString(1, feedback.getFeedbackId());
+            ps.setString(2, feedback.getComment());
+            ps.setInt(3, feedback.getRating());
+            ps.setString(4, feedback.getStatus());
+            ps.setDate(5, feedback.getFeedbackDate());
+            ps.setInt(6, feedback.getReport());
+            ps.setString(7, feedback.getRoom_id());
+            ps.setString(8, feedback.getUser().getUserId());
+
+            if (ps.executeUpdate()>0) {
+                return true;
+            }
+
+        } catch (Exception ex) {
+
+            ex.printStackTrace();
+
+        }
+
+        return false;
+    }
 }
