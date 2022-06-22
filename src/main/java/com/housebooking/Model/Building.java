@@ -4,9 +4,10 @@ public class Building {
 	private String buildingId;
 	private String buildingDesc;
 	private String buildingType;
+	private Address buildingAddress;
 	private String streetId;
 	private String userId;
-	private Address address;
+	private int numRoom;
 	
 	
 	
@@ -44,11 +45,22 @@ public class Building {
 	public void setBuildingType(String buildingType) {
 		this.buildingType = buildingType;
 	}
-	public Address getAddress() {
-		return address;
+	public Address getBuildingAddress() {
+		return buildingAddress;
 	}
-	public void setAddress(Address address) {
-		this.address = address;
+	public void setBuildingAddress(Address buildingAddress) {
+		this.buildingAddress = buildingAddress;
+	}
+	public int getNumRoom() {
+		return numRoom;
+	}
+	public void setNumRoom(int numRoom) {
+		this.numRoom = numRoom;
 	}
 	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return buildingAddress.toString() ;
+	}
 }

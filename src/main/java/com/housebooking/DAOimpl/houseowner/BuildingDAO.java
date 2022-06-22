@@ -1,4 +1,4 @@
-package com.housebooking.DAOimpl.web;
+package com.housebooking.DAOimpl.houseowner;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,25 +11,26 @@ import com.housebooking.Model.Building;
 import com.housebooking.Model.City;
 import com.housebooking.Model.District;
 import com.housebooking.Model.Street;
-import com.housebooking.Model.TypeOfRoom;
 import com.housebooking.Utils.DBUtils;
 
 public class BuildingDAO {
-	public List<Building> list() {
+	public List<Building> list(String userID) {
 		ArrayList<Building> list;
 		list = new ArrayList<Building>();
 
-		String sql = "select b.*, s.street_id, s.street_name, d.district_id,d.district_name, c.city_id, c.city_name \r\n"
+		String sql = "select *\r\n"
 				+ "from Building b join Street s on b.street_id=s.street_id\r\n"
-				+ "	join District d on s.district_id = d.district_id\r\n"
-				+ "	join City c on d.city_id = c.city_id";
+				+ "join District d on s.district_id = d.district_id\r\n"
+				+ "join City c on d.city_id = c.city_id\r\n"
+				+ "where b.user_id like ?";
 
+		
 		try {
 
 			Connection conn = DBUtils.getConnection();
 
 			PreparedStatement ps = conn.prepareStatement(sql);
-
+			ps.setString(1, userID);
 			ResultSet rs = ps.executeQuery();
 
 			while (rs.next()) {
@@ -53,11 +54,13 @@ public class BuildingDAO {
 				address.setStreet(street);
 				
 				building.setBuildingId(rs.getString("building_id"));
-				building.setBuildingDesc(rs.getNString("building_desc"));
-				building.setBuildingType(rs.getNString("building_type"));
+				building.setBuildingDesc(rs.getString("building_desc"));
+				building.setBuildingType(rs.getString("building_type"));
+				building.setBuildingAddress(address);
 				building.setStreetId(rs.getString("street_id"));
 				building.setUserId(rs.getString("user_id"));
-				building.setAddress(address);
+				int numRoom = getNumRoom(rs.getString("building_id"));
+				building.setNumRoom(numRoom);
 				list.add(building);
 			}
 			
@@ -70,6 +73,31 @@ public class BuildingDAO {
 		return list;
 	}
 	
+	
+	public int getNumRoom(String building_id) {
+		int result = 0;
+		
+		String sql = "select count(r.room_id)as roomNum\r\n"
+				+ "from Room r join building b on r.building_id = b.building_id\r\n"
+				+ "where b.building_id like ?";
+		try {
+
+			Connection conn = DBUtils.getConnection();
+
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, building_id);
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				result = Integer.parseInt(rs.getString("roomNum"));
+			}
+			
+			
+		}catch (Exception ex){
+			ex.printStackTrace();
+		}
+		return result;
+	}
 	public List<Building> listBuildingType() {
 		ArrayList<Building> list;
 		list = new ArrayList<Building>();

@@ -12,9 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.housebooking.DAOimpl.web.CityDAO;
-import com.housebooking.DAOimpl.web.TypeOfRoomDAO;
 import com.housebooking.Model.City;
-import com.housebooking.Model.TypeOfRoom;
 
 /**
  * Servlet implementation class HomeController

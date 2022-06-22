@@ -15,5 +15,9 @@ public class District {
 	public void setDistrictName(String districtName) {
 		this.districtName = districtName;
 	}
-	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return districtName;
+	}
 }

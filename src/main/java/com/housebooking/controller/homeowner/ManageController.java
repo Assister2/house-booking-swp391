@@ -1,6 +1,7 @@
 package com.housebooking.controller.homeowner;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,6 +9,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.housebooking.DAOimpl.houseowner.BuildingDAO;
+import com.housebooking.Model.Building;
 
 /**
  * Servlet implementation class ManageController
@@ -28,8 +32,10 @@ public class ManageController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("/view/house-owner/building.jsp");
-        rd.forward(request, response);
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
+
+		doDisplay(request, response);
 	}
 
 	/**
@@ -40,4 +46,19 @@ public class ManageController extends HttpServlet {
 		doGet(request, response);
 	}
 
+	
+	protected void doDisplay(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		//String buildingID = request.getParameter("buildingID");
+		
+		BuildingDAO buildingDAO = new BuildingDAO();
+		List<Building> listBuilding;
+ 
+		listBuilding = buildingDAO.list("User_01");
+		
+		request.setAttribute("listBuilding", listBuilding);
+		RequestDispatcher rd = request.getRequestDispatcher("/view/house-owner/building.jsp");
+		rd.forward(request, response);
+	}
 }

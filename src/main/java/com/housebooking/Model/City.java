@@ -15,5 +15,9 @@ public class City {
 	public void setCityName(String cityName) {
 		this.cityName = cityName;
 	}
-	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return cityName;
+	}
 }

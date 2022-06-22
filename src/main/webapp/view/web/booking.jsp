@@ -426,7 +426,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<div class="product-sec1">
 						<!--/mens-->
 						<!--  -->
-						<c:forEach var="room" items="${listRoom }">
+						<c:forEach var="room" items="${listRoom}">
 
 
 							<div class="row">
@@ -434,7 +434,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									<div class="product-shoe-info shoe">
 										<div class="men-pro-item">
 											<div class="men-thumb-item">
-											<c:set var="image" value="${pageContext.request.contextPath }${room.roomImages[0] }"></c:set>
+											<c:set var="image" value="${pageContext.request.contextPath}${room.roomImages[0]}"></c:set>
 											<c:set var="defaultImage" value="https://vinhomesland.vn/wp-content/uploads/2019/10/homestay.jpg"></c:set>
 												<img width="240" height="190"
 													src="${room.roomImages[0]==null?defaultImage:image }"
