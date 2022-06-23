@@ -33,6 +33,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	
 	
 	
+	
+	
 
 		addEventListener("load", function () {
 			setTimeout(hideURLbar, 0);
@@ -42,6 +44,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			window.scrollTo(0, 1);
 		}
 	
+
+
 
 
 
@@ -110,6 +114,58 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	font-weight: bold;
 	font-size: 20px;
 }
+
+#panel {
+	 border: 1px solid #EDF2F7;
+    font-size: 14px;
+    box-shadow: 0px 1px 1px rgb(0 0 0 / 5%);
+    font-weight: normal;
+    line-height: 17px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    background-color: #ffffff;
+    border-color: rgb(0, 182, 243);
+    display:none;
+}
+
+        .a{
+            color: #ffffff;
+    height: 32px;
+    margin: -1px -1px 0;
+    display: flex;
+    padding: 8px 12px;
+    font-size: 16px;
+    background: linear-gradient(90deg, #00B6F3 0%, #007FF3 100%);
+    align-items: center;
+    font-weight: 600;
+    line-height: 19px;
+    border-radius: 8px 8px 0px 0px;
+        }
+
+        .b{
+            width: 100%;
+    display: flex;
+    padding: 0 24px;
+    width: 100%;
+    display: flex;
+    padding: 0 24px;
+        }
+        .c{
+            display: flex;
+    flex-wrap: wrap;
+    font-size: 18px;
+    max-width: 643px;
+    align-items: center;
+    font-weight: 600;
+    line-height: 21px;
+    padding-bottom: 10px;
+        }
+
+        .d{
+            display: flex;
+    align-items: center;
+    padding-right: 24px;
+        }
 </style>
 
 </head>
@@ -189,7 +245,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<!-- Booking -->
 
 				<div>
-					<a style="background-color: #00BCD4;" href="#addEmployeeModal"
+					<a style="background-color: #00BCD4;" id="flip"
 						class="btn btn-success" data-toggle="modal">Đặt phòng</a>
 				</div>
 
@@ -305,6 +361,48 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			</div>
 			<div class="clearfix"></div>
 			<!--/tabs-->
+
+			<!-- <div id="flip">Click to slide the panel down or up</div> -->
+			<div id="panel" class="main"
+				style="width: 90%; margin-left: auto; margin-right: auto; margin-top: 20px;">
+				
+				<div class="a">Kiểm tra thông tin</div>
+
+				<div class="b row">
+					<div class="col-md-4">sadsadsadsa</div>
+
+					<div class="col-md-8">
+						<div class="c">Standard Twin (tầng hầm)</div>
+						<div class="d">
+							<span class="MuiBox-root jss1070"
+								style="width: 16px; height: 16px; margin-right: 6px;"><svg
+									width="16" height="16" fill="none">
+									<path
+										d="M2 14v-1.333A2.667 2.667 0 014.667 10h2.666A2.667 2.667 0 0110 12.667V14m.667-11.913a2.667 2.667 0 010 5.166M14 14v-1.333a2.667 2.667 0 00-2-2.567M8.667 4.667a2.667 2.667 0 11-5.334 0 2.667 2.667 0 015.334 0z"
+										stroke="#4A5568" stroke-linecap="round"
+										stroke-linejoin="round"></path></svg></span> <span
+								class="MuiBox-root jss1071">Sức chứa tối đa 2 người</span> <span
+								class="MuiBox-root jss1072"
+								style="color: rgb(0, 182, 243); margin-left: 2px;">(Xem
+								chi tiết)</span>
+						</div>
+
+						<div class="MuiBox-root jss1073 jss1027">
+							<span class="MuiBox-root jss1074"
+								style="width: 16px; height: 16px; margin-right: 6px;"><svg
+									width="16" height="16" fill="none">
+									<path
+										d="M12 2H4a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2V4a2 2 0 00-2-2z"
+										stroke="#4A5568" stroke-miterlimit="10"
+										stroke-linecap="square"></path>
+									<path d="M11.333 11.333L5 5M11.334 8.333v3h-3M4.667 7.667v-3h3"
+										stroke="#4A5568" stroke-miterlimit="10" stroke-linecap="round"
+										stroke-linejoin="round"></path></svg></span><span
+								class="MuiBox-root jss1075">35m2</span>
+						</div>
+					</div>
+				</div>
+			</div>
 			<hr>
 
 			<!-- /new_arrivals -->
@@ -459,65 +557,68 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<h3>Near this place</h3>
 				<!-- /womens -->
 				<c:forEach var="room" items="${listNear }">
-					<c:if test="${listNearRoom.size() == 2}">
+					<c:if test="${listNearRoom.size() == 2 or listNearRoom.size() == 1}">
 						<div class="col-md-6">
-								<div class="col-md-4 product-men women_two">
-									<div class="product-shoe-info shoe">
-										<div class="men-pro-item">
-											<div class="men-thumb-item">
-											<c:set var="image" value="${pageContext.request.contextPath}${room.roomImages[0]}"></c:set>
-											<c:set var="defaultImage" value="https://vinhomesland.vn/wp-content/uploads/2019/10/homestay.jpg"></c:set>
-												<img width="240" height="190"
-													src="${room.roomImages[0]==null?defaultImage:image }"
-													alt="">
-												<div class="men-cart-pro">
-													<div class="inner-men-cart-pro">
-														<a href="${pageContext.request.contextPath}/single-post?roomId=${room.roomId}"
-															class="link-product-add-cart">Xem chi tiết</a>
-													</div>
+							<div class="col-md-4 product-men women_two">
+								<div class="product-shoe-info shoe">
+									<div class="men-pro-item">
+										<div class="men-thumb-item">
+											<c:set var="image"
+												value="${pageContext.request.contextPath}${room.roomImages[0]}"></c:set>
+											<c:set var="defaultImage"
+												value="https://vinhomesland.vn/wp-content/uploads/2019/10/homestay.jpg"></c:set>
+											<img width="240" height="190"
+												src="${room.roomImages[0]==null?defaultImage:image }" alt="">
+											<div class="men-cart-pro">
+												<div class="inner-men-cart-pro">
+													<a
+														href="${pageContext.request.contextPath}/single-post?roomId=${room.roomId}"
+														class="link-product-add-cart">Xem chi tiết</a>
 												</div>
-												<!--  <span class="product-new-top">Active</span>-->
 											</div>
-
-										</div>
-									</div>
-								</div>
-								<div class="col-md-8 info-product-price">
-									<div class="item-info-product"
-										style="text-align: left; margin-bottom: 15px;">
-										<h4>
-											<a href="${pageContext.request.contextPath}/single-post?roomId=${room.roomId}">${room.roomName }</a>
-										</h4>
-										<div class="clearfix"></div>
-									</div>
-									<div class="grid_meta">
-										<div class="product_price">
-											<div class="grid-price ">
-												<span class="money ">${room.price/1000 }k/day</span>
-											</div>
+											<!--  <span class="product-new-top">Active</span>-->
 										</div>
 
-										<ul class="stars">
-											<li><a href="#"><i class="fa fa-star"
-													aria-hidden="true"></i></a></li>
-											<li><a href="#"><i class="fa fa-star"
-													aria-hidden="true"></i></a></li>
-											<li><a href="#"><i class="fa fa-star"
-													aria-hidden="true"></i></a></li>
-											<li><a href="#"><i class="fa fa-star"
-													aria-hidden="true"></i></a></li>
-											<li><a href="#"><i class="fa fa-star	"
-													aria-hidden="true"></i></a></li>
-										</ul>
-										<div>Đánh giá: ${room.rating != 0?room.rating:'Chưa có đánh giá' }</div>
-										<div>Loại phòng: ${room.typeName }</div>
-										<div>${room.roomDesc }</div>
 									</div>
 								</div>
-								<hr>
 							</div>
+							<div class="col-md-8 info-product-price">
+								<div class="item-info-product"
+									style="text-align: left; margin-bottom: 15px;">
+									<h4>
+										<a
+											href="${pageContext.request.contextPath}/single-post?roomId=${room.roomId}">${room.roomName }</a>
+									</h4>
+									<div class="clearfix"></div>
+								</div>
+								<div class="grid_meta">
+									<div class="product_price">
+										<div class="grid-price ">
+											<span class="money ">${room.price/1000 }k/day</span>
+										</div>
+									</div>
+
+									<ul class="stars">
+										<li><a href="#"><i class="fa fa-star"
+												aria-hidden="true"></i></a></li>
+										<li><a href="#"><i class="fa fa-star"
+												aria-hidden="true"></i></a></li>
+										<li><a href="#"><i class="fa fa-star"
+												aria-hidden="true"></i></a></li>
+										<li><a href="#"><i class="fa fa-star"
+												aria-hidden="true"></i></a></li>
+										<li><a href="#"><i class="fa fa-star	"
+												aria-hidden="true"></i></a></li>
+									</ul>
+									<div>Đánh giá: ${room.rating != 0?room.rating:'Chưa có đánh giá' }</div>
+									<div>Loại phòng: ${room.typeName }</div>
+									<div>${room.roomDesc }</div>
+								</div>
+							</div>
+							<hr>
+						</div>
 					</c:if>
-				
+
 					<c:if test="${listNearRoom.size() == 3}">
 						<div class="col-md-4 product-men women_two">
 							<div class="product-shoe-info shoe">
@@ -573,7 +674,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							</div>
 						</div>
 					</c:if>
-					
+
 					<c:if test="${listNearRoom.size() == 4}">
 						<div class="col-md-3 product-men women_two">
 							<div class="product-shoe-info shoe">
@@ -734,6 +835,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<!-- Rating js -->
 	<script type="text/javascript"
 		src="${pageContext.request.contextPath}/view/web/js/rating.js"></script>
+
+	<!-- Fade -->
+	<script>
+		$(document).ready(function() {
+			$("#flip").click(function() {
+				$("#panel").slideToggle("slow");
+			});
+		});
+	</script>
 
 </body>
 

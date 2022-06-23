@@ -10,26 +10,27 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class InternalExceptionController
+ * Servlet implementation class AccountController
  */
-@WebServlet(name = "HandleInternalException", urlPatterns = {"/HandleInternalException"})
-public class InternalExceptionController extends HttpServlet {
+@WebServlet("/my-account")
+public class AccountController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public InternalExceptionController() {
+    public AccountController() {
         super();
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+    protected void Proccess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		RequestDispatcher rd = request.getRequestDispatcher("/view/common/myaccount.jsp");
+		rd.forward(request, response);
+	}
+    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("/view/common/InternalException.jsp");
-        rd.forward(request, response);
+		Proccess(request, response);
 	}
 
 	/**
@@ -37,7 +38,7 @@ public class InternalExceptionController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		Proccess(request, response);
 	}
 
 }
