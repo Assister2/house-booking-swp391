@@ -54,11 +54,11 @@
                             	<input type="hidden" name="action" value="login">
                                 <div class="form-group">
                                     <label>Username</label>
-                                    <input class="au-input au-input--full" type="text" name="username" placeholder="Username">
+                                    <input class="au-input au-input--full" type="text" name="username" placeholder="Username" required="required">
                                 </div>
                                 <div class="form-group">
                                     <label>Password</label>
-                                    <input class="au-input au-input--full" type="password" name="password" placeholder="Password">
+                                    <input class="au-input au-input--full" type="password" name="password" placeholder="Password" required="required">
                                 </div>
                                 <div style="color: #FF0000; padding-bottom: 15px;"> ${login_mess}</div>
                                 <div class="login-checkbox">

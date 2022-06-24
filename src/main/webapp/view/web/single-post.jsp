@@ -35,6 +35,24 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 		addEventListener("load", function () {
 			setTimeout(hideURLbar, 0);
@@ -44,6 +62,24 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			window.scrollTo(0, 1);
 		}
 	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -103,6 +139,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800"
 	rel="stylesheet">
 
+<!-- Plugin CKEDITOR -->
+<script
+	src="${pageContext.request.contextPath}/view/common/ckeditor/ckeditor.js"></script>
+
 <style>
 .recommend {
 	background-color: #bfba55;
@@ -116,56 +156,128 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 }
 
 #panel {
-	 border: 1px solid #EDF2F7;
-    font-size: 14px;
-    box-shadow: 0px 1px 1px rgb(0 0 0 / 5%);
-    font-weight: normal;
-    line-height: 17px;
-    border-radius: 8px;
-    margin-bottom: 16px;
-    background-color: #ffffff;
-    border-color: rgb(0, 182, 243);
-    display:none;
+	border: 1px solid #EDF2F7;
+	font-size: 14px;
+	box-shadow: 0px 1px 1px rgb(0 0 0/ 5%);
+	font-weight: normal;
+	line-height: 17px;
+	border-radius: 8px;
+	margin-bottom: 16px;
+	background-color: #ffffff;
+	border-color: rgb(0, 182, 243);
 }
 
-        .a{
-            color: #ffffff;
-    height: 32px;
-    margin: -1px -1px 0;
-    display: flex;
-    padding: 8px 12px;
-    font-size: 16px;
-    background: linear-gradient(90deg, #00B6F3 0%, #007FF3 100%);
-    align-items: center;
-    font-weight: 600;
-    line-height: 19px;
-    border-radius: 8px 8px 0px 0px;
-        }
+.a {
+	color: #ffffff;
+	height: 32px;
+	margin: -1px -1px 0;
+	display: flex;
+	padding: 8px 12px;
+	font-size: 16px;
+	background: linear-gradient(90deg, #00B6F3 0%, #007FF3 100%);
+	align-items: center;
+	font-weight: 600;
+	line-height: 19px;
+	border-radius: 8px 8px 0px 0px;
+}
 
-        .b{
-            width: 100%;
-    display: flex;
-    padding: 0 24px;
-    width: 100%;
-    display: flex;
-    padding: 0 24px;
-        }
-        .c{
-            display: flex;
-    flex-wrap: wrap;
-    font-size: 18px;
-    max-width: 643px;
-    align-items: center;
-    font-weight: 600;
-    line-height: 21px;
-    padding-bottom: 10px;
-        }
+.b {
+	width: 100%;
+	display: flex;
+	padding: 0 24px;
+	width: 100%;
+	display: flex;
+	padding: 0 24px;
+}
 
-        .d{
-            display: flex;
-    align-items: center;
-    padding-right: 24px;
-        }
+.c {
+	display: flex;
+	flex-wrap: wrap;
+	font-size: 18px;
+	max-width: 643px;
+	align-items: center;
+	font-weight: 600;
+	line-height: 21px;
+	padding-bottom: 10px;
+}
+
+.d {
+	display: flex;
+	align-items: center;
+	padding-right: 24px;
+}
+
+.jss2311 {
+	border: 1px solid #EDF2F7;
+	padding: 24px 24px 16px 24px;
+	font-size: 14px;
+	box-shadow: 0px 1px 1px rgb(0 0 0/ 5%);
+	margin-top: 16px;
+	line-height: 17px;
+	border-radius: 8px;
+	background-color: #fff;
+}
+
+.jss2321 {
+	display: flex;
+	font-size: 14px;
+	align-items: center;
+	line-height: 17px;
+}
+
+.jss2312 {
+	padding: 12px 0 8px;
+	font-weight: 600;
+}
+
+.jss2313 {
+	display: flex;
+	align-items: center;
+	margin-left: -9px;
+}
+
+.dropbtn {
+	background-color: #fff;
+	color: white;
+	padding: 16px;
+	font-size: 16px;
+	border: none;
+	cursor: pointer;
+}
+
+.dropdown {
+	position: relative;
+	display: inline-block;
+}
+
+.dropdown-content {
+	display: none;
+	position: absolute;
+	right: 0;
+	background-color: #f9f9f9;
+	min-width: 160px;
+	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+	z-index: 1;
+}
+
+.dropdown-content a {
+	color: black;
+	padding: 12px 16px;
+	text-decoration: none;
+	display: block;
+}
+
+.dropdown-content a:hover {
+	background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+	display: block;
+}
+
+.dropdown:hover .dropbtn {
+	background-color: #c8cbc8;
+}
 </style>
 
 </head>
@@ -230,8 +342,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						class="fa fa-star checked"></span> <span
 						class="fa fa-star checked"></span> <span
 						class="fa fa-star-half-full"></span> <span
-						style="margin-left: 5px; margin-right: 3px;">| 240</span> <span
-						class="fa fa-user"></span>
+						style="margin-left: 5px;">rất tốt<a href="#comment"
+						class="scroll"> (Xem đánh giá)</a></span>
 				</div>
 				<p>
 					<span class="item_price">${room.price/1000 }k per day</span>
@@ -245,34 +357,102 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<!-- Booking -->
 
 				<div>
-					<a style="background-color: #00BCD4;" id="flip"
-						class="btn btn-success" data-toggle="modal">Đặt phòng</a>
+					<a type="button" href="#chonphong"
+						class="btn btn-primary scroll">Chon phòng</a>
 				</div>
 
 				<!-- ENd Booking -->
 
-				<div class="responsive_tabs">
-					<div id="horizontalTab">
-						<ul class="resp-tabs-list">
-							<li>Tiện nghi</li>
-							<li>Dịch vụ thêm</li>
-							<li>Nội quy</li>
-						</ul>
-						<div class="resp-tabs-container" style="height: 160px;">
-							<!--/tab_one-->
+
+
+			</div>
+			<div class="clearfix"></div>
+			<!--/tabs-->
+
+			<div class="responsive_tabs">
+				<div id="horizontalTab">
+					<ul class="resp-tabs-list">
+						<li>Nơi này có gì?</li>
+						<li>Chính sách</li>
+						<li>Thông tin hữu ích</li>
+						<li>Chủ sở hữu</li>
+					</ul>
+					<div class="resp-tabs-container">
+						<!--/tab_one-->
+						<div class="table-responsive">
+							<table class="table table-striped">
+								<tbody>
+									<c:set var="count" value="${1 }"></c:set>
+									<c:if test="${listConvenient[0] == null}">
+										<td>Phòng chưa có tiện nghi nào :((</td>
+									</c:if>
+									<c:forEach var="item" items="${listConvenient }">
+
+										<c:if test="${count%3 == 1 }">
+											<tr>
+										</c:if>
+										<td>${item.conveName}</td>
+										<c:if test="${count%3 == 0}">
+											</tr>
+										</c:if>
+
+										<c:set var="count" value="${count + 1 }"></c:set>
+									</c:forEach>
+									<c:if test="${count%3 == 2}">
+										<td></td>
+										<td></td>
+										</tr>
+									</c:if>
+									<c:if test="${count%3 == 0}">
+										<td></td>
+										</tr>
+									</c:if>
+								</tbody>
+							</table>
+						</div>
+
+						<!--//tab_one-->
+
+						<div class="tab3">
+							<div class="table-responsive">
+								<table class="table table-striped">
+									<tbody>
+										<tr>
+											<td>Tình trạng: Còn phòng</td>
+											<td>Sức chứa (tối đa): 6 người</td>
+										</tr>
+
+										<tr>
+											<td>Thời hạn cho thuê: Thương lượng</td>
+											<td>Tiền Cọc: 50$</td>
+										</tr>
+
+										<tr>
+											<td>Địa chỉ: Chỗ này ghi địa chỉ cụ thể, thành phố Đà
+												Lạt, tỉnh Lâm Đồng</td>
+											<td></td>
+										</tr>
+
+									</tbody>
+								</table>
+							</div>
+						</div>
+
+						<!-- tab 3 -->
+						<div class="tab3">
 							<div class="table-responsive">
 								<table class="table table-striped">
 									<tbody>
 										<c:set var="count" value="${1 }"></c:set>
-										<c:if test="${listConvenient[0] == null}">
-											<td>Phòng chưa có tiện nghi nào :((</td>
+										<c:if test="${listRule[0] == null}">
+											<td>Phòng không có nội quy</td>
 										</c:if>
-										<c:forEach var="item" items="${listConvenient }">
+										<c:forEach var="item" items="${listRule }">
 
 											<c:if test="${count%3 == 1 }">
 												<tr>
 											</c:if>
-											<td>${item.conveName}</td>
+											<td>${item.ruleContent}</td>
 											<c:if test="${count%3 == 0}">
 												</tr>
 											</c:if>
@@ -291,154 +471,166 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									</tbody>
 								</table>
 							</div>
+						</div>
 
-							<!--//tab_one-->
+						<!--//tab_one-->
 
-							<div class="tab3">
-								<div class="table-responsive">
-									<table class="table table-striped">
-										<tbody>
-											<tr>
-												<td>Tình trạng: Còn phòng</td>
-												<td>Sức chứa (tối đa): 6 người</td>
-											</tr>
+						<div class="tab4">tab 4</div>
 
-											<tr>
-												<td>Thời hạn cho thuê: Thương lượng</td>
-												<td>Tiền Cọc: 50$</td>
-											</tr>
+					</div>
+				</div>
+			</div>
+		</div>
 
-											<tr>
-												<td>Địa chỉ: Chỗ này ghi địa chỉ cụ thể, thành phố Đà
-													Lạt, tỉnh Lâm Đồng</td>
-												<td></td>
-											</tr>
+		<div class="chonphong" id="chonphong"
+			style="background-color: #F7FAFC; padding-top: 20px; padding-bottom: 20px; margin-top: 30px;">
+			<div style="width: 90%; margin-left: auto; margin-right: auto;">
+				<h4 style="font-weight: bold;">Chọn phòng</h4>
 
-										</tbody>
-									</table>
-								</div>
+				<div class="MuiBox-root jss2320 jss2311"
+					style="margin-bottom: 20px;">
+					<div class="MuiBox-root jss2330 jss2321">
+						<div class="row" style="width: 100%;">
+							<div class="col-md-3">
+								<label>Ngày đến</label> <input type="text"
+									class="form-control col-md-7" placeholder="__/__/____"
+									name="startDate" required>
 							</div>
-
-							<!-- tab 3 -->
-							<div class="tab3">
-								<div class="table-responsive">
-									<table class="table table-striped">
-										<tbody>
-											<c:set var="count" value="${1 }"></c:set>
-											<c:if test="${listRule[0] == null}">
-												<td>Phòng không có nội quy</td>
-											</c:if>
-											<c:forEach var="item" items="${listRule }">
-
-												<c:if test="${count%3 == 1 }">
-													<tr>
-												</c:if>
-												<td>${item.ruleContent}</td>
-												<c:if test="${count%3 == 0}">
-													</tr>
-												</c:if>
-
-												<c:set var="count" value="${count + 1 }"></c:set>
-											</c:forEach>
-											<c:if test="${count%3 == 2}">
-												<td></td>
-												<td></td>
-												</tr>
-											</c:if>
-											<c:if test="${count%3 == 0}">
-												<td></td>
-												</tr>
-											</c:if>
-										</tbody>
-									</table>
-								</div>
+							<div class="col-md-3">
+								<label>Ngày về</label> <input type="text"
+									class="form-control col-md-7" placeholder="__/__/____"
+									name="endDate" required>
 							</div>
-
+							<div class="col-md-3">
+								<label>Sức chứa</label> <input type="number"
+									class="form-control col-md-7" placeholder="Enter number"
+									name="person" min="0">
+							</div>
+							<div class="col-md-3">
+								<button style="margin-top: 21px;" type="submit"
+									class="btn btn-primary">Kiểm tra tình trạng phòng</button>
+							</div>
 						</div>
 					</div>
 				</div>
 
-			</div>
-			<div class="clearfix"></div>
-			<!--/tabs-->
+				<!-- <div id="flip">Click to slide the panel down or up</div> -->
+				<div id="panel" class="main" style="margin-top: 20px;">
 
-			<!-- <div id="flip">Click to slide the panel down or up</div> -->
-			<div id="panel" class="main"
-				style="width: 90%; margin-left: auto; margin-right: auto; margin-top: 20px;">
-				
-				<div class="a">Kiểm tra thông tin</div>
+					<div class="a">Kiểm tra thông tin</div>
+					<br>
+					<div class="b row">
+						<div class="col-md-3">
+							<div class="grid images_3_of_2">
+								<div class="flexslider">
 
-				<div class="b row">
-					<div class="col-md-4">sadsadsadsa</div>
-
-					<div class="col-md-8">
-						<div class="c">Standard Twin (tầng hầm)</div>
-						<div class="d">
-							<span class="MuiBox-root jss1070"
-								style="width: 16px; height: 16px; margin-right: 6px;"><svg
-									width="16" height="16" fill="none">
-									<path
-										d="M2 14v-1.333A2.667 2.667 0 014.667 10h2.666A2.667 2.667 0 0110 12.667V14m.667-11.913a2.667 2.667 0 010 5.166M14 14v-1.333a2.667 2.667 0 00-2-2.567M8.667 4.667a2.667 2.667 0 11-5.334 0 2.667 2.667 0 015.334 0z"
-										stroke="#4A5568" stroke-linecap="round"
-										stroke-linejoin="round"></path></svg></span> <span
-								class="MuiBox-root jss1071">Sức chứa tối đa 2 người</span> <span
-								class="MuiBox-root jss1072"
-								style="color: rgb(0, 182, 243); margin-left: 2px;">(Xem
-								chi tiết)</span>
+									<ul class="slides">
+										<li
+											data-thumb="${pageContext.request.contextPath}${room.roomImages[0] }">
+											<div class="thumb-image">
+												<img
+													src="${pageContext.request.contextPath}${room.roomImages[0] }"
+													data-imagezoom="true" class="img-responsive">
+											</div>
+										</li>
+										<li
+											data-thumb="${pageContext.request.contextPath}${room.roomImages[1] }">
+											<div class="thumb-image">
+												<img
+													src="${pageContext.request.contextPath}${room.roomImages[1] }"
+													data-imagezoom="true" class="img-responsive">
+											</div>
+										</li>
+										<li
+											data-thumb="${pageContext.request.contextPath}${room.roomImages[2] }">
+											<div class="thumb-image">
+												<img
+													src="${pageContext.request.contextPath}${room.roomImages[2] }"
+													data-imagezoom="true" class="img-responsive">
+											</div>
+										</li>
+									</ul>
+								</div>
+							</div>
+							<a href="#"> Xem chi tiết phòng > </a>
 						</div>
 
-						<div class="MuiBox-root jss1073 jss1027">
-							<span class="MuiBox-root jss1074"
-								style="width: 16px; height: 16px; margin-right: 6px;"><svg
-									width="16" height="16" fill="none">
+						<div class="col-md-9">
+							<div class="c">Standard Twin (tầng hầm)</div>
+							<div class="d"
+								style="display: flex; z-index: 1; position: sticky; transition: all .4s; align-items: center; border-bottom: 1px solid #E2E8F0;">
+								<span style="width: 16px; height: 16px; margin-right: 6px;"><svg
+										width="16" height="16" fill="none">
 									<path
-										d="M12 2H4a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2V4a2 2 0 00-2-2z"
-										stroke="#4A5568" stroke-miterlimit="10"
-										stroke-linecap="square"></path>
+											d="M2 14v-1.333A2.667 2.667 0 014.667 10h2.666A2.667 2.667 0 0110 12.667V14m.667-11.913a2.667 2.667 0 010 5.166M14 14v-1.333a2.667 2.667 0 00-2-2.567M8.667 4.667a2.667 2.667 0 11-5.334 0 2.667 2.667 0 015.334 0z"
+											stroke="#4A5568" stroke-linecap="round"
+											stroke-linejoin="round"></path></svg></span> <span
+									class="MuiBox-root jss1071">Sức chứa tối đa 2 người</span> <span
+									class="MuiBox-root jss1072"
+									style="color: rgb(0, 182, 243); margin-left: 2px;">(Xem
+									chi tiết)</span> <span class="MuiBox-root jss1074"
+									style="margin-left: 20px; width: 16px; height: 16px; margin-right: 6px;"><svg
+										width="16" height="16" fill="none">
+									<path
+											d="M12 2H4a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2V4a2 2 0 00-2-2z"
+											stroke="#4A5568" stroke-miterlimit="10"
+											stroke-linecap="square"></path>
 									<path d="M11.333 11.333L5 5M11.334 8.333v3h-3M4.667 7.667v-3h3"
-										stroke="#4A5568" stroke-miterlimit="10" stroke-linecap="round"
-										stroke-linejoin="round"></path></svg></span><span
-								class="MuiBox-root jss1075">35m2</span>
+											stroke="#4A5568" stroke-miterlimit="10"
+											stroke-linecap="round" stroke-linejoin="round"></path></svg></span><span
+									class="MuiBox-root jss1075">35m2</span>
+							</div>
 						</div>
+
 					</div>
 				</div>
 			</div>
-			<hr>
+		</div>
 
+		<div class="ads-grid_shop" style="padding-top: 40px;">
 			<!-- /new_arrivals -->
-			<div style="width: 100%;">
+			<div style="width: 100%;" id="comment">
 				<div class="blog-single-post-thumb"
 					style="width: 80%; margin: auto;">
 					<div class="blog-comment">
 
-						<h3>Comments</h3>
+						<h3 style="margin-bottom: 20px;">Bình luận và đánh giá:</h3>
 						<c:if test="${listFeedback[0] == null }">
 							<div class="media-body">
 								<br> Chưa có bình luận nào
 							</div>
 						</c:if>
 						<c:forEach var="item" items="${listFeedback }">
-							<div class="media" style="margin-top: 20px;">
-								<div class="media-object pull-left">
-
-									<img style="width: 5.5em;"
-										src="${pageContext.request.contextPath }${item.user.avatar }"
-										class="img-responsive img-circle" width="40" height="40"
-										alt="Blog Image 11">
+							<div class="row">
+								<div class="media col-md-9" style="margin-top: 20px;">
+									<div class="media-object pull-left">
+										<img style="width: 5.5em;"
+											src="${pageContext.request.contextPath }${item.user.avatar }"
+											class="img-responsive img-circle" width="40" height="40"
+											alt="Blog Image 11">
+									</div>
+									<div class="media-body">
+										<h3 class="media-heading">${item.user.name }</h3>
+										<span style="font-size: 12px;"> ${item.feedbackDate }</span>
+										<p>${item.comment }</p>
+										<form action="single-post">
+											<input type="hidden" name="roomId" value="${param.roomId }">
+											<input type="hidden" name="feedbackId"
+												value="${item.feedbackId }">
+										</form>
+									</div>
 								</div>
-								<div class="media-body">
-									<h3 class="media-heading">${item.user.name }</h3>
-									<span style="font-size: 12px;"> ${item.feedbackDate }</span>
-									<p>${item.comment }</p>
-									<form action="single-post">
-										<input type="hidden" name="roomId" value="${param.roomId }">
-										<input type="hidden" name="feedbackId"
-											value="${item.feedbackId }">
-										<button type="submit" class="btn btn-danger btn-sm"
-											style="padding: unset; margin-top: 5px;">Report!</button>
-									</form>
+								<div class="col-md-2" style="margin-top: 20px;">
+									<div class="dropdown" style="float: right;">
+										<button style="height: 5px; padding-top: 0px; border-radius: 5px;" class="dropbtn"><i data-visualcompletion="css-img" class="hu5pjgll m6k467ps" style="background-image: url(&quot;https://static.xx.fbcdn.net/rsrc.php/v3/yD/r/6_b0I_TpqUX.png&quot;); background-position: -90px -114px; background-size: 190px 160px; width: 16px; height: 16px; background-repeat: no-repeat; display: inline-block;"></i></button>
+										<div class="dropdown-content">
+											<a href="#">Report</a> 
+											<a href="#">Reply</a> 
+										</div>
+									</div>
 								</div>
 							</div>
+							<hr>
 						</c:forEach>
 
 						<div class="text-center">
@@ -557,7 +749,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<h3>Near this place</h3>
 				<!-- /womens -->
 				<c:forEach var="room" items="${listNear }">
-					<c:if test="${listNearRoom.size() == 2 or listNearRoom.size() == 1}">
+					<c:if
+						test="${listNearRoom.size() == 2 or listNearRoom.size() == 1}">
 						<div class="col-md-6">
 							<div class="col-md-4 product-men women_two">
 								<div class="product-shoe-info shoe">
@@ -757,6 +950,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<script type="text/javascript"
 		src="${pageContext.request.contextPath}/view/web/js/jquery-2.1.4.min.js"></script>
 	<!-- //js -->
+
+	<!-- CKEDITOR -->
+	<script>
+		CKEDITOR.replace('message');
+	</script>
 
 	<!-- /nav -->
 	<script
