@@ -53,7 +53,7 @@ public class RoomDAO implements IRoomDAO {
 		room.setTypeId(rs.getString("type_id"));
 		room.setBuildingId(rs.getString("building_id"));
 		room.setTypeName(rs.getNString("type_name"));
-		room.setRating(rs.getFloat("rating"));
+		//room.setRating(rs.getFloat("rating"));
 	}
 	
 	private List<String> findImages(String roomId) throws SQLException {
@@ -90,7 +90,7 @@ public class RoomDAO implements IRoomDAO {
 		String sql = " Select  r.*, t.type_name, ISNULL(Round(AVG(rating*1.0),1),0) as rating \r\n"
 				+ " from Room r join Type_Of_Room t on r.type_id = t.type_id\r\n"
 				+ "	join Building b on r.building_id = b.building_id\r\n"
-				+ "	left join Feedback f on r.room_id = f.room_id\r\n" + " Where r.room_id like ?\r\n"
+				+ "	left join Feedback f on r.room_id = f.room_id\r\n" + " Where r.room_id like ? AND r.room_status like 'active'\r\n"
 				+ " Group by r.room_id, r.room_name, r.room_desc, r.room_price, r.room_status, r.building_id, r.type_id, t.type_name\r\n";
 
 		try {
@@ -554,5 +554,65 @@ public class RoomDAO implements IRoomDAO {
 
 		}
 		return "";
+	}
+	
+	public List<Room> list(LocalDate startDate, LocalDate endDate, String buildingId) {
+		ArrayList<Room> list;
+		list = new ArrayList<Room>();
+
+		String sql = " DECLARE @startDate as date = ?\r\n"
+				+ " DECLARE @endDate as date = ?\r\n"
+				+ " Select  r.*, t.type_name\r\n"
+				+ " from Room r join Type_Of_Room t on r.type_id = t.type_id\r\n"
+				+ "	join Building b on r.building_id = b.building_id\r\n"
+				+ "	join Street st on b.street_id = st.street_id\r\n"
+				+ "	join District dis on st.district_id = dis.district_id\r\n"
+				+ "	join City ci on ci.city_id = dis.city_id\r\n"
+				+ "	left join (\r\n"
+				+ "				Select r3.*\r\n"
+				+ "					from Room r3 left join Bill_detail de on r3.room_id = de.room_id\r\n"
+				+ "						left join Bill bi on de.bill_id = bi.bill_id\r\n"
+				+ "					WHERE (\r\n"
+				+ "						@startDate >= de.start_date\r\n"
+				+ "						AND  @endDate <= de.end_date\r\n"
+				+ "					)\r\n"
+				+ "					OR(\r\n"
+				+ "						@startDate Between de.start_date and de.end_date\r\n"
+				+ "					)\r\n"
+				+ "					OR(\r\n"
+				+ "							@endDate  Between de.start_date and de.end_date\r\n"
+				+ "					)\r\n"
+				+ "					OR(\r\n"
+				+ "						@startDate <= de.start_date\r\n"
+				+ "						AND  @endDate >= de.end_date\r\n"
+				+ "					)\r\n"
+				+ "			) as r2 on r.room_id = r2.room_id\r\n"
+				+ " Where b.building_id like ? AND r2.room_id is null AND r.room_status like 'active'\r\n"
+				+ " Group by r.room_id, r.room_name, r.room_desc, r.room_price, r.room_status, r.building_id, r.type_id, t.type_name";
+
+		try {
+
+			Connection conn = DBUtils.getConnection();
+
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setDate(1, Date.valueOf(startDate));
+			ps.setDate(2, Date.valueOf(endDate));
+			ps.setString(3, buildingId);
+
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				Room room = new Room();
+				fillDataInRoom(rs, room);
+				room.setRoomImages(findImages(room.getRoomId()));
+				list.add(room);
+			}
+
+		} catch (Exception ex) {
+
+			ex.printStackTrace();
+
+		}
+		return list;
 	}
 }

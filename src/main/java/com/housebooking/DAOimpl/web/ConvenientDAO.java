@@ -40,14 +40,14 @@ public class ConvenientDAO {
 		return list;
 	}
 	
-	public List<Convenient> list(String roomId) {
+	public List<Convenient> list(String buildingId) {
 		ArrayList<Convenient> list;
 		list = new ArrayList<Convenient>();
 
 		String sql = " select con.* \r\n"
-				+ " from  Convenient con  join Room_Convenient rcon on con.convenient_id = rcon.convenient_id\r\n"
-				+ "	join Room r on rcon.room_id = r.room_id\r\n"
-				+ " Where r.room_id like ?\r\n";
+				+ " from  Convenient con  join Building_Convenient bcon on con.convenient_id = bcon.convenient_id\r\n"
+				+ " join Building b on b.building_id = bcon.building_id\r\n"
+				+ " Where b.building_id like ?";
 
 		try {
 
@@ -55,7 +55,7 @@ public class ConvenientDAO {
 
 			PreparedStatement ps = conn.prepareStatement(sql);
 			
-			ps.setString(1, roomId);
+			ps.setString(1, buildingId);
 
 			ResultSet rs = ps.executeQuery();
 

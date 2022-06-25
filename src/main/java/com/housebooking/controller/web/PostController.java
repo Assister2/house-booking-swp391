@@ -5,8 +5,10 @@ import java.sql.Date;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
+import java.util.Locale;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -20,11 +22,11 @@ import com.housebooking.DAO.IRoomDAO;
 import com.housebooking.DAOimpl.web.ConvenientDAO;
 import com.housebooking.DAOimpl.web.FeedbackDAO;
 import com.housebooking.DAOimpl.web.RoomDAO;
-import com.housebooking.DAOimpl.web.RuleDAO;
+import com.housebooking.DAOimpl.web.WebBuildingDAO;
+import com.housebooking.Model.Building;
 import com.housebooking.Model.Convenient;
 import com.housebooking.Model.Feedback;
 import com.housebooking.Model.Room;
-import com.housebooking.Model.Rule;
 import com.housebooking.Model.UserSession;
 
 @WebServlet("/single-post")
@@ -90,26 +92,41 @@ public class PostController extends HttpServlet {
 
 	protected void doDisplay(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String roomId = request.getParameter("roomId");
+		String buildingId = request.getParameter("buildingId");
+		
+		WebBuildingDAO webBuildingDAO = new WebBuildingDAO();
+		
+		Building building = webBuildingDAO.find(buildingId);
 
-//		IRoomDAO roomDAO = new RoomDAO();
-//
+		IRoomDAO roomDAO = new RoomDAO();
+
 //		Room room = roomDAO.find(roomId);
 
 		ConvenientDAO convenientDAO = new ConvenientDAO();
 
-		List<Convenient> listConvenient = convenientDAO.list(roomId);
+		List<Convenient> listConvenient = convenientDAO.list(buildingId);
 
-		List<Feedback> listFeedback = new FeedbackDAO().list(roomId);
-
-		List<Rule> listRule = new RuleDAO().list(roomId);
+		List<Feedback> listFeedback = new FeedbackDAO().list(buildingId);
 		
-		List<Room> listNearRoom = ((RoomDAO)roomDAO).nearRoom(roomId);
+		String startDate = request.getParameter("startDate");
+		String endDate = request.getParameter("endDate");
+		LocalDate date1 = LocalDate.now();
+		LocalDate date2 = LocalDate.now();
+		
+		if(!(startDate == null) && !(endDate == null)) {
+			try {
+		        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy", Locale.ENGLISH);
+		        date1 = LocalDate.parse(startDate, formatter);
+		        date2 = LocalDate.parse(endDate, formatter);
+			} catch (Exception e) {
+			}
+		}
+		
+		List<Room> listRoom = ((RoomDAO)roomDAO).list(date1, date2, buildingId);
 
-		request.setAttribute("listRule", listRule);
 		request.setAttribute("listFeedback", listFeedback);
 		request.setAttribute("listConvenient", listConvenient);
-		//request.setAttribute("listNearRoom", listNearRoom);
+		request.setAttribute("listRoom", listRoom);
 		request.setAttribute("building", building);
 
 		RequestDispatcher rd = request.getRequestDispatcher("/view/web/single-post.jsp");

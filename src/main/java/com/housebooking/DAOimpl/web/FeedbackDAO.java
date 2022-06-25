@@ -12,15 +12,15 @@ import com.housebooking.Utils.DBUtils;
 
 public class FeedbackDAO {
 
-	public List<Feedback> list(String roomId) {
+	public List<Feedback> list(String buildingId) {
 		ArrayList<Feedback> list;
 		list = new ArrayList<Feedback>();
 
-		String sql = "Select fb.*, us.user_name, us.avatar\r\n"
-				+ " From Feedback fb join Room r on fb.room_id = r.room_id\r\n"
-				+ "	join Users us on fb.user_id = us.user_id\r\n"
-				+ " Where r.room_id like ? AND fb.status like 'on'\r\n"
-				+ " Order by fb.feedback_id DESC\r\n"
+		String sql = " Select fb.*, us.user_name, us.avatar\r\n"
+				+ " From Feedback fb join Building b on fb.building_id = b.building_id\r\n"
+				+ " join Users us on fb.user_id = us.user_id\r\n"
+				+ " Where b.building_id like ? AND fb.status like 'on'\r\n"
+				+ " Order by fb.feedback_date DESC\r\n"
 				+ " OFFSET 0 ROWS FETCH NEXT 3 ROWS ONLY";
 
 		try {
@@ -29,7 +29,7 @@ public class FeedbackDAO {
 
 			PreparedStatement ps = conn.prepareStatement(sql);
 			
-			ps.setString(1, roomId);
+			ps.setString(1, buildingId);
 
 			ResultSet rs = ps.executeQuery();
 

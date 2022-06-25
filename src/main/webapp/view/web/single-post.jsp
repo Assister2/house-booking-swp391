@@ -55,6 +55,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	
 	
 	
+	
 
 		addEventListener("load", function () {
 			setTimeout(hideURLbar, 0);
@@ -64,6 +65,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			window.scrollTo(0, 1);
 		}
 	
+
 
 
 
@@ -264,11 +266,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 }
 
 .jss5457 {
-    color: #00B6F3;
-    width: fit-content;
-    cursor: pointer;
-    margin-top: 6px;
-    background-color: rgba(0, 182, 243, 0.1);
+	color: #00B6F3;
+	width: fit-content;
+	cursor: pointer;
+	margin-top: 6px;
+	background-color: rgba(0, 182, 243, 0.1);
 }
 
 .dropbtn {
@@ -345,26 +347,26 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 						<ul class="slides">
 							<li
-								data-thumb="${pageContext.request.contextPath}${room.roomImages[0] }">
+								data-thumb="${pageContext.request.contextPath}${building.buildingImage }">
 								<div class="thumb-image">
 									<img
-										src="${pageContext.request.contextPath}${room.roomImages[0] }"
+										src="${pageContext.request.contextPath}${building.buildingImage } }"
 										data-imagezoom="true" class="img-responsive">
 								</div>
 							</li>
 							<li
-								data-thumb="${pageContext.request.contextPath}${room.roomImages[1] }">
+								data-thumb="${pageContext.request.contextPath}${building.buildingImage }">
 								<div class="thumb-image">
 									<img
-										src="${pageContext.request.contextPath}${room.roomImages[1] }"
+										src="${pageContext.request.contextPath}${building.buildingImage }"
 										data-imagezoom="true" class="img-responsive">
 								</div>
 							</li>
 							<li
-								data-thumb="${pageContext.request.contextPath}${room.roomImages[2] }">
+								data-thumb="${pageContext.request.contextPath}${building.buildingImage }">
 								<div class="thumb-image">
 									<img
-										src="${pageContext.request.contextPath}${room.roomImages[2] }"
+										src="${pageContext.request.contextPath}${building.buildingImage }"
 										data-imagezoom="true" class="img-responsive">
 								</div>
 							</li>
@@ -374,7 +376,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				</div>
 			</div>
 			<div class="col-md-8 single-right-left simpleCart_shelfItem">
-				<h2 style="color: black;">${room.roomName }</h2>
+				<h2 style="color: black;">${building.buildingName }</h2>
 				<div class="rating" style="margin-top: 10px;">
 					<span class="fa fa-star checked"></span> <span
 						class="fa fa-star checked"></span> <span
@@ -385,12 +387,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						class="scroll"> (Xem đánh giá)</a></span>
 				</div>
 				<p>
-					<span class="item_price">${room.price/1000 }k per day</span>
+					<span class="item_price">Giá trung bình: 999k per day</span>
 				</p>
 				<div>
-					<p style="font-size: 16px;">Concept của phòng: ${room.typeName }
-					</p>
-					<p style="font-size: 16px;">Mô tả: ${room.roomDesc }</p>
+					<p style="font-size: 16px;">Concept của phòng:
+						${building.buildingType }</p>
+					<p style="font-size: 16px;">Mô tả: ${building.buildingDesc }</p>
 				</div>
 
 				<!-- Booking -->
@@ -423,7 +425,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<tbody>
 									<c:set var="count" value="${1 }"></c:set>
 									<c:if test="${listConvenient[0] == null}">
-										<td>Phòng chưa có tiện nghi nào :((</td>
+										<td>Không có thông tin</td>
 									</c:if>
 									<c:forEach var="item" items="${listConvenient }">
 
@@ -479,42 +481,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 						<!-- tab 3 -->
 						<div class="tab3">
-							<div class="table-responsive">
-								<table class="table table-striped">
-									<tbody>
-										<c:set var="count" value="${1 }"></c:set>
-										<c:if test="${listRule[0] == null}">
-											<td>Phòng không có nội quy</td>
-										</c:if>
-										<c:forEach var="item" items="${listRule }">
-
-											<c:if test="${count%3 == 1 }">
-												<tr>
-											</c:if>
-											<td>${item.ruleContent}</td>
-											<c:if test="${count%3 == 0}">
-												</tr>
-											</c:if>
-
-											<c:set var="count" value="${count + 1 }"></c:set>
-										</c:forEach>
-										<c:if test="${count%3 == 2}">
-											<td></td>
-											<td></td>
-											</tr>
-										</c:if>
-										<c:if test="${count%3 == 0}">
-											<td></td>
-											</tr>
-										</c:if>
-									</tbody>
-								</table>
-							</div>
+							<p>${building.buildingRule }</p>
 						</div>
 
 						<!--//tab_one-->
 
-						<div class="tab4">tab 4</div>
+						<div class="tab4">
+							<p>Chỗ này để chủ sở hữu</p>
+						</div>
 
 					</div>
 				</div>
@@ -553,113 +527,125 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					</div>
 				</div>
 
-				<!-- <div id="flip">Click to slide the panel down or up</div> -->
-				<div id="panel" class="main" style="margin-top: 20px;">
-					<div class="b row">
-						<div class="col-md-3">
-							<div class="grid images_3_of_2">
-								<div class="flexslider">
+				<c:set var="listRoom" value="${listRoom }"></c:set>
+				<c:forEach var="room" items="${listRoom }">
+					<!-- <div id="flip">Click to slide the panel down or up</div> -->
+					<div id="panel" class="main" style="margin-top: 20px;">
+						<div class="b row">
+							<div class="col-md-3">
+								<div class="grid images_3_of_2">
+									<div class="flexslider">
 
-									<ul class="slides">
-										<li
-											data-thumb="${pageContext.request.contextPath}${room.roomImages[0] }">
-											<div class="thumb-image">
-												<img
-													src="${pageContext.request.contextPath}${room.roomImages[0] }"
-													data-imagezoom="true" class="img-responsive">
-											</div>
-										</li>
-										<li
-											data-thumb="${pageContext.request.contextPath}${room.roomImages[1] }">
-											<div class="thumb-image">
-												<img
-													src="${pageContext.request.contextPath}${room.roomImages[1] }"
-													data-imagezoom="true" class="img-responsive">
-											</div>
-										</li>
-										<li
-											data-thumb="${pageContext.request.contextPath}${room.roomImages[2] }">
-											<div class="thumb-image">
-												<img
-													src="${pageContext.request.contextPath}${room.roomImages[2] }"
-													data-imagezoom="true" class="img-responsive">
-											</div>
-										</li>
-									</ul>
+										<ul class="slides">
+											<li
+												data-thumb="${pageContext.request.contextPath}${room.roomImages[0] }">
+												<div class="thumb-image">
+													<img
+														src="${pageContext.request.contextPath}${room.roomImages[0] }"
+														data-imagezoom="true" class="img-responsive">
+												</div>
+											</li>
+											<li
+												data-thumb="${pageContext.request.contextPath}${room.roomImages[1] }">
+												<div class="thumb-image">
+													<img
+														src="${pageContext.request.contextPath}${room.roomImages[1] }"
+														data-imagezoom="true" class="img-responsive">
+												</div>
+											</li>
+											<li
+												data-thumb="${pageContext.request.contextPath}${room.roomImages[2] }">
+												<div class="thumb-image">
+													<img
+														src="${pageContext.request.contextPath}${room.roomImages[2] }"
+														data-imagezoom="true" class="img-responsive">
+												</div>
+											</li>
+										</ul>
+									</div>
 								</div>
+								<a href="#"> Xem chi tiết phòng > </a>
 							</div>
-							<a href="#"> Xem chi tiết phòng > </a>
-						</div>
 
-						<div class="col-md-9">
-							<div class="c">Standard Twin (tầng hầm)</div>
-							<div class="d"
-								style="display: flex; z-index: 1; position: sticky; transition: all .4s; align-items: center; border-bottom: 1px solid #E2E8F0;">
-								<span style="width: 16px; height: 16px; margin-right: 6px;"><svg
-										width="16" height="16" fill="none">
+							<div class="col-md-9">
+								<div class="c">Standard Twin (tầng hầm)</div>
+								<div class="d"
+									style="display: flex; z-index: 1; position: sticky; transition: all .4s; align-items: center; border-bottom: 1px solid #E2E8F0;">
+									<span style="width: 16px; height: 16px; margin-right: 6px;"><svg
+											width="16" height="16" fill="none">
 									<path
-											d="M2 14v-1.333A2.667 2.667 0 014.667 10h2.666A2.667 2.667 0 0110 12.667V14m.667-11.913a2.667 2.667 0 010 5.166M14 14v-1.333a2.667 2.667 0 00-2-2.567M8.667 4.667a2.667 2.667 0 11-5.334 0 2.667 2.667 0 015.334 0z"
-											stroke="#4A5568" stroke-linecap="round"
-											stroke-linejoin="round"></path></svg></span> <span
-									class="MuiBox-root jss1071">Sức chứa tối đa 2 người</span> <span
-									class="MuiBox-root jss1072"
-									style="color: rgb(0, 182, 243); margin-left: 2px;">(Xem
-									chi tiết)</span> <span class="MuiBox-root jss1074"
-									style="margin-left: 20px; width: 16px; height: 16px; margin-right: 6px;"><svg
-										width="16" height="16" fill="none">
+												d="M2 14v-1.333A2.667 2.667 0 014.667 10h2.666A2.667 2.667 0 0110 12.667V14m.667-11.913a2.667 2.667 0 010 5.166M14 14v-1.333a2.667 2.667 0 00-2-2.567M8.667 4.667a2.667 2.667 0 11-5.334 0 2.667 2.667 0 015.334 0z"
+												stroke="#4A5568" stroke-linecap="round"
+												stroke-linejoin="round"></path></svg></span> <span
+										class="MuiBox-root jss1071">Sức chứa tối đa 2 người</span> <span
+										class="MuiBox-root jss1072"
+										style="color: rgb(0, 182, 243); margin-left: 2px;">(Xem
+										chi tiết)</span> <span class="MuiBox-root jss1074"
+										style="margin-left: 20px; width: 16px; height: 16px; margin-right: 6px;"><svg
+											width="16" height="16" fill="none">
 									<path
-											d="M12 2H4a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2V4a2 2 0 00-2-2z"
-											stroke="#4A5568" stroke-miterlimit="10"
-											stroke-linecap="square"></path>
+												d="M12 2H4a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2V4a2 2 0 00-2-2z"
+												stroke="#4A5568" stroke-miterlimit="10"
+												stroke-linecap="square"></path>
 									<path d="M11.333 11.333L5 5M11.334 8.333v3h-3M4.667 7.667v-3h3"
-											stroke="#4A5568" stroke-miterlimit="10"
-											stroke-linecap="round" stroke-linejoin="round"></path></svg></span><span
-									class="MuiBox-root jss1075">35m2</span>
-							</div>
-							<div class="row" style="height: 75%;">
-								<div class="col-md-7 discript">
-									<div>
-										<p style="font-size: 16px;"><span style="font-weight: bold;">Concept của phòng:</span>
-											${room.typeName }</p>
-										<p style="font-size: 16px;"><span style="font-weight: bold;">Mô tả:</span> ${room.roomDesc }</p>
-									</div>
-									<div class="MuiBox-root jss5475 jss5455">
-										<div class="MuiBox-root jss5476 jss5456">Khăn tắm</div>
-										<div class="MuiBox-root jss5477 jss5456">Cửa sổ</div>
-										<div class="MuiBox-root jss5478 jss5456">Không hút thuốc</div>
-										<div class="MuiBox-root jss5479 jss5456">Đồ vệ sinh cá
-											nhân miễn phí</div>
-										<div class="MuiBox-root jss5480 jss5456">Dép đi trong
-											nhà</div>
-										<div class="MuiBox-root jss5481 jss5456">Phòng tắm riêng</div>
-										<div class="MuiBox-root jss5482 jss5456 jss5457">+8 tiện ích</div>
-									</div>
-									
+												stroke="#4A5568" stroke-miterlimit="10"
+												stroke-linecap="round" stroke-linejoin="round"></path></svg></span><span
+										class="MuiBox-root jss1075">35m2</span>
 								</div>
-								<div class="col-md-2"
-									style="height: 100%; z-index: 1; position: sticky; transition: all .4s; align-items: center; border-right: 1px solid #E2E8F0; border-left: 1px solid #E2E8F0;">
-									<div class="discript MuiBox-root jss1065 jss760">
-										<span class="MuiBox-root jss1066 jss761"><svg
-												width="24" height="24" fill="none" class="svgFillAll jss763">
+								<div class="row" style="height: 75%;">
+									<div class="col-md-7 discript">
+										<div>
+											<p style="font-size: 16px;">
+												<span style="font-weight: bold;">Concept của phòng:</span>
+												${room.typeName }
+											</p>
+											<p style="font-size: 16px;">
+												<span style="font-weight: bold;">Mô tả:</span>
+												${room.roomDesc }
+											</p>
+										</div>
+										<div class="MuiBox-root jss5475 jss5455">
+											<div class="MuiBox-root jss5476 jss5456">Khăn tắm</div>
+											<div class="MuiBox-root jss5477 jss5456">Cửa sổ</div>
+											<div class="MuiBox-root jss5478 jss5456">Không hút
+												thuốc</div>
+											<div class="MuiBox-root jss5479 jss5456">Đồ vệ sinh cá
+												nhân miễn phí</div>
+											<div class="MuiBox-root jss5480 jss5456">Dép đi trong
+												nhà</div>
+											<div class="MuiBox-root jss5481 jss5456">Phòng tắm
+												riêng</div>
+											<div class="MuiBox-root jss5482 jss5456 jss5457">+8
+												tiện ích</div>
+										</div>
+
+									</div>
+									<div class="col-md-2"
+										style="height: 100%; z-index: 1; position: sticky; transition: all .4s; align-items: center; border-right: 1px solid #E2E8F0; border-left: 1px solid #E2E8F0;">
+										<div class="discript MuiBox-root jss1065 jss760">
+											<span class="MuiBox-root jss1066 jss761"><svg
+													width="24" height="24" fill="none"
+													class="svgFillAll jss763">
 												<g clip-path="url(#icon_bed_double_svg__clip0)"
-													fill="#718096">
+														fill="#718096">
 												<path
-													d="M22.5 11.75h-21a1.5 1.5 0 00-1.5 1.5v4a1.5 1.5 0 001.125 1.45.5.5 0 01.375.483v1.067a1 1 0 102 0v-1a.5.5 0 01.5-.5h16a.5.5 0 01.5.5v1a1 1 0 002 0v-1.064a.5.5 0 01.375-.483A1.5 1.5 0 0024 17.25v-4a1.5 1.5 0 00-1.5-1.5zM2.5 10.25a.5.5 0 00.5.5h18a.5.5 0 00.5-.5v-5a2.5 2.5 0 00-2.5-2.5H5a2.5 2.5 0 00-2.5 2.5v5zm4-3h2a2.5 2.5 0 012.166 1.25.5.5 0 01-.433.75H4.767a.5.5 0 01-.433-.75A2.5 2.5 0 016.5 7.25zm9 0h2a2.5 2.5 0 012.166 1.25.5.5 0 01-.433.75h-5.466a.5.5 0 01-.433-.75A2.5 2.5 0 0115.5 7.25z"></path></g>
+														d="M22.5 11.75h-21a1.5 1.5 0 00-1.5 1.5v4a1.5 1.5 0 001.125 1.45.5.5 0 01.375.483v1.067a1 1 0 102 0v-1a.5.5 0 01.5-.5h16a.5.5 0 01.5.5v1a1 1 0 002 0v-1.064a.5.5 0 01.375-.483A1.5 1.5 0 0024 17.25v-4a1.5 1.5 0 00-1.5-1.5zM2.5 10.25a.5.5 0 00.5.5h18a.5.5 0 00.5-.5v-5a2.5 2.5 0 00-2.5-2.5H5a2.5 2.5 0 00-2.5 2.5v5zm4-3h2a2.5 2.5 0 012.166 1.25.5.5 0 01-.433.75H4.767a.5.5 0 01-.433-.75A2.5 2.5 0 016.5 7.25zm9 0h2a2.5 2.5 0 012.166 1.25.5.5 0 01-.433.75h-5.466a.5.5 0 01-.433-.75A2.5 2.5 0 0115.5 7.25z"></path></g>
 												<defs>
 												<clipPath id="icon_bed_double_svg__clip0">
 												<path fill="#fff" d="M0 0h24v24H0z"></path></clipPath></defs></svg></span><span
-											class="MuiBox-root jss1067">1 giường đôi</span>
+												class="MuiBox-root jss1067">1 giường đôi</span>
+										</div>
+									</div>
+									<div class="col-md-3 discript" style="text-align: right;">
+										<p>Giá:</p>
+										<p>Đặt phòng</p>
 									</div>
 								</div>
-								<div class="col-md-3 discript" style="text-align: right;">
-									<p>Giá:</p>
-									<p>Đặt phòng</p>
-								</div>
 							</div>
-						</div>
 
+						</div>
 					</div>
-				</div>
+				</c:forEach>
 			</div>
 		</div>
 
@@ -823,6 +809,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<!--//comment zone-->
 			<!--//tabs-->
 			<hr>
+
 			<c:set var="listNear" value="${listNearRoom }"></c:set>
 			<!-- /new_arrivals -->
 			<div class="new_arrivals">

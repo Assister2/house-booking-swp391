@@ -5,6 +5,7 @@ public class Building {
 	private String buildingDesc;
 	private String buildingName;
 	private String buildingType;
+	private String buildingRule;
 	private String buildingImage;
 	private String buildingAddress;
 	private String streetId;
@@ -13,8 +14,12 @@ public class Building {
 	private float rating;
 	
 	
-	
-	
+	public String getBuildingRule() {
+		return buildingRule;
+	}
+	public void setBuildingRule(String buildingRule) {
+		this.buildingRule = buildingRule;
+	}
 	public float getRating() {
 		return rating;
 	}

@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -132,15 +133,7 @@ public class WebBuildingDAO {
 			while (rs.next()) {
 				Building building = new Building();
 
-				building.setBuildingId(rs.getString("building_id"));
-				building.setBuildingName(rs.getNString("building_name"));
-				building.setBuildingDesc(rs.getString("building_desc"));
-				building.setBuildingType(rs.getString("building_type"));
-				building.setBuildingAddress(rs.getString("address"));
-				building.setBuildingImage(rs.getString("buiding_image"));
-				building.setRating(rs.getFloat("rating"));
-				int numRoom = getNumRoom(rs.getString("building_id"));
-				building.setNumRoom(numRoom);
+				fillBuildingData(building, rs);
 				list.add(building);
 			}
 
@@ -182,11 +175,19 @@ public class WebBuildingDAO {
 	
 	public Building find(String buildingId) {
 		Building building = new Building();
-		String sql = " Select  r.*, t.type_name, ISNULL(Round(AVG(rating*1.0),1),0) as rating \r\n"
+		String sql = "  Select  b.building_id, b.building_number,b.building_name, b.building_desc, \r\n"
+				+ " b.buiding_image, b.building_type, b.building_rule, \r\n"
+				+ " ( b.building_number + ' ' + st.street_name + ' '+ dis.district_name +' '+ ci.city_name ) as address,\r\n"
+				+ " ISNULL(Round(AVG(rating*1.0),1),0) as rating\r\n"
 				+ " from Room r join Type_Of_Room t on r.type_id = t.type_id\r\n"
 				+ "	join Building b on r.building_id = b.building_id\r\n"
-				+ "	left join Feedback f on r.room_id = f.room_id\r\n" + " Where r.room_id like ?\r\n"
-				+ " Group by r.room_id, r.room_name, r.room_desc, r.room_price, r.room_status, r.building_id, r.type_id, t.type_name\r\n";
+				+ "	join Street st on b.street_id = st.street_id\r\n"
+				+ "	join District dis on st.district_id = dis.district_id\r\n"
+				+ "	join City ci on ci.city_id = dis.city_id\r\n"
+				+ "	left join Feedback fb on b.building_id = fb.building_id\r\n"
+				+ " Where b.building_id like ?\r\n"
+				+ " Group by b.building_id, b.building_number,b.building_name, b.building_desc, \r\n"
+				+ " b.buiding_image, b.building_type, b.building_rule, b.building_number,st.street_name,dis.district_name , ci.city_name\r\n";
 
 		try {
 
@@ -194,14 +195,12 @@ public class WebBuildingDAO {
 
 			PreparedStatement ps = conn.prepareStatement(sql);
 
-			ps.setString(1, roomId);
+			ps.setString(1, buildingId);
 			ResultSet rs = ps.executeQuery();
 
 			while (rs.next()) {
-				fillDataInRoom(rs, room);
+				fillBuildingData(building, rs);
 			}
-			
-			room.setRoomImages(findImages(roomId));
 
 		} catch (Exception ex) {
 
@@ -209,6 +208,19 @@ public class WebBuildingDAO {
 
 		}
 
-		return room;
+		return building;
+	}
+
+	private void fillBuildingData(Building building, ResultSet rs) throws SQLException {
+		building.setBuildingId(rs.getString("building_id"));
+		building.setBuildingName(rs.getNString("building_name"));
+		building.setBuildingDesc(rs.getString("building_desc"));
+		building.setBuildingType(rs.getString("building_type"));
+		building.setBuildingAddress(rs.getString("address"));
+		building.setBuildingImage(rs.getString("buiding_image"));
+		building.setBuildingRule(rs.getNString("building_rule"));
+		building.setRating(rs.getFloat("rating"));
+		int numRoom = getNumRoom(rs.getString("building_id"));
+		building.setNumRoom(numRoom);
 	}
 }
