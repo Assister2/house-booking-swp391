@@ -15,7 +15,7 @@ Select * from Type_Of_Room
 Go
 Select * from Convenient
 Go
-Select * from Room_Convenient
+Select * from Building_Convenient
 Go
 Select * from Users
 Go
@@ -26,6 +26,24 @@ Go
 Select * from Room_Images
 Go
 Select * from Feedback
+Go
+
+--Delete dữ liệu
+-- Delete
+
+Delete from City
+Delete from District
+Delete from Street
+Delete from Building
+Delete from Room_Images
+Delete from Type_Of_Room
+Delete from Convenient
+Delete from Building_Convenient
+Delete from Feedback
+Delete from Bill_Detail
+Delete from Bill
+Delete from Users
+Delete from Room
 Go
 
 --Inser dữ liệu
@@ -132,36 +150,27 @@ Go
 
 Insert into Building
 Values
-	('350101_B00',null,N'Homestay Dành cho khác chỉ qua đêm', N'Homestay', 111,'350101', 'User_01'),
-	('580101_B01',null,N'Hotel có phòng rộng gần với các địa điểm nổi tiếng', N'Hotel',111, '580101', 'User_01'),
-	('580101_B02',null,N'Hotel có phòng đọc sách nhà ăn, v.v', N'Hotel',111, '580101', 'User_01'),
-	('580202_B01',null,N'Khách Sạn có phòng ăn, phòng sách riêng', N'Hotel',111, '580202', 'User_01'),
-	('240102_B01',null,N'Nhà 2 tầng đầy đủ tiện nghi thích hợp cho gia đình du lịch nhiều ngày', N'Nhà nguyên căn',111, '240102', 'User_01'),
-	('240202_B01',null,N'Phòng cho gia đình có đầy đủ tiện nghi', N'Homestay',111, '240202', 'User_01'),
-	('220101_B01',null,N'Khu nhà qua đêm phong cách cổ điển', N'Nhà nguyên căn',111,'220101', 'User_01'),
-	('430101_B01',null,N'Khách sạn phong cách hiện đại, đầy đủ tiện nghi, View đẹp', N'Hotel', 111,'430101', 'User_01'),
-	('430201_B01',null,N'Nhà vườn, có hồ bơi bao bọc bởi cây cảnh', N'Nhà nguyên căn',111,'430201',  'User_01')
-Go
-
-Insert into Building
-Values
-	('370101_B01',null,N'Resort và spa có cảnh quan đẹp bao quanh bỏi hồ, vườn cảnh', N'Homestay', 111,'370101', 'User_01'),
-	('370201_B01',null,N'Homestay phong cách cổ điển hài hoà với thiên nhiên', N'Homestay', 111,'370201','User_01'),
-
-	('120201_B01',null,N'Resort bãi biển, mát mẻ', N'Homestay',111,'120201',  'User_01'),
-	('120101_B01',null,N'Nhà gô gần gũi với thiên nhiên', N'Nhà nguyên căn',111,'120101',  'User_01'),
-	
-	('350101_B01',null,N'Gần khu vườn, có thể dùng để mở tiệc BBQ', N'Homestay',111,'350101',  'User_01'),
-	('350201_B01',null,N'Khu vườn cạnh nhà, thân thiện thiện với thú cưng', N'Homestay', 111,'350201', 'User_01'),
-	
-	('110201_B01',null,N'Full căn hộ 84m2 có 3 phòng riêng', N'Nhà nguyên căn',111,'110201',  'User_01'),
-	('110101_B01',null,N'Homestay cho gia đình, đầy đủ tiện nghi',  N'Homestay',111, '110101', 'User_01'),
-
-	('150101_B01',null,N'Hotel có view nhìn ra thành phố', N'Hotel',111, '150101', 'User_01'),
-	('150201_B01',null,N'Chung cư gần biển', N'Homestay',111,'150201',  'User_01'),
-
-	('480101_B01',null,N'Khách sạn gần bãi biển',  N'Hotel', 111,'480101', 'User_01'),
-	('480201_B01',null,N'Homestay kiểu khu vườn', N'Homestay',111, '480201', 'User_01')
+	('350101_B00','123 ABC', N'Homestay ABC', null, N'Homestay Dành cho khác chỉ qua đêm', N'Homestay', N'Không hút thuốc các kiểu, chỗ này trên page dùng CKEDITOR sửa lại','350101', 'User_01'),
+	('580101_B01','123 ABC',  N'Homestay ABC', null, N'Hotel có phòng rộng gần với các địa điểm nổi tiếng', N'Homesay',N'Không hút thuốc các kiểu, chỗ này trên page dùng CKEDITOR sửa lại', '580101', 'User_01'),
+	('580101_B02','123 ABC',  N'Homestay ABC', null,N'Hotel có phòng đọc sách nhà ăn, v.v', N'Homestay',N'Không hút thuốc các kiểu, chỗ này trên page dùng CKEDITOR sửa lại', '580101', 'User_01'),
+	('580202_B01','123 ABC', N'Homestay ABC', null, N'Khách Sạn có phòng ăn, phòng sách riêng', N'Homestay',N'Không hút thuốc các kiểu, chỗ này trên page dùng CKEDITOR sửa lại', '580202', 'User_01'),
+	('240102_B01','123 ABC', N'Homestay ABC', null, N'Nhà 2 tầng đầy đủ tiện nghi thích hợp cho gia đình du lịch nhiều ngày', N'Nhà nguyên căn',N'Không hút thuốc các kiểu, chỗ này trên page dùng CKEDITOR sửa lại', '240102', 'User_01'),
+	('240202_B01','123 ABC', N'Homestay ABC', null, N'Phòng cho gia đình có đầy đủ tiện nghi', N'Homestay',N'Không hút thuốc các kiểu, chỗ này trên page dùng CKEDITOR sửa lại', '240202', 'User_01'),
+	('220101_B01','123 ABC', N'Homestay ABC', null, N'Khu nhà qua đêm phong cách cổ điển', N'Nhà nguyên căn',N'Không hút thuốc các kiểu, chỗ này trên page dùng CKEDITOR sửa lại','220101', 'User_01'),
+	('430101_B01','123 ABC', N'Homestay ABC', null, N'Khách sạn phong cách hiện đại, đầy đủ tiện nghi, View đẹp', N'Homestay', N'Không hút thuốc các kiểu, chỗ này trên page dùng CKEDITOR sửa lại','430101', 'User_01'),
+	('430201_B01','123 ABC', N'Homestay ABC', null, N'Nhà vườn, có hồ bơi bao bọc bởi cây cảnh', N'Nhà nguyên căn',N'Không hút thuốc các kiểu, chỗ này trên page dùng CKEDITOR sửa lại','430201',  'User_01')
+	('370101_B01','123 ABC', N'Homestay ABC', null,N'Resort và spa có cảnh quan đẹp bao quanh bỏi hồ, vườn cảnh', N'Homestay', N'Không hút thuốc các kiểu, chỗ này trên page dùng CKEDITOR sửa lại','370101', 'User_01'),
+	('370201_B01','123 ABC', N'Homestay ABC', null,N'Homestay phong cách cổ điển hài hoà với thiên nhiên', N'Homestay', N'Không hút thuốc các kiểu, chỗ này trên page dùng CKEDITOR sửa lại','370201','User_01'),
+	('120201_B01','123 ABC', N'Homestay ABC', null,N'Resort bãi biển, mát mẻ', N'Homestay',N'Không hút thuốc các kiểu, chỗ này trên page dùng CKEDITOR sửa lại','120201',  'User_01'),
+	('120101_B01','123 ABC', N'Homestay ABC', null,N'Nhà gô gần gũi với thiên nhiên', N'Nhà nguyên căn',N'Không hút thuốc các kiểu, chỗ này trên page dùng CKEDITOR sửa lại','120101',  'User_01'),	
+	('350101_B01','123 ABC', N'Homestay ABC', null,N'Gần khu vườn, có thể dùng để mở tiệc BBQ', N'Homestay',N'Không hút thuốc các kiểu, chỗ này trên page dùng CKEDITOR sửa lại','350101',  'User_01'),
+	('350201_B01','123 ABC', N'Homestay ABC', null,N'Khu vườn cạnh nhà, thân thiện thiện với thú cưng', N'Homestay', N'Không hút thuốc các kiểu, chỗ này trên page dùng CKEDITOR sửa lại','350201', 'User_01'),	
+	('110201_B01','123 ABC', N'Homestay ABC', null,N'Full căn hộ 84m2 có 3 phòng riêng', N'Nhà nguyên căn',N'Không hút thuốc các kiểu, chỗ này trên page dùng CKEDITOR sửa lại','110201',  'User_01'),
+	('110101_B01','123 ABC', N'Homestay ABC', null,N'Homestay cho gia đình, đầy đủ tiện nghi',  N'Homestay',N'Không hút thuốc các kiểu, chỗ này trên page dùng CKEDITOR sửa lại', '110101', 'User_01'),
+	('150101_B01','123 ABC', N'Homestay ABC', null,N'Hotel có view nhìn ra thành phố', N'Hotel',N'Không hút thuốc các kiểu, chỗ này trên page dùng CKEDITOR sửa lại', '150101', 'User_01'),
+	('150201_B01','123 ABC', N'Homestay ABC', null,N'Chung cư gần biển', N'Homestay',N'Không hút thuốc các kiểu, chỗ này trên page dùng CKEDITOR sửa lại','150201',  'User_01'),
+	('480101_B01','123 ABC', N'Homestay ABC', null,N'Khách sạn gần bãi biển',  N'Hotel', N'Không hút thuốc các kiểu, chỗ này trên page dùng CKEDITOR sửa lại','480101', 'User_01'),
+	('480201_B01','123 ABC', N'Homestay ABC', null,N'Homestay kiểu khu vườn', N'Homestay',N'Không hút thuốc các kiểu, chỗ này trên page dùng CKEDITOR sửa lại', '480201', 'User_01')
 Go
 
 Insert into Convenient
@@ -175,114 +184,100 @@ Values
 	('Con_07',N'Tiện nghi cho người khuyết tật')
 Go
 
-Insert into Room
+Insert into Building_Convenient
 Values
-	('Room_01',N'Trường Giang Dalat Homestay', 'active', N'Tọa lạc tại thành phố Đà Lạt, cách Vườn hoa Đà Lạt 1,3 km, Trường Giang Dalat Hotel cung cấp chỗ nghỉ với nhà hàng, chỗ đỗ xe riêng miễn phí, sảnh khách chung và khu vườn.', 900000, 'type_2', '350101_B00')
+	('350101_B00', 'Con_01'),
+	('350101_B00', 'Con_02'),
+	('350101_B00', 'Con_03'),
+	('350101_B00', 'Con_04'),
+	('350101_B00', 'Con_05'),
+	('350101_B00', 'Con_06'),
+	('350101_B00', 'Con_07'),
+
+	('580101_B01', 'Con_01'),
+	('580101_B01', 'Con_02'),
+	('580101_B01', 'Con_03'),
+	('580101_B01', 'Con_04'),
+	('580101_B01', 'Con_05'),
+	('580101_B01', 'Con_06'),
+	('580101_B01', 'Con_07'),
+
+	('110101_B01', 'Con_01'),
+	('110101_B01', 'Con_02'),
+	('110101_B01', 'Con_03'),
+	('110101_B01', 'Con_04'),
+	('110101_B01', 'Con_05'),
+	('110101_B01', 'Con_06'),
+	('110101_B01', 'Con_07'),
+
+	('580202_B01', 'Con_01'),
+	('580202_B01', 'Con_02'),
+	('580202_B01', 'Con_03'),
+	('580202_B01', 'Con_04'),
+	('580202_B01', 'Con_05'),
+	('580202_B01', 'Con_06'),
+	('580202_B01', 'Con_07'),
+
+	('240102_B01', 'Con_01'),
+	('240102_B01', 'Con_02'),
+	('240102_B01', 'Con_03'),
+	('240102_B01', 'Con_04'),
+	('240102_B01', 'Con_05'),
+	('240102_B01', 'Con_06'),
+	('240102_B01', 'Con_07'),
+
+	('480101_B01', 'Con_01'),
+	('480101_B01', 'Con_02'),
+	('480101_B01', 'Con_03'),
+	('480101_B01', 'Con_04'),
+	('480101_B01', 'Con_05'),
+	('480101_B01', 'Con_06'),
+	('480101_B01', 'Con_07'),
+
+	('240202_B01', 'Con_01'),
+	('240202_B01', 'Con_02'),
+	('240202_B01', 'Con_03'),
+	('240202_B01', 'Con_04'),
+	('240202_B01', 'Con_05'),
+	('240202_B01', 'Con_06'),
+	('240202_B01', 'Con_07'),
+
+	('220101_B01', 'Con_01'),
+	('220101_B01', 'Con_02'),
+	('220101_B01', 'Con_03'),
+	('220101_B01', 'Con_04'),
+	('220101_B01', 'Con_05'),
+	('220101_B01', 'Con_06'),
+	('220101_B01', 'Con_07'),
+
+	('430101_B01', 'Con_01'),
+	('430101_B01', 'Con_02'),
+	('430101_B01', 'Con_03'),
+	('430101_B01', 'Con_04'),
+	('430101_B01', 'Con_05'),
+	('430101_B01', 'Con_06'),
+	('430101_B01', 'Con_07')
 Go
 
 Insert into Room
 Values
-	('Room_02',N'ACE Hotel - Bến Thành', 'active', N'139H Nguyễn Trãi, Quận 1, TP. Hồ Chí Minh, cách chợ Bến Thành 5 phút đi bộ',450000.00,'type_2','580101_B01')
-Go
-
-Insert into Room
-Values
-	('Room_03',N'Calista Sai Gon Hotel', 'active', N'247-249, Lý Tự Trọng, Phường Bến Thành Quận 1, TP. Hồ Chí Minh',750000.00,'type_2','580101_B02')
-Go
-
-Insert into Room
-Values
-	('Room_22',N'Common Inn Thao Dien', 'active', N'19, Đường 38, Phường Thảo Điền, Quận 2, TP.HCM', 780000.00,'type_2','580202_B01')
-Go
-
-Insert into Room
-Values
-	('Room_04',N'WECOZY HANOI - Railway Side, The Old Quarter', 'active', N'20 Tống Duy Tân, Quận Hoàn Kiếm, Hà Nội, Việt Nam ',1000000.00,'type_2','240102_B01')
-Go
-
-Insert into Room
-Values
-	('Room_05',N'Lakeside House', 'active', N'135 đường Đội Cấn, quận Ba Đình, Hà Nội',325000.00,'type_2','240202_B01')
-Go
-
-Insert into Room
-Values
-	('Room_06',N'Ancient Town 29 Phố Cổ', 'active', N'29 tổ 3 (Phố Cổ), Đồng Văn, Việt Nam',330000.00,'type_1','220101_B01')
-Go
-
-Insert into Room
-Values
-	('Room_08',N'Sapa Catcat Hills Resort & Spa', 'active', N'86 Fansipan, Sapa, Việt Nam, cách ga cáp treo Fansipan Legend 14 phút đi bộ',187800.00,'type_3','370101_B01')
-Go
-
-Insert into Room
-Values
-	('Room_09',N'La Beauté Bắc Hà','active',N'Homestay được xây dựng tại làng Tá Chài, Bắc Hà, Lào Cai, Việt Nam, CÓ WIFI',340000,'type_1','370201_B01')
-Go
-
-Insert into Room
-Values
-	('Room_11',N'Nhà gỗ - Farmstay Hoa Rừng U Minh', 'active', N'Ấp 15, xã Khánh An, Huyện U Minh, tỉnh Cà Mau, Cách Cà Mau 20.9km ',360000.00,'type_3','120101_B01')
-Go
-
-Insert into Room
-Values
-	('Room_12',N'Lovely House','active',N'Hẻm 3 /4 Đường Đoàn Thị Điểm Phường 4 Thành phố Đà Lạt,Việt Nam',380000.00,'type_3','350101_B01')
-Go
-
-Insert into Room
-Values
-	('Room_13',N'Raon Valley Villa', 'active', N'44D Trần Khánh Dư, Phường 8, Da Lat, Việt Nam, Cách Vườn Hoa Đà Lạt 17 phút đi bộ',400000.00,'type_3','350101_B01')
-Go
-
-Insert into Room
-Values
-	('Room_14',N'Muong Thanh Luxury Phu Tho', 'active', N'Toạ lạc tại CC17 Unit, Hung Vuong Square, Việt Trì, Việt Nam ',146100.00,'type_2','430101_B01')
-Go
-
-Insert into Room
-Values
-	('Room_17',N'Chunlii Homestay', 'active', N'Mũi Kê Gà, xã Tân Thành, Thành Thuận Nam, Bình Thuận',444000.00,'type_2','110101_B01')
-Go
-
-Insert into Room
-Values	
-	('Room_18',N'Cosmos Hotel Danang', 'active', N'117-119 Ngô Thì Sỹ, Phường Mỹ An, Ngũ Hành Sơn, Đà Nẵng, Việt Nam, Cách Biển Mỹ Khê 300m và Biển Bắc Mỹ An 450m',737000.00,'type_2','150101_B01')
-Go
-
-
-Insert into Room
-Values
-	('Room_20',N'Grand Pearl Minh Chau', 'active', N'Xã Minh Châu, Đảo Quan Lạn, Huyện Vân Đồn, Tỉnh Quảng Ninh, Cách bãi biển 1 phút đi bộ',2041000.00,'type_2','480101_B01')
-Go
-
-Insert into Room
-Values
-	('Room_23',N'Lavie Villa', 'active', N'Nằm cách Hồ Xuân Hương 2,7 km, Lavie Villa có sảnh khách chung, vườn cũng như chỗ nghỉ gắn máy điều hòa với ban công và WiFi miễn phí.',500000,'type_2','480101_B01')
-Go
-
-Insert into Room_Convenient
-Values
-	('Room_01', 'Con_01'),
-	('Room_01', 'Con_02'),
-	('Room_01', 'Con_03'),
-	('Room_02', 'Con_04')
-Go
-
-Insert into Rules
-Values
-	(1, N'Giữ gìn vệ sinh, không xả rác'),
-	(2, N'Cấm hút thuốc'),
-	(3, N'Không về trễ quá 11h đêm'),
-	(4, N'Không mang theo thú cưng')
-Go
-
-Insert into Building_Rules
-Values
-	('350101_B00', 1),
-	('350101_B00', 2),
-	('350101_B00', 3),
-	('350101_B00', 4)
+	('Room_01',N'Trường Giang Dalat Homestay', 'active', N'Tọa lạc tại thành phố Đà Lạt, cách Vườn hoa Đà Lạt 1,3 km, Trường Giang Dalat Hotel cung cấp chỗ nghỉ với nhà hàng, chỗ đỗ xe riêng miễn phí, sảnh khách chung và khu vườn.', 900000, 'type_2', '350101_B00'),
+	('Room_02',N'ACE Hotel - Bến Thành', 'active', N'139H Nguyễn Trãi, Quận 1, TP. Hồ Chí Minh, cách chợ Bến Thành 5 phút đi bộ',450000.00,'type_2','580101_B01'),
+	('Room_03',N'Calista Sai Gon Hotel', 'active', N'247-249, Lý Tự Trọng, Phường Bến Thành Quận 1, TP. Hồ Chí Minh',750000.00,'type_2','580101_B02'),
+	('Room_07',N'Common Inn Thao Dien', 'active', N'19, Đường 38, Phường Thảo Điền, Quận 2, TP.HCM', 780000.00,'type_2','580202_B01'),
+	('Room_04',N'WECOZY HANOI - Railway Side, The Old Quarter', 'active', N'20 Tống Duy Tân, Quận Hoàn Kiếm, Hà Nội, Việt Nam ',1000000.00,'type_2','240102_B01'),
+	('Room_05',N'Lakeside House', 'active', N'135 đường Đội Cấn, quận Ba Đình, Hà Nội',325000.00,'type_2','240202_B01'),
+	('Room_06',N'Ancient Town 29 Phố Cổ', 'active', N'29 tổ 3 (Phố Cổ), Đồng Văn, Việt Nam',330000.00,'type_1','220101_B01'),
+	('Room_08',N'Sapa Catcat Hills Resort & Spa', 'active', N'86 Fansipan, Sapa, Việt Nam, cách ga cáp treo Fansipan Legend 14 phút đi bộ',187800.00,'type_3','370101_B01'),
+	('Room_09',N'La Beauté Bắc Hà','active',N'Homestay được xây dựng tại làng Tá Chài, Bắc Hà, Lào Cai, Việt Nam, CÓ WIFI',340000,'type_1','370201_B01'),
+	('Room_10',N'Nhà gỗ - Farmstay Hoa Rừng U Minh', 'active', N'Ấp 15, xã Khánh An, Huyện U Minh, tỉnh Cà Mau, Cách Cà Mau 20.9km ',360000.00,'type_3','120101_B01'),
+	('Room_12',N'Lovely House','active',N'Hẻm 3 /4 Đường Đoàn Thị Điểm Phường 4 Thành phố Đà Lạt,Việt Nam',380000.00,'type_3','350101_B01'),
+	('Room_13',N'Raon Valley Villa', 'active', N'44D Trần Khánh Dư, Phường 8, Da Lat, Việt Nam, Cách Vườn Hoa Đà Lạt 17 phút đi bộ',400000.00,'type_3','350101_B01'),
+	('Room_14',N'Muong Thanh Luxury Phu Tho', 'active', N'Toạ lạc tại CC17 Unit, Hung Vuong Square, Việt Trì, Việt Nam ',146100.00,'type_2','430101_B01'),
+	('Room_11',N'Chunlii Homestay', 'active', N'Mũi Kê Gà, xã Tân Thành, Thành Thuận Nam, Bình Thuận',444000.00,'type_2','110101_B01'),
+	('Room_15',N'Cosmos Hotel Danang', 'active', N'117-119 Ngô Thì Sỹ, Phường Mỹ An, Ngũ Hành Sơn, Đà Nẵng, Việt Nam, Cách Biển Mỹ Khê 300m và Biển Bắc Mỹ An 450m',737000.00,'type_2','150101_B01'),
+	('Room_16',N'Grand Pearl Minh Chau', 'active', N'Xã Minh Châu, Đảo Quan Lạn, Huyện Vân Đồn, Tỉnh Quảng Ninh, Cách bãi biển 1 phút đi bộ',2041000.00,'type_2','480101_B01'),
+	('Room_17',N'Lavie Villa', 'active', N'Nằm cách Hồ Xuân Hương 2,7 km, Lavie Villa có sảnh khách chung, vườn cũng như chỗ nghỉ gắn máy điều hòa với ban công và WiFi miễn phí.',500000,'type_2','480101_B01')
 Go
 
 Insert into Bill

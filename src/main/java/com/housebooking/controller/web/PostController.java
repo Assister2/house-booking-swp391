@@ -92,9 +92,9 @@ public class PostController extends HttpServlet {
 			throws ServletException, IOException {
 		String roomId = request.getParameter("roomId");
 
-		IRoomDAO roomDAO = new RoomDAO();
-
-		Room room = roomDAO.find(roomId);
+//		IRoomDAO roomDAO = new RoomDAO();
+//
+//		Room room = roomDAO.find(roomId);
 
 		ConvenientDAO convenientDAO = new ConvenientDAO();
 
@@ -109,8 +109,8 @@ public class PostController extends HttpServlet {
 		request.setAttribute("listRule", listRule);
 		request.setAttribute("listFeedback", listFeedback);
 		request.setAttribute("listConvenient", listConvenient);
-		request.setAttribute("listNearRoom", listNearRoom);
-		request.setAttribute("room", room);
+		//request.setAttribute("listNearRoom", listNearRoom);
+		request.setAttribute("building", building);
 
 		RequestDispatcher rd = request.getRequestDispatcher("/view/web/single-post.jsp");
 		rd.forward(request, response);

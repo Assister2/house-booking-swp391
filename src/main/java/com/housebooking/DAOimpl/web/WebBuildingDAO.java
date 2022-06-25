@@ -12,6 +12,7 @@ import com.housebooking.Model.Address;
 import com.housebooking.Model.Building;
 import com.housebooking.Model.City;
 import com.housebooking.Model.District;
+import com.housebooking.Model.Room;
 import com.housebooking.Model.Street;
 import com.housebooking.Utils.DBUtils;
 
@@ -177,5 +178,37 @@ public class WebBuildingDAO {
 			ex.printStackTrace();
 		}
 		return result;
+	}
+	
+	public Building find(String buildingId) {
+		Building building = new Building();
+		String sql = " Select  r.*, t.type_name, ISNULL(Round(AVG(rating*1.0),1),0) as rating \r\n"
+				+ " from Room r join Type_Of_Room t on r.type_id = t.type_id\r\n"
+				+ "	join Building b on r.building_id = b.building_id\r\n"
+				+ "	left join Feedback f on r.room_id = f.room_id\r\n" + " Where r.room_id like ?\r\n"
+				+ " Group by r.room_id, r.room_name, r.room_desc, r.room_price, r.room_status, r.building_id, r.type_id, t.type_name\r\n";
+
+		try {
+
+			Connection conn = DBUtils.getConnection();
+
+			PreparedStatement ps = conn.prepareStatement(sql);
+
+			ps.setString(1, roomId);
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				fillDataInRoom(rs, room);
+			}
+			
+			room.setRoomImages(findImages(roomId));
+
+		} catch (Exception ex) {
+
+			ex.printStackTrace();
+
+		}
+
+		return room;
 	}
 }
