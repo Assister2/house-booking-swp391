@@ -279,16 +279,17 @@
 																	</tr>
 																</thead>
 																<tbody>
+																<c:forEach var="s" begin="1" end="${listService.size() }">
+																<c:if test="${listService[s-1].buildingID == listBuilding[a-1].buildingId}">
 																	<tr>
-
 																		<td>
 																			<div class="table-data__info">
-																				<h6>lori lynch</h6>
+																				<h6>${listService[s-1].serviceName }</h6>
 																			</div>
 																		</td>
 																		<td>
 																			<div class="table-data__info">
-																				<h6>700k</h6>
+																				<h6>${listService[s-1].price }k</h6>
 																			</div>
 																		</td>
 																		<td class="table-data-feature">
@@ -301,105 +302,10 @@
 																				<i class="zmdi zmdi-delete"></i>
 																			</button>
 																		</td>
-
 																	</tr>
-																	<tr>
-
-																		<td>
-																			<div class="table-data__info">
-																				<h6>lori lynch</h6>
-																			</div>
-																		</td>
-																		<td>
-																			<div class="table-data__info">
-																				<h6>700k</h6>
-																			</div>
-																		</td>
-																		<td class="table-data-feature">
-																			<button class="item" data-toggle="tooltip"
-																				data-placement="top" title="Edit">
-																				<i class="zmdi zmdi-edit"></i>
-																			</button>
-																			<button class="item" data-toggle="tooltip"
-																				data-placement="top" title="Edit">
-																				<i class="zmdi zmdi-delete"></i>
-																			</button>
-																		</td>
-
-																	</tr>
-																	<tr>
-
-																		<td>
-																			<div class="table-data__info">
-																				<h6>lori lynch</h6>
-																			</div>
-																		</td>
-																		<td>
-																			<div class="table-data__info">
-																				<h6>700k</h6>
-																			</div>
-																		</td>
-																		<td class="table-data-feature">
-																			<button class="item" data-toggle="tooltip"
-																				data-placement="top" title="Edit">
-																				<i class="zmdi zmdi-edit"></i>
-																			</button>
-																			<button class="item" data-toggle="tooltip"
-																				data-placement="top" title="Edit">
-																				<i class="zmdi zmdi-delete"></i>
-																			</button>
-																		</td>
-
-																	</tr>
-																	<tr>
-
-																		<td>
-																			<div class="table-data__info">
-																				<h6>lori lynch</h6>
-																			</div>
-																		</td>
-																		<td>
-																			<div class="table-data__info">
-																				<h6>700k</h6>
-																			</div>
-																		</td>
-																		<td class="table-data-feature">
-																			<button class="item" data-toggle="tooltip"
-																				data-placement="top" title="Edit">
-																				<i class="zmdi zmdi-edit"></i>
-																			</button>
-																			<button class="item" data-toggle="tooltip"
-																				data-placement="top" title="Edit">
-																				<i class="zmdi zmdi-delete"></i>
-																			</button>
-																		</td>
-
-																	</tr>
-																	<tr>
-
-																		<td>
-																			<div class="table-data__info">
-																				<h6>lori lynch</h6>
-																			</div>
-																		</td>
-																		<td>
-																			<div class="table-data__info">
-																				<h6>700k</h6>
-																			</div>
-																		</td>
-																		<td class="table-data-feature">
-																			<button class="item" data-toggle="tooltip"
-																				data-placement="top" title="Edit">
-																				<i class="zmdi zmdi-edit"></i>
-																			</button>
-																			<button class="item" data-toggle="tooltip"
-																				data-placement="top" title="Edit">
-																				<i class="zmdi zmdi-delete"></i>
-																			</button>
-																		</td>
-
-																	</tr>
-
+																	</c:if>
+																	</c:forEach>
+																	
 																</tbody>
 															</table>
 														</div>
@@ -549,28 +455,20 @@
 															</h3>
 														</div>
 
-
 														<div class="table-responsive table-data">
 															<table class="table">
 																<thead>
+																	<c:forEach var="s" begin="1" end="${listService.size() }">
+																	<c:if test="${listService[s-1].buildingID == listBuilding[a-1].buildingId}">
 																	<tr>
-
-																		<td>Dịch vụ</td>
-																		<td>Giá</td>
-																		<td style="text-align: right;">ACtion</td>
-																	</tr>
-																</thead>
-																<tbody>
-																	<tr>
-
 																		<td>
 																			<div class="table-data__info">
-																				<h6>lori lynch</h6>
+																				<h6>${listService[s-1].serviceName }</h6>
 																			</div>
 																		</td>
 																		<td>
 																			<div class="table-data__info">
-																				<h6>700k</h6>
+																				<h6>${listService[s-1].price }k</h6>
 																			</div>
 																		</td>
 																		<td class="table-data-feature">
@@ -583,105 +481,9 @@
 																				<i class="zmdi zmdi-delete"></i>
 																			</button>
 																		</td>
-
 																	</tr>
-																	<tr>
-
-																		<td>
-																			<div class="table-data__info">
-																				<h6>lori lynch</h6>
-																			</div>
-																		</td>
-																		<td>
-																			<div class="table-data__info">
-																				<h6>700k</h6>
-																			</div>
-																		</td>
-																		<td class="table-data-feature">
-																			<button class="item" data-toggle="tooltip"
-																				data-placement="top" title="Edit">
-																				<i class="zmdi zmdi-edit"></i>
-																			</button>
-																			<button class="item" data-toggle="tooltip"
-																				data-placement="top" title="Edit">
-																				<i class="zmdi zmdi-delete"></i>
-																			</button>
-																		</td>
-
-																	</tr>
-																	<tr>
-
-																		<td>
-																			<div class="table-data__info">
-																				<h6>lori lynch</h6>
-																			</div>
-																		</td>
-																		<td>
-																			<div class="table-data__info">
-																				<h6>700k</h6>
-																			</div>
-																		</td>
-																		<td class="table-data-feature">
-																			<button class="item" data-toggle="tooltip"
-																				data-placement="top" title="Edit">
-																				<i class="zmdi zmdi-edit"></i>
-																			</button>
-																			<button class="item" data-toggle="tooltip"
-																				data-placement="top" title="Edit">
-																				<i class="zmdi zmdi-delete"></i>
-																			</button>
-																		</td>
-
-																	</tr>
-																	<tr>
-
-																		<td>
-																			<div class="table-data__info">
-																				<h6>lori lynch</h6>
-																			</div>
-																		</td>
-																		<td>
-																			<div class="table-data__info">
-																				<h6>700k</h6>
-																			</div>
-																		</td>
-																		<td class="table-data-feature">
-																			<button class="item" data-toggle="tooltip"
-																				data-placement="top" title="Edit">
-																				<i class="zmdi zmdi-edit"></i>
-																			</button>
-																			<button class="item" data-toggle="tooltip"
-																				data-placement="top" title="Edit">
-																				<i class="zmdi zmdi-delete"></i>
-																			</button>
-																		</td>
-
-																	</tr>
-																	<tr>
-
-																		<td>
-																			<div class="table-data__info">
-																				<h6>lori lynch</h6>
-																			</div>
-																		</td>
-																		<td>
-																			<div class="table-data__info">
-																				<h6>700k</h6>
-																			</div>
-																		</td>
-																		<td class="table-data-feature">
-																			<button class="item" data-toggle="tooltip"
-																				data-placement="top" title="Edit">
-																				<i class="zmdi zmdi-edit"></i>
-																			</button>
-																			<button class="item" data-toggle="tooltip"
-																				data-placement="top" title="Edit">
-																				<i class="zmdi zmdi-delete"></i>
-																			</button>
-																		</td>
-
-																	</tr>
-
+																	</c:if>
+																	</c:forEach>
 																</tbody>
 															</table>
 														</div>
