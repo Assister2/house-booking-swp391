@@ -24,18 +24,6 @@ Drop table City
 Drop table Users
 Go
 
-ALTER TABLE District
-DROP CONSTRAINT FK_District_City;
-Go
-
-ALTER TABLE Street
-DROP CONSTRAINT FK_Street_District;
-Go
-
-ALTER TABLE Room
-DROP CONSTRAINT FK_Room_Building;
-Go
-
 -- Create table
 Create table Room (
 	room_id varchar(50),
@@ -66,10 +54,12 @@ Go
 
 Create table Building(
 	building_id varchar(50),
+	building_number nvarchar(200),
 	building_name nvarchar(max),
+	buiding_image  varchar(200),
 	building_desc nvarchar(max),
-	building_type varchar(50),
-	building_number varchar(50),
+	building_type nvarchar(100),
+	building_rule  nvarchar(max),
 	street_id varchar(50),
 	user_id varchar(50),
 	primary key(building_id)
@@ -106,10 +96,10 @@ Create table Convenient(
 )
 Go
 
-Create table Room_Convenient(
-	room_id varchar(50),
+Create table Building_Convenient(
+	building_id varchar(50),
 	convenient_id varchar(50),
-	primary key(room_id,convenient_id)
+	primary key(building_id,convenient_id)
 )
 Go
 
@@ -155,8 +145,9 @@ Create table Feedback(
 	status nvarchar(20),
 	feedback_date date,
 	report int,
-	room_id varchar(50),
+	building_id varchar(50),
 	user_id varchar(50),
+	replyTo varchar(50),
 	primary key(feedback_id)
 )
 Go
@@ -179,20 +170,6 @@ Create table Building_Additional_service
 )
 Go
 
-Create table Rules(
-	ruleId int,
-	rule_content nvarchar(max),
-	primary key(ruleId)
-)
-Go
-
-Create table Building_Rules(
-	building_id varchar(50),
-	ruleId int,
-	primary key(building_id,ruleId)
-)
-Go
-
 -- SET FOREIGN KEY
 ALTER TABLE Room
 ADD CONSTRAINT FK_Room_TypeOfRoom
@@ -204,13 +181,13 @@ ADD CONSTRAINT FK_Room_Building
 FOREIGN KEY (building_id) REFERENCES Building(building_id);
 Go
 
-ALTER TABLE Room_Convenient
-ADD CONSTRAINT FK_Room_Convenient_Room
-FOREIGN KEY (room_id) REFERENCES Room(room_id);
+ALTER TABLE Building_Convenient
+ADD CONSTRAINT FK_Building_Convenient_Building
+FOREIGN KEY (building_id) REFERENCES Building(building_id);
 Go
 
-ALTER TABLE Room_Convenient
-ADD CONSTRAINT FK_Room_Convenient_Convenient
+ALTER TABLE Building_Convenient
+ADD CONSTRAINT FK_Building_Convenient_Convenient
 FOREIGN KEY (convenient_id) REFERENCES Convenient(convenient_id);
 Go
 
@@ -255,8 +232,8 @@ FOREIGN KEY (bill_id) REFERENCES Bill(bill_id);
 Go
 
 ALTER TABLE Feedback
-ADD CONSTRAINT FK_Feedback_Room
-FOREIGN KEY (room_id) REFERENCES Room(room_id);
+ADD CONSTRAINT FK_Feedback_Building
+FOREIGN KEY (building_id) REFERENCES Building(building_id);
 Go
 
 ALTER TABLE Feedback
@@ -272,30 +249,4 @@ Go
 ALTER TABLE Building_Additional_service
 ADD CONSTRAINT FK_Building_Additional_service_Additional_service
 FOREIGN KEY (add_serviceId) REFERENCES Additional_service(add_serviceId);
-Go
-
-ALTER TABLE Building_Rules
-ADD CONSTRAINT FK_Building_Rules_Rules
-FOREIGN KEY (ruleId) REFERENCES Rules(ruleId);
-Go
-
-ALTER TABLE Building_Rules
-ADD CONSTRAINT FK_Building_Rules_Building
-FOREIGN KEY (building_id) REFERENCES Building(building_id);
-Go
--- Delete
-
-Delete from City
-Delete from District
-Delete from Street
-Delete from Building
-Delete from Room_Images
-Delete from Type_Of_Room
-Delete from Convenient
-Delete from Room_Convenient
-Delete from Feedback
-Delete from Bill_Detail
-Delete from Bill
-Delete from Users
-Delete from Room
 Go
