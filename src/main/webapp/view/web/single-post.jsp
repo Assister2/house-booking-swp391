@@ -1,6 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>  
 
 <!DOCTYPE html>
 <html lang="eng">
@@ -350,7 +351,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								data-thumb="${pageContext.request.contextPath}${building.buildingImage }">
 								<div class="thumb-image">
 									<img
-										src="${pageContext.request.contextPath}${building.buildingImage } }"
+										src="${pageContext.request.contextPath}${building.buildingImage }"
 										data-imagezoom="true" class="img-responsive">
 								</div>
 							</li>
@@ -546,18 +547,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 												</div>
 											</li>
 											<li
-												data-thumb="${pageContext.request.contextPath}${room.roomImages[1] }">
+												data-thumb="${pageContext.request.contextPath}${room.roomImages[0] }">
 												<div class="thumb-image">
 													<img
-														src="${pageContext.request.contextPath}${room.roomImages[1] }"
+														src="${pageContext.request.contextPath}${room.roomImages[0] }"
 														data-imagezoom="true" class="img-responsive">
 												</div>
 											</li>
 											<li
-												data-thumb="${pageContext.request.contextPath}${room.roomImages[2] }">
+												data-thumb="${pageContext.request.contextPath}${room.roomImages[0] }">
 												<div class="thumb-image">
 													<img
-														src="${pageContext.request.contextPath}${room.roomImages[2] }"
+														src="${pageContext.request.contextPath}${room.roomImages[0] }"
 														data-imagezoom="true" class="img-responsive">
 												</div>
 											</li>
@@ -568,7 +569,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							</div>
 
 							<div class="col-md-9">
-								<div class="c">Standard Twin (tầng hầm)</div>
+								<div class="c">${room.roomName } </div>
 								<div class="d"
 									style="display: flex; z-index: 1; position: sticky; transition: all .4s; align-items: center; border-bottom: 1px solid #E2E8F0;">
 									<span style="width: 16px; height: 16px; margin-right: 6px;"><svg
@@ -637,8 +638,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 										</div>
 									</div>
 									<div class="col-md-3 discript" style="text-align: right;">
-										<p>Giá:</p>
-										<p>Đặt phòng</p>
+									<fmt:parseNumber var="gia" type="number" value="${room.price }" />  
+										<p>Giá: ${gia } VNĐ</p>
+										<button type="submit" class="btn btn-primary">Đặt phòng</button>
 									</div>
 								</div>
 							</div>
@@ -726,7 +728,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 						<form action="single-post" method="post">
 							<input type="hidden" name="action" value="comment"> <input
-								type="hidden" name="roomId" value="${param.roomId }"> <span
+								type="hidden" name="buildingId" value="${param.buildingId }"> <span
 								class="star-rating"> <input type="radio" name="rating"
 								value="1"><i></i> <input type="radio" name="rating"
 								value="2"><i></i> <input type="radio" name="rating"

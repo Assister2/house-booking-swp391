@@ -42,7 +42,6 @@ public class FeedbackDAO {
 				feedback.setStatus(rs.getString("status"));
 				feedback.setFeedbackDate(rs.getDate("feedback_date"));
 				feedback.setReport(rs.getInt("report"));
-				feedback.setRoom_id(rs.getString("room_id"));
 				
 				User user = new User();				 
 				user.setUserId(rs.getString("user_id"));
@@ -65,7 +64,7 @@ public class FeedbackDAO {
 	
 	 public boolean add(Feedback feedback) {
          String sql = "INSERT INTO Feedback "
-                + " VALUES(?,?,?,?,?,?,?,?)";
+                + " VALUES(?,?,?,?,?,?,?,?,?)";
 
         try {
 
@@ -79,9 +78,10 @@ public class FeedbackDAO {
             ps.setString(4, feedback.getStatus());
             ps.setDate(5, feedback.getFeedbackDate());
             ps.setInt(6, feedback.getReport());
-            ps.setString(7, feedback.getRoom_id());
+            ps.setString(7, feedback.getBuildingId());
             ps.setString(8, feedback.getUser().getUserId());
-
+            ps.setString(9, feedback.getReply());
+            
             if (ps.executeUpdate()>0) {
                 return true;
             }

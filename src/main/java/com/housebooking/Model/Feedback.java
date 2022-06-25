@@ -9,17 +9,31 @@ public class Feedback {
 	private String status;
 	private Date feedbackDate;
 	private int report;
-	private String room_id;
+	private String buildingId;
 	private User user;
+	private String reply;
 	
 	
 	
+	public String getBuildingId() {
+		return buildingId;
+	}
+	public void setBuildingId(String buildingId) {
+		this.buildingId = buildingId;
+	}
+	public String getReply() {
+		return reply;
+	}
+	public void setReply(String reply) {
+		this.reply = reply;
+	}
 	public Feedback() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
 	public Feedback(String feedbackId, String comment, int rating, String status, Date feedbackDate, int report,
-			String room_id, User user) {
+			String buildingId, User user, String reply) {
 		super();
 		this.feedbackId = feedbackId;
 		this.comment = comment;
@@ -27,8 +41,9 @@ public class Feedback {
 		this.status = status;
 		this.feedbackDate = feedbackDate;
 		this.report = report;
-		this.room_id = room_id;
+		this.buildingId = buildingId;
 		this.user = user;
+		this.reply = reply;
 	}
 	public String getFeedbackId() {
 		return feedbackId;
@@ -66,12 +81,7 @@ public class Feedback {
 	public void setReport(int report) {
 		this.report = report;
 	}
-	public String getRoom_id() {
-		return room_id;
-	}
-	public void setRoom_id(String room_id) {
-		this.room_id = room_id;
-	}
+
 	public User getUser() {
 		return user;
 	}

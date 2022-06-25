@@ -69,14 +69,15 @@ public class PostController extends HttpServlet {
 		//String name = request.getParameter("name");
 		//String email = request.getParameter("email");
 		String comment = request.getParameter("message");
-		String roomId = request.getParameter("roomId");
+		String buildingId = request.getParameter("buildingId");
+		String replyTo = request.getParameter("replyTo");
 		int report = 0;
 		Date date = new Date(System.currentTimeMillis());
 		String status = "On";
 		LocalDateTime dateTime = LocalDateTime.now().plus(Duration.of(10, ChronoUnit.MINUTES));
 		String feedbackId = dateTime.toString();
 		
-		Feedback feedback = new Feedback(feedbackId, comment, rating, status, date, report, roomId, userSession.getUser());
+		Feedback feedback = new Feedback(feedbackId, comment, rating, status, date, report, buildingId, userSession.getUser(),replyTo);
 		
 		FeedbackDAO feedbackDAO = new FeedbackDAO();
 	
