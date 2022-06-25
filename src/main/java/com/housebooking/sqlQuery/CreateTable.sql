@@ -12,7 +12,7 @@ Drop table Additional_service
 Drop table Bill_Detail 
 Drop table Bill
 Drop table Feedback
-Drop table Room_Convenient
+Drop table Building_Convenient
 Drop table Convenient
 Drop table Room_Images
 Drop table Room

@@ -11,7 +11,7 @@ from Room r join Type_Of_Room t on r.type_id = t.type_id
 	join Street st on b.street_id = st.street_id
 	join District dis on st.district_id = dis.district_id
 	join City ci on ci.city_id = dis.city_id
-	left join Room_Convenient con on r.room_id = con.room_id
+	left join Building_Convenient con on  b.building_id = con.building_id
 	left join Room_Images rm on  r.room_id = rm.room_id
 	left join (
 				Select r3.*
@@ -32,12 +32,13 @@ from Room r join Type_Of_Room t on r.type_id = t.type_id
 						AND  @endDate >= de.end_date
 					)
 			) as r2 on r.room_id = r2.room_id
-			left join Feedback f on r.room_id = f.room_id			
+			left join Feedback f on b.building_id = f.building_id			
 Where ci.city_name like @city  AND r2.room_id is null AND rm.image_name like 'image-1'
 Group by r.room_id, r.room_name, r.room_desc, r.room_price, r.room_status, r.building_id, r.type_id, t.type_name, rm.image_link
 Order by r.room_price ASC
 OFFSET @start ROWS FETCH NEXT @end ROWS ONLY
 Go
+
 
 Select *
 from Room r
