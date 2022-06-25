@@ -55,6 +55,34 @@ public class RoomDAO implements IRoomDAO {
 		room.setTypeName(rs.getNString("type_name"));
 		room.setRating(rs.getFloat("rating"));
 	}
+	
+	private List<String> findImages(String roomId) throws SQLException {
+		List<String> list = new ArrayList<>();
+		String sql = " Select rm.image_link\r\n"
+				+ " From Room r join Room_Images rm on r.room_id = rm.room_id\r\n"
+				+ " Where r.room_id like ?";
+
+		try {
+
+			Connection conn = DBUtils.getConnection();
+
+			PreparedStatement ps = conn.prepareStatement(sql);
+
+			ps.setString(1, roomId);
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				list.add(rs.getString("image_link"));
+			}
+
+		} catch (Exception ex) {
+
+			ex.printStackTrace();
+
+		}
+
+		return list;
+	}
 
 	@Override
 	public Room find(String roomId) {
@@ -77,6 +105,8 @@ public class RoomDAO implements IRoomDAO {
 			while (rs.next()) {
 				fillDataInRoom(rs, room);
 			}
+			
+			room.setRoomImages(findImages(roomId));
 
 		} catch (Exception ex) {
 
@@ -184,6 +214,7 @@ public class RoomDAO implements IRoomDAO {
 		return list;
 	}
 
+	//nay k co dung, de test thoii
 	public List<Room> list(String city, LocalDate startDate, LocalDate endDate, String direction, int start,
 			int recordsPerPage) {
 		ArrayList<Room> list;
@@ -296,7 +327,7 @@ public class RoomDAO implements IRoomDAO {
 			}
 		}
 		
-		sql += " Where ci.city_name like @city  AND r2.room_id is null AND (rm.image_link like '%_01.jpg%' Or rm.image_link like '%_01.jpeg%')\r\n";
+		sql += " Where ci.city_name like @city  AND r2.room_id is null AND rm.image_name like 'image-1'\r\n";
 
 		if (buildingType != null) {
 			sql += " AND (";
@@ -441,5 +472,87 @@ public class RoomDAO implements IRoomDAO {
 		}
 		return 0;
 	}
+	
+	//Load near place
+	public List<Room> nearRoom(String roomId) {
+		ArrayList<Room> list;
+		list = new ArrayList<Room>();
+		
+		String city_name = getCity(roomId);
 
+		String sql = " Select r.*, t.type_name, ISNULL(Round(AVG(rating*1.0),1),0) as rating, rm.image_link\r\n"
+				+ " From Room r join Building b on r.building_id = b.building_id\r\n"
+				+ "	join Street st on st.street_id = b.street_id\r\n"
+				+ "	join District ds on st.district_id = ds.district_id\r\n"
+				+ "	left join Type_Of_Room t on r.type_id = t.type_id\r\n"
+				+ "	left join Feedback f on r.room_id = f.room_id\r\n"
+				+ "	join City ci on ci.city_id = ds.city_id\r\n"
+				+ "	left join Room_Images rm on  r.room_id = rm.room_id\r\n"
+				+ "	left join (Select r2.* From Room r2 where r2.room_id like ?) as r2 on r.room_id = r2.room_id\r\n"
+				+ " Where r2.room_id is null AND ci.city_name like ? AND r.room_status like 'active' AND rm.image_name like 'image-1' \r\n"
+				+ " Group by r.room_id, r.room_name, r.room_desc, r.room_price, r.room_status, r.building_id, r.type_id, t.type_name, rm.image_link \r\n"
+				+ " Order by r.room_id ASC\r\n"
+				+ " OFFSET 0 ROWS FETCH NEXT 4 ROWS ONLY";
+
+		try {
+
+			Connection conn = DBUtils.getConnection();
+
+			PreparedStatement ps = conn.prepareStatement(sql);
+
+			ps.setString(1, roomId);
+			ps.setNString(2, "%" + city_name + "%");
+
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				Room room = new Room();
+				fillDataInRoom(rs, room);
+				List<String> images = new ArrayList<String>();
+				images.add(rs.getString("image_link"));
+				
+				room.setRoomImages(images);
+				list.add(room);
+			}
+
+		} catch (Exception ex) {
+
+			ex.printStackTrace();
+
+		}
+
+		return list;
+	}
+	
+
+	//Find City of Room
+	private String getCity(String roomId) {
+		String sql = " Select ci.city_name\r\n"
+				+ " From Room r join Building b on r.building_id = b.building_id\r\n"
+				+ "	join Street st on st.street_id = b.street_id\r\n"
+				+ "	join District ds on st.district_id = ds.district_id\r\n"
+				+ "	join City ci on ci.city_id = ds.city_id\r\n"
+				+ " Where r.room_id like ?";
+
+		try {
+
+			Connection conn = DBUtils.getConnection();
+
+			PreparedStatement ps = conn.prepareStatement(sql);
+			
+			ps.setString(1, roomId);
+
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				return rs.getNString("city_name");
+			}
+
+		} catch (Exception ex) {
+
+			ex.printStackTrace();
+
+		}
+		return "";
+	}
 }

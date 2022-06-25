@@ -238,28 +238,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							</c:forEach>
 						</ul>
 					</div>
-
-					<!-- Concept -->
-					<hr>
-					<!-- Type -->
-					<c:set var="listType" value="${requestScope.listType }"></c:set>
-					<div class="left-side">
-						<h3 class="agileits-sear-head">Concept</h3>
-						<ul>
-							<c:forEach var="type" items="${listType }">
-								<li><input id="${type.typeId}" type="checkbox"
-									value="${type.typeId}" class="checked" name="concept"
-									<c:forEach var="item" items="${conceptChoose}">
-										<c:if test="${item eq type.typeId}">
-									    	checked
-									  	</c:if>
-									</c:forEach>>
-									<span class="span"><label for="${type.typeId}"
-										style="font-weight: unset;">${type.typeName}</label></span></li>
-							</c:forEach>
-						</ul>
-					</div>
-					<!-- //discounts -->
+					
 					<hr>
 					<!--preference -->
 					<div class="left-side">
@@ -420,13 +399,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						</div>
 					</div>
 					<div class="clearfix"></div>
-					<c:set var="listRoom" value="${requestScope.listRoom}" />
+					<c:set var="listBuilding" value="${requestScope.listBuilding}" />
 					<c:set var="count" value="${1}" />
 					<!-- product-sec1 -->
 					<div class="product-sec1">
 						<!--/mens-->
 						<!--  -->
-						<c:forEach var="room" items="${listRoom}">
+						<c:forEach var="building" items="${listBuilding}">
 
 
 							<div class="row">
@@ -434,14 +413,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									<div class="product-shoe-info shoe">
 										<div class="men-pro-item">
 											<div class="men-thumb-item">
-											<c:set var="image" value="${pageContext.request.contextPath}${room.roomImages[0]}"></c:set>
+											<c:set var="image" value="${pageContext.request.contextPath}${building.buildingImage}"></c:set>
 											<c:set var="defaultImage" value="https://vinhomesland.vn/wp-content/uploads/2019/10/homestay.jpg"></c:set>
 												<img width="240" height="190"
-													src="${room.roomImages[0]==null?defaultImage:image }"
+													src="${building.buildingImage==null?defaultImage:image }"
 													alt="">
 												<div class="men-cart-pro">
 													<div class="inner-men-cart-pro">
-														<a href="${pageContext.request.contextPath}/single-post?roomId=${room.roomId}"
+														<a href="${pageContext.request.contextPath}/single-post?buildingId=${building.buildingId}"
 															class="link-product-add-cart">Xem chi tiết</a>
 													</div>
 												</div>
@@ -455,14 +434,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									<div class="item-info-product"
 										style="text-align: left; margin-bottom: 15px;">
 										<h4>
-											<a href="single.html">${room.roomName }</a>
+											<a href="${pageContext.request.contextPath}/single-post?buildingId=${building.buildingId}">${building.buildingName }</a>
 										</h4>
 										<div class="clearfix"></div>
 									</div>
 									<div class="grid_meta">
 										<div class="product_price">
 											<div class="grid-price ">
-												<span class="money ">${room.price/1000 }k/day</span>
+												<span class="money ">999k/day</span>
 											</div>
 										</div>
 
@@ -478,9 +457,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 											<li><a href="#"><i class="fa fa-star	"
 													aria-hidden="true"></i></a></li>
 										</ul>
-										<div>Đánh giá: ${room.rating != 0?room.rating:'Chưa có đánh giá' }</div>
-										<div>Loại phòng: ${room.typeName }</div>
-										<div>${room.roomDesc }</div>
+										<div>Đánh giá: ${building.rating != 0?building.rating:'Chưa có đánh giá' }</div>
+										<div>Loại phòng: ${building.buildingType }</div>
+										<div>Địa chỉ: ${building.buildingAddress	 }</div>
+										<div>${building.buildingDesc }</div>
 									</div>
 								</div>
 								<hr>

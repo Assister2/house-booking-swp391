@@ -64,7 +64,7 @@ public class LoginController extends HttpServlet {
 
 	protected void doDisplay(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("view/common/login.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/view/common/login.jsp");
 		rd.forward(request, response);
 	}
 

@@ -11,7 +11,7 @@ from Room r join Type_Of_Room t on r.type_id = t.type_id
 	join Street st on b.street_id = st.street_id
 	join District dis on st.district_id = dis.district_id
 	join City ci on ci.city_id = dis.city_id
-	left join Room_Convenient con on r.room_id = con.room_id
+	left join Building_Convenient con on  b.building_id = con.building_id
 	left join Room_Images rm on  r.room_id = rm.room_id
 	left join (
 				Select r3.*
@@ -32,16 +32,18 @@ from Room r join Type_Of_Room t on r.type_id = t.type_id
 						AND  @endDate >= de.end_date
 					)
 			) as r2 on r.room_id = r2.room_id
-			left join Feedback f on r.room_id = f.room_id			
-Where ci.city_name like @city  AND r2.room_id is null AND (rm.image_link like '%_01.jpg%' Or rm.image_link like '%_01.jpeg%')
+			left join Feedback f on b.building_id = f.building_id			
+Where ci.city_name like @city  AND r2.room_id is null AND rm.image_name like 'image-1'
 Group by r.room_id, r.room_name, r.room_desc, r.room_price, r.room_status, r.building_id, r.type_id, t.type_name, rm.image_link
 Order by r.room_price ASC
 OFFSET @start ROWS FETCH NEXT @end ROWS ONLY
 Go
 
+
 Select *
-from Room r join Room_Images rm on r.room_id= rm.room_id
-Where rm.image_link like '%_01.jpg%' Or rm.image_link like '%_01.jpeg%'
+from Room r
+Order by r.room_price ASC
+OFFSET 3 ROWS FETCH NEXT 6 ROWS ONLY
 Go
 
 SELECT CAST(25.45 AS int);
@@ -121,7 +123,7 @@ From (
 				) as r2 on r.room_id = r2.room_id
 				left join Feedback f on r.room_id = f.room_id
 	Where ci.city_name like @city  AND r2.room_id is null
-	Group by r.room_id, r.room_name, r.room_desc, r.room_price, r.room_status, r.room_rule, r.building_id, r.type_id, t.type_name
+	Group by r.room_id, r.room_name, r.room_desc, r.room_price, r.room_status, r.building_id, r.type_id, t.type_name
 )  room
 Go
 
@@ -165,16 +167,11 @@ From Room r left join Feedback f on r.room_id = f.room_id
 Group by r.room_id
 Go
 
-
-SELECT ISNULL(1, 'W3Schools.com')
-Go
-
 SELECT r.*, t.type_name, ISNULL(Round(AVG(rating*1.0),1),0) as rating
 FROM Room r left join Type_Of_Room t on r.type_id = t.type_id
 	left join Feedback f on r.room_id = f.room_id
-Group by r.room_id, r.room_name, r.room_desc, r.room_price, r.room_status, r.room_rule, r.building_id, r.type_id, t.type_name
-Order by r.room_price ASC
-OFFSET ? ROWS FETCH NEXT ? ROWS ONLY
+Group by r.room_id, r.room_name, r.room_desc, r.room_price, r.room_status, r.building_id, r.type_id, t.type_name
+Go
 
 -----
 
@@ -189,7 +186,7 @@ from Room r join Type_Of_Room t on r.type_id = t.type_id
 	join Building b on r.building_id = b.building_id
 	left join Feedback f on r.room_id = f.room_id
 Where r.room_id like 'Room_01'
-Group by r.room_id, r.room_name, r.room_desc, r.room_price, r.room_status, r.room_rule, r.building_id, r.type_id, t.type_name
+Group by r.room_id, r.room_name, r.room_desc, r.room_price, r.room_status, r.building_id, r.type_id, t.type_name
 Go
 
 ---
@@ -198,3 +195,38 @@ from  Convenient con  join Room_Convenient rcon on con.convenient_id = rcon.conv
 	join Room r on rcon.room_id = r.room_id
 Where r.room_id like 'Room_01'
 Go	
+
+
+--------------------------------------------------------------Tim gan day
+Select r.*, t.type_name, ISNULL(Round(AVG(rating*1.0),1),0) as rating, rm.image_link
+From Room r join Building b on r.building_id = b.building_id
+	join Street st on st.street_id = b.street_id
+	join District ds on st.district_id = ds.district_id
+	left join Type_Of_Room t on r.type_id = t.type_id
+	left join Feedback f on r.room_id = f.room_id
+	join City ci on ci.city_id = ds.city_id
+	left join Room_Images rm on  r.room_id = rm.room_id
+	left join (Select r2.* From Room r2 where r2.room_id like 'Room_01') as r2 on r.room_id = r2.room_id
+Where r2.room_id is null AND ci.city_name like N'%Lâm Đồng%' AND r.room_status like 'active' AND rm.image_name like 'image-1' 
+Group by r.room_id, r.room_name, r.room_desc, r.room_price, r.room_status, r.building_id, r.type_id, t.type_name, rm.image_link
+Order by r.room_id ASC
+OFFSET 0 ROWS FETCH NEXT 4 ROWS ONLY
+Go
+
+--Tìm địa chỉ của phòng
+Select ci.city_name
+From Room r join Building b on r.building_id = b.building_id
+	join Street st on st.street_id = b.street_id
+	join District ds on st.district_id = ds.district_id
+	join City ci on ci.city_id = ds.city_id
+Where r.room_id like 'Room_01'
+Go
+
+
+--Load comment
+Select fb.*, us.user_name, us.avatar
+From Feedback fb join Room r on fb.room_id = r.room_id
+join Users us on fb.user_id = us.user_id
+Where r.room_id like 'Room_01' AND fb.status like 'on'
+Order by fb.feedback_id DESC
+OFFSET 0 ROWS FETCH NEXT 3 ROWS ONLY

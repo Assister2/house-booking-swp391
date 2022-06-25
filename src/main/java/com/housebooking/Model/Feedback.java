@@ -12,6 +12,24 @@ public class Feedback {
 	private String room_id;
 	private User user;
 	
+	
+	
+	public Feedback() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public Feedback(String feedbackId, String comment, int rating, String status, Date feedbackDate, int report,
+			String room_id, User user) {
+		super();
+		this.feedbackId = feedbackId;
+		this.comment = comment;
+		this.rating = rating;
+		this.status = status;
+		this.feedbackDate = feedbackDate;
+		this.report = report;
+		this.room_id = room_id;
+		this.user = user;
+	}
 	public String getFeedbackId() {
 		return feedbackId;
 	}

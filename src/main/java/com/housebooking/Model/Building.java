@@ -3,14 +3,36 @@ package com.housebooking.Model;
 public class Building {
 	private String buildingId;
 	private String buildingDesc;
+	private String buildingName;
 	private String buildingType;
-	private Address buildingAddress;
+	private String buildingImage;
+	private String buildingAddress;
 	private String streetId;
 	private String userId;
 	private int numRoom;
+	private float rating;
 	
 	
 	
+	
+	public float getRating() {
+		return rating;
+	}
+	public void setRating(float rating) {
+		this.rating = rating;
+	}
+	public String getBuildingName() {
+		return buildingName;
+	}
+	public void setBuildingName(String buildingName) {
+		this.buildingName = buildingName;
+	}
+	public String getBuildingImage() {
+		return buildingImage;
+	}
+	public void setBuildingImage(String buildingImage) {
+		this.buildingImage = buildingImage;
+	}
 	public Building() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -45,14 +67,22 @@ public class Building {
 	public void setBuildingType(String buildingType) {
 		this.buildingType = buildingType;
 	}
-	public Address getBuildingAddress() {
-		return buildingAddress;
-	}
-	public void setBuildingAddress(Address buildingAddress) {
-		this.buildingAddress = buildingAddress;
-	}
+//	public Address getBuildingAddress() {
+//		return buildingAddress;
+//	}
+//	public void setBuildingAddress(Address buildingAddress) {
+//		this.buildingAddress = buildingAddress;
+//	}
+	
+	
 	public int getNumRoom() {
 		return numRoom;
+	}
+	public String getBuildingAddress() {
+		return buildingAddress;
+	}
+	public void setBuildingAddress(String buildingAddress) {
+		this.buildingAddress = buildingAddress;
 	}
 	public void setNumRoom(int numRoom) {
 		this.numRoom = numRoom;

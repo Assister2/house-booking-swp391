@@ -21,6 +21,7 @@ import com.housebooking.DAOimpl.web.ConvenientDAO;
 import com.housebooking.DAOimpl.web.DistrictDAO;
 import com.housebooking.DAOimpl.web.RoomDAO;
 import com.housebooking.DAOimpl.web.TypeOfRoomDAO;
+import com.housebooking.DAOimpl.web.WebBuildingDAO;
 import com.housebooking.Model.Building;
 import com.housebooking.Model.Convenient;
 import com.housebooking.Model.District;
@@ -75,18 +76,11 @@ public class BookingController extends HttpServlet {
 		if (request.getParameter("page") != null) {
 			page = Integer.parseInt(request.getParameter("page"));
 		}
-		int totalRecords = ((RoomDAO)roomDAO).getTotalRecord();
 		
 		//Lay tham so loai cho o
 		String[] buildingType = null;
 		if (request.getParameterValues("buildingType") != null) {
             buildingType = request.getParameterValues("buildingType");            
-        }
-		
-		//Lay concept
-		String[] concept = null;
-		if (request.getParameterValues("concept") != null) {
-            concept = request.getParameterValues("concept");
         }
 		
 		//Lay loai tien nghi
@@ -107,35 +101,29 @@ public class BookingController extends HttpServlet {
 		//Lay huong sort
 		String sort = request.getParameter("sort")==null?"":request.getParameter("sort");
 		
-        List<Room> listRoom;
+        List<Building> listBuilding;
         List<District> listDistrict;
         
-        if(city == null) {
-        	listRoom = roomDAO.list((page - 1) * recordsPerPage, recordsPerPage);
-        }
-        else {
-        	listRoom = ((RoomDAO)roomDAO).list(city, date1, date2, buildingType, 
-        			concept, convenient, (int)rating, district, sort, (page - 1) * recordsPerPage, recordsPerPage);
-        	totalRecords = ((RoomDAO)roomDAO).getTotalRecord(city, date1, date2, buildingType, 
-        			concept, convenient, (int)rating, district, sort, (page - 1) * recordsPerPage, recordsPerPage);
-        }
+        WebBuildingDAO webBuildingDAO = new WebBuildingDAO();
+        
+        listBuilding = webBuildingDAO.list(date1, date2, city, (page - 1) * recordsPerPage, recordsPerPage, buildingType, convenient, rating, district, sort);
+        
+        int totalRecords = webBuildingDAO.totalRecords(date1, date2, city,buildingType, convenient, rating, district);
         
         // Tinh so trang
         int noOfPages = (int) Math.ceil(totalRecords * 1.0 / recordsPerPage);
       
         listDistrict = new DistrictDAO().list(city);
         
-        
         request.setAttribute("districtChoose", district);
         request.setAttribute("ratingScale", rating);
         request.setAttribute("convenientChoose", convenient);
-        request.setAttribute("conceptChoose", concept);
         request.setAttribute("buildingType", buildingType);
         request.setAttribute("listDistrict", listDistrict);
 		request.setAttribute("totalRecords", totalRecords);
 		request.setAttribute("currentPage", page);
 		request.setAttribute("noOfPages", noOfPages);
-		request.setAttribute("listRoom", listRoom);
+		request.setAttribute("listBuilding", listBuilding);
 		defaulItem(request, response);
 
 		RequestDispatcher rd = request.getRequestDispatcher("/view/web/booking.jsp");
