@@ -53,6 +53,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	
 	
 	
+	
+	
 
 		addEventListener("load", function () {
 			setTimeout(hideURLbar, 0);
@@ -62,6 +64,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			window.scrollTo(0, 1);
 		}
 	
+
+
 
 
 
@@ -164,9 +168,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	border-radius: 8px;
 	margin-bottom: 16px;
 	background-color: #ffffff;
-	border-color: rgb(0, 182, 243);
+	padding-top: 20px;
+	padding-bottom: 20px;
 }
-
+/*
 .a {
 	color: #ffffff;
 	height: 32px;
@@ -179,8 +184,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	font-weight: 600;
 	line-height: 19px;
 	border-radius: 8px 8px 0px 0px;
-}
-
+}*/
 .b {
 	width: 100%;
 	display: flex;
@@ -236,6 +240,37 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	margin-left: -9px;
 }
 
+.jss760 {
+	display: flex;
+	text-align: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+.jss5455 {
+	margin: -3px;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.jss5456 {
+	margin: 3px;
+	padding: 5px 8px;
+	font-size: 12px;
+	font-weight: 400;
+	line-height: 14px;
+	border-radius: 100px;
+	background-color: #EDF2F7;
+}
+
+.jss5457 {
+    color: #00B6F3;
+    width: fit-content;
+    cursor: pointer;
+    margin-top: 6px;
+    background-color: rgba(0, 182, 243, 0.1);
+}
+
 .dropbtn {
 	background-color: #fff;
 	color: white;
@@ -277,6 +312,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 .dropdown:hover .dropbtn {
 	background-color: #c8cbc8;
+}
+
+.discript span:nth-child(1), p:nth-child(1) {
+	margin-top: 20px;
 }
 </style>
 
@@ -357,8 +396,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<!-- Booking -->
 
 				<div>
-					<a type="button" href="#chonphong"
-						class="btn btn-primary scroll">Chon phòng</a>
+					<a type="button" href="#chonphong" class="btn btn-primary scroll">Chon
+						phòng</a>
 				</div>
 
 				<!-- ENd Booking -->
@@ -516,9 +555,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 				<!-- <div id="flip">Click to slide the panel down or up</div> -->
 				<div id="panel" class="main" style="margin-top: 20px;">
-
-					<div class="a">Kiểm tra thông tin</div>
-					<br>
 					<div class="b row">
 						<div class="col-md-3">
 							<div class="grid images_3_of_2">
@@ -580,6 +616,46 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 											stroke-linecap="round" stroke-linejoin="round"></path></svg></span><span
 									class="MuiBox-root jss1075">35m2</span>
 							</div>
+							<div class="row" style="height: 75%;">
+								<div class="col-md-7 discript">
+									<div>
+										<p style="font-size: 16px;"><span style="font-weight: bold;">Concept của phòng:</span>
+											${room.typeName }</p>
+										<p style="font-size: 16px;"><span style="font-weight: bold;">Mô tả:</span> ${room.roomDesc }</p>
+									</div>
+									<div class="MuiBox-root jss5475 jss5455">
+										<div class="MuiBox-root jss5476 jss5456">Khăn tắm</div>
+										<div class="MuiBox-root jss5477 jss5456">Cửa sổ</div>
+										<div class="MuiBox-root jss5478 jss5456">Không hút thuốc</div>
+										<div class="MuiBox-root jss5479 jss5456">Đồ vệ sinh cá
+											nhân miễn phí</div>
+										<div class="MuiBox-root jss5480 jss5456">Dép đi trong
+											nhà</div>
+										<div class="MuiBox-root jss5481 jss5456">Phòng tắm riêng</div>
+										<div class="MuiBox-root jss5482 jss5456 jss5457">+8 tiện ích</div>
+									</div>
+									
+								</div>
+								<div class="col-md-2"
+									style="height: 100%; z-index: 1; position: sticky; transition: all .4s; align-items: center; border-right: 1px solid #E2E8F0; border-left: 1px solid #E2E8F0;">
+									<div class="discript MuiBox-root jss1065 jss760">
+										<span class="MuiBox-root jss1066 jss761"><svg
+												width="24" height="24" fill="none" class="svgFillAll jss763">
+												<g clip-path="url(#icon_bed_double_svg__clip0)"
+													fill="#718096">
+												<path
+													d="M22.5 11.75h-21a1.5 1.5 0 00-1.5 1.5v4a1.5 1.5 0 001.125 1.45.5.5 0 01.375.483v1.067a1 1 0 102 0v-1a.5.5 0 01.5-.5h16a.5.5 0 01.5.5v1a1 1 0 002 0v-1.064a.5.5 0 01.375-.483A1.5 1.5 0 0024 17.25v-4a1.5 1.5 0 00-1.5-1.5zM2.5 10.25a.5.5 0 00.5.5h18a.5.5 0 00.5-.5v-5a2.5 2.5 0 00-2.5-2.5H5a2.5 2.5 0 00-2.5 2.5v5zm4-3h2a2.5 2.5 0 012.166 1.25.5.5 0 01-.433.75H4.767a.5.5 0 01-.433-.75A2.5 2.5 0 016.5 7.25zm9 0h2a2.5 2.5 0 012.166 1.25.5.5 0 01-.433.75h-5.466a.5.5 0 01-.433-.75A2.5 2.5 0 0115.5 7.25z"></path></g>
+												<defs>
+												<clipPath id="icon_bed_double_svg__clip0">
+												<path fill="#fff" d="M0 0h24v24H0z"></path></clipPath></defs></svg></span><span
+											class="MuiBox-root jss1067">1 giường đôi</span>
+									</div>
+								</div>
+								<div class="col-md-3 discript" style="text-align: right;">
+									<p>Giá:</p>
+									<p>Đặt phòng</p>
+								</div>
+							</div>
 						</div>
 
 					</div>
@@ -622,10 +698,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								</div>
 								<div class="col-md-2" style="margin-top: 20px;">
 									<div class="dropdown" style="float: right;">
-										<button style="height: 5px; padding-top: 0px; border-radius: 5px;" class="dropbtn"><i data-visualcompletion="css-img" class="hu5pjgll m6k467ps" style="background-image: url(&quot;https://static.xx.fbcdn.net/rsrc.php/v3/yD/r/6_b0I_TpqUX.png&quot;); background-position: -90px -114px; background-size: 190px 160px; width: 16px; height: 16px; background-repeat: no-repeat; display: inline-block;"></i></button>
+										<button
+											style="height: 5px; padding-top: 0px; border-radius: 5px;"
+											class="dropbtn">
+											<i data-visualcompletion="css-img" class="hu5pjgll m6k467ps"
+												style="background-image: url(&quot;https://static.xx.fbcdn.net/rsrc.php/v3/yD/r/6_b0I_TpqUX.png&quot;); background-position: -90px -114px; background-size: 190px 160px; width: 16px; height: 16px; background-repeat: no-repeat; display: inline-block;"></i>
+										</button>
 										<div class="dropdown-content">
-											<a href="#">Report</a> 
-											<a href="#">Reply</a> 
+											<a href="#">Report</a> <a href="#">Reply</a>
 										</div>
 									</div>
 								</div>
