@@ -37,25 +37,10 @@ public class HomeController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		
+		System.out.println(request.getParameter("shoe_item"));	
+		
 		doDisplay(request, response);
 
-//		String city = request.getParameter("city");
-//		Date startDate = null;
-//		Date endDate = null;
-//		if(request.getParameter("startDate")!= null && request.getParameter("endDate")!= null) {
-//			try {
-//				startDate = Date.valueOf(request.getParameter("startDate"));
-//				endDate = Date.valueOf(request.getParameter("endDate"));
-//			} catch (Exception e) {
-//				// TODO: handle exception
-//			}
-//		}
-//		
-//		if (city == null) {
-//			doDisplay(request, response);
-//		} else {
-//			response.sendRedirect(request.getContextPath() +"/booking" + "?city=" + city + "&startDate=" + startDate + "&endDate=" + endDate);
-//		}
 	}
 	
 	protected void doDisplay(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

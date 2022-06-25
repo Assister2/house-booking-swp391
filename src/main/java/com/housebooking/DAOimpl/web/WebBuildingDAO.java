@@ -127,7 +127,6 @@ public class WebBuildingDAO {
 				}
 			}
 
-			System.out.println(sql);
 			ResultSet rs = ps.executeQuery();
 
 			while (rs.next()) {

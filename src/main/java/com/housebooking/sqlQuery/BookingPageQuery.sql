@@ -2,10 +2,7 @@
 -- Lọc phòng ở 1 địa điểm thời gian cụ thể
 DECLARE @startDate as date = '2022-06-15'
 DECLARE @endDate as date = '2022-06-18'
-DECLARE @city as nvarchar(100) = N'%Lâm Đồng%'
-DECLARE @start as int = 0
-DECLARE @end as int = 6
-Select  r.*, t.type_name, ISNULL(Round(AVG(rating*1.0),1),0) as rating, rm.image_link
+Select  r.*, t.type_name
 from Room r join Type_Of_Room t on r.type_id = t.type_id
 	join Building b on r.building_id = b.building_id
 	join Street st on b.street_id = st.street_id
@@ -33,7 +30,7 @@ from Room r join Type_Of_Room t on r.type_id = t.type_id
 					)
 			) as r2 on r.room_id = r2.room_id
 			left join Feedback f on b.building_id = f.building_id			
-Where ci.city_name like @city  AND r2.room_id is null AND rm.image_name like 'image-1'
+Where b.building_id like @  AND r2.room_id is null
 Group by r.room_id, r.room_name, r.room_desc, r.room_price, r.room_status, r.building_id, r.type_id, t.type_name, rm.image_link
 Order by r.room_price ASC
 OFFSET @start ROWS FETCH NEXT @end ROWS ONLY

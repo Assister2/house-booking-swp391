@@ -22,6 +22,7 @@
 	
 	
 	
+	
             addEventListener("load", function () {
             setTimeout(hideURLbar, 0);
             }, false);
@@ -29,6 +30,7 @@
             window.scrollTo(0, 1);
             }
         
+
 
 
 
@@ -227,14 +229,14 @@ select::-ms-expand {
 					</div>
 
 					<div class="col-md-3">
-						<label class="lbDiadiem">Ngày đến</label> <input type="text" name="startDate"
-							id="my_date_picker1" class="form-control"
+						<label class="lbDiadiem">Ngày đến</label> <input type="text"
+							name="startDate" id="my_date_picker1" class="form-control"
 							placeholder="__/__/____" required autocomplete="off">
 					</div>
 
 					<div class="col-md-3">
-						<label class="lbDiadiem">Ngày về</label> <input type="text" name="endDate"
-							id="my_date_picker2" class="form-control"
+						<label class="lbDiadiem">Ngày về</label> <input type="text"
+							name="endDate" id="my_date_picker2" class="form-control"
 							placeholder="__/__/____" required autocomplete="off">
 					</div>
 
@@ -254,44 +256,50 @@ select::-ms-expand {
 			<div class="row center">
 				<div class="col-md-2">
 					<img class="img-responsive" style="border-radius: 50%;" alt=""
-						src="https://hoangviettravel.vn/wp-content/uploads/2020/05/tour-phu-quoc-3-ngay-2-dem-1-min.jpg">
-					<br>
-					<a href="${pageContext.request.contextPath}/booking?city=Phú+Quốc">Phú Quốc</a>
+						src="https://bizweb.dktcdn.net/thumb/1024x1024/100/149/137/products/rock-beach-resort-phu-quoc-38b1371d-19f5-4b46-a852-775a1a006082-c76b8e9a-3efa-4735-8bc2-1ebba579858f.jpg?v=1647260298573">
+					<br> <a
+						href="${pageContext.request.contextPath}/booking?city=Kiên+Giang&district=Phú+Quốc">Phú
+						Quốc</a>
 				</div>
 
 				<div class="col-md-2">
 					<img class="img-responsive" style="border-radius: 50%;" alt=""
 						src="https://dulich9.com/wp-content/uploads/2019/05/Diem-du-lich-Nha-Trang.jpg">
-					<br>
-					<a href="${pageContext.request.contextPath}/booking?city=Phú+Quốc">Nha Trang</a>
+					<br> <a
+						href="${pageContext.request.contextPath}/booking?city=Khánh+Hòa&district=Nha+Trang">Nha
+						Trang</a>
 				</div>
 
 				<div class="col-md-2">
 					<img class="img-responsive" style="border-radius: 50%;" alt=""
 						src="https://images.foody.vn/res/g10/97019/s800/foody-buu-dien-thanh-pho-ho-chi-minh-748-636527632924027650.jpg">
-					<br>
-					<a href="${pageContext.request.contextPath}/booking?city=Hồ+Chí+Minh">TP Hồ Chí Minh</a>
+					<br> <a
+						href="${pageContext.request.contextPath}/booking?city=Hồ+Chí+Minh">TP
+						Hồ Chí Minh</a>
 				</div>
 
 				<div class="col-md-2">
 					<img class="img-responsive" style="border-radius: 50%;" alt=""
 						src="https://hoianit.com/wp-content/uploads/2021/07/hoa-giay-hoi-an-800x800.jpg">
-					<br>
-					<a href="${pageContext.request.contextPath}/booking?city=Hội+An">Hội An</a>
+					<br> <a
+						href="${pageContext.request.contextPath}/booking?city=Quảng+Nam&district=Hội+An">Hội
+						An</a>
 				</div>
 
 				<div class="col-md-2">
 					<img class="img-responsive" style="border-radius: 50%;" alt=""
 						src="http://reviewvilla.vn/wp-content/uploads/2022/03/art-homestay-vung-tau-8.jpg">
-					<br>
-					<a href="${pageContext.request.contextPath}/booking?city=Vũng+Tàu">BR - VT</a>
+					<br> <a
+						href="${pageContext.request.contextPath}/booking?city=Bà+Rịa+-+Vũng+Tàu">BR
+						- VT</a>
 				</div>
 
 				<div class="col-md-2">
 					<img class="img-responsive" style="border-radius: 50%;" alt=""
 						src="https://motogo.vn/wp-content/uploads/2020/02/O1HMsGK3ini3tjjM2jYmL00tRdfjrry8.jpeg">
-					<br>
-					<a href="${pageContext.request.contextPath}/booking?city=Lâm+Đồng">Đà Lạt</a>
+					<br> <a
+						href="${pageContext.request.contextPath}/booking?city=Lâm+Đồng">Đà
+						Lạt</a>
 				</div>
 			</div>
 		</div>
@@ -319,6 +327,74 @@ select::-ms-expand {
 	<script src="${pageContext.request.contextPath}/view/web/js/classie.js"></script>
 	<script src="${pageContext.request.contextPath}/view/web/js/demo1.js"></script>
 	<!-- //nav -->
+
+	<!-- cart-js -->
+	<script src="js/minicart.js"></script>
+	<script>
+		shoe.render();
+
+		shoe.cart.on('shoe_checkout', function(evt) {
+			var items, len, i;
+
+			if (this.subtotal() > 0) {
+				items = this.items();
+
+				for (i = 0, len = items.length; i < len; i++) {
+				}
+			}
+		});
+	</script>
+	<!--quantity-->
+	<script>
+		$('.value-plus')
+				.on(
+						'click',
+						function() {
+							var divUpd = $(this).parent().find('.value'), newVal = parseInt(
+									divUpd.text(), 10) + 1;
+							divUpd.text(newVal);
+						});
+
+		$('.value-minus')
+				.on(
+						'click',
+						function() {
+							var divUpd = $(this).parent().find('.value'), newVal = parseInt(
+									divUpd.text(), 10) - 1;
+							if (newVal >= 1)
+								divUpd.text(newVal);
+						});
+	</script>
+	<!--quantity-->
+	<script>
+		$(document).ready(function(c) {
+			$('.close1').on('click', function(c) {
+				$('.rem1').fadeOut('slow', function(c) {
+					$('.rem1').remove();
+				});
+			});
+		});
+	</script>
+	<script>
+		$(document).ready(function(c) {
+			$('.close2').on('click', function(c) {
+				$('.rem2').fadeOut('slow', function(c) {
+					$('.rem2').remove();
+				});
+			});
+		});
+	</script>
+	<script>
+		$(document).ready(function(c) {
+			$('.close3').on('click', function(c) {
+				$('.rem3').fadeOut('slow', function(c) {
+					$('.rem3').remove();
+				});
+			});
+		});
+	</script>
+	<!-- //cart-js -->
+	
 	<!--search-bar-->
 	<script src="${pageContext.request.contextPath}/view/web/js/search.js"></script>
 	<!--//search-bar-->
@@ -371,22 +447,26 @@ select::-ms-expand {
 				function() {
 
 					$(function() {
-						$("#my_date_picker1").datepicker({ minDate: 0 });
+						$("#my_date_picker1").datepicker({
+							minDate : 0
+						});
 					});
 
 					$(function() {
-						$("#my_date_picker2").datepicker({ minDate: 0 });
+						$("#my_date_picker2").datepicker({
+							minDate : 0
+						});
 					});
 
 					$('#my_date_picker1').change(
-							 function() {
+							function() {
 								startDate = $(this).datepicker('getDate');
-								 
+
 								$("#my_date_picker2").datepicker("option",
 										"minDate", startDate);
-								
+
 							})
-							
+
 					$('#my_date_picker2').change(
 							function() {
 								endDate = $(this).datepicker('getDate');
@@ -395,6 +475,7 @@ select::-ms-expand {
 							})
 				})
 	</script>
+	
 </body>
 
 </html>

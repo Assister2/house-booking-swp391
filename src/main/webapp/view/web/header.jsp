@@ -12,7 +12,7 @@
 				<a class="navbar-brand"
 					href="${pageContext.request.contextPath}/home"><span>House</span></a>
 				<a class="navbar-brand"
-					href="${pageContext.request.contextPath}/booking"> <i>
+					href="${pageContext.request.contextPath}/home"> <i>
 						Booking</i></a>
 			</h1>
 		</div>
@@ -105,6 +105,15 @@
 				<i class="fa fa-bars" aria-hidden="true"></i>
 			</button>
 		</div>
+		<div class="top_nav_right">
+					<div class="shoecart shoecart2 cart cart box_1">
+						<form action="#" method="post" class="last">
+							<input type="hidden" name="cmd" value="_cart">
+							<input type="hidden" name="display" value="1">
+							<button class="top_shoe_cart" type="submit" name="submit" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button>
+						</form>
+					</div>
+				</div>
 		
 	</c:if>
 	<div class="clearfix"></div>

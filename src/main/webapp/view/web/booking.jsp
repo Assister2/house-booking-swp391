@@ -122,6 +122,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/ui-lightness/jquery-ui.css'
 	rel='stylesheet'>
 
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <style>
 .main-filter {
 	background: #b0a7a7;
@@ -142,6 +143,23 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 .ui-slider-handle {
 	display: none;
 }
+
+	.sbmincart-quantity, .sbmincart-subtotal, .sbmincart-price{
+			display: none !important;
+		}
+
+		.sbmincart-details-remove{
+			width: 30%;
+   			float: left;
+		}
+
+		.sbmincart-remove{
+			float: right;
+		}
+
+		.sbmincart-submit{
+
+		}
 </style>
 </head>
 
@@ -422,9 +440,21 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 													<div class="inner-men-cart-pro">
 														<a href="${pageContext.request.contextPath}/single-post?buildingId=${building.buildingId}"
 															class="link-product-add-cart">Xem chi tiết</a>
-													</div>
+															
+													</div>	
+													
 												</div>
-												<!--  <span class="product-new-top">Active</span>-->
+												<span class="product-new-top" style="background-color: gray; width: 10%;;"><div class="shoe single-item hvr-outline-out">
+												<form action="#" method="get">
+													<input type="hidden" name="cmd" value="_cart">
+													<input type="hidden" name="shoe_item" value="dsaasd">
+													<input type="hidden" name="amount" value="405.00">
+													<button type="submit" class="shoe-cart pshoe-cart"><i class="fa fa-cart-plus" aria-hidden="true"></i></button>
+
+													<a href="#" data-toggle="modal" data-target="#myModal1"></a>
+												</form>
+
+											</div></span>
 											</div>
 
 										</div>
@@ -457,10 +487,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 											<li><a href="#"><i class="fa fa-star	"
 													aria-hidden="true"></i></a></li>
 										</ul>
-										<div>Đánh giá: ${building.rating != 0?building.rating:'Chưa có đánh giá' }</div>
-										<div>Loại phòng: ${building.buildingType }</div>
-										<div>Địa chỉ: ${building.buildingAddress	 }</div>
-										<div>${building.buildingDesc }</div>
+										<div><span style="font-weight: bolder;">Đánh giá: </span> ${building.rating != 0?building.rating:'Chưa có đánh giá' }</div>
+										<div><span style="font-weight: bolder;">Loại phòng: </span> ${building.buildingType }</div>
+										<div><span style="font-weight: bolder;">Địa chỉ<i style="font-size: 14px;" class="material-icons">&#xe567;</i> :</span> ${building.buildingAddress}</div>
+										<div><span style="font-weight: bolder;">Mô tả:</span>${building.buildingDesc }</div>
 									</div>
 								</div>
 								<hr>
@@ -690,6 +720,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							})
 				})
 	</script>
+
 
 </body>
 

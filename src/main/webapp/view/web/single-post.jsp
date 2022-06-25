@@ -1,7 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>  
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
 <html lang="eng">
@@ -57,6 +57,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	
 	
 	
+	
 
 		addEventListener("load", function () {
 			setTimeout(hideURLbar, 0);
@@ -66,6 +67,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			window.scrollTo(0, 1);
 		}
 	
+
 
 
 
@@ -320,6 +322,35 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 .discript span:nth-child(1), p:nth-child(1) {
 	margin-top: 20px;
 }
+
+.tooltip {
+	position: relative;
+	display: inline-block;
+	border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+	visibility: hidden;
+	width: 120px;
+	background-color: black;
+	color: #fff;
+	text-align: center;
+	border-radius: 6px;
+	padding: 5px 0;
+	position: absolute;
+	z-index: 1;
+	bottom: 100%;
+	left: 50%;
+	margin-left: -60px;
+	/* Fade in tooltip - takes 1 second to go from 0% to 100% opac: */
+	opacity: 0;
+	transition: opacity 1s;
+}
+
+.tooltip:hover .tooltiptext {
+	visibility: visible;
+	opacity: 1;
+}
 </style>
 
 </head>
@@ -393,13 +424,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<div>
 					<p style="font-size: 16px;">Concept của phòng:
 						${building.buildingType }</p>
+
+					<p style="font-size: 16px;">Địa chỉ: ${building.buildingAddress }</p>
 					<p style="font-size: 16px;">Mô tả: ${building.buildingDesc }</p>
 				</div>
 
 				<!-- Booking -->
 
 				<div>
-					<a type="button" href="#chonphong" class="btn btn-primary scroll">Chon
+					<a type="button" href="#chonphong" class="btn btn-primary scroll">Chọn
 						phòng</a>
 				</div>
 
@@ -456,6 +489,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<!--//tab_one-->
 
 						<div class="tab3">
+							<p>${building.buildingRule }</p>
+						</div>
+
+						<!-- tab 3 -->
+						<div class="tab3">
 							<div class="table-responsive">
 								<table class="table table-striped">
 									<tbody>
@@ -478,11 +516,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									</tbody>
 								</table>
 							</div>
-						</div>
 
-						<!-- tab 3 -->
-						<div class="tab3">
-							<p>${building.buildingRule }</p>
 						</div>
 
 						<!--//tab_one-->
@@ -565,11 +599,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 										</ul>
 									</div>
 								</div>
-								<a href="#"> Xem chi tiết phòng > </a>
 							</div>
 
 							<div class="col-md-9">
-								<div class="c">${room.roomName } </div>
+								<div class="c">${room.roomName }</div>
 								<div class="d"
 									style="display: flex; z-index: 1; position: sticky; transition: all .4s; align-items: center; border-bottom: 1px solid #E2E8F0;">
 									<span style="width: 16px; height: 16px; margin-right: 6px;"><svg
@@ -616,10 +649,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 												nhà</div>
 											<div class="MuiBox-root jss5481 jss5456">Phòng tắm
 												riêng</div>
-											<div class="MuiBox-root jss5482 jss5456 jss5457">+8
-												tiện ích</div>
 										</div>
-
+										
 									</div>
 									<div class="col-md-2"
 										style="height: 100%; z-index: 1; position: sticky; transition: all .4s; align-items: center; border-right: 1px solid #E2E8F0; border-left: 1px solid #E2E8F0;">
@@ -638,9 +669,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 										</div>
 									</div>
 									<div class="col-md-3 discript" style="text-align: right;">
-									<fmt:parseNumber var="gia" type="number" value="${room.price }" />  
+										<fmt:parseNumber var="gia" type="number"
+											value="${room.price }" />
 										<p>Giá: ${gia } VNĐ</p>
-										<button type="submit" class="btn btn-primary">Đặt phòng</button>
+										<button type="submit" class="btn btn-primary">Đặt
+											phòng</button>
 									</div>
 								</div>
 							</div>
@@ -728,13 +761,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 						<form action="single-post" method="post">
 							<input type="hidden" name="action" value="comment"> <input
-								type="hidden" name="buildingId" value="${param.buildingId }"> <span
-								class="star-rating"> <input type="radio" name="rating"
-								value="1"><i></i> <input type="radio" name="rating"
-								value="2"><i></i> <input type="radio" name="rating"
-								value="3"><i></i> <input type="radio" name="rating"
-								value="4" checked><i></i> <input type="radio"
-								name="rating" value="5"><i></i>
+								type="hidden" name="buildingId" value="${param.buildingId }">
+							<span class="star-rating"> <input type="radio"
+								name="rating" value="1"><i></i> <input type="radio"
+								name="rating" value="2"><i></i> <input type="radio"
+								name="rating" value="3"><i></i> <input type="radio"
+								name="rating" value="4" checked><i></i> <input
+								type="radio" name="rating" value="5"><i></i>
 							</span>
 							<c:if test="${usersession != null}">
 								<input type="text" class="form-control" placeholder="Name"
@@ -1111,6 +1144,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			});
 		});
 	</script>
+
 
 </body>
 
