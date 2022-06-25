@@ -1,6 +1,7 @@
 package com.housebooking.controller.homeowner;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.housebooking.DAOimpl.houseowner.BuildingDAO;
 import com.housebooking.Model.Building;
+import com.housebooking.Model.Service;
 
 /**
  * Servlet implementation class ManageController
@@ -53,11 +55,16 @@ public class ManageController extends HttpServlet {
 		//String buildingID = request.getParameter("buildingID");
 		
 		BuildingDAO buildingDAO = new BuildingDAO();
+		
 		List<Building> listBuilding;
+		List<Service> listService;
  
 		listBuilding = buildingDAO.list("User_01");
 		
+		listService = buildingDAO.listService(listBuilding);
+		
 		request.setAttribute("listBuilding", listBuilding);
+		request.setAttribute("listService", listService);
 		RequestDispatcher rd = request.getRequestDispatcher("/view/house-owner/building.jsp");
 		rd.forward(request, response);
 	}

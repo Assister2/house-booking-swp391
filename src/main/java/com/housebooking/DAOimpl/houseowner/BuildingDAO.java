@@ -10,6 +10,7 @@ import com.housebooking.Model.Address;
 import com.housebooking.Model.Building;
 import com.housebooking.Model.City;
 import com.housebooking.Model.District;
+import com.housebooking.Model.Service;
 import com.housebooking.Model.Street;
 import com.housebooking.Utils.DBUtils;
 
@@ -98,6 +99,49 @@ public class BuildingDAO {
 		}
 		return result;
 	}
+	
+	public List<Service> listService(List<Building> listBuilding) {
+		ArrayList<Service> list;
+		list = new ArrayList<Service>();
+		int count = 1;
+
+		String sql = "select bas.building_id, ads.add_serviceName, bas.add_service_price\r\n"
+				+ "from Building_Additional_service bas join Additional_service ads on bas.add_serviceId = ads.add_serviceId\r\n"
+				+ "where ";
+		for (int i = 1; i<=listBuilding.size();i++) {
+			if(i==1) {
+				sql += "bas.building_id like ?";
+			} else {
+				sql += " or bas.building_id like ?";
+			}
+		}
+			
+		try {
+
+			Connection conn = DBUtils.getConnection();
+
+			PreparedStatement ps = conn.prepareStatement(sql);
+			for (Building b : listBuilding) {				
+				ps.setString(count, b.getBuildingId());
+				count++;
+			}
+			
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				Service service = new Service();
+				service.setBuildingID(rs.getString("building_id"));
+				service.setServiceName(rs.getString("add_serviceName"));
+				service.setPrice(rs.getInt("add_service_price"));				
+				list.add(service);
+			}
+				
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}		
+		return list;
+	}
+	
 	public List<Building> listBuildingType() {
 		ArrayList<Building> list;
 		list = new ArrayList<Building>();
