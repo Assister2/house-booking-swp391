@@ -1,6 +1,7 @@
 package com.housebooking.Model;
 
 public class Convenient {
+	private String buildingID;
 	private String conveId;
 	private String conveName;
 	public String getConveId() {
@@ -15,5 +16,10 @@ public class Convenient {
 	public void setConveName(String conveName) {
 		this.conveName = conveName;
 	}
-	
+	public String getBuildingID() {
+		return buildingID;
+	}
+	public void setBuildingID(String buildingID) {
+		this.buildingID = buildingID;
+	}
 }

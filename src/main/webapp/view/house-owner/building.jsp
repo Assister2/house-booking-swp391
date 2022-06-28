@@ -57,6 +57,10 @@
 	href="${pageContext.request.contextPath}/view/house-owner/vendor/perfect-scrollbar/perfect-scrollbar.css"
 	rel="stylesheet" media="all">
 
+<!-- Plugin CKEDITOR -->
+<script
+	src="${pageContext.request.contextPath}/view/common/ckeditor/ckeditor.js"></script>
+
 <!-- Main CSS-->
 <link
 	href="${pageContext.request.contextPath}/view/house-owner/css/theme.css"
@@ -201,7 +205,8 @@
 												<c:if test="${i==1 }">
 													<a class="nav-item nav-link active" id="nav-home-tab"
 														data-toggle="tab" href="#nav-${i }" role="tab"
-														aria-controls="nav-home${i }" aria-selected="true">Nhà ${i }</a>
+														aria-controls="nav-home${i }" aria-selected="true">Nhà
+														${i }</a>
 												</c:if>
 
 
@@ -220,481 +225,418 @@
 										</div>
 
 									</nav>
-																		
+
+
 									<div class="tab-content pl-3 pt-2" id="nav-tabContent">
-									<c:forEach var="a" begin="1" end="${listBuilding.size() }">
-										<c:if test="${a == 1 }">
-											<div class="tab-pane fade show active" id="nav-${a }"
-											role="tabpanel" aria-labelledby="nav-home${a }">
-											<br>
-											<div class="row">
+										<c:forEach var="a" begin="1" end="${listBuilding.size() }">
+											<c:if test="${a == 1 }">
+												<div class="tab-pane fade show active" id="nav-${a }"
+													role="tabpanel" aria-labelledby="nav-home${a }">
+													<br>
+													<div class="row">
 
-												<div class="col-4">
-													<img class="img-responsive img-thumbnail"
-														src="https://media.istockphoto.com/photos/beauty-on-the-plateau-hills-of-dalat-picture-id520621666?k=20&m=520621666&s=612x612&w=0&h=UWUIul9FOpaX5GGRlWF9qMSYODgeU3ktb6xWgd4kSRU="
-														alt="">
-												</div>
-												<div class="col-8">
-													<h3>${listBuilding[a-1].buildingId }</h3>
-													<p>
-														<span style="font-weight: bolder;">Loại cho thuê:</span>
-														${listBuilding[a-1].buildingType }
-													</p>
-													<p>
-														<span style="font-weight: bolder;">Địa chỉ:</span>
-														${listBuilding[a-1].buildingAddress }
-													</p>
-													<p>
-														<span style="font-weight: bolder;">Mô tả:</span> 
-														${listBuilding[a-1].buildingDesc }
-													</p>
-													Số lượng phòng: <span
-														style="font-weight: bold; padding-left: 5px; padding-right: 5px;">
-														${listBuilding[a-1].numRoom }
-													</span> <a href="#">Xem chi tiết</a>
-												</div>
-											</div>
-											<hr>
-											<div class="row">
-												<div class="col-6">
-													<!-- USER DATA-->
-													<div class="user-data m-b-30" style="padding-top: 0px;">
-														<div
-															style="background-color: #e5e5e5; padding-top: 30px; padding-bottom: 0.5px;">
-															<h3 class="title-3 m-b-30">
-																<i class="zmdi zmdi-account-calendar"></i>Quản lý dịch
-																vụ
-															</h3>
+														<div class="col-4">
+															<c:if test="${listBuilding[a-1].buildingImage != null}">
+																<img class="img-responsive img-thumbnail"
+																	src="${pageContext.request.contextPath}${listBuilding[a-1].buildingImage}"
+																	alt="">
+															</c:if>
+															<c:if test="${listBuilding[a-1].buildingImage == null}">
+																<img class="img-responsive img-thumbnail"
+																	src="https://bazantravel.com/cdn/medias/uploads/75/75014-leng-keng-homestay-da-lat-700x466.jpg"
+																	alt="">
+															</c:if>
 														</div>
-
-
-														<div class="table-responsive table-data">
-															<table class="table">
-																<thead>
-																	<tr>
-
-																		<td>Dịch vụ</td>
-																		<td>Giá</td>
-																		<td style="text-align: right;">Action</td>
-																	</tr>
-																</thead>
-																<tbody>
-																<c:forEach var="s" begin="1" end="${listService.size() }">
-																<c:if test="${listService[s-1].buildingID == listBuilding[a-1].buildingId}">
-																	<tr>
-																		<td>
-																			<div class="table-data__info">
-																				<h6>${listService[s-1].serviceName }</h6>
-																			</div>
-																		</td>
-																		<td>
-																			<div class="table-data__info">
-																				<h6>${listService[s-1].price }k</h6>
-																			</div>
-																		</td>
-																		<td class="table-data-feature">
-																			<button class="item" data-toggle="tooltip"
-																				data-placement="top" title="Edit">
-																				<i class="zmdi zmdi-edit"></i>
-																			</button>
-																			<button class="item" data-toggle="tooltip"
-																				data-placement="top" title="Edit">
-																				<i class="zmdi zmdi-delete"></i>
-																			</button>
-																		</td>
-																	</tr>
-																	</c:if>
-																	</c:forEach>
-																	
-																</tbody>
-															</table>
-														</div>
-														<div class="user-data__footer">
-															<button class="au-btn au-btn-load" data-toggle="modal"
-																data-target="#ModalDichVu">Thêm dịch vụ</button>
+														<div class="col-8">
+															<h3>${listBuilding[a-1].buildingName }</h3>
+															<p>
+																<span style="font-weight: bolder;">Loại cho thuê:</span>
+																${listBuilding[a-1].buildingType }
+															</p>
+															<p>
+																<span style="font-weight: bolder;">Địa chỉ:</span>
+																${listBuilding[a-1].buildingAddress }
+															</p>
+															<p>
+																<span style="font-weight: bolder;">Mô tả:</span>
+																${listBuilding[a-1].buildingDesc }
+															</p>
+															Số lượng phòng: <span
+																style="font-weight: bold; padding-left: 5px; padding-right: 5px;">
+																${listBuilding[a-1].numRoom } </span> <a href="#">Xem chi
+																tiết</a>
 														</div>
 													</div>
+													<hr>
+													<div class="row">
+														<div class="col-6">
+															<!-- USER DATA-->
+															<div class="user-data m-b-30" style="padding-top: 0px;">
+																<div
+																	style="background-color: #e5e5e5; padding-top: 30px; padding-bottom: 0.5px;">
+																	<h3 class="title-3 m-b-30">
+																		<i class="zmdi zmdi-account-calendar"></i>Quản lý dịch
+																		vụ
+																	</h3>
+																</div>
 
 
-												</div>
+																<div class="table-responsive table-data">
+																	<table class="table">
+																		<thead>
+																			<tr>
 
-												<!-- END USER DATA-->
-												<div class="col-6">
-													<!-- USER DATA-->
-													<div class="user-data m-b-30" style="padding-top: 0px;">
-														<div
-															style="background-color: #e5e5e5; padding-top: 30px; padding-bottom: 0.5px;">
-															<h3 class="title-3 m-b-30">
-																<i class="zmdi zmdi-account-calendar"></i>Nội quy
-															</h3>
+																				<td>Dịch vụ</td>
+																				<td>Giá</td>
+																				<td style="text-align: right;">Action</td>
+																			</tr>
+																		</thead>
+																		<tbody>
+																			<c:forEach var="s" begin="1"
+																				end="${listService.size() }">
+																				<c:if
+																					test="${listService[s-1].buildingID == listBuilding[a-1].buildingId}">
+																					<tr>
+																						<td>
+																							<div class="table-data__info">
+																								<h6>${listService[s-1].serviceName }</h6>
+																							</div>
+																						</td>
+																						<td>
+																							<div class="table-data__info">
+																								<h6>${listService[s-1].price }k</h6>
+																							</div>
+																						</td>
+																						<td class="table-data-feature">
+																							<button class="item" data-toggle="tooltip"
+																								data-placement="top" title="Edit">
+																								<i class="zmdi zmdi-edit"></i>
+																							</button>
+																							<button class="item" data-toggle="tooltip"
+																								data-placement="top" title="Edit">
+																								<i class="zmdi zmdi-delete"></i>
+																							</button>
+																						</td>
+																					</tr>
+																				</c:if>
+																			</c:forEach>
+
+																		</tbody>
+																	</table>
+																</div>
+																<div class="user-data__footer">
+																	<button class="au-btn au-btn-load" data-toggle="modal"
+																		data-target="#ModalDichVu${a }">Thêm dịch vụ</button>
+																</div>
+															</div>
+
+
 														</div>
 
+														<!-- END USER DATA-->
+														<div class="col-6">
+															<!-- USER DATA-->
+															<div class="user-data m-b-30" style="padding-top: 0px;">
+																<div
+																	style="background-color: #e5e5e5; padding-top: 30px; padding-bottom: 0.5px;">
+																	<h3 class="title-3 m-b-30">
+																		<i class="zmdi zmdi-account-calendar"></i>Tiện Nghi
+																	</h3>
+																</div>
 
-														<div class="table-responsive table-data">
-															<table class="table">
-																<thead>
-																	<tr>
 
-																		<td>Nội quy</td>
-																		<td style="text-align: right;">Action</td>
-																	</tr>
-																</thead>
-																<tbody>
-																	<tr>
-																		<td>
-																			<div class="table-data__info">
-																				<h6>Không xả rác bừa bãi, giữ vệ sinh chung</h6>
-																			</div>
-																		</td>
-																		<td class="table-data-feature">
-																			<button class="item" data-toggle="tooltip"
-																				data-placement="top" title="Edit">
-																				<i class="zmdi zmdi-delete"></i>
-																			</button>
-																		</td>
+																<div class="table-responsive table-data">
+																	<table class="table">
+																		<thead>
+																			<tr>
 
-																	</tr>
-																	<tr>
-																		<td>
-																			<div class="table-data__info">
-																				<h6>Không mang theo thú cưng</h6>
-																			</div>
-																		</td>
-																		<td class="table-data-feature">
-																			<button class="item" data-toggle="tooltip"
-																				data-placement="top" title="Edit">
-																				<i class="zmdi zmdi-delete"></i>
-																			</button>
-																		</td>
+																				<td>Tiện Nghi</td>
+																				<td style="text-align: right;">Action</td>
+																			</tr>
+																		</thead>
+																		<tbody>
+																			<c:forEach var="c" begin="1"
+																				end="${listConvenient.size() }">
+																				<c:if
+																					test="${listConvenient[c-1].buildingID == listBuilding[a-1].buildingId}">
+																					<tr>
+																						<td>
+																							<div class="table-data__info">
+																								<h6>${listConvenient[c-1].conveName }</h6>
+																							</div>
+																						</td>
+																						<td class="table-data-feature">
+																							<button class="item" data-toggle="tooltip"
+																								data-placement="top" title="Edit">
+																								<i class="zmdi zmdi-delete"></i>
+																							</button>
+																						</td>
 
-																	</tr>
-																	<tr>
-																		<td>
-																			<div class="table-data__info">
-																				<h6>Không về trễ quá 11h đêm</h6>
-																			</div>
-																		</td>
-																		<td class="table-data-feature">
-																			<button class="item" data-toggle="tooltip"
-																				data-placement="top" title="Edit">
-																				<i class="zmdi zmdi-delete"></i>
-																			</button>
-																		</td>
+																					</tr>
 
-																	</tr>
-																	<tr>
-																		<td>
-																			<div class="table-data__info">
-																				<h6>Bồi thường theo giá trị tương ứng vật phẩm
-																					bị làm hư hại</h6>
-																			</div>
-																		</td>
-																		<td class="table-data-feature">
-																			<button class="item" data-toggle="tooltip"
-																				data-placement="top" title="Edit">
-																				<i class="zmdi zmdi-delete"></i>
-																			</button>
-																		</td>
+																				</c:if>
+																			</c:forEach>
 
-																	</tr>
-
-																</tbody>
-															</table>
-														</div>
-														<div class="user-data__footer">
-															<button class="au-btn au-btn-load" data-toggle="modal"
-																data-target="#ModalNoiQuy">Thêm Nội quy</button>
+																		</tbody>
+																	</table>
+																</div>
+																<div class="user-data__footer">
+																	<button class="au-btn au-btn-load" data-toggle="modal"
+																		data-target="#ModalTienNghi${a }">Thêm Tiện
+																		Nghi</button>
+																</div>
+															</div>
 														</div>
 													</div>
 												</div>
-											</div>
-										</div>
-										</c:if>
-										<c:if test="${a != 1 }">
-											<div class="tab-pane fade" id="nav-${a }" role="tabpanel"
-											aria-labelledby="nav-home${a }">
-											<br>
-											<div class="row">
+											</c:if>
+											<c:if test="${a != 1 }">
+												<div class="tab-pane fade" id="nav-${a }" role="tabpanel"
+													aria-labelledby="nav-home${a }">
+													<br>
+													<div class="row">
 
-												<div class="col-4">
-													<img class="img-responsive img-thumbnail"
-														src="https://media.istockphoto.com/photos/beauty-on-the-plateau-hills-of-dalat-picture-id520621666?k=20&m=520621666&s=612x612&w=0&h=UWUIul9FOpaX5GGRlWF9qMSYODgeU3ktb6xWgd4kSRU="
-														alt="">
-												</div>
-
-												<div class="col-8">
-													<h3>${listBuilding[a-1].buildingId }</h3>
-													<p>
-														<span style="font-weight: bolder;">Loại cho thuê:</span>
-														${listBuilding[a-1].buildingType }
-													</p>
-													<p>
-														<span style="font-weight: bolder;">Địa chỉ:</span>
-														${listBuilding[a-1].buildingAddress }
-													</p>
-													<p>
-														<span style="font-weight: bolder;">Mô tả:</span> 
-														${listBuilding[a-1].buildingDesc }
-													</p>
-													Số lượng phòng: <span
-														style="font-weight: bold; padding-left: 5px; padding-right: 5px;">
-														${listBuilding[a-1].numRoom }
-													</span> <a href="#">Xem chi tiết</a>
-												</div>
-											</div>
-											<hr>
-											<div class="row">
-												<div class="col-6">
-													<!-- USER DATA-->
-													<div class="user-data m-b-30" style="padding-top: 0px;">
-														<div
-															style="background-color: #e5e5e5; padding-top: 30px; padding-bottom: 0.5px;">
-															<h3 class="title-3 m-b-30">
-																<i class="zmdi zmdi-account-calendar"></i>Quản lý dịch
-																vụ
-															</h3>
+														<div class="col-4">
+															<c:if test="${listBuilding[a-1].buildingImage != null}">
+																<img class="img-responsive img-thumbnail"
+																	src="${pageContext.request.contextPath}${listBuilding[a-1].buildingImage}"
+																	alt="">
+															</c:if>
+															<c:if test="${listBuilding[a-1].buildingImage == null}">
+																<img class="img-responsive img-thumbnail"
+																	src="https://bazantravel.com/cdn/medias/uploads/75/75014-leng-keng-homestay-da-lat-700x466.jpg"
+																	alt="">
+															</c:if>
 														</div>
 
-														<div class="table-responsive table-data">
-															<table class="table">
-																<thead>
-																	<c:forEach var="s" begin="1" end="${listService.size() }">
-																	<c:if test="${listService[s-1].buildingID == listBuilding[a-1].buildingId}">
-																	<tr>
-																		<td>
-																			<div class="table-data__info">
-																				<h6>${listService[s-1].serviceName }</h6>
-																			</div>
-																		</td>
-																		<td>
-																			<div class="table-data__info">
-																				<h6>${listService[s-1].price }k</h6>
-																			</div>
-																		</td>
-																		<td class="table-data-feature">
-																			<button class="item" data-toggle="tooltip"
-																				data-placement="top" title="Edit">
-																				<i class="zmdi zmdi-edit"></i>
-																			</button>
-																			<button class="item" data-toggle="tooltip"
-																				data-placement="top" title="Edit">
-																				<i class="zmdi zmdi-delete"></i>
-																			</button>
-																		</td>
-																	</tr>
-																	</c:if>
-																	</c:forEach>
-																</tbody>
-															</table>
-														</div>
-														<div class="user-data__footer">
-															<button class="au-btn au-btn-load" data-toggle="modal"
-																data-target="#ModalDichVu">Thêm dịch vụ</button>
+														<div class="col-8">
+															<h3>${listBuilding[a-1].buildingName }</h3>
+															<p>
+																<span style="font-weight: bolder;">Loại cho thuê:</span>
+																${listBuilding[a-1].buildingType }
+															</p>
+															<p>
+																<span style="font-weight: bolder;">Địa chỉ:</span>
+																${listBuilding[a-1].buildingAddress }
+															</p>
+															<p>
+																<span style="font-weight: bolder;">Mô tả:</span>
+																${listBuilding[a-1].buildingDesc }
+															</p>
+															Số lượng phòng: <span
+																style="font-weight: bold; padding-left: 5px; padding-right: 5px;">
+																${listBuilding[a-1].numRoom } </span> <a href="#">Xem chi
+																tiết</a>
 														</div>
 													</div>
+													<hr>
+													<div class="row">
+														<div class="col-6">
+															<!-- USER DATA-->
+															<div class="user-data m-b-30" style="padding-top: 0px;">
+																<div
+																	style="background-color: #e5e5e5; padding-top: 30px; padding-bottom: 0.5px;">
+																	<h3 class="title-3 m-b-30">
+																		<i class="zmdi zmdi-account-calendar"></i>Quản lý dịch
+																		vụ
+																	</h3>
+																</div>
+
+																<div class="table-responsive table-data">
+																	<table class="table">
+																		<thead>
+																			<tr>
+
+																				<td>Dịch vụ</td>
+																				<td>Giá</td>
+																				<td style="text-align: right;">Action</td>
+																			</tr>
+																		</thead>
+																		<c:forEach var="s" begin="1"
+																			end="${listService.size() }">
+																			<c:if
+																				test="${listService[s-1].buildingID == listBuilding[a-1].buildingId}">
+																				<tr>
+																					<td>
+																						<div class="table-data__info">
+																							<h6>${listService[s-1].serviceName }</h6>
+																						</div>
+																					</td>
+																					<td>
+																						<div class="table-data__info">
+																							<h6>${listService[s-1].price }k</h6>
+																						</div>
+																					</td>
+																					<td class="table-data-feature">
+																						<button class="item" data-toggle="tooltip"
+																							data-placement="top" title="Edit">
+																							<i class="zmdi zmdi-edit"></i>
+																						</button>
+																						<button class="item" data-toggle="tooltip"
+																							data-placement="top" title="Edit">
+																							<i class="zmdi zmdi-delete"></i>
+																						</button>
+																					</td>
+																				</tr>
+																			</c:if>
+																		</c:forEach>
+																		</tbody>
+																	</table>
+																</div>
+																<div class="user-data__footer">
+																	<button class="au-btn au-btn-load" data-toggle="modal"
+																		data-target="#ModalDichVu${a }">Thêm dịch vụ</button>
+																</div>
+															</div>
 
 
-												</div>
-
-												<!-- END USER DATA-->
-												<div class="col-6">
-													<!-- USER DATA-->
-													<div class="user-data m-b-30" style="padding-top: 0px;">
-														<div
-															style="background-color: #e5e5e5; padding-top: 30px; padding-bottom: 0.5px;">
-															<h3 class="title-3 m-b-30">
-																<i class="zmdi zmdi-account-calendar"></i>Nội quy
-															</h3>
 														</div>
 
+														<!-- END USER DATA-->
+														<div class="col-6">
+															<!-- USER DATA-->
+															<div class="user-data m-b-30" style="padding-top: 0px;">
+																<div
+																	style="background-color: #e5e5e5; padding-top: 30px; padding-bottom: 0.5px;">
+																	<h3 class="title-3 m-b-30">
+																		<i class="zmdi zmdi-account-calendar"></i>Tiện Nghi
+																	</h3>
+																</div>
 
-														<div class="table-responsive table-data">
-															<table class="table">
-																<thead>
-																	<tr>
 
-																		<td>Nội quy</td>
-																		<td style="text-align: right;">Action</td>
-																	</tr>
-																</thead>
-																<tbody>
-																	<tr>
-																		<td>
-																			<div class="table-data__info">
-																				<h6>Không xả rác bừa bãi, giữ vệ sinh chung</h6>
-																			</div>
-																		</td>
-																		<td class="table-data-feature">
-																			<button class="item" data-toggle="tooltip"
-																				data-placement="top" title="Edit">
-																				<i class="zmdi zmdi-delete"></i>
-																			</button>
-																		</td>
+																<div class="table-responsive table-data">
+																	<table class="table">
+																		<thead>
+																			<tr>
+																				<td>Tiện Nghi</td>
+																				<td style="text-align: right;">Action</td>
+																			</tr>
+																		</thead>
 
-																	</tr>
-																	<tr>
-																		<td>
-																			<div class="table-data__info">
-																				<h6>Không mang theo thú cưng</h6>
-																			</div>
-																		</td>
-																		<td class="table-data-feature">
-																			<button class="item" data-toggle="tooltip"
-																				data-placement="top" title="Edit">
-																				<i class="zmdi zmdi-delete"></i>
-																			</button>
-																		</td>
+																		<tbody>
+																			<c:forEach var="c" begin="1"
+																				end="${listConvenient.size() }">
+																				<c:if
+																					test="${listConvenient[c-1].buildingID == listBuilding[a-1].buildingId}">
+																					<tr>
+																						<td>
+																							<div class="table-data__info">
+																								<h6>${listConvenient[c-1].conveName }</h6>
+																							</div>
+																						</td>
+																						<td class="table-data-feature">
+																							<button class="item" data-toggle="tooltip"
+																								data-placement="top" title="Edit">
+																								<i class="zmdi zmdi-delete"></i>
+																							</button>
+																						</td>
 
-																	</tr>
-																	<tr>
-																		<td>
-																			<div class="table-data__info">
-																				<h6>Không về trễ quá 11h đêm</h6>
-																			</div>
-																		</td>
-																		<td class="table-data-feature">
-																			<button class="item" data-toggle="tooltip"
-																				data-placement="top" title="Edit">
-																				<i class="zmdi zmdi-delete"></i>
-																			</button>
-																		</td>
+																					</tr>
 
-																	</tr>
-																	<tr>
-																		<td>
-																			<div class="table-data__info">
-																				<h6>Bồi thường theo giá trị tương ứng vật phẩm
-																					bị làm hư hại</h6>
-																			</div>
-																		</td>
-																		<td class="table-data-feature">
-																			<button class="item" data-toggle="tooltip"
-																				data-placement="top" title="Edit">
-																				<i class="zmdi zmdi-delete"></i>
-																			</button>
-																		</td>
+																				</c:if>
+																			</c:forEach>
 
-																	</tr>
-
-																</tbody>
-															</table>
-														</div>
-														<div class="user-data__footer">
-															<button class="au-btn au-btn-load" data-toggle="modal"
-																data-target="#ModalNoiQuy">Thêm Nội quy</button>
+																		</tbody>
+																	</table>
+																</div>
+																<div class="user-data__footer">
+																	<button class="au-btn au-btn-load" data-toggle="modal"
+																		data-target="#ModalTienNghi${a }">Thêm Tiện
+																		Nghi</button>
+																</div>
+															</div>
 														</div>
 													</div>
 												</div>
-											</div>
-										</div>
-										</c:if>
-										
-										
-											
+											</c:if>
+
 										</c:forEach>
-										<!-- END USER DATA-->
-										<div class="tab-pane fade" id="nav-profile" role="tabpanel"
-											aria-labelledby="nav-profile-tab">
-											<p>Raw denim you probably haven't heard of them jean
-												shorts Austin. Nesciunt tofu stumptown aliqua, retro synth
-												master cleanse. Mustache cliche tempor, williamsburg carles
-												vegan helvetica. Reprehenderit butcher retro keffiyeh
-												dreamcatcher synth. Cosby sweater eu banh mi, irure terry
-												richardson ex sd. Alip placeat salvia cillum iphone. Seitan
-												alip s cardigan american apparel, butcher voluptate nisi .</p>
-										</div>
-										<div class="tab-pane fade" id="nav-contact" role="tabpanel"
-											aria-labelledby="nav-contact-tab">
-											<p>Raw denim you probably haven't heard of them jean
-												shorts Austin. Nesciunt tofu stumptown aliqua, retro synth
-												master cleanse. Mustache cliche tempor, williamsburg carles
-												vegan helvetica. Reprehenderit butcher retro keffiyeh
-												dreamcatcher synth. Cosby sweater eu banh mi, irure terry
-												richardson ex sd. Alip placeat salvia cillum iphone. Seitan
-												alip s cardigan american apparel, butcher voluptate nisi .</p>
-										</div>
-
 
 										<!-- Thêm nhà -->
+
 										<div class="tab-pane fade" id="nav-add" role="tabpanel"
 											aria-labelledby="nav-contact-tab">
-											<div class="tab-pane fade show active" id="nav-home"
-												role="tabpanel" aria-labelledby="nav-home-tab">
-												<br>
-												<div class="row">
+											<form action="manage" method="get"
+												enctype="multipart/form-data">
+												<div class="tab-pane fade show active" id="nav-home"
+													role="tabpanel" aria-labelledby="nav-home-tab">
+													<br>
+													<div class="row">
 
-													<div class="col-4">
-														<div class="file-upload">
-															<button class="file-upload-btn" type="button"
-																onclick="$('.file-upload-input').trigger( 'click' )">Add
-																Image</button>
 
-															<div class="image-upload-wrap">
-																<input class="file-upload-input" type='file'
-																	onchange="readURL(this);" accept="image/*" />
-																<div class="drag-text">
-																	<h3>Drag and drop a file or select add Image</h3>
+														<div class="col-4">
+															<div class="file-upload">
+																<button class="file-upload-btn" type="button"
+																	onclick="$('.file-upload-input').trigger( 'click' )">Add
+																	Image</button>
+
+																<div class="image-upload-wrap">
+																	<input class="file-upload-input" type='file'
+																		onchange="readURL(this);" accept="image/*" name="image"/>
+																	<div class="drag-text">
+																		<h3>Drag and drop a file or select add Image</h3>
+																	</div>
+																</div>
+																<div class="file-upload-content">
+																	<img class="file-upload-image" src="#" alt="your image" />
+																	<div class="image-title-wrap">
+																		<button type="button" onclick="removeUpload()"
+																			class="remove-image">
+																			Remove <span class="image-title">Uploaded
+																				Image</span>
+																		</button>
+																	</div>
 																</div>
 															</div>
-															<div class="file-upload-content">
-																<img class="file-upload-image" src="#" alt="your image" />
-																<div class="image-title-wrap">
-																	<button type="button" onclick="removeUpload()"
-																		class="remove-image">
-																		Remove <span class="image-title">Uploaded Image</span>
-																	</button>
+														</div>
+														<div class="col-8">
+															<div class="row form-field">
+																<div class="col-md-3">
+																	<label>Tên nhà</label>
+																</div>
+																<div class="col-md-8">
+																	<input type="text" id="" name="buildingName"
+																		placeholder="Nhập tên nhà" class="form-control">
+																</div>
+															</div>
+															<div class="row form-field">
+																<div class="col-md-3">
+																	<label>Loại cho thuê</label>
+																</div>
+																<div class="col-md-8">
+																	<input type="text" id="" name="buildingType"
+																		placeholder="Chọn loại cho thuê" class="form-control">
+																</div>
+															</div>
+															<div class="row form-field">
+																<div class="col-md-3">
+																	<label>Địa chỉ</label>
+																</div>
+																<div class="col-md-8">
+																	<input type="text" id="" name="Address" placeholder="Địa chỉ"
+																		class="form-control">
+																</div>
+															</div>
+															<div class="row form-field">
+																<div class="col-md-3">
+																	<label>Mô tả</label>
+																</div>
+																<div class="col-md-8">
+																	<textarea class="form-control" name="mota"
+																		placeholder="Mô tả" id="mota" rows="3"></textarea>
+																</div>
+															</div>
+															<div class="row form-field">
+																<div class="col-md-9"></div>
+																<div class="col-md-2">
+																		<input style="width: 100%;" type="submit" class="btn btn-primary" value="Save" name="Action">
 																</div>
 															</div>
 														</div>
 													</div>
-													<div class="col-8">
-														<div class="row form-field">
-															<div class="col-md-3">
-																<label>Tên nhà</label>
-															</div>
-															<div class="col-md-8">
-																<input type="text" id="" name=""
-																	placeholder="Nhập tên nhà" class="form-control">
-															</div>
-														</div>
-														<div class="row form-field">
-															<div class="col-md-3">
-																<label>Loại cho thuê</label>
-															</div>
-															<div class="col-md-8">
-																<input type="text" id="" name=""
-																	placeholder="Chọn loại cho thuê" class="form-control">
-															</div>
-														</div>
-														<div class="row form-field">
-															<div class="col-md-3">
-																<label>Địa chỉ</label>
-															</div>
-															<div class="col-md-8">
-																<input type="text" id="" name="" placeholder="Địa chỉ"
-																	class="form-control">
-															</div>
-														</div>
-														<div class="row form-field">
-															<div class="col-md-3">
-																<label>Mô tả</label>
-															</div>
-															<div class="col-md-8">
-																<textarea class="form-control" placeholder="Mô tả" id=""
-																	rows="3"></textarea>
-															</div>
-														</div>
-														<div class="row form-field">
-															<div class="col-md-9"></div>
-															<div class="col-md-2">
-																<button style="width: 100%;" type="submit"
-																	class="btn btn-primary">Lưu</button>
-															</div>
-														</div>
-													</div>
+													<hr>
 												</div>
-												<hr>
-											</div>
+											</form>
 										</div>
 
 									</div>
@@ -709,65 +651,129 @@
 	</div>
 	<!-- END PAGE CONTAINER-->
 	<!-- modal large -->
-	<div class="modal fade" id="ModalDichVu" tabindex="-1" role="dialog"
-		aria-labelledby="largeModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-lg" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="largeModalLabel">Thêm dịch vụ</h5>
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<p>There are three species of zebras: the plains zebra, the
-						mountain zebra and the Grévy's zebra. The plains zebra and the
-						mountain zebra belong to the subgenus Hippotigris, but Grévy's
-						zebra is the sole species of subgenus Dolichohippus. The latter
-						resembles an ass, to which it is closely related, while the former
-						two are more horse-like. All three belong to the genus Equus,
-						along with other living equids.</p>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary"
-						data-dismiss="modal">Cancel</button>
-					<button type="button" class="btn btn-primary">Confirm</button>
+	<c:forEach var="b" begin="1" end="${listBuilding.size() }">
+		<div class="modal fade" id="ModalDichVu${b }" tabindex="-1"
+			role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-lg" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="largeModalLabel">Thêm dịch vụ</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div class="table-responsive table-data">
+							<table class="table">
+								<thead>
+									<tr>
+
+										<td>Dịch vụ</td>
+										<td>Giá</td>
+										<td style="text-align: right;">Action</td>
+									</tr>
+								</thead>
+								<c:forEach var="saa" begin="1"
+									end="${listServiceAllowToAdd.size() }">
+									<c:if
+										test="${listServiceAllowToAdd[saa-1].buildingID == listBuilding[b-1].buildingId}">
+										<tr>
+											<td>
+												<div class="table-data__info">
+													<h6>${listServiceAllowToAdd[saa-1].serviceName }</h6>
+												</div>
+											</td>
+											<td>
+												<div class="table-data__info">
+													<h6>abc</h6>
+												</div>
+											</td>
+											<td class="table-data-feature">
+												<button class="item" data-toggle="tooltip"
+													data-placement="top" title="Edit">
+													<i class="zmdi zmdi-edit"></i>
+												</button>
+												<button class="item" data-toggle="tooltip"
+													data-placement="top" title="Edit">
+													<i class="zmdi zmdi-delete"></i>
+												</button>
+											</td>
+										</tr>
+									</c:if>
+								</c:forEach>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal">Cancel</button>
+						<button type="button" class="btn btn-primary">Confirm</button>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
+	</c:forEach>
+
 	<!-- end modal large -->
 
 	<!-- modal large -->
-	<div class="modal fade" id="ModalNoiQuy" tabindex="-1" role="dialog"
-		aria-labelledby="largeModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-lg" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="largeModalLabel">Thêm nội quy</h5>
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<p>There are three species of zebras: the plains zebra, the
-						mountain zebra and the Grévy's zebra. The plains zebra and the
-						mountain zebra belong to the subgenus Hippotigris, but Grévy's
-						zebra is the sole species of subgenus Dolichohippus. The latter
-						resembles an ass, to which it is closely related, while the former
-						two are more horse-like. All three belong to the genus Equus,
-						along with other living equids.</p>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary"
-						data-dismiss="modal">Cancel</button>
-					<button type="button" class="btn btn-primary">Confirm</button>
+	<c:forEach var="lb" begin="1" end="${listBuilding.size() }">
+		<div class="modal fade" id="ModalTienNghi${lb }" tabindex="-1"
+			role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-lg" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="largeModalLabel">Thêm Tiện Nghi</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="table-responsive table-data">
+						<table class="table">
+							<thead>
+								<tr>
+									<td>Tiện Nghi</td>
+									<td style="text-align: right;">Action</td>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach var="lc" begin="1"
+									end="${listConvenientAllowToAdd.size() }">
+									<c:if
+										test="${listConvenientAllowToAdd[lc-1].buildingID == listBuilding[lb-1].buildingId}">
+										<tr>
+											<td>
+												<div class="table-data__info">
+													<h6>${listConvenientAllowToAdd[lc-1].conveName }</h6>
+												</div>
+											</td>
+											<td class="table-data-feature">
+												<button class="item" data-toggle="tooltip"
+													data-placement="top" title="Edit">
+													<i class="zmdi zmdi-delete"></i>
+												</button>
+											</td>
+
+										</tr>
+
+									</c:if>
+								</c:forEach>
+
+							</tbody>
+						</table>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal">Cancel</button>
+						<button type="button" class="btn btn-primary">Confirm</button>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
+	</c:forEach>
 	<!-- end modal large -->
 
 
@@ -805,6 +811,10 @@
 		$('.image-upload-wrap').bind('dragleave', function() {
 			$('.image-upload-wrap').removeClass('image-dropping');
 		});
+	</script>
+
+	<script>
+		CKEDITOR.replace('mota');
 	</script>
 
 	<!-- Jquery JS-->

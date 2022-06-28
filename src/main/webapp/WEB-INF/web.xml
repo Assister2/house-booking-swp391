@@ -25,4 +25,12 @@
         <error-code>500</error-code>
         <location>/HandleInternalException</location>
     </error-page>
+    
+    <context-param> 
+      <description>Location to store uploaded file</description> 
+      <param-name>file-upload</param-name> 
+      <param-value>
+        	/house-booking-swp391/src/main/webapp/view/web/images/building/
+      </param-value> 
+   </context-param>
 </web-app>

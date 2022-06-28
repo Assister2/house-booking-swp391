@@ -2,6 +2,7 @@ package com.housebooking.Model;
 
 public class Service {
 	private String buildingID;
+	private String serviceID;
 	private String serviceName;
 	private int price;
 	public Service() {
@@ -23,5 +24,11 @@ public class Service {
 	}
 	public String getBuildingID() {
 		return buildingID;
+	}
+	public String getServiceID() {
+		return serviceID;
+	}
+	public void setServiceID(String serviceID) {
+		this.serviceID = serviceID;
 	}
 }
