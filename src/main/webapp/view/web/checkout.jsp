@@ -385,6 +385,9 @@ body {
 		<jsp:include page="commontool.jsp"></jsp:include>
 
 	</div>
+	
+	<div class="text-center"><h1>Trang chưa format</h1></div>
+	
 
 	<div style="width: 80%; margin-left: auto; margin-right: auto;">
 		<div class="col-md-7">
@@ -412,11 +415,8 @@ body {
 										d="M2 14v-1.333A2.667 2.667 0 014.667 10h2.666A2.667 2.667 0 0110 12.667V14m.667-11.913a2.667 2.667 0 010 5.166M14 14v-1.333a2.667 2.667 0 00-2-2.567M8.667 4.667a2.667 2.667 0 11-5.334 0 2.667 2.667 0 015.334 0z"
 										stroke="#4A5568" stroke-linecap="round"
 										stroke-linejoin="round"></path></svg></span> <span
-								class="MuiBox-root jss1071">Sức chứa tối đa 2 người</span> <span
-								class="MuiBox-root jss1072"
-								style="color: rgb(0, 182, 243); margin-left: 2px;">(Xem
-								chi tiết)</span> <span class="MuiBox-root jss1074"
-								style="margin-left: 20px; width: 16px; height: 16px; margin-right: 6px;"><svg
+								class="MuiBox-root jss1071">Sức chứa tối đa 2 người</span>  <span class="MuiBox-root jss1074"
+								style="margin-left: 30%; width: 16px; height: 16px; margin-right: 6px;"><svg
 									width="16" height="16" fill="none">
 									<path
 										d="M12 2H4a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2V4a2 2 0 00-2-2z"
@@ -428,7 +428,7 @@ body {
 								class="MuiBox-root jss1075">35m2</span>
 						</div>
 						<div class="row" style="height: 75%;">
-							<div class="col-md-7 discript">
+							<div class="col-md-12 discript">
 								<div
 									style="display: flex; font-size: 14px; font-weight: normal; line-height: 17px; padding-top: 8px;">
 									<svg width="16" height="16" fill="none">
@@ -438,7 +438,15 @@ body {
 											d="M11.771 11.105l-2.828 2.828a1.333 1.333 0 01-1.885 0l-2.83-2.828a5.333 5.333 0 117.543 0v0z"
 											stroke="#1A202C" stroke-linecap="round"
 											stroke-linejoin="round"></path></svg>
-									<p>Địa chỉ:</p>
+									<p>Địa chỉ:........</p>
+								</div>
+								<div class="row" style="margin-top: 10px;">
+									<div class="col-md-6">
+										Ngày đến: __/__/____
+									</div>
+									<div class="col-md-6">
+										Ngày về: __/__/____
+									</div>
 								</div>
 
 							</div>
@@ -451,6 +459,18 @@ body {
 			
 			<div id="panel" class="main col-md-12">
 				<h2>Thông tin đơn hàng</h2>
+				<label for="name">Khách hàng</label>
+				<input class="form-control" type="text" placeholder="tên khách hàng" name="name" id = "name" value="${usersession.user.name }" disabled="disabled">
+				
+				<label for="phone">Số điện thoại</label>
+				<input class="form-control" type="text" placeholder="tên khách hàng" name="phone" id = "phone" value="${usersession.user.phoneNumber }" disabled="disabled">
+				
+				<label for="email">Email</label>
+				<input class="form-control" type="Email" placeholder="tên khách hàng" name="email" id = "email" value="${usersession.user.email }" disabled="disabled">
+				
+				<input type="checkbox" required="required"> Tôi đã đọc kỹ thông tin
+				<br>
+				<input type="submit" class="btn btn-primary" value="Gửi yêu cầu đặt phòng">
 			</div>
 		</div>
 
@@ -461,7 +481,10 @@ body {
 				style="width: 432px; height: 114px; border-radius: 5px;"
 				src="https://q-xx.bstatic.com/xdata/images/hotel/840x460/205684046.jpg?k=edd4b442376ac9cf1784cb06c8de0dc8a6037a871e50f060ba8bbcdc297cb74a&o=">
 			<b>Ten cua phong: </b>
-			<p>Sức chứa:</p>
+			<p>Giá: .../ 1 ngày</p>
+			<p>Thông tin này kia các kiểu</p>
+			<p>Số ngày ở: ...</p>
+			<p>Tổng tiền:...</p>
 		</div>
 	</div>
 

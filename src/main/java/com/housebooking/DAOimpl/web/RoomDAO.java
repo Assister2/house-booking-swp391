@@ -51,6 +51,8 @@ public class RoomDAO implements IRoomDAO {
 		room.setRoomDesc(rs.getNString("room_desc"));
 		room.setPrice(rs.getFloat("room_price"));
 		room.setTypeId(rs.getString("type_id"));
+		room.setArea(rs.getFloat("room_area"));
+		room.setBed(rs.getInt("room_bed"));
 		room.setBuildingId(rs.getString("building_id"));
 		room.setTypeName(rs.getNString("type_name"));
 		//room.setRating(rs.getFloat("rating"));
@@ -91,7 +93,7 @@ public class RoomDAO implements IRoomDAO {
 				+ " from Room r join Type_Of_Room t on r.type_id = t.type_id\r\n"
 				+ "	join Building b on r.building_id = b.building_id\r\n"
 				+ "	left join Feedback f on r.room_id = f.room_id\r\n" + " Where r.room_id like ? AND r.room_status like 'active'\r\n"
-				+ " Group by r.room_id, r.room_name, r.room_desc, r.room_price, r.room_status, r.building_id, r.type_id, t.type_name\r\n";
+				+ " Group by r.room_id, r.room_name, r.room_desc, r.room_area, r.room_bed, r.room_price, r.room_status, r.building_id, r.type_id, t.type_name\r\n";
 
 		try {
 
@@ -143,7 +145,7 @@ public class RoomDAO implements IRoomDAO {
 				+ "				) as r2 on r.room_id = r2.room_id\r\n"
 				+ "				left join Feedback f on r.room_id = f.room_id\r\n"
 				+ "	Where ci.city_name like @city  AND r2.room_id is null\r\n"
-				+ "	Group by r.room_id, r.room_name, r.room_desc, r.room_price, r.room_status, r.building_id, r.type_id, t.type_name\r\n"
+				+ "	Group by r.room_id, r.room_name, r.room_desc, r.room_area, r.room_bed, r.room_price, r.room_status, r.building_id, r.type_id, t.type_name\r\n"
 				+ ")  room";
 
 		try {
@@ -185,7 +187,7 @@ public class RoomDAO implements IRoomDAO {
 		String sql = " SELECT r.*, t.type_name, ISNULL(Round(AVG(rating*1.0),1),0) as rating\r\n"
 				+ " FROM Room r left join Type_Of_Room t on r.type_id = t.type_id\r\n"
 				+ "	left join Feedback f on r.room_id = f.room_id\r\n"
-				+ " Group by r.room_id, r.room_name, r.room_desc, r.room_price, r.room_status, r.building_id, r.type_id, t.type_name\r\n"
+				+ " Group by r.room_id, r.room_name, r.room_desc, r.room_area, r.room_bed, r.room_price, r.room_status, r.building_id, r.type_id, t.type_name\r\n"
 				+ " Order by r.room_price ASC\r\n" + " OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
 
 		try {
@@ -252,7 +254,7 @@ public class RoomDAO implements IRoomDAO {
 				+ "				left join Feedback f on r.room_id = f.room_id\r\n"
 				+ " Where ci.city_name like @city  AND r2.room_id is null\r\n"
 				+ "	AND rm.image_link like '%_01.jpg%' Or rm.image_link like '%_01.jpeg%'\r\n"
-				+ " Group by r.room_id, r.room_name, r.room_desc, r.room_price, r.room_status, r.building_id, r.type_id, t.type_name, rm.image_link\r\n"
+				+ " Group by r.room_id, r.room_name, r.room_desc, r.room_area, r.room_bed, r.room_price, r.room_status, r.building_id, r.type_id, t.type_name, rm.image_link\r\n"
 				+ " Order by r.room_price ASC OFFSET @start ROWS FETCH NEXT @end ROWS ONLY";
 
 		try {
@@ -373,7 +375,7 @@ public class RoomDAO implements IRoomDAO {
 			sql += ")\r\n";
 		}
 
-		sql += " Group by r.room_id, r.room_name, r.room_desc, r.room_price, r.room_status, r.building_id, r.type_id, t.type_name, rm.image_link\r\n"
+		sql += " Group by r.room_id, r.room_name, r.room_desc, r.room_area, r.room_bed, r.room_price, r.room_status, r.building_id, r.type_id, t.type_name, rm.image_link\r\n"
 				+ " Order by r.room_price " + direct + "\r\n" + " OFFSET @start ROWS FETCH NEXT @end ROWS ONLY";
 
 		//System.out.println(sql);
@@ -490,7 +492,7 @@ public class RoomDAO implements IRoomDAO {
 				+ "	left join Room_Images rm on  r.room_id = rm.room_id\r\n"
 				+ "	left join (Select r2.* From Room r2 where r2.room_id like ?) as r2 on r.room_id = r2.room_id\r\n"
 				+ " Where r2.room_id is null AND ci.city_name like ? AND r.room_status like 'active' AND rm.image_name like 'image-1' \r\n"
-				+ " Group by r.room_id, r.room_name, r.room_desc, r.room_price, r.room_status, r.building_id, r.type_id, t.type_name, rm.image_link \r\n"
+				+ " Group by r.room_id, r.room_name, r.room_desc, r.room_area, r.room_bed, r.room_price, r.room_status, r.building_id, r.type_id, t.type_name, rm.image_link \r\n"
 				+ " Order by r.room_id ASC\r\n"
 				+ " OFFSET 0 ROWS FETCH NEXT 4 ROWS ONLY";
 
@@ -588,7 +590,7 @@ public class RoomDAO implements IRoomDAO {
 				+ "					)\r\n"
 				+ "			) as r2 on r.room_id = r2.room_id\r\n"
 				+ " Where b.building_id like ? AND r2.room_id is null AND r.room_status like 'active'\r\n"
-				+ " Group by r.room_id, r.room_name, r.room_desc, r.room_price, r.room_status, r.building_id, r.type_id, t.type_name";
+				+ " Group by r.room_id, r.room_name, r.room_desc, r.room_price, r.room_area, r.room_bed, r.room_status, r.building_id, r.type_id, t.type_name";
 
 		try {
 

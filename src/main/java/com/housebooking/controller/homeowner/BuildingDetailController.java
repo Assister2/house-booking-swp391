@@ -9,15 +9,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/single-house")
-
-public class SingleHouseController extends HttpServlet{
+/**
+ * Servlet implementation class BuildingDetailController
+ */
+@WebServlet("/building-detail")
+public class BuildingDetailController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    
+       
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SingleHouseController() {
+    public BuildingDetailController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,7 +28,7 @@ public class SingleHouseController extends HttpServlet{
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("/view/house-owner/single-house.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/view/house-owner/room.jsp");
         rd.forward(request, response);
 	}
 
@@ -37,4 +39,5 @@ public class SingleHouseController extends HttpServlet{
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
+
 }

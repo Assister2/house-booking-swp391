@@ -9,6 +9,8 @@ public class Room {
     private String roomName;
     private String roomDesc;
     private String roomStatus;
+    private int bed;
+    private float area;
     private float price;
     private String typeId;
     private String buildingId;
@@ -22,7 +24,23 @@ public class Room {
         this.roomImages = new ArrayList<String>();
     }
 
-    public String getRoomId() {
+    public int getBed() {
+		return bed;
+	}
+
+	public void setBed(int bed) {
+		this.bed = bed;
+	}
+
+	public float getArea() {
+		return area;
+	}
+
+	public void setArea(float area) {
+		this.area = area;
+	}
+
+	public String getRoomId() {
         return roomId;
     }
 

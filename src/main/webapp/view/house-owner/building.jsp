@@ -263,7 +263,7 @@
 															</p>
 															Số lượng phòng: <span
 																style="font-weight: bold; padding-left: 5px; padding-right: 5px;">
-																${listBuilding[a-1].numRoom } </span> <a href="#">Xem chi
+																${listBuilding[a-1].numRoom } </span> <a href="${pageContext.request.contextPath}/building-detail?buildingId=${listBuilding[a-1].buildingId }">Xem chi
 																tiết</a>
 														</div>
 													</div>
@@ -691,8 +691,8 @@
 											</td>
 											<td class="table-data-feature">
 												<button class="item" data-toggle="tooltip"
-													data-placement="top" title="Edit">
-													<i class="zmdi zmdi-edit"></i>
+													data-placement="top" title="Add">
+													<i class="zmdi zmdi-plus-circle-o"></i>
 												</button>
 												<button class="item" data-toggle="tooltip"
 													data-placement="top" title="Edit">
@@ -736,7 +736,9 @@
 							<thead>
 								<tr>
 									<td>Tiện Nghi</td>
-									<td style="text-align: right;">Action</td>
+									<td style="text-align: right;">
+									<span style="margin-right: 3px;"><label for="selectAllTienNghi">Chọn tất cả</label></span> <input type="checkbox" id="selectAllTienNghi" name="">
+									</td>
 								</tr>
 							</thead>
 							<tbody>
@@ -751,10 +753,7 @@
 												</div>
 											</td>
 											<td class="table-data-feature">
-												<button class="item" data-toggle="tooltip"
-													data-placement="top" title="Edit">
-													<i class="zmdi zmdi-delete"></i>
-												</button>
+												<input type="checkbox" name="listTienNghi" value="${listConvenientAllowToAdd[lc-1].conveId }">
 											</td>
 
 										</tr>

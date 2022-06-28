@@ -35,15 +35,17 @@ Delete from City
 Delete from District
 Delete from Street
 Delete from Building
-Delete from Room_Images
-Delete from Type_Of_Room
-Delete from Convenient
-Delete from Building_Convenient
-Delete from Feedback
-Delete from Bill_Detail
-Delete from Bill
+Delete from Room_Images --6
+Delete from Type_Of_Room --8
+Delete from Convenient --5
+Delete from Building_Convenient --4
+Delete from Feedback --3
+Delete from Bill_Detail --1
+Delete from Bill --2
 Delete from Users
-Delete from Room
+Delete from Room  --7
+Delete Additional_service --10
+Delete Building_Additional_service --9
 Go
 
 --Inser dữ liệu
@@ -158,7 +160,7 @@ Values
 	('240202_B01','123 ABC', N'Homestay ABC', null, N'Phòng cho gia đình có đầy đủ tiện nghi', N'Homestay',N'Không hút thuốc các kiểu, chỗ này trên page dùng CKEDITOR sửa lại', '240202', 'User_01'),
 	('220101_B01','123 ABC', N'Homestay ABC', null, N'Khu nhà qua đêm phong cách cổ điển', N'Nhà nguyên căn',N'Không hút thuốc các kiểu, chỗ này trên page dùng CKEDITOR sửa lại','220101', 'User_01'),
 	('430101_B01','123 ABC', N'Homestay ABC', null, N'Khách sạn phong cách hiện đại, đầy đủ tiện nghi, View đẹp', N'Homestay', N'Không hút thuốc các kiểu, chỗ này trên page dùng CKEDITOR sửa lại','430101', 'User_01'),
-	('430201_B01','123 ABC', N'Homestay ABC', null, N'Nhà vườn, có hồ bơi bao bọc bởi cây cảnh', N'Nhà nguyên căn',N'Không hút thuốc các kiểu, chỗ này trên page dùng CKEDITOR sửa lại','430201',  'User_01')
+	('430201_B01','123 ABC', N'Homestay ABC', null, N'Nhà vườn, có hồ bơi bao bọc bởi cây cảnh', N'Nhà nguyên căn',N'Không hút thuốc các kiểu, chỗ này trên page dùng CKEDITOR sửa lại','430201',  'User_01'),
 	('370101_B01','123 ABC', N'Homestay ABC', null,N'Resort và spa có cảnh quan đẹp bao quanh bỏi hồ, vườn cảnh', N'Homestay', N'Không hút thuốc các kiểu, chỗ này trên page dùng CKEDITOR sửa lại','370101', 'User_01'),
 	('370201_B01','123 ABC', N'Homestay ABC', null,N'Homestay phong cách cổ điển hài hoà với thiên nhiên', N'Homestay', N'Không hút thuốc các kiểu, chỗ này trên page dùng CKEDITOR sửa lại','370201','User_01'),
 	('120201_B01','123 ABC', N'Homestay ABC', null,N'Resort bãi biển, mát mẻ', N'Homestay',N'Không hút thuốc các kiểu, chỗ này trên page dùng CKEDITOR sửa lại','120201',  'User_01'),
@@ -314,6 +316,8 @@ Values
 Go
 
 
+--//////////////////////////////////////////////
+
 insert into dbo.Additional_service 
 values	('SV001',N'Nước Suối',Null),
 		('SV002',N'Coca Cola',Null),
@@ -335,14 +339,411 @@ values	('110101_B01','SV001','true',30),
 		('110201_B01','SV003','true',30),
 		('120101_B01','SV001','true',50),
 		('120101_B01','SV002','true',60),
-		('120101_B01','SV003','true',60)
-Go
-
-Insert Into dbo.Building_Additional_service Values
+		('120101_B01','SV003','true',60),
 		('350101_B00','SV001','true',50),
 		('350101_B00','SV002','true',60),
 		('350101_B00','SV003','true',60),
 		('350101_B00','SV004','true',50),
-		('350101_B00','SV005','true',60),
-		('350101_B00','SV006','true',60)
+		('350101_B00','SV005','true',60)
 Go
+
+--12
+INSERT [dbo].[Bill] ([bill_id], [date], [total], [status], [user_id]) VALUES (N'R01_01', CAST(N'2022-06-23' AS Date), 2400000, N'Đang xử lý', N'User_10')
+INSERT [dbo].[Bill] ([bill_id], [date], [total], [status], [user_id]) VALUES (N'R01_02', CAST(N'2022-06-26' AS Date), 900000, N'Đang xử lý', N'User_11')
+INSERT [dbo].[Bill] ([bill_id], [date], [total], [status], [user_id]) VALUES (N'R02_01', CAST(N'2022-06-26' AS Date), 900000, N'Đang xử lý', N'User_10')
+INSERT [dbo].[Bill] ([bill_id], [date], [total], [status], [user_id]) VALUES (N'R03_01', CAST(N'2022-06-26' AS Date), 900000, N'Đang xử lý', N'User_10')
+INSERT [dbo].[Bill] ([bill_id], [date], [total], [status], [user_id]) VALUES (N'R28_01', CAST(N'2022-06-01' AS Date), 650000, N'Chờ duyệt', N'User_03')
+GO
+
+--13
+INSERT [dbo].[Bill_detail] ([bill_id], [room_id], [start_date], [end_date], [price], [note], [expense]) VALUES (N'R01_01', N'Room_01', CAST(N'2022-06-15' AS Date), CAST(N'2022-06-23' AS Date), 2400000, N'Không có', 0)
+INSERT [dbo].[Bill_detail] ([bill_id], [room_id], [start_date], [end_date], [price], [note], [expense]) VALUES (N'R01_02', N'Room_01', CAST(N'2022-06-24' AS Date), CAST(N'2022-06-26' AS Date), 900000, N'Không có', 0)
+INSERT [dbo].[Bill_detail] ([bill_id], [room_id], [start_date], [end_date], [price], [note], [expense]) VALUES (N'R02_01', N'Room_02', CAST(N'2022-06-24' AS Date), CAST(N'2022-06-26' AS Date), 900000, N'Không có', 0)
+INSERT [dbo].[Bill_detail] ([bill_id], [room_id], [start_date], [end_date], [price], [note], [expense]) VALUES (N'R03_01', N'Room_03', CAST(N'2022-06-24' AS Date), CAST(N'2022-06-26' AS Date), 900000, N'Không có', 0)
+INSERT [dbo].[Bill_detail] ([bill_id], [room_id], [start_date], [end_date], [price], [note], [expense]) VALUES (N'R28_01', N'Room_28', CAST(N'2022-07-06' AS Date), CAST(N'2022-07-07' AS Date), 650000, N'Không có', 0)
+GO
+
+--6
+INSERT [dbo].[Building] ([building_id], [building_number], [building_name], [buiding_image], [building_desc], [building_type], [building_rule], [street_id], [user_id]) VALUES (N'110101_B01', N'Số 77', N'Fisherman Village Boutique Villas - Beachfront', NULL, N'Homestay cho gia đình, đầy đủ tiện nghi', N'Homestay', N'Không hút thuốc các kiểu, chỗ này trên page dùng CKEDITOR sửa lại', N'110101', N'User_05')
+INSERT [dbo].[Building] ([building_id], [building_number], [building_name], [buiding_image], [building_desc], [building_type], [building_rule], [street_id], [user_id]) VALUES (N'110201_B01', N'Số 34, Mũi Kê Gà', N'Chunlii Homestay', NULL, N'Full căn hộ 84m2 có 3 phòng riêng', N'Nhà nguyên căn', N'Không hút thuốc các kiểu, chỗ này trên page dùng CKEDITOR sửa lại', N'110201', N'User_08')
+INSERT [dbo].[Building] ([building_id], [building_number], [building_name], [buiding_image], [building_desc], [building_type], [building_rule], [street_id], [user_id]) VALUES (N'120101_B01', N'Số 93', N'THƯ DUY Resort', NULL, N'Nhà gô gần gũi với thiên nhiên', N'Nhà nguyên căn', N'Không hút thuốc các kiểu, chỗ này trên page dùng CKEDITOR sửa lại', N'120101', N'User_08')
+INSERT [dbo].[Building] ([building_id], [building_number], [building_name], [buiding_image], [building_desc], [building_type], [building_rule], [street_id], [user_id]) VALUES (N'120201_B01', N'Số 23, Ấp 15', N'Nhà gỗ - Farmstay Hoa Rừng U Minh', NULL, N'Resort bãi biển, mát mẻ', N'Homestay', N'Không hút thuốc các kiểu, chỗ này trên page dùng CKEDITOR sửa lại', N'120201', N'User_07')
+INSERT [dbo].[Building] ([building_id], [building_number], [building_name], [buiding_image], [building_desc], [building_type], [building_rule], [street_id], [user_id]) VALUES (N'150101_B01', N'117-119, Ngô Thuỳ Sỹ', N'Cosmos Hotel Danang', NULL, N'Hotel có view nhìn ra thành phố', N'Hotel', N'Không hút thuốc các kiểu, chỗ này trên page dùng CKEDITOR sửa lại', N'150101', N'User_01')
+INSERT [dbo].[Building] ([building_id], [building_number], [building_name], [buiding_image], [building_desc], [building_type], [building_rule], [street_id], [user_id]) VALUES (N'150201_B01', N'Sô 54', N'Vietstork Villa 03 Bedroom Resort', NULL, N'Chung cư gần biển', N'Homestay', N'Không hút thuốc các kiểu, chỗ này trên page dùng CKEDITOR sửa lại', N'150201', N'User_06')
+INSERT [dbo].[Building] ([building_id], [building_number], [building_name], [buiding_image], [building_desc], [building_type], [building_rule], [street_id], [user_id]) VALUES (N'220101_B01', N'Số 29 tổ 3', N'Ancient Town 29 Phố Cổ', NULL, N'Khu nhà qua đêm phong cách cổ điển', N'Nhà nguyên căn', N'Không hút thuốc các kiểu, chỗ này trên page dùng CKEDITOR sửa lại', N'220101', N'User_07')
+INSERT [dbo].[Building] ([building_id], [building_number], [building_name], [buiding_image], [building_desc], [building_type], [building_rule], [street_id], [user_id]) VALUES (N'240102_B01', N'Số 20', N'WECOZY HANOI - Railway Side, The Old Quarter', NULL, N'Nhà 2 tầng đầy đủ tiện nghi thích hợp cho gia đình du lịch nhiều ngày', N'Nhà nguyên căn', N'Không hút thuốc các kiểu, chỗ này trên page dùng CKEDITOR sửa lại', N'240102', N'User_08')
+INSERT [dbo].[Building] ([building_id], [building_number], [building_name], [buiding_image], [building_desc], [building_type], [building_rule], [street_id], [user_id]) VALUES (N'240202_B01', N'Số 12', N'Lakeside House', NULL, N'Phòng cho gia đình có đầy đủ tiện nghi', N'Homestay', N'Không hút thuốc các kiểu, chỗ này trên page dùng CKEDITOR sửa lại', N'240202', N'User_05')
+INSERT [dbo].[Building] ([building_id], [building_number], [building_name], [buiding_image], [building_desc], [building_type], [building_rule], [street_id], [user_id]) VALUES (N'350101_B00', N'123, Hồ Xuân Huong', N'Trường Giang Dalat Homestay', NULL, N'Homestay Dành cho khác chỉ qua đêm', N'Homestay', N'Không hút thuốc các kiểu, chỗ này trên page dùng CKEDITOR sửa lại', N'350101', N'User_01')
+INSERT [dbo].[Building] ([building_id], [building_number], [building_name], [buiding_image], [building_desc], [building_type], [building_rule], [street_id], [user_id]) VALUES (N'350101_B01', N'Số Số 34, H?m 3/4', N'Lovely House', NULL, N'Gần khu vườn, có thể dùng để mở tiệc BBQ', N'Homestay', N'Không hút thuốc các kiểu, chỗ này trên page dùng CKEDITOR sửa lại', N'350101', N'User_01')
+INSERT [dbo].[Building] ([building_id], [building_number], [building_name], [buiding_image], [building_desc], [building_type], [building_rule], [street_id], [user_id]) VALUES (N'350201_B01', N'Số 44D', N'Raon Valley Villa', NULL, N'Khu vườn cạnh nhà, thân thiện thiện với thú cưng', N'Homestay', N'Không hút thuốc các kiểu, chỗ này trên page dùng CKEDITOR sửa lại', N'350201', N'User_07')
+INSERT [dbo].[Building] ([building_id], [building_number], [building_name], [buiding_image], [building_desc], [building_type], [building_rule], [street_id], [user_id]) VALUES (N'370101_B01', N'Số 86', N'Sapa Catcat Hills Resort & Spa', NULL, N'Resort và spa có cảnh quan đẹp bao quanh bỏi hồ, vườn cảnh', N'Homestay', N'Không hút thuốc các kiểu, chỗ này trên page dùng CKEDITOR sửa lại', N'370101', N'User_01')
+INSERT [dbo].[Building] ([building_id], [building_number], [building_name], [buiding_image], [building_desc], [building_type], [building_rule], [street_id], [user_id]) VALUES (N'370201_B01', N'Làng Tá Chài', N'La Beauté Bắc Hà', NULL, N'Homestay phong cách cổ điển hài hoà với thiên nhiên', N'Homestay', N'Không hút thuốc các kiểu, chỗ này trên page dùng CKEDITOR sửa lại', N'370201', N'User_06')
+INSERT [dbo].[Building] ([building_id], [building_number], [building_name], [buiding_image], [building_desc], [building_type], [building_rule], [street_id], [user_id]) VALUES (N'430101_B01', N'CC17 Unit ', N'Muong Thanh Luxury Phu Tho', NULL, N'Khách sạn phong cách hiện đại, đầy đủ tiện nghi, View đẹp', N'Homestay', N'Không hút thuốc các kiểu, chỗ này trên page dùng CKEDITOR sửa lại', N'430101', N'User_06')
+INSERT [dbo].[Building] ([building_id], [building_number], [building_name], [buiding_image], [building_desc], [building_type], [building_rule], [street_id], [user_id]) VALUES (N'430201_B01', N'Số 33 ', N'Chin Luc Hotel', NULL, N'Nhà vườn, có hồ bơi bao bọc bởi cây cảnh', N'Nhà nguyên căn', N'Không hút thuốc các kiểu, chỗ này trên page dùng CKEDITOR sửa lại', N'430201', N'User_08')
+INSERT [dbo].[Building] ([building_id], [building_number], [building_name], [buiding_image], [building_desc], [building_type], [building_rule], [street_id], [user_id]) VALUES (N'480101_B01', N'Số 99', N'Grand Pearl Minh Chau', NULL, N'Khách sạn gần bãi biển', N'Hotel', N'Không hút thuốc các kiểu, chỗ này trên page dùng CKEDITOR sửa lại', N'480101', N'User_08')
+INSERT [dbo].[Building] ([building_id], [building_number], [building_name], [buiding_image], [building_desc], [building_type], [building_rule], [street_id], [user_id]) VALUES (N'480201_B01', N'Số 38, Khu ph? 4', N'Starlight Boutique Hotel', NULL, N'Homestay kiểu khu vườn', N'Homestay', N'Không hút thuốc các kiểu, chỗ này trên page dùng CKEDITOR sửa lại', N'480201', N'User_05')
+INSERT [dbo].[Building] ([building_id], [building_number], [building_name], [buiding_image], [building_desc], [building_type], [building_rule], [street_id], [user_id]) VALUES (N'580101_B01', N'139H', N'ACE Hotel - Bến Thành', NULL, N'Hotel có phòng rộng gần với các địa điểm nổi tiếng', N'Homesay', N'Không hút thuốc các kiểu, chỗ này trên page dùng CKEDITOR sửa lại', N'580101', N'User_05')
+INSERT [dbo].[Building] ([building_id], [building_number], [building_name], [buiding_image], [building_desc], [building_type], [building_rule], [street_id], [user_id]) VALUES (N'580101_B02', N'247-249, Lý Tự Trọng', N'Calista Sai Gon Hotel', NULL, N'Hotel có phòng đọc sách nhà ăn, v.v', N'Homestay', N'Không hút thuốc các kiểu, chỗ này trên page dùng CKEDITOR sửa lại', N'580101', N'User_06')
+INSERT [dbo].[Building] ([building_id], [building_number], [building_name], [buiding_image], [building_desc], [building_type], [building_rule], [street_id], [user_id]) VALUES (N'580202_B01', N'198, Ðường Số 38', N'Common Inn Thao Dien', NULL, N'Khách Sạn có phòng ăn, phòng sách riêng', N'Homestay', N'Không hút thuốc các kiểu, chỗ này trên page dùng CKEDITOR sửa lại', N'580202', N'User_07')
+GO
+
+--8
+INSERT [dbo].[Building_Convenient] ([building_id], [convenient_id]) VALUES (N'110101_B01', N'Con_01')
+INSERT [dbo].[Building_Convenient] ([building_id], [convenient_id]) VALUES (N'110101_B01', N'Con_02')
+INSERT [dbo].[Building_Convenient] ([building_id], [convenient_id]) VALUES (N'110101_B01', N'Con_03')
+INSERT [dbo].[Building_Convenient] ([building_id], [convenient_id]) VALUES (N'110101_B01', N'Con_04')
+INSERT [dbo].[Building_Convenient] ([building_id], [convenient_id]) VALUES (N'110101_B01', N'Con_05')
+INSERT [dbo].[Building_Convenient] ([building_id], [convenient_id]) VALUES (N'110101_B01', N'Con_06')
+INSERT [dbo].[Building_Convenient] ([building_id], [convenient_id]) VALUES (N'110101_B01', N'Con_07')
+INSERT [dbo].[Building_Convenient] ([building_id], [convenient_id]) VALUES (N'220101_B01', N'Con_01')
+INSERT [dbo].[Building_Convenient] ([building_id], [convenient_id]) VALUES (N'220101_B01', N'Con_02')
+INSERT [dbo].[Building_Convenient] ([building_id], [convenient_id]) VALUES (N'220101_B01', N'Con_03')
+INSERT [dbo].[Building_Convenient] ([building_id], [convenient_id]) VALUES (N'220101_B01', N'Con_04')
+INSERT [dbo].[Building_Convenient] ([building_id], [convenient_id]) VALUES (N'220101_B01', N'Con_05')
+INSERT [dbo].[Building_Convenient] ([building_id], [convenient_id]) VALUES (N'220101_B01', N'Con_06')
+INSERT [dbo].[Building_Convenient] ([building_id], [convenient_id]) VALUES (N'220101_B01', N'Con_07')
+INSERT [dbo].[Building_Convenient] ([building_id], [convenient_id]) VALUES (N'240102_B01', N'Con_01')
+INSERT [dbo].[Building_Convenient] ([building_id], [convenient_id]) VALUES (N'240102_B01', N'Con_02')
+INSERT [dbo].[Building_Convenient] ([building_id], [convenient_id]) VALUES (N'240102_B01', N'Con_03')
+INSERT [dbo].[Building_Convenient] ([building_id], [convenient_id]) VALUES (N'240102_B01', N'Con_04')
+INSERT [dbo].[Building_Convenient] ([building_id], [convenient_id]) VALUES (N'240102_B01', N'Con_05')
+INSERT [dbo].[Building_Convenient] ([building_id], [convenient_id]) VALUES (N'240102_B01', N'Con_06')
+INSERT [dbo].[Building_Convenient] ([building_id], [convenient_id]) VALUES (N'240102_B01', N'Con_07')
+INSERT [dbo].[Building_Convenient] ([building_id], [convenient_id]) VALUES (N'240202_B01', N'Con_01')
+INSERT [dbo].[Building_Convenient] ([building_id], [convenient_id]) VALUES (N'240202_B01', N'Con_02')
+INSERT [dbo].[Building_Convenient] ([building_id], [convenient_id]) VALUES (N'240202_B01', N'Con_03')
+INSERT [dbo].[Building_Convenient] ([building_id], [convenient_id]) VALUES (N'240202_B01', N'Con_04')
+INSERT [dbo].[Building_Convenient] ([building_id], [convenient_id]) VALUES (N'240202_B01', N'Con_05')
+INSERT [dbo].[Building_Convenient] ([building_id], [convenient_id]) VALUES (N'240202_B01', N'Con_06')
+INSERT [dbo].[Building_Convenient] ([building_id], [convenient_id]) VALUES (N'240202_B01', N'Con_07')
+INSERT [dbo].[Building_Convenient] ([building_id], [convenient_id]) VALUES (N'350101_B00', N'Con_01')
+INSERT [dbo].[Building_Convenient] ([building_id], [convenient_id]) VALUES (N'350101_B00', N'Con_02')
+INSERT [dbo].[Building_Convenient] ([building_id], [convenient_id]) VALUES (N'350101_B00', N'Con_03')
+INSERT [dbo].[Building_Convenient] ([building_id], [convenient_id]) VALUES (N'350101_B00', N'Con_04')
+INSERT [dbo].[Building_Convenient] ([building_id], [convenient_id]) VALUES (N'350101_B00', N'Con_05')
+INSERT [dbo].[Building_Convenient] ([building_id], [convenient_id]) VALUES (N'350101_B00', N'Con_06')
+INSERT [dbo].[Building_Convenient] ([building_id], [convenient_id]) VALUES (N'350101_B00', N'Con_07')
+INSERT [dbo].[Building_Convenient] ([building_id], [convenient_id]) VALUES (N'430101_B01', N'Con_01')
+INSERT [dbo].[Building_Convenient] ([building_id], [convenient_id]) VALUES (N'430101_B01', N'Con_02')
+INSERT [dbo].[Building_Convenient] ([building_id], [convenient_id]) VALUES (N'430101_B01', N'Con_03')
+INSERT [dbo].[Building_Convenient] ([building_id], [convenient_id]) VALUES (N'430101_B01', N'Con_04')
+INSERT [dbo].[Building_Convenient] ([building_id], [convenient_id]) VALUES (N'430101_B01', N'Con_05')
+INSERT [dbo].[Building_Convenient] ([building_id], [convenient_id]) VALUES (N'430101_B01', N'Con_06')
+INSERT [dbo].[Building_Convenient] ([building_id], [convenient_id]) VALUES (N'430101_B01', N'Con_07')
+INSERT [dbo].[Building_Convenient] ([building_id], [convenient_id]) VALUES (N'480101_B01', N'Con_01')
+INSERT [dbo].[Building_Convenient] ([building_id], [convenient_id]) VALUES (N'480101_B01', N'Con_02')
+INSERT [dbo].[Building_Convenient] ([building_id], [convenient_id]) VALUES (N'480101_B01', N'Con_03')
+INSERT [dbo].[Building_Convenient] ([building_id], [convenient_id]) VALUES (N'480101_B01', N'Con_04')
+INSERT [dbo].[Building_Convenient] ([building_id], [convenient_id]) VALUES (N'480101_B01', N'Con_05')
+INSERT [dbo].[Building_Convenient] ([building_id], [convenient_id]) VALUES (N'480101_B01', N'Con_06')
+INSERT [dbo].[Building_Convenient] ([building_id], [convenient_id]) VALUES (N'480101_B01', N'Con_07')
+INSERT [dbo].[Building_Convenient] ([building_id], [convenient_id]) VALUES (N'580101_B01', N'Con_01')
+INSERT [dbo].[Building_Convenient] ([building_id], [convenient_id]) VALUES (N'580101_B01', N'Con_02')
+INSERT [dbo].[Building_Convenient] ([building_id], [convenient_id]) VALUES (N'580101_B01', N'Con_03')
+INSERT [dbo].[Building_Convenient] ([building_id], [convenient_id]) VALUES (N'580101_B01', N'Con_04')
+INSERT [dbo].[Building_Convenient] ([building_id], [convenient_id]) VALUES (N'580101_B01', N'Con_05')
+INSERT [dbo].[Building_Convenient] ([building_id], [convenient_id]) VALUES (N'580101_B01', N'Con_06')
+INSERT [dbo].[Building_Convenient] ([building_id], [convenient_id]) VALUES (N'580101_B01', N'Con_07')
+INSERT [dbo].[Building_Convenient] ([building_id], [convenient_id]) VALUES (N'580202_B01', N'Con_01')
+INSERT [dbo].[Building_Convenient] ([building_id], [convenient_id]) VALUES (N'580202_B01', N'Con_02')
+INSERT [dbo].[Building_Convenient] ([building_id], [convenient_id]) VALUES (N'580202_B01', N'Con_03')
+INSERT [dbo].[Building_Convenient] ([building_id], [convenient_id]) VALUES (N'580202_B01', N'Con_04')
+INSERT [dbo].[Building_Convenient] ([building_id], [convenient_id]) VALUES (N'580202_B01', N'Con_05')
+INSERT [dbo].[Building_Convenient] ([building_id], [convenient_id]) VALUES (N'580202_B01', N'Con_06')
+INSERT [dbo].[Building_Convenient] ([building_id], [convenient_id]) VALUES (N'580202_B01', N'Con_07')
+GO
+
+--1
+INSERT [dbo].[City] ([city_id], [city_name]) VALUES (N'01', N'An Giang')
+INSERT [dbo].[City] ([city_id], [city_name]) VALUES (N'02', N'Bà Rịa – Vũng Tàu')
+INSERT [dbo].[City] ([city_id], [city_name]) VALUES (N'05', N'Bạc Liêu')
+INSERT [dbo].[City] ([city_id], [city_name]) VALUES (N'08', N'Bình Định')
+INSERT [dbo].[City] ([city_id], [city_name]) VALUES (N'11', N'Bình Thuận')
+INSERT [dbo].[City] ([city_id], [city_name]) VALUES (N'12', N'Cà Mau')
+INSERT [dbo].[City] ([city_id], [city_name]) VALUES (N'15', N'Đà Nẵng')
+INSERT [dbo].[City] ([city_id], [city_name]) VALUES (N'19', N'Đồng Nai')
+INSERT [dbo].[City] ([city_id], [city_name]) VALUES (N'22', N'Hà Giang')
+INSERT [dbo].[City] ([city_id], [city_name]) VALUES (N'23', N'Hà Nam')
+INSERT [dbo].[City] ([city_id], [city_name]) VALUES (N'24', N'Hà Nội')
+INSERT [dbo].[City] ([city_id], [city_name]) VALUES (N'30', N'Hưng Yên')
+INSERT [dbo].[City] ([city_id], [city_name]) VALUES (N'33', N'Kon Tum')
+INSERT [dbo].[City] ([city_id], [city_name]) VALUES (N'34', N'Lai Châu')
+INSERT [dbo].[City] ([city_id], [city_name]) VALUES (N'35', N'Lâm Đồng')
+INSERT [dbo].[City] ([city_id], [city_name]) VALUES (N'37', N'Lào Cai')
+INSERT [dbo].[City] ([city_id], [city_name]) VALUES (N'43', N'Phú Thọ')
+INSERT [dbo].[City] ([city_id], [city_name]) VALUES (N'44', N'Phú Yên')
+INSERT [dbo].[City] ([city_id], [city_name]) VALUES (N'45', N'Quảng Bình')
+INSERT [dbo].[City] ([city_id], [city_name]) VALUES (N'48', N'Quảng Ninh')
+INSERT [dbo].[City] ([city_id], [city_name]) VALUES (N'55', N'Thanh Hóa')
+INSERT [dbo].[City] ([city_id], [city_name]) VALUES (N'58', N'Hồ Chí Minh')
+INSERT [dbo].[City] ([city_id], [city_name]) VALUES (N'63', N'Yên Bái')
+GO
+
+--7
+INSERT [dbo].[Convenient] ([convenient_id], [convenient_name]) VALUES (N'Con_01', N'Bãi đỗ xe')
+INSERT [dbo].[Convenient] ([convenient_id], [convenient_name]) VALUES (N'Con_02', N'Hồ bơi')
+INSERT [dbo].[Convenient] ([convenient_id], [convenient_name]) VALUES (N'Con_03', N'Phòng xông hơi')
+INSERT [dbo].[Convenient] ([convenient_id], [convenient_name]) VALUES (N'Con_04', N'Wifi')
+INSERT [dbo].[Convenient] ([convenient_id], [convenient_name]) VALUES (N'Con_05', N'Cho phép mang theo vật nuôi')
+INSERT [dbo].[Convenient] ([convenient_id], [convenient_name]) VALUES (N'Con_06', N'Trung tâm thể thao')
+INSERT [dbo].[Convenient] ([convenient_id], [convenient_name]) VALUES (N'Con_07', N'Tiện nghi cho người khuyết tật')
+INSERT [dbo].[Convenient] ([convenient_id], [convenient_name]) VALUES (N'Con_08', N'Sân golf')
+INSERT [dbo].[Convenient] ([convenient_id], [convenient_name]) VALUES (N'Con_09', N'Sân bóng')
+INSERT [dbo].[Convenient] ([convenient_id], [convenient_name]) VALUES (N'Con_10', N'Sân chơi cho trẻ em')
+INSERT [dbo].[Convenient] ([convenient_id], [convenient_name]) VALUES (N'Con_11', N'Phục vụ đồ ăn tận phòng')
+INSERT [dbo].[Convenient] ([convenient_id], [convenient_name]) VALUES (N'Con_12', N'Quầy bar')
+GO
+
+--2
+INSERT [dbo].[District] ([district_id], [district_name], [city_id]) VALUES (N'1101', N'Hàm Thuận Nam', N'11')
+INSERT [dbo].[District] ([district_id], [district_name], [city_id]) VALUES (N'1102', N'Hàm Tân', N'11')
+INSERT [dbo].[District] ([district_id], [district_name], [city_id]) VALUES (N'1201', N'U Minh', N'12')
+INSERT [dbo].[District] ([district_id], [district_name], [city_id]) VALUES (N'1202', N'Phường 6', N'12')
+INSERT [dbo].[District] ([district_id], [district_name], [city_id]) VALUES (N'1501', N'Sơn Trà', N'15')
+INSERT [dbo].[District] ([district_id], [district_name], [city_id]) VALUES (N'1502', N'Ngũ Hành Sơn', N'15')
+INSERT [dbo].[District] ([district_id], [district_name], [city_id]) VALUES (N'2201', N'Đồng Văn', N'22')
+INSERT [dbo].[District] ([district_id], [district_name], [city_id]) VALUES (N'2202', N'Mèo Vạc', N'22')
+INSERT [dbo].[District] ([district_id], [district_name], [city_id]) VALUES (N'2401', N'Quận Hoàn Kiếm', N'24')
+INSERT [dbo].[District] ([district_id], [district_name], [city_id]) VALUES (N'2402', N'Quận Ba Đình', N'24')
+INSERT [dbo].[District] ([district_id], [district_name], [city_id]) VALUES (N'3501', N'Phường 4', N'35')
+INSERT [dbo].[District] ([district_id], [district_name], [city_id]) VALUES (N'3502', N'Phường 8', N'35')
+INSERT [dbo].[District] ([district_id], [district_name], [city_id]) VALUES (N'3701', N'Sa Pa', N'37')
+INSERT [dbo].[District] ([district_id], [district_name], [city_id]) VALUES (N'3702', N'Bắc Hà', N'37')
+INSERT [dbo].[District] ([district_id], [district_name], [city_id]) VALUES (N'4301', N'Việt Trì', N'43')
+INSERT [dbo].[District] ([district_id], [district_name], [city_id]) VALUES (N'4302', N'Ba Vì', N'43')
+INSERT [dbo].[District] ([district_id], [district_name], [city_id]) VALUES (N'4801', N'Vân Đồn', N'48')
+INSERT [dbo].[District] ([district_id], [district_name], [city_id]) VALUES (N'4802', N'Cô Tô', N'48')
+INSERT [dbo].[District] ([district_id], [district_name], [city_id]) VALUES (N'5801', N'Quận 1', N'58')
+INSERT [dbo].[District] ([district_id], [district_name], [city_id]) VALUES (N'5802', N'Quận 2', N'58')
+GO
+
+--10
+INSERT [dbo].[Room] ([room_id], [room_name], [room_status], [room_desc], [room_price], [type_id], [building_id]) VALUES (N'Room_01', N'Trường Giang Dalat Homestay_001', N'active', N'Phòng 1 giường đôi', 900000, N'type_2', N'350101_B00')
+INSERT [dbo].[Room] ([room_id], [room_name], [room_status], [room_desc], [room_price], [type_id], [building_id]) VALUES (N'Room_02', N'Trường Giang Dalat Homestay_002', N'active', N'Phòng 1 giường đơn', 900000, N'type_2', N'350101_B00')
+INSERT [dbo].[Room] ([room_id], [room_name], [room_status], [room_desc], [room_price], [type_id], [building_id]) VALUES (N'Room_03', N'Trường Giang Dalat Homestay_003', N'active', N'Phòng ngủ cho nhiều người', 1200000, N'type_2', N'350101_B00')
+INSERT [dbo].[Room] ([room_id], [room_name], [room_status], [room_desc], [room_price], [type_id], [building_id]) VALUES (N'Room_04', N'Chunlii Homestay_001', N'active', N'Phòng đơn', 330000, N'type_2', N'110101_B01')
+INSERT [dbo].[Room] ([room_id], [room_name], [room_status], [room_desc], [room_price], [type_id], [building_id]) VALUES (N'Room_05', N'Chunlii Homestay_002', N'active', N'Phòng đôi', 330000, N'type_2', N'110101_B01')
+INSERT [dbo].[Room] ([room_id], [room_name], [room_status], [room_desc], [room_price], [type_id], [building_id]) VALUES (N'Room_06', N'Fisherman Village Boutique Villas - Beachfront_001', N'active', N'Phòng đơn', 400000, N'type_3', N'110201_B01')
+INSERT [dbo].[Room] ([room_id], [room_name], [room_status], [room_desc], [room_price], [type_id], [building_id]) VALUES (N'Room_08', N'Fisherman Village Boutique Villas - Beachfront_002', N'active', N'Phòng đơn', 400000, N'type_3', N'110201_B01')
+INSERT [dbo].[Room] ([room_id], [room_name], [room_status], [room_desc], [room_price], [type_id], [building_id]) VALUES (N'Room_09', N'Nhà gỗ - Farmstay Hoa Rừng U Minh_001', N'active', N'Phòng 2 giường đơn', 340000, N'type_1', N'120201_B01')
+INSERT [dbo].[Room] ([room_id], [room_name], [room_status], [room_desc], [room_price], [type_id], [building_id]) VALUES (N'Room_11', N'Nhà gỗ - Farmstay Hoa Rừng U Minh_002', N'active', N'Phòng 1 giường đôi', 340000, N'type_1', N'120201_B01')
+INSERT [dbo].[Room] ([room_id], [room_name], [room_status], [room_desc], [room_price], [type_id], [building_id]) VALUES (N'Room_12', N'THƯ DUY Resort_001', N'active', N'Phòng 1 giường đôi', 380000, N'type_3', N'120101_B01')
+INSERT [dbo].[Room] ([room_id], [room_name], [room_status], [room_desc], [room_price], [type_id], [building_id]) VALUES (N'Room_13', N'THƯ DUY Resort_002', N'active', N'Phòng 2 giường đơn', 380000, N'type_3', N'120101_B01')
+INSERT [dbo].[Room] ([room_id], [room_name], [room_status], [room_desc], [room_price], [type_id], [building_id]) VALUES (N'Room_14', N'Cosmos Hotel Danang_001', N'active', N'Phòng 1 giường đơn, 1 giường đôi', 844000, N'type_2', N'150101_B01')
+INSERT [dbo].[Room] ([room_id], [room_name], [room_status], [room_desc], [room_price], [type_id], [building_id]) VALUES (N'Room_17', N'Cosmos Hotel Danang_002', N'active', N'Phòng 1 giường đơn', 444000, N'type_2', N'150101_B01')
+INSERT [dbo].[Room] ([room_id], [room_name], [room_status], [room_desc], [room_price], [type_id], [building_id]) VALUES (N'Room_18', N'Cosmos Hotel Danang_003', N'active', N'Phòng 1 giường đôi', 644000, N'type_2', N'150101_B01')
+INSERT [dbo].[Room] ([room_id], [room_name], [room_status], [room_desc], [room_price], [type_id], [building_id]) VALUES (N'Room_20', N'Vietstork Villa 03 Bedroom Resort_001', N'active', N'Phòng 3 phòng ngủ riêng', 980000, N'type_2', N'150201_B01')
+INSERT [dbo].[Room] ([room_id], [room_name], [room_status], [room_desc], [room_price], [type_id], [building_id]) VALUES (N'Room_22', N'Vietstork Villa 03 Bedroom Resort_002', N'active', N'Phòng 3 phòng ngủ riêng', 780000, N'type_2', N'150201_B01')
+INSERT [dbo].[Room] ([room_id], [room_name], [room_status], [room_desc], [room_price], [type_id], [building_id]) VALUES (N'Room_23', N'Ancient Town 29 Phố Cổ_001', N'active', N'Phòng 1 giường đôi', 390000, N'type_2', N'220101_B01')
+INSERT [dbo].[Room] ([room_id], [room_name], [room_status], [room_desc], [room_price], [type_id], [building_id]) VALUES (N'Room_24', N'Ancient Town 29 Phố Cổ_002', N'active', N'Phòng 2 giường đôi', 390000, N'type_2', N'220101_B01')
+INSERT [dbo].[Room] ([room_id], [room_name], [room_status], [room_desc], [room_price], [type_id], [building_id]) VALUES (N'Room_25', N'WECOZY HANOI - Railway Side, The Old Quarter_001', N'active', N'Phòng 1 giường đôi', 450000, N'type_1', N'240102_B01')
+INSERT [dbo].[Room] ([room_id], [room_name], [room_status], [room_desc], [room_price], [type_id], [building_id]) VALUES (N'Room_26', N'WECOZY HANOI - Railway Side, The Old Quarter_002', N'active', N'Phòng 1 giường đôi', 450000, N'type_1', N'240102_B01')
+INSERT [dbo].[Room] ([room_id], [room_name], [room_status], [room_desc], [room_price], [type_id], [building_id]) VALUES (N'Room_27', N'Lakeside House_002', N'active', N'Phòng 1 giường đôi', 350000, N'type_1', N'240202_B01')
+INSERT [dbo].[Room] ([room_id], [room_name], [room_status], [room_desc], [room_price], [type_id], [building_id]) VALUES (N'Room_28', N'Lakeside House_001', N'active', N'Phòng ngủ cho gia đình 3-4 người', 850000, N'type_1', N'240202_B01')
+INSERT [dbo].[Room] ([room_id], [room_name], [room_status], [room_desc], [room_price], [type_id], [building_id]) VALUES (N'Room_29', N'Lovely House_001', N'active', N'Phòng 2 phòng ngủ riêng', 350000, N'type_3', N'350101_B01')
+INSERT [dbo].[Room] ([room_id], [room_name], [room_status], [room_desc], [room_price], [type_id], [building_id]) VALUES (N'Room_30', N'Lovely House_002', N'active', N'Phòng cho gia đình có 3 phòng riêng', 350000, N'type_3', N'350101_B01')
+INSERT [dbo].[Room] ([room_id], [room_name], [room_status], [room_desc], [room_price], [type_id], [building_id]) VALUES (N'Room_31', N'Raon Valley Villa_001', N'active', N'4 phòng riêng (mỗi phòng có nhà VS riêng), có nhà bếp', 900000, N'type_1', N'350201_B01')
+INSERT [dbo].[Room] ([room_id], [room_name], [room_status], [room_desc], [room_price], [type_id], [building_id]) VALUES (N'Room_32', N'Raon Valley Villa_002', N'active', N'2 phòng riêng, có thêm phòng khách, nhà bếp', 600000, N'type_1', N'350201_B01')
+INSERT [dbo].[Room] ([room_id], [room_name], [room_status], [room_desc], [room_price], [type_id], [building_id]) VALUES (N'Room_33', N'Sapa Catcat Hills Resort & Spa_001', N'active', N'Phòng 1 giường đơn', 600000, N'type_3', N'370101_B01')
+INSERT [dbo].[Room] ([room_id], [room_name], [room_status], [room_desc], [room_price], [type_id], [building_id]) VALUES (N'Room_34', N'Sapa Catcat Hills Resort & Spa_002', N'active', N'Phòng 1 giường đôi', 650000, N'type_3', N'370101_B01')
+INSERT [dbo].[Room] ([room_id], [room_name], [room_status], [room_desc], [room_price], [type_id], [building_id]) VALUES (N'Room_35', N'La Beauté Bắc Hà_001', N'active', N'Phòng 2 giường đơn', 500000, N'type_2', N'370201_B01')
+INSERT [dbo].[Room] ([room_id], [room_name], [room_status], [room_desc], [room_price], [type_id], [building_id]) VALUES (N'Room_36', N'La Beauté Bắc Hà_002', N'active', N'Phòng 1 giường đôi', 450000, N'type_2', N'370201_B01')
+INSERT [dbo].[Room] ([room_id], [room_name], [room_status], [room_desc], [room_price], [type_id], [building_id]) VALUES (N'Room_37', N'Muong Thanh Luxury Phu Tho_001', N'active', N'Phòng 1 giường đơn', 350000, N'type_2', N'430101_B01')
+INSERT [dbo].[Room] ([room_id], [room_name], [room_status], [room_desc], [room_price], [type_id], [building_id]) VALUES (N'Room_38', N'Muong Thanh Luxury Phu Tho_002', N'active', N'Phòng 1 giường đôi', 350000, N'type_2', N'430101_B01')
+INSERT [dbo].[Room] ([room_id], [room_name], [room_status], [room_desc], [room_price], [type_id], [building_id]) VALUES (N'Room_40', N'Chin Luc Hotel_002', N'active', N'Phòng 1 giường đơn', 450000, N'type_1', N'430201_B01')
+INSERT [dbo].[Room] ([room_id], [room_name], [room_status], [room_desc], [room_price], [type_id], [building_id]) VALUES (N'Room_41', N'Chin Luc Hotel_001', N'active', N'Phòng 2 giường đơn', 450000, N'type_1', N'430201_B01')
+INSERT [dbo].[Room] ([room_id], [room_name], [room_status], [room_desc], [room_price], [type_id], [building_id]) VALUES (N'Room_42', N'Grand Pearl Minh Chau_001', N'active', N'Phòng 2 giường đơn', 650000, N'type_1', N'480101_B01')
+INSERT [dbo].[Room] ([room_id], [room_name], [room_status], [room_desc], [room_price], [type_id], [building_id]) VALUES (N'Room_43', N'Grand Pearl Minh Chau_002', N'active', N'Phòng 1 giường đôi', 650000, N'type_1', N'480101_B01')
+INSERT [dbo].[Room] ([room_id], [room_name], [room_status], [room_desc], [room_price], [type_id], [building_id]) VALUES (N'Room_44', N'Starlight Boutique Hotel_001', N'active', N'Phòng 1 giường đôi', 550000, N'type_1', N'480201_B01')
+INSERT [dbo].[Room] ([room_id], [room_name], [room_status], [room_desc], [room_price], [type_id], [building_id]) VALUES (N'Room_45', N'Starlight Boutique Hotel_002', N'active', N'Phòng 2 giường đơn', 650000, N'type_1', N'480201_B01')
+INSERT [dbo].[Room] ([room_id], [room_name], [room_status], [room_desc], [room_price], [type_id], [building_id]) VALUES (N'Room_46', N'ACE Hotel - Bến Thành_001', N'active', N'Phòng 1 giường đôi', 750000, N'type_1', N'580101_B01')
+INSERT [dbo].[Room] ([room_id], [room_name], [room_status], [room_desc], [room_price], [type_id], [building_id]) VALUES (N'Room_47', N'ACE Hotel - Bến Thành_002', N'active', N'Phòng 1 giường đôi', 750000, N'type_1', N'580101_B01')
+INSERT [dbo].[Room] ([room_id], [room_name], [room_status], [room_desc], [room_price], [type_id], [building_id]) VALUES (N'Room_48', N'Calista Sai Gon Hotel_001', N'active', N'Phòng 1 giường đôi', 7000000, N'type_1', N'580101_B02')
+INSERT [dbo].[Room] ([room_id], [room_name], [room_status], [room_desc], [room_price], [type_id], [building_id]) VALUES (N'Room_49', N'Calista Sai Gon Hotel_002', N'active', N'Phòng 2 giường đơn', 680000, N'type_1', N'580101_B02')
+INSERT [dbo].[Room] ([room_id], [room_name], [room_status], [room_desc], [room_price], [type_id], [building_id]) VALUES (N'Room_50', N'Common Inn Thao Dien_001', N'active', N'Phòng 1 giường đôi', 6000000, N'type_1', N'580202_B01')
+INSERT [dbo].[Room] ([room_id], [room_name], [room_status], [room_desc], [room_price], [type_id], [building_id]) VALUES (N'Room_51', N'Common Inn Thao Dien_002', N'active', N'Phòng 2 giường đơn', 700000, N'type_1', N'580202_B01')
+GO
+
+--11
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_01', N'/view/common/image/room/r1_1.jpg', N'Hình 1')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_01', N'/view/common/image/room/r1_2.jpg', N'R01_P2')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_01', N'/view/common/image/room/r1_3.jpg', N'R01_P3')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_02', N'/view/common/image/room/r2_1.jpg', N'Hình 1')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_02', N'/view/common/image/room/r2_2.jpg', N'Hình 1')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_02', N'/view/common/image/room/r2_3.jpg', N'R02_P3')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_03', N'/view/common/image/room/r3_1.jpg', N'Hình 1')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_03', N'/view/common/image/room/r3_2.jpg', N'R03_P2')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_03', N'/view/common/image/room/r3_3.jpg', N'R03_P3')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_04', N'/view/common/image/room/r4_1.jpg', N'Hình 1')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_04', N'/view/common/image/room/r4_2.jpg', N'R04_P2')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_04', N'/view/common/image/room/r4_5.jpg', N'R04_P3')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_05', N'/view/common/image/room/r5_1.jpg', N'Hình 1')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_05', N'/view/common/image/room/r5_2.jpg', N'R05_P2')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_05', N'/view/common/image/room/r5_3.jpg', N'R05_P3')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_06', N'/view/common/image/room/r6_1.jpg', N'Hình 1')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_06', N'/view/common/image/room/r6_2.jpg', N'R06_P2')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_06', N'/view/common/image/room/r6_3.jpg', N'R06_P3')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_08', N'/view/common/image/room/r8_1.jpg', N'Hình 1')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_08', N'/view/common/image/room/r8_2.jpg', N'R08_P2')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_08', N'/view/common/image/room/r8_3.jpg', N'R08_P3')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_09', N'/view/common/image/room/r9_1.jpg', N'Hình 1')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_09', N'/view/common/image/room/r9_2.jpg', N'R09_P2')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_09', N'/view/common/image/room/r9_3.jpg', N'R09_P3')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_11', N'/view/common/image/room/r11_1.jpg', N'Hình 1')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_11', N'/view/common/image/room/r11_2.jpg', N'R11_P2')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_11', N'/view/common/image/room/r11_3.jpg', N'R11_P3')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_12', N'/view/common/image/room/r12_1.jpg', N'Hình 1')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_12', N'/view/common/image/room/r12_2.jpg', N'R12_P2')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_12', N'/view/common/image/room/r12_3.jpg', N'R12_P3')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_13', N'/view/common/image/room/r13_1.jpg', N'Hình 1')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_13', N'/view/common/image/room/r13_2.jpg', N'R13_P2')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_13', N'/view/common/image/room/r13_3.jpg', N'R13_P3')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_14', N'/view/common/image/room/r14_1.jpg', N'RHình 1')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_14', N'/view/common/image/room/r14_2.jpg', N'R14_P2')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_14', N'/view/common/image/room/r14_3.jpg', N'R14_P3')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_17', N'/view/common/image/room/r17_1.jpg', N'Hình 1')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_17', N'/view/common/image/room/r17_2.jpg', N'R17_P2')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_17', N'/view/common/image/room/r17_3.jpg', N'R17_P3')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_18', N'/view/common/image/room/r18_1.jpg', N'Hình 1')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_18', N'/view/common/image/room/r18_2.jpg', N'R18_P2')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_18', N'/view/common/image/room/r18_3.jpg', N'R18_P3')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_20', N'/view/common/image/room/r20_1.jpg', N'Hình 1')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_20', N'/view/common/image/room/r20_2.jpg', N'R20_P2')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_20', N'/view/common/image/room/r20_3.jpg', N'R20_P3')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_22', N'/view/common/image/room/r22_1.jpg', N'Hình 1')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_22', N'/view/common/image/room/r22_2.jpg', N'R22_P2')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_22', N'/view/common/image/room/r22_3.jpg', N'R22_P3')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_23', N'/view/common/image/room/r23_1.jpg', N'Hình 1')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_23', N'/view/common/image/room/r23_2.jpg', N'R23_P2')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_23', N'/view/common/image/room/r23_3.jpg', N'R23_P3')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_24', N'/view/common/image/room/r24_1.jpg', N'Hình 1')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_24', N'/view/common/image/room/r24_2.jpg', N'R24_P2')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_24', N'/view/common/image/room/r24_3.jpg', N'R24_P3')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_25', N'/view/common/image/room/r25_1.jpg', N'Hình 1')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_25', N'/view/common/image/room/r25_2.jpg', N'R25_P2')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_25', N'/view/common/image/room/r25_3.jpg', N'R25_P3')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_26', N'48', N'R26_P1')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_26', N'49', N'R26_P2')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_26', N'50', N'R26_P3')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_27', N'51', N'R27_P1')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_27', N'52', N'R27_P2')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_27', N'53', N'R27_P3')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_28', N'54', N'R28_P1')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_28', N'55', N'R28_P2')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_28', N'56', N'R28_P3')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_29', N'57', N'R29_P1')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_29', N'58', N'R29_P2')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_29', N'59', N'R29_P3')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_30', N'60', N'R30_P1')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_30', N'61', N'R30_P2')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_30', N'62', N'R30_P3')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_31', N'63', N'R31_P1')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_31', N'64', N'R31_P2')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_31', N'65', N'R31_P3')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_32', N'66', N'R32_P1')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_32', N'67', N'R32_P2')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_32', N'68', N'R32_P3')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_33', N'69', N'R33_P1')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_33', N'70', N'R33_P2')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_33', N'71', N'R33_P3')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_34', N'77', N'R34_P1')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_34', N'78', N'R34_P2')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_34', N'79', N'R34_P3')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_35', N'80', N'R35_P1')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_35', N'81', N'R35_P2')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_35', N'82', N'R35_P3')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_36', N'83', N'R36_P1')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_36', N'84', N'R36_P2')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_36', N'85', N'R36_P3')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_37', N'86', N'R37_P3')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_37', N'87', N'R37_P2')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_37', N'88', N'R37_P1')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_38', N'89', N'R38_P1')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_38', N'90', N'R38_P2')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_38', N'91', N'R38_P3')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_40', N'92', N'R40_P1')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_40', N'93', N'R40_P2')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_40', N'94', N'R40_P3')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_41', N'95', N'R41_P1')
+GO
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_41', N'96', N'R41_P2')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_41', N'97', N'R41_P3')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_42', N'100', N'R42_P3')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_42', N'98', N'R42_P1')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_42', N'99', N'R42_P2')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_43', N'101', N'R43_P1')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_43', N'102', N'R43_P2')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_43', N'103', N'R43_P3')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_44', N'104', N'R44_P1')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_44', N'105', N'R44_P2')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_44', N'106', N'R44_P3')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_45', N'107', N'R45_P1')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_45', N'108', N'R45_P2')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_45', N'109', N'R45_P3')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_46', N'110', N'R46_P1')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_46', N'111', N'R46_P2')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_46', N'112', N'R46_P3')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_47', N'113', N'R47_P1')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_47', N'114', N'R47_P2')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_47', N'115', N'R47_P3')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_48', N'116', N'R48_P1')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_48', N'117', N'R48_P2')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_48', N'118', N'R48_P3')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_49', N'119', N'R49_P1')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_49', N'120', N'R49_P2')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_49', N'121', N'R49_P3')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_50', N'122', N'R50_P1')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_50', N'123', N'R50_P2')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_50', N'124', N'R50_P3')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_51', N'125', N'R51_P1')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_51', N'126', N'R51_P2')
+INSERT [dbo].[Room_Images] ([room_id], [image_link], [image_name]) VALUES (N'Room_51', N'127', N'R51_P3')
+GO
+
+--3
+INSERT [dbo].[Street] ([street_id], [street_name], [district_id]) VALUES (N'110101', N'Kê Gà', N'1101')
+INSERT [dbo].[Street] ([street_id], [street_name], [district_id]) VALUES (N'110201', N'Số 18', N'1102')
+INSERT [dbo].[Street] ([street_id], [street_name], [district_id]) VALUES (N'120101', N'Khánh An', N'1201')
+INSERT [dbo].[Street] ([street_id], [street_name], [district_id]) VALUES (N'120201', N'Lý Thường Kiệt', N'1202')
+INSERT [dbo].[Street] ([street_id], [street_name], [district_id]) VALUES (N'150101', N'Ngô Thì Sỹ', N'1501')
+INSERT [dbo].[Street] ([street_id], [street_name], [district_id]) VALUES (N'150201', N'Hoàng Sa', N'1502')
+INSERT [dbo].[Street] ([street_id], [street_name], [district_id]) VALUES (N'220101', N'Tổ 3 (Phố Cổ)', N'2201')
+INSERT [dbo].[Street] ([street_id], [street_name], [district_id]) VALUES (N'220201', N'Pả Vi', N'2202')
+INSERT [dbo].[Street] ([street_id], [street_name], [district_id]) VALUES (N'240101', N'Lương Ngọc Quyến', N'2401')
+INSERT [dbo].[Street] ([street_id], [street_name], [district_id]) VALUES (N'240102', N'Tống Duy Tân', N'2401')
+INSERT [dbo].[Street] ([street_id], [street_name], [district_id]) VALUES (N'240201', N'Phan Đình Phùng', N'2402')
+INSERT [dbo].[Street] ([street_id], [street_name], [district_id]) VALUES (N'240202', N'Đội Cấn', N'2402')
+INSERT [dbo].[Street] ([street_id], [street_name], [district_id]) VALUES (N'350101', N'Đoàn Thị Điểm', N'3501')
+INSERT [dbo].[Street] ([street_id], [street_name], [district_id]) VALUES (N'350201', N'Trần Khánh Dư', N'3502')
+INSERT [dbo].[Street] ([street_id], [street_name], [district_id]) VALUES (N'370101', N'Fansipan', N'3701')
+INSERT [dbo].[Street] ([street_id], [street_name], [district_id]) VALUES (N'370201', N'Làng Tà Chải', N'3702')
+INSERT [dbo].[Street] ([street_id], [street_name], [district_id]) VALUES (N'430101', N'Hung Vuong Square', N'4301')
+INSERT [dbo].[Street] ([street_id], [street_name], [district_id]) VALUES (N'430201', N'Văn Hoà', N'4302')
+INSERT [dbo].[Street] ([street_id], [street_name], [district_id]) VALUES (N'480101', N'Minh Châu', N'4801')
+INSERT [dbo].[Street] ([street_id], [street_name], [district_id]) VALUES (N'480201', N'Cô Tô', N'4802')
+INSERT [dbo].[Street] ([street_id], [street_name], [district_id]) VALUES (N'580101', N'Nguyễn Trãi', N'5801')
+INSERT [dbo].[Street] ([street_id], [street_name], [district_id]) VALUES (N'580102', N'Phạm Ngũ Lão', N'5801')
+INSERT [dbo].[Street] ([street_id], [street_name], [district_id]) VALUES (N'580201', N'19', N'5802')
+INSERT [dbo].[Street] ([street_id], [street_name], [district_id]) VALUES (N'580202', N'38', N'5802')
+GO
+
+--4 
+INSERT [dbo].[Type_Of_Room] ([type_id], [type_name]) VALUES (N'type_1', N'Cổ Điển')
+INSERT [dbo].[Type_Of_Room] ([type_id], [type_name]) VALUES (N'type_2', N'Hiện Đại')
+INSERT [dbo].[Type_Of_Room] ([type_id], [type_name]) VALUES (N'type_3', N'Thiên Nhiên')
+GO
+
+--5
+INSERT [dbo].[Users] ([user_id], [user_name], [avatar], [role], [username], [password], [phone], [email]) VALUES (N'User_01', N'Nguyễn Trường Giang', N'/view/web/images/avatar/Giang.jpg', N'Owner', N'Giang', N'123', N'0987654321', N'GiangNTSE150747@gfpt.edu.vn')
+INSERT [dbo].[Users] ([user_id], [user_name], [avatar], [role], [username], [password], [phone], [email]) VALUES (N'User_02', N'Trần Nhựt Hào', N'/view/web/images/avatar/Hao.jpg', N'User', N'haotn', N'123', N'0369663031', N'haotnse150564@fpt.edu.vn')
+INSERT [dbo].[Users] ([user_id], [user_name], [avatar], [role], [username], [password], [phone], [email]) VALUES (N'User_03', N'Nguyễn Quang', NULL, N'User', N'Quang', N'123', N'0987654321', N'GiangNTSE1507471@gfpt.edu.vn')
+INSERT [dbo].[Users] ([user_id], [user_name], [avatar], [role], [username], [password], [phone], [email]) VALUES (N'User_04', N'Nguyễn Hoàng Duy', N'/view/web/images/avatar/Duy.jpg', N'Admin', N'duycute', N'456', N'0987654321', N'DuyNHSE15073@gfpt.edu.vn')
+INSERT [dbo].[Users] ([user_id], [user_name], [avatar], [role], [username], [password], [phone], [email]) VALUES (N'User_05', N'Hoàng Văn Mão', NULL, N'Owner', N'maohv1', N'123', N'0268517803', NULL)
+INSERT [dbo].[Users] ([user_id], [user_name], [avatar], [role], [username], [password], [phone], [email]) VALUES (N'User_06', N'Lê Kim Hoa', NULL, N'Owner', N'hoalk', N'123', N'0983000883', NULL)
+INSERT [dbo].[Users] ([user_id], [user_name], [avatar], [role], [username], [password], [phone], [email]) VALUES (N'User_07', N'Trịnh Bình Minh', NULL, N'Owner', N'minhtb', N'123', N'0733424382', NULL)
+INSERT [dbo].[Users] ([user_id], [user_name], [avatar], [role], [username], [password], [phone], [email]) VALUES (N'User_08', N'Bách Hoa Lý', NULL, N'Owner', N'lybh', N'123', N'0448046839', NULL)
+INSERT [dbo].[Users] ([user_id], [user_name], [avatar], [role], [username], [password], [phone], [email]) VALUES (N'User_09', N'Lý Thanh Kiều', NULL, N'User', N'kieult', N'123', N'0362255298', NULL)
+INSERT [dbo].[Users] ([user_id], [user_name], [avatar], [role], [username], [password], [phone], [email]) VALUES (N'User_10', N'Lâm Văn Thanh', NULL, N'User', N'thanhlv', N'123', N'0754503245', NULL)
+INSERT [dbo].[Users] ([user_id], [user_name], [avatar], [role], [username], [password], [phone], [email]) VALUES (N'User_11', N'Trần Hoà Nghĩa', NULL, N'User', N'nghiath', N'123', N'0505405421', NULL)
+INSERT [dbo].[Users] ([user_id], [user_name], [avatar], [role], [username], [password], [phone], [email]) VALUES (N'User_12', N'Phan Thanh Tra', NULL, N'User', N'trapt', N'123', N'0813546314', NULL)
+GO

@@ -164,7 +164,7 @@ select::-ms-expand {
 							<div class="banner-top2">
 								<div class="banner-info-wthree">
 									<h3>Vũng Tàu</h3>
-									<p>See how good they feel.</p>
+									<p>Love The Ocean</p>
 
 								</div>
 
@@ -174,7 +174,7 @@ select::-ms-expand {
 							<div class="banner-top3">
 								<div class="banner-info-wthree">
 									<h3>Đà Nẵng</h3>
-									<p>See how good they feel.</p>
+									<p>“FantastiCity!”.</p>
 
 								</div>
 
@@ -184,7 +184,7 @@ select::-ms-expand {
 							<div class="banner-top">
 								<div class="banner-info-wthree">
 									<h3>Sài Gòn</h3>
-									<p>See how good they feel.</p>
+									<p>Feel Free Like Saigonese</p>
 
 								</div>
 
@@ -194,7 +194,7 @@ select::-ms-expand {
 							<div class="banner-top1">
 								<div class="banner-info-wthree">
 									<h3>Đà Lạt</h3>
-									<p>For All Walks of Life.</p>
+									<p>DaLat Heal Your Love, Maybe "Steal".</p>
 
 								</div>
 
@@ -210,7 +210,7 @@ select::-ms-expand {
 
 
 	<div class="fluid-container">
-		<p class="h1">Nhanh chóng - Tiện lợi - An toàn</p>
+		<p class="h1">Nhanh chóng - Tiện lợi - Uy tín</p>
 		<div class="center">
 			<form action="booking" method="get">
 				<div class="row cpn1">
@@ -241,7 +241,7 @@ select::-ms-expand {
 					</div>
 
 					<div class="col-md-2" style="text-align: center; margin-top: 5px;">
-						<button type="submit" class="btn btn-danger btn-lg"
+						<button type="submit" class="btn btn-primary btn-lg"
 							style="text-align: center; height: 50px; width: 100px;">
 							<i class="fa fa-search-plus"></i>
 						</button>

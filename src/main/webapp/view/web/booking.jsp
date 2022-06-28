@@ -48,6 +48,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	
 	
 	
+	
 		addEventListener("load", function () {
 			setTimeout(hideURLbar, 0);
 		}, false);
@@ -56,6 +57,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			window.scrollTo(0, 1);
 		}
 	
+
 
 
 
@@ -122,7 +124,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/ui-lightness/jquery-ui.css'
 	rel='stylesheet'>
 
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <style>
 .main-filter {
 	background: #b0a7a7;
@@ -144,22 +147,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	display: none;
 }
 
-	.sbmincart-quantity, .sbmincart-subtotal, .sbmincart-price{
-			display: none !important;
-		}
-
-		.sbmincart-details-remove{
-			width: 30%;
-   			float: left;
-		}
-
-		.sbmincart-remove{
-			float: right;
-		}
-
-		.sbmincart-submit{
-
-		}
+.infor{
+	margin-top: 5px;
+}
 </style>
 </head>
 
@@ -202,38 +192,37 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<label for="pwd">Ngày về:</label> <input type="text"
 								name="endDate" id="my_date_picker2" class="form-control"
 								placeholder="${param.endDate!=null?param.endDate:'MM/dd/yyyy' }"
-								value="${param.endDate!=null?param.endDate:null }" required autocomplete="off">
-						</div> 
+								value="${param.endDate!=null?param.endDate:null }" required
+								autocomplete="off">
+						</div>
 
 						<div style="text-align: right;">
 							<button type="submit" class="btn btn-primary"
-								style="width: 100px;">Lưu</button>
+								style="width: 100px;">Tìm kiếm</button>
 						</div>
 					</form>
 				</div>
 
 				<hr>
 				<!-- price range -->
-				<form action="" method="post">
+				<form action="booking" method="get">
+				<input type="hidden" name="city" value="${param.city }"> <input
+						type="hidden" name="startDate" value="${param.startDate }"
+						autocomplete="off"> <input type="hidden" name="endDate"
+						value="${param.endDate }" autocomplete="off"> <input
+						type="hidden" name="filter" value="true">
+						
 					<div class="range">
-						<h3 class="agileits-sear-head">Price range</h3>
+						<h3 class="agileits-sear-head">Khoảng giá (VNĐ)</h3>
 
 						<ul class="dropdown-menu6">
 							<li>
-								<div id="slider-range"></div> <input type="text" id="amount"
-								style="border: 0; color: #ffffff; font-weight: normal;" />
+								<div id="slider-range"></div> <input type="text" id="amount" name="price"
+								style="border: 0; color: #ffffff; font-weight: normal;" /> 
 							</li>
 						</ul>
 					</div>
-
-				</form>
-				<!-- //price range -->
-
-				<form action="booking" method="get">
-					<input type="hidden" name="city" value="${param.city }"> <input
-						type="hidden" name="startDate" value="${param.startDate }" autocomplete="off">
-					<input type="hidden" name="endDate" value="${param.endDate }" autocomplete="off">
-					<input type="hidden" name="filter" value="true">
+				
 					<!-- Loai cho o -->
 					<hr>
 					<!-- Type -->
@@ -256,7 +245,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							</c:forEach>
 						</ul>
 					</div>
-					
+
 					<hr>
 					<!--preference -->
 					<div class="left-side">
@@ -310,7 +299,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<div class="form-check">
 							<input class="form-check-input" type="radio" name="rating"
 								id="ratingbtn3" value="2.5"
-								<c:if test="${requestScope.ratingScale >=2 and  requestScope.ratingScale <3}">
+								<c:if test="${requestScope.ratingScale >=2 and requestScope.ratingScale <3}">
 									checked
 								</c:if>>
 							<label style="font-weight: unset;" class="form-check-label"
@@ -368,32 +357,32 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 			<c:url var="SortUrl" value="booking">
 				<c:param name="city" value="${param.city}" />
-				
+
 				<c:param name="startDate" value="${param.startDate}" />
-				
+
 				<c:param name="endDate" value="${param.endDate}" />
-				
+
 				<c:forEach var="item" items="${buildingType}">
 					<c:param name="buildingType" value="${item}" />
 				</c:forEach>
-				
+
 				<c:forEach var="item" items="${conceptChoose}">
 					<c:param name="concept" value="${item}" />
 				</c:forEach>
-				
+
 				<c:forEach var="item" items="${convenientChoose}">
 					<c:param name="convenientOption" value="${item}" />
 				</c:forEach>
-				
+
 				<c:if test="${ratingScale != 0 }">
 					<c:param name="rating" value="${ratingScale}" />
 				</c:if>
-				
+
 				<c:forEach var="item" items="${districtChoose}">
 					<c:param name="districtOption" value="${item}" />
 				</c:forEach>
 			</c:url>
-			
+
 			<!-- product right -->
 			<div class="left-ads-display col-md-9">
 				<div class="wrapper_top_shop">
@@ -408,11 +397,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<button style="width: 100%; background-color: gray;"
 								class="btn btn-primary dropdown-toggle" type="button"
 								data-toggle="dropdown">
-								${param.sort=='down'?'Sắp xếp giá giảm dần':'Sắp xếp giá tăng dần' } <span class="caret"></span>
+								${param.sort=='down'?'Sắp xếp giá giảm dần':'Sắp xếp giá tăng dần' }
+								<span class="caret"></span>
 							</button>
 							<ul class="dropdown-menu" style="width: 100%;">
 								<li><a href="${SortUrl}&sort=up">Sắp xếp giá tăng dần</a></li>
-								<li><a href="${SortUrl}&sort=down">Sắp xếp giá giảm dần </a></li>
+								<li><a href="${SortUrl}&sort=down">Sắp xếp giá giảm dần
+								</a></li>
 							</ul>
 						</div>
 					</div>
@@ -431,30 +422,23 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									<div class="product-shoe-info shoe">
 										<div class="men-pro-item">
 											<div class="men-thumb-item">
-											<c:set var="image" value="${pageContext.request.contextPath}${building.buildingImage}"></c:set>
-											<c:set var="defaultImage" value="https://vinhomesland.vn/wp-content/uploads/2019/10/homestay.jpg"></c:set>
+												<c:set var="image"
+													value="${pageContext.request.contextPath}${building.buildingImage}"></c:set>
+												<c:set var="defaultImage"
+													value="https://vinhomesland.vn/wp-content/uploads/2019/10/homestay.jpg"></c:set>
 												<img width="240" height="190"
 													src="${building.buildingImage==null?defaultImage:image }"
 													alt="">
 												<div class="men-cart-pro">
 													<div class="inner-men-cart-pro">
-														<a href="${pageContext.request.contextPath}/single-post?buildingId=${building.buildingId}"
+														<a
+															href="${pageContext.request.contextPath}/single-post?buildingId=${building.buildingId}"
 															class="link-product-add-cart">Xem chi tiết</a>
-															
-													</div>	
-													
+
+													</div>
+
 												</div>
-												<span class="product-new-top" style="background-color: gray; width: 10%;;"><div class="shoe single-item hvr-outline-out">
-												<form action="#" method="get">
-													<input type="hidden" name="cmd" value="_cart">
-													<input type="hidden" name="shoe_item" value="dsaasd">
-													<input type="hidden" name="amount" value="405.00">
-													<button type="submit" class="shoe-cart pshoe-cart"><i class="fa fa-cart-plus" aria-hidden="true"></i></button>
 
-													<a href="#" data-toggle="modal" data-target="#myModal1"></a>
-												</form>
-
-											</div></span>
 											</div>
 
 										</div>
@@ -464,33 +448,49 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									<div class="item-info-product"
 										style="text-align: left; margin-bottom: 15px;">
 										<h4>
-											<a href="${pageContext.request.contextPath}/single-post?buildingId=${building.buildingId}">${building.buildingName }</a>
+											<a
+												href="${pageContext.request.contextPath}/single-post?buildingId=${building.buildingId}">${building.buildingName }</a>
 										</h4>
 										<div class="clearfix"></div>
 									</div>
 									<div class="grid_meta">
-										<div class="product_price">
+										<div class="product_price infor">
 											<div class="grid-price ">
-												<span class="money ">999k/day</span>
+												<span class="money ">Giá trung bình: </span> 900,000 VNĐ/ 1 ngày <a>(chưa làm :3)</a>
 											</div>
 										</div>
 
-										<ul class="stars">
-											<li><a href="#"><i class="fa fa-star"
-													aria-hidden="true"></i></a></li>
-											<li><a href="#"><i class="fa fa-star"
-													aria-hidden="true"></i></a></li>
-											<li><a href="#"><i class="fa fa-star"
-													aria-hidden="true"></i></a></li>
-											<li><a href="#"><i class="fa fa-star"
-													aria-hidden="true"></i></a></li>
-											<li><a href="#"><i class="fa fa-star	"
-													aria-hidden="true"></i></a></li>
-										</ul>
-										<div><span style="font-weight: bolder;">Đánh giá: </span> ${building.rating != 0?building.rating:'Chưa có đánh giá' }</div>
-										<div><span style="font-weight: bolder;">Loại phòng: </span> ${building.buildingType }</div>
-										<div><span style="font-weight: bolder;">Địa chỉ<i style="font-size: 14px;" class="material-icons">&#xe567;</i> :</span> ${building.buildingAddress}</div>
-										<div><span style="font-weight: bolder;">Mô tả:</span>${building.buildingDesc }</div>
+										<div class="infor">
+											<span style="font-weight: bolder;">Đánh giá: </span>
+											${building.rating != 0?building.rating:'Chưa có đánh giá' }
+										</div>
+										<div class="infor">
+											<span style="font-weight: bolder;">Loại phòng: </span>
+											${building.buildingType }
+										</div>
+
+										<div class="infor">
+											<svg width="16" height="16" fill="none">
+									<path d="M8 9.333a2 2 0 100-4 2 2 0 000 4z" stroke="#1A202C"
+													stroke-linecap="round" stroke-linejoin="round"></path>
+									<path
+													d="M11.771 11.105l-2.828 2.828a1.333 1.333 0 01-1.885 0l-2.83-2.828a5.333 5.333 0 117.543 0v0z"
+													stroke="#1A202C" stroke-linecap="round"
+													stroke-linejoin="round"></path></svg>
+											<span style="font-weight: bolder;"> Địa chỉ :</span>
+											${building.buildingAddress}
+										</div>
+										<div class="infor">
+											<svg viewBox="0 0 20 20" fill="none"
+												style="width: 16px; height: 16px;">
+												<path
+													d="M10 17.5a7.5 7.5 0 100-15 7.5 7.5 0 000 15zM10 6.667h.008"
+													stroke="#4A5568" stroke-width="1.5" stroke-linecap="round"
+													stroke-linejoin="round"></path>
+												<path d="M9.167 10H10v3.333h.833" stroke="#4A5568"
+													stroke-width="1.5" stroke-linecap="round"
+													stroke-linejoin="round"></path></svg>
+											<span style="font-weight: bolder;"> Mô tả: </span>${building.buildingDesc }</div>
 									</div>
 								</div>
 								<hr>
@@ -649,22 +649,23 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		//<![CDATA[ 
 		$(window).load(
 				function() {
+					var dollarUSLocale = Intl.NumberFormat('en-US');
 					$("#slider-range").slider(
 							{
 								range : true,
 								min : 0,
-								max : 9000,
-								values : [ 50, 6000 ],
+								max : 5000000,
+								values : [ 0, 5000000 ],
 								slide : function(event, ui) {
 									$("#amount").val(
-											"$" + ui.values[0] + " - $"
-													+ ui.values[1]);
+											"" + dollarUSLocale.format(ui.values[0]) + " - "
+													+ dollarUSLocale.format(ui.values[1]));
 								}
 							});
 					$("#amount").val(
-							"$" + $("#slider-range").slider("values", 0)
-									+ " - $"
-									+ $("#slider-range").slider("values", 1));
+							dollarUSLocale.format($("#slider-range").slider("values", 0))
+									+ " - "
+									+ dollarUSLocale.format($("#slider-range").slider("values", 1)));
 
 				}); //]]>
 	</script>
@@ -697,11 +698,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				function() {
 
 					$(function() {
-						$("#my_date_picker1").datepicker({ minDate: 0 });
+						$("#my_date_picker1").datepicker({
+							minDate : 0
+						});
 					});
 
 					$(function() {
-						$("#my_date_picker2").datepicker({ minDate: 0 });
+						$("#my_date_picker2").datepicker({
+							minDate : 0
+						});
 					});
 
 					$('#my_date_picker1').change(
