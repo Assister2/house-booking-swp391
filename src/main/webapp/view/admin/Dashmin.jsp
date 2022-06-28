@@ -249,8 +249,8 @@
                                         <td>${o.roomName}</td>
                                         <td>${o.roomDesc}</td>
                                         <td>${o.roomStatus}</td>
-                                        <td><a class="btn btn-sm btn-primary" href="${pageContext.request.contextPath}/Approve?rID=${o.roomId}" title="Approve" ">Approve</a></td>
-                                        <td><a class="btn btn-sm btn-primary" href="${pageContext.request.contextPath}/Deny?rID=${o.roomId}">Deny</a></td>
+                                        <td><a class="btn btn-sm btn-primary" href="${pageContext.request.contextPath}/AdminControl?action=approve&rID=${o.roomId}" title="Approve" ">Approve</a></td>
+                                        <td><a class="btn btn-sm btn-primary" href="${pageContext.request.contextPath}/AdminControl?action=deny&rID=${o.roomId}">Deny</a></td>
                                         <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
 
                                     </tr>
