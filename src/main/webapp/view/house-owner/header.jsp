@@ -214,32 +214,32 @@
                                 <div class="account-wrap">
                                     <div class="account-item clearfix js-item-menu">
                                         <div class="image">
-                                            <img src="${pageContext.request.contextPath}/view/web/images/avatar/Giang.jpg" alt="John Doe" />
+                                            <img src="${pageContext.request.contextPath}${usersession.user.avatar}" alt="${usersession.user.name }" />
                                         </div>
                                         <div class="content">
-                                            <a class="js-acc-btn" href="#">Truong Giang</a>
+                                            <a class="js-acc-btn" href="#">${usersession.user.name }</a>
                                         </div>
                                         <div class="account-dropdown js-dropdown">
                                             <div class="info clearfix">
                                                 <div class="image">
                                                     <a href="#">
-                                                        <img src="${pageContext.request.contextPath}/view/web/images/avatar/Giang.jpg" alt="John Doe" />
+                                                        <img src="${pageContext.request.contextPath}${usersession.user.avatar}" alt="${usersession.user.name }" />
                                                     </a>
                                                 </div>
                                                 <div class="content">
                                                     <h5 class="name">
-                                                        <a href="#">Truong Giang</a>
+                                                        <a href="#">${usersession.user.name }</a>
                                                     </h5>
-                                                    <span class="email">GiangNTSE@fpt.edu.vn</span>
+                                                    <span class="email">${usersession.user.email }</span>
                                                 </div>
                                             </div>
                                             <div class="account-dropdown__body">
                                                 <div class="account-dropdown__item">
-                                                    <a href="#">
+                                                    <a href="${pageContext.request.contextPath}/my-account">
                                                         <i class="zmdi zmdi-account"></i>Account</a>
                                                 </div>
                                                 <div class="account-dropdown__item">
-                                                    <a href="#">
+                                                    <a href="${pageContext.request.contextPath}/my-account">
                                                         <i class="zmdi zmdi-settings"></i>Setting</a>
                                                 </div>
                                                 <div class="account-dropdown__item">
@@ -248,7 +248,7 @@
                                                 </div>
                                             </div>
                                             <div class="account-dropdown__footer">
-                                                <a href="#">
+                                                <a href="${pageContext.request.contextPath}/log-out">
                                                     <i class="zmdi zmdi-power"></i>Logout</a>
                                             </div>
                                         </div>

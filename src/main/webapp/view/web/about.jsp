@@ -5,7 +5,7 @@
 <html lang="eng">
 
 <head>
-<title>House Booking</title>
+<title>Booking | AboutUs</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords"
@@ -61,7 +61,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<div class="ads-grid_shop">
 		<div class="shop_inner_inf">
 			<h3 class="head">About Us</h3>
-			<p class="head_para">Add Some Description</p>
+			<p class="head_para">Nhóm 7</p>
 			<div class="inner_section_w3ls">
 				<div class="col-md-6 news-left">
 					<img
@@ -69,7 +69,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						alt=" " class="img-responsive">
 				</div>
 				<div class="col-md-6 news-right">
-					<h4>Welcome to our Downy Shoes</h4>
+					<h4>Welcome to Booking Ur Heart</h4>
 					<p class="sub_p">Etiam faucibus viverra libero vel efficitur.
 						Ut semper nisl ut laoreet ultrices. Maecenas dictum arcu purus,
 						sit amet volutpat purus viverra sit amet. Quisque lacinia quam sed
@@ -216,161 +216,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<div class="clearfix"></div>
 	</div>
 	<!-- /Properties -->
-	<div class="mid_slider_w3lsagile">
-		<div class="col-md-3 mid_slider_text">
-			<h5>Some More Shoes</h5>
-		</div>
-		<div class="col-md-9 mid_slider_info">
-			<div id="myCarousel" class="carousel slide" data-ride="carousel">
-				<!-- Indicators -->
-				<ol class="carousel-indicators">
-					<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-					<li data-target="#myCarousel" data-slide-to="1" class=""></li>
-					<li data-target="#myCarousel" data-slide-to="2" class=""></li>
-					<li data-target="#myCarousel" data-slide-to="3" class=""></li>
-				</ol>
-				<div class="carousel-inner" role="listbox">
-					<div class="item active">
-						<div class="row">
-							<div class="col-md-3 col-sm-3 col-xs-3 slidering">
-								<div class="thumbnail">
-									<img
-										src="${pageContext.request.contextPath}/view/web/images/g1.jpg"
-										alt="Image" style="max-width: 100%;">
-								</div>
-							</div>
-							<div class="col-md-3 col-sm-3 col-xs-3 slidering">
-								<div class="thumbnail">
-									<img
-										src="${pageContext.request.contextPath}/view/web/images/g2.jpg"
-										alt="Image" style="max-width: 100%;">
-								</div>
-							</div>
-							<div class="col-md-3 col-sm-3 col-xs-3 slidering">
-								<div class="thumbnail">
-									<img
-										src="${pageContext.request.contextPath}/view/web/images/g3.jpg"
-										alt="Image" style="max-width: 100%;">
-								</div>
-							</div>
-							<div class="col-md-3 col-sm-3 col-xs-3 slidering">
-								<div class="thumbnail">
-									<img
-										src="${pageContext.request.contextPath}/view/web/images/g4.jpg"
-										alt="Image" style="max-width: 100%;">
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="item">
-						<div class="row">
-							<div class="col-md-3 col-sm-3 col-xs-3 slidering">
-								<div class="thumbnail">
-									<img
-										src="${pageContext.request.contextPath}/view/web/images/g5.jpg"
-										alt="Image" style="max-width: 100%;">
-								</div>
-							</div>
-							<div class="col-md-3 col-sm-3 col-xs-3 slidering">
-								<div class="thumbnail">
-									<img
-										src="${pageContext.request.contextPath}/view/web/images/g6.jpg"
-										alt="Image" style="max-width: 100%;">
-								</div>
-							</div>
-							<div class="col-md-3 col-sm-3 col-xs-3 slidering">
-								<div class="thumbnail">
-									<img
-										src="${pageContext.request.contextPath}/view/web/images/g2.jpg"
-										alt="Image" style="max-width: 100%;">
-								</div>
-							</div>
-							<div class="col-md-3 col-sm-3 col-xs-3 slidering">
-								<div class="thumbnail">
-									<img
-										src="${pageContext.request.contextPath}/view/web/images/g1.jpg"
-										alt="Image" style="max-width: 100%;">
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="item">
-						<div class="row">
-							<div class="col-md-3 col-sm-3 col-xs-3 slidering">
-								<div class="thumbnail">
-									<img
-										src="${pageContext.request.contextPath}/view/web/images/g1.jpg"
-										alt="Image" style="max-width: 100%;">
-								</div>
-							</div>
-							<div class="col-md-3 col-sm-3 col-xs-3 slidering">
-								<div class="thumbnail">
-									<img
-										src="${pageContext.request.contextPath}/view/web/images/g2.jpg"
-										alt="Image" style="max-width: 100%;">
-								</div>
-							</div>
-							<div class="col-md-3 col-sm-3 col-xs-3 slidering">
-								<div class="thumbnail">
-									<img
-										src="${pageContext.request.contextPath}/view/web/images/g3.jpg"
-										alt="Image" style="max-width: 100%;">
-								</div>
-							</div>
-							<div class="col-md-3 col-sm-3 col-xs-3 slidering">
-								<div class="thumbnail">
-									<img
-										src="${pageContext.request.contextPath}/view/web/images/g4.jpg"
-										alt="Image" style="max-width: 100%;">
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="item">
-						<div class="row">
-							<div class="col-md-3 col-sm-3 col-xs-3 slidering">
-								<div class="thumbnail">
-									<img
-										src="${pageContext.request.contextPath}/view/web/images/g1.jpg"
-										alt="Image" style="max-width: 100%;">
-								</div>
-							</div>
-							<div class="col-md-3 col-sm-3 col-xs-3 slidering">
-								<div class="thumbnail">
-									<img
-										src="${pageContext.request.contextPath}/view/web/images/g2.jpg"
-										alt="Image" style="max-width: 100%;">
-								</div>
-							</div>
-							<div class="col-md-3 col-sm-3 col-xs-3 slidering">
-								<div class="thumbnail">
-									<img
-										src="${pageContext.request.contextPath}/view/web/images/g3.jpg"
-										alt="Image" style="max-width: 100%;">
-								</div>
-							</div>
-							<div class="col-md-3 col-sm-3 col-xs-3 slidering">
-								<div class="thumbnail">
-									<img
-										src="${pageContext.request.contextPath}/view/web/images/g4.jpg"
-										alt="Image" style="max-width: 100%;">
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<a class="left carousel-control" href="#myCarousel" role="button"
-					data-slide="prev"> <span class="fa fa-chevron-left"
-					aria-hidden="true"></span> <span class="sr-only">Previous</span>
-				</a> <a class="right carousel-control" href="#myCarousel" role="button"
-					data-slide="next"> <span class="fa fa-chevron-right"
-					aria-hidden="true"></span> <span class="sr-only">Next</span>
-				</a>
-				<!-- The Modal -->
-
-			</div>
-		</div>
-
 		<div class="clearfix"></div>
 	</div>
 	<!--//banner -->

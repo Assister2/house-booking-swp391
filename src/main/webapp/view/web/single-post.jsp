@@ -7,7 +7,7 @@
 <html lang="eng">
 
 <head>
-<title>House Booking</title>
+<title>Booking | SinglePost</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords"
@@ -351,6 +351,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	visibility: visible;
 	opacity: 1;
 }
+
 </style>
 
 </head>
@@ -463,22 +464,28 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									</c:if>
 									<c:forEach var="item" items="${listConvenient }">
 
-										<c:if test="${count%3 == 1 }">
+										<c:if test="${count%4 == 1 }">
 											<tr>
 										</c:if>
 										<td>${item.conveName}</td>
-										<c:if test="${count%3 == 0}">
+										<c:if test="${count%4 == 0}">
 											</tr>
 										</c:if>
 
 										<c:set var="count" value="${count + 1 }"></c:set>
 									</c:forEach>
-									<c:if test="${count%3 == 2}">
+									<c:if test="${count%4 == 3}">
+										<td></td>
 										<td></td>
 										<td></td>
 										</tr>
 									</c:if>
-									<c:if test="${count%3 == 0}">
+									<c:if test="${count%4 == 2}">
+										<td></td>
+										<td></td>
+										</tr>
+									</c:if>
+									<c:if test="${count%4 == 1}">
 										<td></td>
 										</tr>
 									</c:if>

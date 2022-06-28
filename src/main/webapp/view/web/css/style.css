@@ -1259,13 +1259,13 @@ p.copy-right-w3ls-agileits a:hover {
 }
 /*-- //footer --*/
 .banner_top.innerpage {
-	background: url(../images/nam.jpeg) no-repeat 0px -400px;
+	background: url(../images/nam.jpeg) no-repeat 0px -500px;
 	background-size: cover;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
 	-moz-background-size: cover;
-	min-height: 225px;
+	min-height: 250px;
 }
 
 .ads-grid_shop {

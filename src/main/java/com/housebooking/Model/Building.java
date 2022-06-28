@@ -72,13 +72,6 @@ public class Building {
 	public void setBuildingType(String buildingType) {
 		this.buildingType = buildingType;
 	}
-//	public Address getBuildingAddress() {
-//		return buildingAddress;
-//	}
-//	public void setBuildingAddress(Address buildingAddress) {
-//		this.buildingAddress = buildingAddress;
-//	}
-	
 	
 	public int getNumRoom() {
 		return numRoom;

@@ -40,7 +40,6 @@ public class LoginController extends HttpServlet {
 
 		AccessManager accessManager = new AccessManager();
 		UserSession us = accessManager.login(username, password);
-
 		HttpSession ss = request.getSession(true);
 
 		if (us.getUser() != null) {

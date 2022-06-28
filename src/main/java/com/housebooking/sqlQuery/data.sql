@@ -312,3 +312,37 @@ Values
 	('Room_16', '/view/web/resourse/room_16_01.jpg','image-1'),
 	('Room_17', '/view/web/resourse/room_17_01.jpg','image-1')
 Go
+
+
+insert into dbo.Additional_service 
+values	('SV001',N'Nước Suối',Null),
+		('SV002',N'Coca Cola',Null),
+		('SV003',N'Pepsi',Null),
+		('SV004',N'String Dâu',Null),
+		('SV005',N'Snack',Null),
+		('SV006',N'Rượu Vang',Null)
+Go
+
+insert into dbo.Building_Additional_service
+values	('110101_B01','SV001','true',30),
+		('110101_B01','SV002','true',40),
+		('110101_B01','SV003','true',40),
+		('110101_B01','SV004','true',40),
+		('110101_B01','SV005','true',20),
+		('110101_B01','SV006','true',400),
+		('110201_B01','SV001','true',20),
+		('110201_B01','SV002','true',30),
+		('110201_B01','SV003','true',30),
+		('120101_B01','SV001','true',50),
+		('120101_B01','SV002','true',60),
+		('120101_B01','SV003','true',60)
+Go
+
+Insert Into dbo.Building_Additional_service Values
+		('350101_B00','SV001','true',50),
+		('350101_B00','SV002','true',60),
+		('350101_B00','SV003','true',60),
+		('350101_B00','SV004','true',50),
+		('350101_B00','SV005','true',60),
+		('350101_B00','SV006','true',60)
+Go
