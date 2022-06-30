@@ -10,13 +10,13 @@
 		<div class="logo">
 			<h1>
 				<a class="navbar-brand"
-					href="${pageContext.request.contextPath}/home"><span>House</span></a>
+					href="${pageContext.request.contextPath}/home"><span>Heart</span></a>
 				<a class="navbar-brand"
-					href="${pageContext.request.contextPath}/home"> <i>
+					href="${pageContext.request.contextPath}/home"> <i> 
 						Booking</i></a>
 			</h1>
 		</div>
-		<div class="overlay overlay-contentpush">
+		<div class="overlay overlay-contentpush" style=" box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; ">
 			<button type="button" class="overlay-close">
 				<i class="fa fa-times" aria-hidden="true"></i>
 			</button>
@@ -24,16 +24,16 @@
 			<nav>
 				<ul>
 					<li><a href="${pageContext.request.contextPath}/home"
-						class="active">Home</a></li>
-					<li><a href="${pageContext.request.contextPath}/about">About</a></li>
-					<li><a href="${pageContext.request.contextPath}/error">Team</a></li>
+						class="active">Trang chủ</a></li>
+					<li><a href="${pageContext.request.contextPath}/about">About Us</a></li>
 					<c:if test="${usersession != null }">
-						<li><a href="${pageContext.request.contextPath}/log-out">Log
-								out</a></li>
+					<li><a href="${pageContext.request.contextPath}/NotFoundException">Xem đơn hàng</a></li>
+					<li><a href="${pageContext.request.contextPath}/my-account">Tài khoản</a></li>
+						<li><a href="${pageContext.request.contextPath}/log-out">Đăng Xuất</a></li>
 					</c:if>
 					<c:if test="${usersession == null }">
-						<li><a href="${pageContext.request.contextPath}/login">Login</a></li>
-						<li><a href="${pageContext.request.contextPath}/sign-up">Sign up</a></li>
+						<li><a href="${pageContext.request.contextPath}/login">Đăng nhập</a></li>
+						<li><a href="${pageContext.request.contextPath}/sign-up">Đăng ký</a></li>
 					</c:if>
 
 				</ul>
@@ -53,16 +53,29 @@
 		<div class="search_w3ls_agileinfo">
 			<div>
 				<div class="cd-main-header">
-					<ul class="cd-header-buttons">
-						<li><a class="cd-search-trigger" href="#cd-search"> <span></span></a></li>
+			<ul class="cd-header-buttons">
+					<button class="btn btn-secondary dropdown-toggle" type="button"
+						style="background-color: rgba(27, 25, 25, 0.27); color: white; height: 36px; width: 36px;"
+						id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true"
+						aria-expanded="false">
+						<i class="fa fa-user" aria-hidden="true"></i>
+					</button>
+					<ul class="dropdown-menu  dropdown-menu-right"
+						aria-labelledby="dropdownMenu"> 
+						<c:if test="${usersession.user == null }">
+							<li style="width: 100%;"><a href="${pageContext.request.contextPath}/login">Đăng nhập</a></li>
+							<li style="width: 100%;"><a href="${pageContext.request.contextPath}/sign-up">Đăng ký</a></li>
+						</c:if>
+						
+						<c:if test="${usersession.user != null }">
+							<li style="width: 100%;"><a href="${pageContext.request.contextPath}/my-account">Quản lý tài khoản</a></li>
+							<li style="width: 100%;"><a href="${pageContext.request.contextPath}/#">Xem đơn đặt</a></li>
+							<li style="width: 100%;"><a href="${pageContext.request.contextPath}/log-out">Đăng xuất</a></li>
+						</c:if>
+						
 					</ul>
-				</div>
-				<div id="cd-search" class="cd-search">
-					<form action="#" method="post">
-						<input name="Search" type="search"
-							placeholder="Click enter after typing...">
-					</form>
-				</div>
+			</ul>
+		</div>
 			</div>
 		</div>
 
@@ -78,7 +91,7 @@
 					<i>Booking</i></a>
 			</h1>
 		</div>
-		<div class="overlay overlay-contentpush">
+		<div class="overlay overlay-contentpush" style=" box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; ">
 			<button type="button" class="overlay-close">
 				<i class="fa fa-times" aria-hidden="true"></i>
 			</button>
@@ -105,15 +118,6 @@
 				<i class="fa fa-bars" aria-hidden="true"></i>
 			</button>
 		</div>
-		<div class="top_nav_right">
-					<div class="shoecart shoecart2 cart cart box_1">
-						<form action="#" method="post" class="last">
-							<input type="hidden" name="cmd" value="_cart">
-							<input type="hidden" name="display" value="1">
-							<button class="top_shoe_cart" type="submit" name="submit" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button>
-						</form>
-					</div>
-				</div>
 		
 	</c:if>
 	<div class="clearfix"></div>
