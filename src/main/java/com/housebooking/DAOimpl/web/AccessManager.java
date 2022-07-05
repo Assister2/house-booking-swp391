@@ -58,8 +58,8 @@ public class AccessManager {
 	 
 	 public UserSession loginGoogle(String id, String name, String email) {
 	        UserSession userSession =  new UserSession();
-
-	        String sql = "select user_id from Users "
+	        User user = new User();
+	        String sql = "select * from Users "
 	                + "Where user_id like ? ";
 
 	        
@@ -75,14 +75,21 @@ public class AccessManager {
 
 	            if (!rs.next() ) {
 	                createNewGoogleAccess(id, name, email);
+	                userSession = loginGoogle(id, name, email);
+	                
 	            } else {
-	            	User user = new User();
+	            	user = new User();
 	            	user.setUserId(rs.getString("user_id"));
 	                user.setName(rs.getNString("user_name"));
+	                user.setAvatar(rs.getString("avatar"));
 	                user.setRole(rs.getString("role"));
+	                user.setUsername(rs.getString("username"));
+	                user.setPassword(rs.getString("password"));
+	                user.setPhoneNumber(rs.getString("phone"));
 	                user.setEmail(rs.getString("Email"));
+	                
 	            }
-	            
+	            userSession.setUser(user);
 	            ps.close();
 	            conn.close();
 
@@ -97,6 +104,62 @@ public class AccessManager {
 	    }
 	 
 	 public void createNewGoogleAccess(String id, String name, String email) {
-	        System.out.println("asb");
-	    }
+		 String sql = "INSERT INTO Users\r\n"
+		 		+ "VALUES (?,?,null,?,null,null,null,?)";
+
+	        
+	        try {
+
+	            Connection conn = DBUtils.getConnection();
+
+	            PreparedStatement ps = conn.prepareStatement(sql);
+
+	            ps.setString(1, id);
+	            ps.setString(2, name);
+	            ps.setString(3, "User");
+	            ps.setString(4, email);
+
+	            ResultSet rs = ps.executeQuery();
+	            
+	            ps.close();
+	            conn.close();
+
+	        } catch (Exception ex) {
+
+	            ex.printStackTrace();
+
+	        }
+	        
+	  }
+	 
+//	 public int getLastestNumberID() {
+//		 int userIDLastestNumber = 0;
+//	        String sql = "select top 1 user_id from Users\r\n"
+//	        		+ "order by user_id DESC";
+//     
+//	        try {
+//
+//	            Connection conn = DBUtils.getConnection();
+//
+//	            PreparedStatement ps = conn.prepareStatement(sql);
+//
+//	            ResultSet rs = ps.executeQuery();
+//
+//	            if (rs.next()) {
+//	            	userIDLastestNumber = Integer.parseInt((rs.getString("user_id")).substring(5));
+//	            }
+//	            
+//	            System.out.println(userIDLastestNumber);
+//	            
+//	            ps.close();
+//	            conn.close();
+//	            
+//	            return userIDLastestNumber;
+//	        } catch (Exception ex) {
+//
+//	            ex.printStackTrace();
+//
+//	        }
+//	     return 0;
+//	 }
 }

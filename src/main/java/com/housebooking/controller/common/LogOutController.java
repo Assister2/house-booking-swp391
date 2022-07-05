@@ -32,7 +32,7 @@ public class LogOutController extends HttpServlet {
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		session.invalidate();
-		response.sendRedirect("login");
+		response.sendRedirect("home");
 	}
 
 	/**
