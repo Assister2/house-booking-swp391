@@ -254,6 +254,10 @@
 																${listBuilding[a-1].buildingType }
 															</p>
 															<p>
+																<span style="font-weight: bolder;">Trạng thái:</span>
+																...
+															</p>
+															<p>
 																<span style="font-weight: bolder;">Địa chỉ:</span>
 																${listBuilding[a-1].buildingAddress }
 															</p>
@@ -263,8 +267,10 @@
 															</p>
 															Số lượng phòng: <span
 																style="font-weight: bold; padding-left: 5px; padding-right: 5px;">
-																${listBuilding[a-1].numRoom } </span> <a href="${pageContext.request.contextPath}/building-detail?buildingId=${listBuilding[a-1].buildingId }">Xem chi
-																tiết</a>
+																${listBuilding[a-1].numRoom } </span> <a
+																href="${pageContext.request.contextPath}/building-detail?buildingId=${listBuilding[a-1].buildingId }">Xem
+																chi tiết</a>
+																<p><a href="#">Chỉnh sửa thông tin</a></p>
 														</div>
 													</div>
 													<hr>
@@ -416,6 +422,10 @@
 																${listBuilding[a-1].buildingType }
 															</p>
 															<p>
+																<span style="font-weight: bolder;">Trạng thái:</span>
+																...
+															</p>
+															<p>
 																<span style="font-weight: bolder;">Địa chỉ:</span>
 																${listBuilding[a-1].buildingAddress }
 															</p>
@@ -425,8 +435,10 @@
 															</p>
 															Số lượng phòng: <span
 																style="font-weight: bold; padding-left: 5px; padding-right: 5px;">
-																${listBuilding[a-1].numRoom } </span> <a href="${pageContext.request.contextPath}/building-detail?buildingId=${listBuilding[a-1].buildingId }">Xem chi
-																tiết</a>
+																${listBuilding[a-1].numRoom } </span> <a
+																href="${pageContext.request.contextPath}/building-detail?buildingId=${listBuilding[a-1].buildingId }">Xem
+																chi tiết</a>
+																<p><a href="#">Chỉnh sửa thông tin</a></p>
 														</div>
 													</div>
 													<hr>
@@ -556,8 +568,9 @@
 
 										<div class="tab-pane fade" id="nav-add" role="tabpanel"
 											aria-labelledby="nav-contact-tab">
-											<form action="manage" method="get"
+											<form action="manage" method="post"
 												enctype="multipart/form-data">
+												<input type="hidden" name="action" value="test">
 												<div class="tab-pane fade show active" id="nav-home"
 													role="tabpanel" aria-labelledby="nav-home-tab">
 													<br>
@@ -572,7 +585,8 @@
 
 																<div class="image-upload-wrap">
 																	<input class="file-upload-input" type='file'
-																		onchange="readURL(this);" accept="image/*" name="image"/>
+																		onchange="readURL(this);" accept="image/*"
+																		name="image" multiple="multiple" />
 																	<div class="drag-text">
 																		<h3>Drag and drop a file or select add Image</h3>
 																	</div>
@@ -591,37 +605,68 @@
 														</div>
 														<div class="col-8">
 															<div class="row form-field">
-																<div class="col-md-3">
+																<div class="col-md-2">
 																	<label>Tên nhà</label>
 																</div>
-																<div class="col-md-8">
+																<div class="col-md-9">
 																	<input type="text" id="" name="buildingName"
 																		placeholder="Nhập tên nhà" class="form-control">
 																</div>
 															</div>
+
 															<div class="row form-field">
-																<div class="col-md-3">
-																	<label>Loại cho thuê</label>
-																</div>
-																<div class="col-md-8">
-																	<input type="text" id="" name="buildingType"
-																		placeholder="Chọn loại cho thuê" class="form-control">
-																</div>
-															</div>
-															<div class="row form-field">
-																<div class="col-md-3">
+																<div class="col-md-2">
 																	<label>Địa chỉ</label>
 																</div>
-																<div class="col-md-8">
-																	<input type="text" id="" name="Address" placeholder="Nhập số nhà"
+																<div class="form-group col-md-3">
+																	<select name="state" id="countySel" size="1"
 																		class="form-control">
+																		<option value="" selected="selected">Select
+																			Country</option>
+																	</select>
+																</div>
+																<div class="form-group col-md-3">
+																	<select name="countrya" id="stateSel" size="1"
+																		class="form-control">
+																		<option value="" selected="selected">Please
+																			select Country first</option>
+																	</select>
+																</div>
+																<div class="form-group col-md-3">
+																	<select name="district" id="districtSel" size="1" class="form-control">
+																		<option value="" selected="selected">Please
+																			select State first</option>
+																	</select>
 																</div>
 															</div>
 															<div class="row form-field">
+																<div class="col-md-12">Thông tin chi tiết</div>
+															</div>
+
+															<div class="row form-field">
+																<div class="col-md-4">
+																	<input type="text" id="" name="building_number"
+																		placeholder="Nhập số nhà" class="form-control">
+																</div>
+
 																<div class="col-md-3">
+																	<input type="number" id="area" name="area"
+																		placeholder="Diện tích" class="form-control">
+																</div>
+
+																<div class="form-group col-md-4">
+																	<select class="form-control" id="" name="building_type">
+																		<option>Loại cho thuê</option>
+																		<option>Nhà nguyên căn</option>
+																		<option>Phòng riêng</option>
+																	</select>
+																</div>
+															</div>
+															<div class="row form-field">
+																<div class="col-md-2">
 																	<label>Mô tả</label>
 																</div>
-																<div class="col-md-8">
+																<div class="col-md-9">
 																	<textarea class="form-control" name="mota"
 																		placeholder="Mô tả" id="mota" rows="3"></textarea>
 																</div>
@@ -629,16 +674,16 @@
 															<div class="row form-field">
 																<div class="col-md-9"></div>
 																<div class="col-md-2">
-																		<input style="width: 100%;" type="submit" class="btn btn-primary" value="Save" name="Action">
+																	<button style="width: 100%;" type="submit"
+																		class="btn btn-primary">Save</button>
 																</div>
 															</div>
 														</div>
 													</div>
-													<hr>
 												</div>
-											</form>
+												<hr>
 										</div>
-
+										</form>
 									</div>
 								</div>
 							</div>
@@ -736,9 +781,10 @@
 							<thead>
 								<tr>
 									<td>Tiện Nghi</td>
-									<td style="text-align: right;">
-									<span style="margin-right: 3px;"><label for="selectAllTienNghi">Chọn tất cả</label></span> <input type="checkbox" id="selectAllTienNghi" name="">
-									</td>
+									<td style="text-align: right;"><span
+										style="margin-right: 3px;"><label
+											for="selectAllTienNghi">Chọn tất cả</label></span> <input
+										type="checkbox" id="selectAllTienNghi" name=""></td>
 								</tr>
 							</thead>
 							<tbody>
@@ -752,8 +798,9 @@
 													<h6>${listConvenientAllowToAdd[lc-1].conveName }</h6>
 												</div>
 											</td>
-											<td class="table-data-feature">
-												<input type="checkbox" name="listTienNghi" value="${listConvenientAllowToAdd[lc-1].conveId }">
+											<td class="table-data-feature"><input type="checkbox"
+												name="listTienNghi"
+												value="${listConvenientAllowToAdd[lc-1].conveId }">
 											</td>
 
 										</tr>
@@ -764,6 +811,7 @@
 							</tbody>
 						</table>
 					</div>
+
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary"
 							data-dismiss="modal">Cancel</button>
@@ -857,6 +905,55 @@
 	<!-- Main JS-->
 	<script
 		src="${pageContext.request.contextPath}/view/house-owner/js/main.js"></script>
+
+	<script>
+		var stateObject = {
+			"Hồ Chí Minh" : {
+				"Quận 1" : [ "Nguyễn Huệ", "North Delhi" ],
+				"QUận 2" : [ "Thiruvananthapuram", "Palakkad" ],
+				"Thủ Đức" : [ "North Goa", "South Goa" ],
+			},
+			"Australia" : {
+				"South Australia" : [ "Dunstan", "Mitchell" ],
+				"Victoria" : [ "Altona", "Euroa" ]
+			},
+			"Canada" : {
+				"Alberta" : [ "Acadia", "Bighorn" ],
+				"Columbia" : [ "Washington", "" ]
+			},
+		}
+
+		window.onload = function() {
+			var countySel = document.getElementById("countySel"), stateSel = document
+					.getElementById("stateSel"), districtSel = document
+					.getElementById("districtSel");
+			for ( var country in stateObject) {
+				countySel.options[countySel.options.length] = new Option(
+						country, country);
+			}
+			countySel.onchange = function() {
+				stateSel.length = 1; // remove all options bar first
+				districtSel.length = 1; // remove all options bar first
+				if (this.selectedIndex < 1)
+					return; // done 
+				for ( var state in stateObject[this.value]) {
+					stateSel.options[stateSel.options.length] = new Option(
+							state, state);
+				}
+			}
+			countySel.onchange(); // reset in case page is reloaded
+			stateSel.onchange = function() {
+				districtSel.length = 1; // remove all options bar first
+				if (this.selectedIndex < 1)
+					return; // done 
+				var district = stateObject[countySel.value][this.value];
+				for (var i = 0; i < district.length; i++) {
+					districtSel.options[districtSel.options.length] = new Option(
+							district[i], district[i]);
+				}
+			}
+		}
+	</script>
 </body>
 
 </html>

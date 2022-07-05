@@ -1,6 +1,7 @@
 package com.housebooking.controller.web;
 
 import java.io.IOException;
+import java.net.InetAddress;
 import java.sql.Date;
 import java.util.List;
 
@@ -43,10 +44,11 @@ public class HomeController extends HttpServlet {
 	
 	protected void doDisplay(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<City> listCity = new CityDAO().list();
-		
 		request.setAttribute("listCity", listCity);
+		
+		System.out.println(request.getContextPath());
 		RequestDispatcher rd = request.getRequestDispatcher("/view/web/home.jsp");
-        rd.forward(request, response);
+		rd.forward(request, response);
 	}
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

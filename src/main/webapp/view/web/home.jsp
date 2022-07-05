@@ -207,8 +207,6 @@ select::-ms-expand {
 		</div>
 	</div>
 	<!-- //banner -->
-
-
 	<div class="fluid-container">
 		<p class="h1">Nhanh chóng - Tiện lợi - Uy tín</p>
 		<div class="center">

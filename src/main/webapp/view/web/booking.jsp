@@ -415,8 +415,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<!--/mens-->
 						<!--  -->
 						<c:forEach var="building" items="${listBuilding}">
-
-
+	
 							<div class="row">
 								<div class="col-md-4 product-men women_two">
 									<div class="product-shoe-info shoe">
