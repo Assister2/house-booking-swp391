@@ -69,11 +69,7 @@ public class WebBuildingDAO {
 			}
 			sql += ")\r\n";
 		}
-		
-		if (rating != 0) {
-			sql += " AND rating between CAST(? AS int) AND (CAST(? AS int) + 1)\r\n";
-		}
-		
+
 		if (district != null) {
 			sql += " AND (";
 			for (int i = 0; i <= district.length - 1; i++) {
@@ -86,8 +82,13 @@ public class WebBuildingDAO {
 			sql += ")\r\n";
 		}
 		
-		sql += " Group by b.building_id, b.building_number,b.building_name, b.building_desc, b.buiding_image, b.building_type, b.building_rule, st.street_name, dis.district_name, ci.city_name "
-				+ " Order by b.building_id ASC\r\n"
+		sql += " Group by b.building_id, b.building_number,b.building_name, b.building_desc, b.buiding_image, b.building_type, b.building_rule, st.street_name, dis.district_name, ci.city_name \r\n";
+				
+		
+		if(rating != 0 ) {
+			sql += " Having ISNULL(Round(AVG(fb.rating*1.0),1),0) Between CAST(? AS int) AND (CAST(? AS int) + 1) \r\n";
+		}
+		sql	+= " Order by b.building_id ASC\r\n"
 				+ " OFFSET @start ROWS FETCH NEXT @end ROWS ONLY";
 		
 		try {
@@ -113,12 +114,7 @@ public class WebBuildingDAO {
 					ps.setNString(count++, "%" + buildingType[i] + "%");
 					//System.out.println(count++);
 				}
-			}
-			
-			if(rating != 0) {
-				ps.setInt(count++, (int) rating);
-				ps.setInt(count++, (int) rating);
-			}
+			}		
 			
 			if (district != null) {
 				for (int i = 0; i <= district.length - 1; i++) {
@@ -126,7 +122,11 @@ public class WebBuildingDAO {
 					//System.out.println(count++);
 				}
 			}
-
+			
+			if(rating != 0) {
+				ps.setInt(count++, (int) rating);
+				ps.setInt(count++, (int) rating);
+			}
 			ResultSet rs = ps.executeQuery();
 
 			while (rs.next()) {

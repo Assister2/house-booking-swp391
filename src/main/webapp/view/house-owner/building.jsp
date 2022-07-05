@@ -425,7 +425,7 @@
 															</p>
 															Số lượng phòng: <span
 																style="font-weight: bold; padding-left: 5px; padding-right: 5px;">
-																${listBuilding[a-1].numRoom } </span> <a href="#">Xem chi
+																${listBuilding[a-1].numRoom } </span> <a href="${pageContext.request.contextPath}/building-detail?buildingId=${listBuilding[a-1].buildingId }">Xem chi
 																tiết</a>
 														</div>
 													</div>
@@ -613,7 +613,7 @@
 																	<label>Địa chỉ</label>
 																</div>
 																<div class="col-md-8">
-																	<input type="text" id="" name="Address" placeholder="Địa chỉ"
+																	<input type="text" id="" name="Address" placeholder="Nhập số nhà"
 																		class="form-control">
 																</div>
 															</div>

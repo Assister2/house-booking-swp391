@@ -274,7 +274,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<h3 class="agileits-sear-head">Xếp hạng đánh giá</h3>
 						<div class="form-check">
 							<input class="form-check-input" type="radio" name="rating"
-								id="ratingbtn1" value="4.5"
+								id="ratingbtn1" value="4.4"
 								<c:if test="${requestScope.ratingScale >=4 }">
 									checked
 								</c:if>>
@@ -286,7 +286,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						</div>
 						<div class="form-check">
 							<input class="form-check-input" type="radio" name="rating"
-								id="ratingbtn2" value="3.5"
+								id="ratingbtn2" value="3.4"
 								<c:if test="${requestScope.ratingScale >=3 and  requestScope.ratingScale <4}">
 									checked
 								</c:if>>
@@ -298,7 +298,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						</div>
 						<div class="form-check">
 							<input class="form-check-input" type="radio" name="rating"
-								id="ratingbtn3" value="2.5"
+								id="ratingbtn3" value="2.4"
 								<c:if test="${requestScope.ratingScale >=2 and requestScope.ratingScale <3}">
 									checked
 								</c:if>>
@@ -310,7 +310,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						</div>
 						<div class="form-check">
 							<input class="form-check-input" type="radio" name="rating"
-								id="ratingbtn4" value="1.5"
+								id="ratingbtn4" value="1.4"
 								<c:if test="${requestScope.ratingScale <2 and requestScope.ratingScale != 0}">
 									checked
 								</c:if>>
