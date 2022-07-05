@@ -72,9 +72,9 @@
                                 <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">sign in</button>
                                 <div class="social-login-content">
                                     <div class="social-button">
-                                        <button class="au-btn au-btn--block au-btn--blue m-b-20">sign in with facebook</button>
-                                        <button style="background: red;" class="au-btn au-btn--block au-btn--blue2">sign in with google</button>
-                                    </div>
+                                        <a href="https://accounts.google.com/o/oauth2/auth?scope=email&redirect_uri=http://localhost:8080/house-booking-swp391/login&response_type=code
+    									&client_id=88179618778-1pobvpfpbc5da9q5uic4scv623gjefag.apps.googleusercontent.com&approval_prompt=force">Login With Google</a>
+    								</div>
                                 </div>
                                 
                             </form>

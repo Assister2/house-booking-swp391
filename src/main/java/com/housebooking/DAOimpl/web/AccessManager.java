@@ -55,4 +55,48 @@ public class AccessManager {
 
 	        return null;
 	    }
+	 
+	 public UserSession loginGoogle(String id, String name, String email) {
+	        UserSession userSession =  new UserSession();
+
+	        String sql = "select user_id from Users "
+	                + "Where user_id like ? ";
+
+	        
+	        try {
+
+	            Connection conn = DBUtils.getConnection();
+
+	            PreparedStatement ps = conn.prepareStatement(sql);
+
+	            ps.setString(1, id);
+
+	            ResultSet rs = ps.executeQuery();
+
+	            if (!rs.next() ) {
+	                createNewGoogleAccess(id, name, email);
+	            } else {
+	            	User user = new User();
+	            	user.setUserId(rs.getString("user_id"));
+	                user.setName(rs.getNString("user_name"));
+	                user.setRole(rs.getString("role"));
+	                user.setEmail(rs.getString("Email"));
+	            }
+	            
+	            ps.close();
+	            conn.close();
+
+	            return userSession;
+	        } catch (Exception ex) {
+
+	            ex.printStackTrace();
+
+	        }
+
+	        return null;
+	    }
+	 
+	 public void createNewGoogleAccess(String id, String name, String email) {
+	        System.out.println("asb");
+	    }
 }
