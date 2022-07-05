@@ -217,7 +217,7 @@
                                             <img src="${pageContext.request.contextPath}${usersession.user.avatar}" alt="${usersession.user.name }" />
                                         </div>
                                         <div class="content">
-                                            <a class="js-acc-btn" href="#">${usersession.user.name }</a>
+                                            <a class="js-acc-btn" href="${pageContext.request.contextPath}/my-account">${usersession.user.name }</a>
                                         </div>
                                         <div class="account-dropdown js-dropdown">
                                             <div class="info clearfix">
@@ -228,7 +228,7 @@
                                                 </div>
                                                 <div class="content">
                                                     <h5 class="name">
-                                                        <a href="#">${usersession.user.name }</a>
+                                                        <a href="${pageContext.request.contextPath}/my-account">${usersession.user.name }</a>
                                                     </h5>
                                                     <span class="email">${usersession.user.email }</span>
                                                 </div>
