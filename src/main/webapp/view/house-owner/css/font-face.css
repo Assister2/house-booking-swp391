@@ -341,3 +341,14 @@
        url('../fonts/poppins/poppins-v5-latin-900italic.svg#Poppins')
 		format('svg'); /* Legacy iOS */
 }
+
+.gg-login {
+  background-color: #199319;
+  color: white;
+  padding: 15px 25px;
+  text-decoration: none;
+}
+
+.gg-login:hover {
+  background-color: #223094;
+}
