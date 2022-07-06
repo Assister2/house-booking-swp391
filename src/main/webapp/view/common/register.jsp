@@ -40,13 +40,13 @@
 
 <body>
      <div class="page-wrapper">
-        <div class="page-content--bge5">
+        <div style="background:-webkit-gradient(linear,left bottom,right top,from(#fc2c77),to(#6c4079))" class="page-content--bge5">
             <div class="container">
                 <div class="login-wrap">
                     <div class="login-content">
                         <div class="login-logo">
-                            <a href="#">
-                                <img src="${pageContext.request.contextPath}/view/house-owner/images/icon/logo.png" alt="CoolAdmin">
+                            <a href="${pageContext.request.contextPath}/home">
+                                <img style="height: 150px;weight:150px" src="${pageContext.request.contextPath}/view/house-owner/images/icon/house-booking2.png" alt="house-booking">
                             </a>
                         </div>
                         <div class="login-form">
@@ -56,30 +56,22 @@
                                     <input class="au-input au-input--full" type="text" name="username" placeholder="Username" required="required">
                                 </div>
                                 <div class="form-group">
-                                    <label>Email Address</label>
-                                    <input class="au-input au-input--full" type="email" name="email" placeholder="Email" required="required">
-                                </div>
-                                <div class="form-group">
                                     <label>Password</label>
                                     <input class="au-input au-input--full" type="password" name="password" placeholder="Password" required="required">
                                 </div>
-                                <div class="login-checkbox">
-                                    <label>
-                                        <input type="checkbox" name="aggree" required>Agree the terms and policy
-                                    </label>
+                                <div class="form-group">
+                                    <label>Re-Password</label>
+                                    <input class="au-input au-input--full" type="password" name="re-password" placeholder="Password" required="required">
                                 </div>
+                                <div style="color: #FF0000; padding-bottom: 15px;">
+									${register_mess}</div>
                                 <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">register</button>
-                                <div class="social-login-content">
-                                    <div class="social-button">
-                                        <button class="au-btn au-btn--block au-btn--blue m-b-20">register with facebook</button>
-                                        <button class="au-btn au-btn--block au-btn--blue2">register with twitter</button>
-                                    </div>
-                                </div>
+                                
                             </form>
                             <div class="register-link">
                                 <p>
                                     Already have account?
-                                    <a href="#">Sign In</a>
+                                    <a href="${pageContext.request.contextPath}/login">Sign In</a>
                                 </p>
                             </div>
                         </div>

@@ -119,7 +119,7 @@ public class AccessManager {
 	            ps.setString(3, "User");
 	            ps.setString(4, email);
 
-	            ResultSet rs = ps.executeQuery();
+	            ps.executeUpdate();
 	            
 	            ps.close();
 	            conn.close();
