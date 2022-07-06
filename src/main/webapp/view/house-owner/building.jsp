@@ -361,44 +361,49 @@
 
 					<!-- modal small -->
 					<form action="manage" method="post">
-					<input type="hidden" name="action" value="UpdateService">
-					<input type="hidden" name="UpdateService_buildingId" value="${listBuilding[a-1].buildingId }">
-					<input type="hidden" name="UpdateService_serviceId" value="${listService[s-1].serviceID }">
-					
-					<div class="modal fade"
-						id="edit${listBuilding[a-1].buildingId}${listService[s-1].serviceID }"
-						tabindex="-1" role="dialog" aria-labelledby="smallmodalLabel"
-						aria-hidden="true">
-						<div class="modal-dialog modal-sm" role="document">
-							<div class="modal-content">
-								<div class="modal-header">
-									<h5 class="modal-title" id="smallmodalLabel">Chỉnh sửa dịch vụ</h5>
-									<button type="button" class="close" data-dismiss="modal"
-										aria-label="Close">
-										<span aria-hidden="true">&times;</span>
-									</button>
-								</div>
-								<div class="modal-body">
-									<p style="font-weight: bold;" >Tên dịch vụ:</p>  ${listService[s-1].serviceName }
-									
-									<p style="font-weight: bold;" >Giá:</p>
-									<input class="form-control" type="number" name="UpdateService_Price" value="${listService[s-1].price }">
-									
-								</div>
-								<div class="modal-footer">
-									<button type="button" class="btn btn-secondary"
-										data-dismiss="modal">Cancel</button>
-									<button type="submit" class="btn btn-primary">Confirm</button>
+						<input type="hidden" name="action" value="UpdateService">
+						<input type="hidden" name="UpdateService_buildingId"
+							value="${listBuilding[a-1].buildingId }"> <input
+							type="hidden" name="UpdateService_serviceId"
+							value="${listService[s-1].serviceID }">
+
+						<div class="modal fade"
+							id="edit${listBuilding[a-1].buildingId}${listService[s-1].serviceID }"
+							tabindex="-1" role="dialog" aria-labelledby="smallmodalLabel"
+							aria-hidden="true">
+							<div class="modal-dialog modal-sm" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="smallmodalLabel">Chỉnh sửa
+											dịch vụ</h5>
+										<button type="button" class="close" data-dismiss="modal"
+											aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="modal-body">
+										<p style="font-weight: bold;">Tên dịch vụ:</p>
+										${listService[s-1].serviceName }
+
+										<p style="font-weight: bold;">Giá:</p>
+										<input class="form-control" type="number"
+											name="UpdateService_Price" value="${listService[s-1].price }">
+
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary"
+											data-dismiss="modal">Cancel</button>
+										<button type="submit" class="btn btn-primary">Confirm</button>
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
 					</form>
 					<!-- end modal small -->
 				</c:if>
 			</c:forEach>
 		</c:forEach>
-		
+
 		<!-- Delete service -->
 		<c:forEach var="a" begin="1" end="${listBuilding.size() }">
 			<c:forEach var="s" begin="1" end="${listService.size() }">
@@ -407,35 +412,83 @@
 
 					<!-- modal small -->
 					<form action="manage" method="post">
-					<input type="hidden" name="action" value="DeleteService">
-					<input type="hidden" name="DeleteService_buildingId" value="${listBuilding[a-1].buildingId }">
-					<input type="hidden" name="DeleteService_serviceId" value="${listService[s-1].serviceID }">
-					
-					<div class="modal fade"
-						id="delete${listBuilding[a-1].buildingId}${listService[s-1].serviceID }"
-						tabindex="-1" role="dialog" aria-labelledby="smallmodalLabel"
-						aria-hidden="true">
-						<div class="modal-dialog modal-sm" role="document">
-							<div class="modal-content">
-								<div class="modal-header">
-									<h5 class="modal-title" id="smallmodalLabel">Xóa dịch vụ</h5>
-									<button type="button" class="close" data-dismiss="modal"
-										aria-label="Close">
-										<span aria-hidden="true">&times;</span>
-									</button>
-								</div>
-								<div class="modal-body">
-									<p style="font-weight: bold;" >${listService[s-1].serviceName } - ${listService[s-1].price }(VNĐ)</p>
-									Bạn có chắc muốn xóa dịch vụ này
-								</div>
-								<div class="modal-footer">
-									<button type="button" class="btn btn-secondary"
-										data-dismiss="modal">Cancel</button>
-									<button type="submit" class="btn btn-primary">Confirm</button>
+						<input type="hidden" name="action" value="DeleteService">
+						<input type="hidden" name="DeleteService_buildingId"
+							value="${listBuilding[a-1].buildingId }"> <input
+							type="hidden" name="DeleteService_serviceId"
+							value="${listService[s-1].serviceID }">
+
+						<div class="modal fade"
+							id="delete${listBuilding[a-1].buildingId}${listService[s-1].serviceID }"
+							tabindex="-1" role="dialog" aria-labelledby="smallmodalLabel"
+							aria-hidden="true">
+							<div class="modal-dialog modal-sm" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="smallmodalLabel">Xóa dịch vụ</h5>
+										<button type="button" class="close" data-dismiss="modal"
+											aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="modal-body">
+										<p style="font-weight: bold;">${listService[s-1].serviceName }
+											- ${listService[s-1].price }(VNĐ)</p>
+										Bạn có chắc muốn xóa dịch vụ này
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary"
+											data-dismiss="modal">Cancel</button>
+										<button type="submit" class="btn btn-primary">Confirm</button>
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
+					</form>
+					<!-- end modal small -->
+				</c:if>
+			</c:forEach>
+		</c:forEach>
+
+		<!-- Delete convenient -->
+		<c:forEach var="a" begin="1" end="${listBuilding.size() }">
+			<c:forEach var="c" begin="1" end="${listConvenient.size() }">
+				<c:if
+					test="${listConvenient[c-1].buildingID == listBuilding[a-1].buildingId}">
+
+					<!-- modal small -->
+					<form action="manage" method="post">
+						<input type="hidden" name="action" value="DeleteConvenient">
+						<input type="hidden" name="DeleteConvenient_buildingId"
+							value="${listBuilding[a-1].buildingId }"> <input
+							type="hidden" name="DeleteConvenient_conveId"
+							value="${listConvenient[c-1].conveId }">
+
+						<div class="modal fade"
+							id="deleteConvenient${listBuilding[a-1].buildingId}${listConvenient[c-1].conveId }"
+							tabindex="-1" role="dialog" aria-labelledby="smallmodalLabel"
+							aria-hidden="true">
+							<div class="modal-dialog modal-sm" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="smallmodalLabel">Xóa tiện nghi</h5>
+										<button type="button" class="close" data-dismiss="modal"
+											aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="modal-body">
+										<p style="font-weight: bold;">${listConvenient[c-1].conveName }</p>
+										Bạn có chắc muốn xóa tiện nghi này
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary"
+											data-dismiss="modal">Cancel</button>
+										<button type="submit" class="btn btn-primary">Confirm</button>
+									</div>
+								</div>
+							</div>
+						</div>
 					</form>
 					<!-- end modal small -->
 				</c:if>
@@ -531,10 +584,20 @@
 																<span style="font-weight: bolder;">Mô tả:</span>
 																${listBuilding[a-1].buildingDesc }
 															</p>
-															<p>
-																<span style="font-weight: bolder;">Thông tin hữu
-																	ích:</span> ${listBuilding[a-1].buildingDetailInfor }
-															</p>
+															<c:if
+																test="${listBuilding[a-1].buildingDetailInfor != null}">
+																<p>
+																	<span style="font-weight: bolder;">Thông tin hữu
+																		ích:</span> ${listBuilding[a-1].buildingDetailInfor }
+																</p>
+															</c:if>
+
+															<c:if test="${listBuilding[a-1].buildingRule != null}">
+																<p>
+																	<span style="font-weight: bolder;">Nội quy:</span>
+																	${listBuilding[a-1].buildingRule }
+																</p>
+															</c:if>
 															Số lượng phòng: <span
 																style="font-weight: bold; padding-left: 5px; padding-right: 5px;">
 																${listBuilding[a-1].numRoom } </span> <a
@@ -648,8 +711,8 @@
 																							</div>
 																						</td>
 																						<td class="table-data-feature">
-																							<button class="item" data-toggle="tooltip"
-																								data-placement="top" title="Edit">
+																							<button class="item" data-toggle="modal"
+																								data-target="#deleteConvenient${listBuilding[a-1].buildingId}${listConvenient[c-1].conveId }">
 																								<i class="zmdi zmdi-delete"></i>
 																							</button>
 																						</td>
@@ -719,10 +782,23 @@
 																<span style="font-weight: bolder;">Mô tả chung:</span>
 																${listBuilding[a-1].buildingDesc }
 															</p>
-															<p>
-																<span style="font-weight: bolder;">Thông tin hữu
-																	ích:</span> ${listBuilding[a-1].buildingDetailInfor }
-															</p>
+															<c:if
+																test="${listBuilding[a-1].buildingDetailInfor != null}">
+
+															</c:if>
+															<c:if
+																test="${listBuilding[a-1].buildingDetailInfor != null}">
+																<p>
+																	<span style="font-weight: bolder;">Thông tin hữu
+																		ích:</span> ${listBuilding[a-1].buildingDetailInfor }
+																</p>
+															</c:if>
+															<c:if test="${listBuilding[a-1].buildingRule != null}">
+																<p>
+																	<span style="font-weight: bolder;">Nội quy:</span>
+																	${listBuilding[a-1].buildingRule }
+																</p>
+															</c:if>
 															Số lượng phòng: <span
 																style="font-weight: bold; padding-left: 5px; padding-right: 5px;">
 																${listBuilding[a-1].numRoom } </span> <a
@@ -774,13 +850,13 @@
 																					</td>
 																					<td class="table-data-feature">
 																						<button class="item" data-toggle="modal"
-																								data-target="#edit${listBuilding[a-1].buildingId}${listService[s-1].serviceID }">
-																								<i class="zmdi zmdi-edit"></i>
-																							</button>
+																							data-target="#edit${listBuilding[a-1].buildingId}${listService[s-1].serviceID }">
+																							<i class="zmdi zmdi-edit"></i>
+																						</button>
 																						<button class="item" data-toggle="modal"
-																								data-target="#delete${listBuilding[a-1].buildingId}${listService[s-1].serviceID }">
-																								<i class="zmdi zmdi-delete"></i>
-																							</button>
+																							data-target="#delete${listBuilding[a-1].buildingId}${listService[s-1].serviceID }">
+																							<i class="zmdi zmdi-delete"></i>
+																						</button>
 																					</td>
 																				</tr>
 																			</c:if>
@@ -830,8 +906,8 @@
 																							</div>
 																						</td>
 																						<td class="table-data-feature">
-																							<button class="item" data-toggle="tooltip"
-																								data-placement="top" title="Edit">
+																							<button class="item" data-toggle="modal"
+																								data-target="#deleteConvenient${listBuilding[a-1].buildingId}${listConvenient[c-1].conveId }">
 																								<i class="zmdi zmdi-delete"></i>
 																							</button>
 																						</td>
@@ -1116,63 +1192,66 @@
 
 	<!-- modal large -->
 	<c:forEach var="lb" begin="1" end="${listBuilding.size() }">
-		<div class="modal fade" id="ModalTienNghi${lb }" tabindex="-1"
-			role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
-			<div class="modal-dialog modal-lg" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="largeModalLabel">Thêm Tiện Nghi</h5>
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="table-responsive table-data">
-						<table class="table">
-							<thead>
-								<tr>
-									<td>Tiện Nghi</td>
-									<td style="text-align: right;"><span
-										style="margin-right: 3px;"><label
-											for="selectAllTienNghi">Chọn tất cả</label></span> <input
-										type="checkbox" id="selectAllTienNghi" name=""></td>
-								</tr>
-							</thead>
-							<tbody>
-								<c:forEach var="lc" begin="1"
-									end="${listConvenientAllowToAdd.size() }">
-									<c:if
-										test="${listConvenientAllowToAdd[lc-1].buildingID == listBuilding[lb-1].buildingId}">
-										<tr>
-											<td>
-												<div class="table-data__info">
-													<h6>${listConvenientAllowToAdd[lc-1].conveName }</h6>
-												</div>
-											</td>
-											<td class="table-data-feature"><input type="checkbox"
-												name="listTienNghi"
-												value="${listConvenientAllowToAdd[lc-1].conveId }">
-											</td>
+		<form action="manage" method="post">
+			<div class="modal fade" id="ModalTienNghi${lb }" tabindex="-1"
+				role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-lg" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="largeModalLabel">Thêm Tiện Nghi</h5>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="table-responsive table-data">
+							<table class="table">
+								<thead>
+									<tr>
+										<td>Tiện Nghi</td>
+										<td style="text-align: right;"><span
+											style="margin-right: 3px;"><label
+												for="selectAll${lb }">Chọn tất cả</label></span> <input
+											type="checkbox" id="selectAll${lb }" name=""></td>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach var="lc" begin="1"
+										end="${listConvenientAllowToAdd.size() }">
+										<c:if
+											test="${listConvenientAllowToAdd[lc-1].buildingID == listBuilding[lb-1].buildingId}">
+											<tr>
+												<td>
+													<div class="table-data__info">
+														<h6>${listConvenientAllowToAdd[lc-1].conveName }</h6>
+													</div>
+												</td>
+												<td class="table-data-feature "><input
+													class="Convenient" type="checkbox" name="listConvenient"
+													value="${listConvenientAllowToAdd[lc-1].conveId }">
+												</td>
 
-										</tr>
+											</tr>
 
-									</c:if>
-								</c:forEach>
+										</c:if>
+									</c:forEach>
 
-							</tbody>
-						</table>
-					</div>
+								</tbody>
+							</table>
+						</div>
 
-
-
-					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary"
-							data-dismiss="modal">Cancel</button>
-						<button type="button" class="btn btn-primary">Confirm</button>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary"
+								data-dismiss="modal">Cancel</button>
+							<button type="submit" class="btn btn-primary">Confirm</button>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+			<input type="hidden" name="action" value="AddConvenient"> <input
+				type="hidden" name="AddConvenient_buildingId"
+				value="${listBuilding[lb-1].buildingId }">
+		</form>
 	</c:forEach>
 	<!-- end modal large -->
 
@@ -1317,6 +1396,17 @@
 			}
 		}
 	</script>
+
+	<script>
+		var total = document.getElementById('totalBuilding').value;
+		console.log(total);
+		for (var i = 1; i <= total; i++) {
+			$("#selectAll" + i).click(function() {
+				$(".Convenient").not(this).prop('checked', this.checked);
+			});
+		}
+	</script>
+
 	<c:if test="${message != null }">
 		<script>
 			let myModal = new bootstrap.Modal(document

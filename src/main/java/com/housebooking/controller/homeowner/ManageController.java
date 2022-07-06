@@ -15,12 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileUploadException;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
-
 import com.housebooking.DAOimpl.houseowner.BuildingDAO;
+import com.housebooking.DAOimpl.houseowner.ConvenientDAO;
 import com.housebooking.DAOimpl.houseowner.ServiceDAO;
 import com.housebooking.DAOimpl.houseowner.StreetDAO;
 import com.housebooking.Model.Building;
@@ -71,6 +67,12 @@ public class ManageController extends HttpServlet {
 			case "DeleteService":
 				DeleteService(request, response);
 				break;
+			case "AddConvenient":
+				AddConvenient(request, response);
+				break;
+			case "DeleteConvenient":
+				DeleteConvenient(request, response);
+				break;
 
 			default:
 				doDisplay(request, response);
@@ -97,6 +99,54 @@ public class ManageController extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	protected void DeleteConvenient(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		  
+		String buildingId = request.getParameter("DeleteConvenient_buildingId");
+		String convenId =  request.getParameter("DeleteConvenient_conveId");
+		
+		try {
+			if(new ConvenientDAO().DeleteBuildingConvenient(new Convenient(buildingId, convenId, ""))) {
+				request.setAttribute("message", "Xóa thành công");
+			}
+			else {
+				request.setAttribute("message", "Xóa không thành công");
+			}
+		} catch (Exception e) {
+			request.setAttribute("message", "Có lỗi xảy ra");
+		}
+		finally {
+			doDisplay(request, response);  
+		}		
+	}
+	
+	protected void AddConvenient(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		  
+		String buildingId = request.getParameter("AddConvenient_buildingId");
+		//String convenientId[] =  request.getParameterValues("listConvenient");
+		ConvenientDAO convenientDAO = new ConvenientDAO();
+		boolean check = true;
+
+		if (request.getParameterValues("listConvenient") != null) {
+            for (String conveId : request.getParameterValues("listConvenient")) {
+            	try {
+            		convenientDAO.AddNewBuildingConvenient(new Convenient(buildingId,conveId,""));
+				} catch (Exception e) {
+					check = false;
+				}
+                
+            }
+        }
+		
+		if(check == true) {
+			request.setAttribute("message", "Thêm thành công");
+		} else {
+			request.setAttribute("message", "Có lỗi xảy ra");
+		}
+		
+		doDisplay(request, response);  
+		
 	}
 	
 	protected void DeleteService(HttpServletRequest request, HttpServletResponse response) throws Exception {

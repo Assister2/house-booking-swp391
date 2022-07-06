@@ -7,6 +7,18 @@ public class Convenient {
 	public String getConveId() {
 		return conveId;
 	}
+	
+	public Convenient() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Convenient(String buildingID, String conveId, String conveName) {
+		super();
+		this.buildingID = buildingID;
+		this.conveId = conveId;
+		this.conveName = conveName;
+	}
 	public void setConveId(String conveId) {
 		this.conveId = conveId;
 	}
