@@ -270,7 +270,9 @@
 																${listBuilding[a-1].numRoom } </span> <a
 																href="${pageContext.request.contextPath}/building-detail?buildingId=${listBuilding[a-1].buildingId }">Xem
 																chi tiết</a>
-																<p><a href="#">Chỉnh sửa thông tin</a></p>
+															<p>
+																<a href="#">Chỉnh sửa thông tin</a>
+															</p>
 														</div>
 													</div>
 													<hr>
@@ -438,7 +440,9 @@
 																${listBuilding[a-1].numRoom } </span> <a
 																href="${pageContext.request.contextPath}/building-detail?buildingId=${listBuilding[a-1].buildingId }">Xem
 																chi tiết</a>
-																<p><a href="#">Chỉnh sửa thông tin</a></p>
+															<p>
+																<a href="#">Chỉnh sửa thông tin</a>
+															</p>
 														</div>
 													</div>
 													<hr>
@@ -604,52 +608,53 @@
 															</div>
 														</div>
 														<div class="col-8">
-															<div class="row form-field">
+															<div class="row">
 																<div class="col-md-2">
 																	<label>Tên nhà</label>
 																</div>
-																<div class="col-md-9">
+																<div class="col-md-10">
 																	<input type="text" id="" name="buildingName"
 																		placeholder="Nhập tên nhà" class="form-control">
 																</div>
 															</div>
 
-															<div class="row form-field">
-																<div class="col-md-2">
-																	<label>Địa chỉ</label>
-																</div>
-																<div class="form-group col-md-3">
+															<div class="row">
+																<div class="col-md-12">Địa chỉ</div>
+															</div>
+															<div class="row">
+																<div class="form-group col-md-4">
 																	<select name="state" id="countySel" size="1"
 																		class="form-control">
 																		<option value="" selected="selected">Select
 																			Country</option>
 																	</select>
 																</div>
-																<div class="form-group col-md-3">
+																<div class="form-group col-md-4">
 																	<select name="countrya" id="stateSel" size="1"
 																		class="form-control">
 																		<option value="" selected="selected">Please
 																			select Country first</option>
 																	</select>
 																</div>
-																<div class="form-group col-md-3">
-																	<select name="district" id="districtSel" size="1" class="form-control">
+																<div class="form-group col-md-4">
+																	<select name="district" id="districtSel" size="1"
+																		class="form-control">
 																		<option value="" selected="selected">Please
 																			select State first</option>
 																	</select>
 																</div>
 															</div>
-															<div class="row form-field">
+															<div class="row">
 																<div class="col-md-12">Thông tin chi tiết</div>
 															</div>
 
-															<div class="row form-field">
+															<div class="row">
 																<div class="col-md-4">
 																	<input type="text" id="" name="building_number"
 																		placeholder="Nhập số nhà" class="form-control">
 																</div>
 
-																<div class="col-md-3">
+																<div class="col-md-4">
 																	<input type="number" id="area" name="area"
 																		placeholder="Diện tích" class="form-control">
 																</div>
@@ -662,17 +667,34 @@
 																	</select>
 																</div>
 															</div>
-															<div class="row form-field">
-																<div class="col-md-2">
-																	<label>Mô tả</label>
+															<div class="row form-field	">										
+																<div class="col-md-12">
+																	<textarea class="form-control" name="Add_infor"
+																		placeholder="Thông tin hữu ích: nhà gần trường, hướng mặt tiền,.." id="Add_infor" rows="2"></textarea>
 																</div>
-																<div class="col-md-9">
+															</div>
+															<div class="row">
+																<div class="col-md-12">Nội quy</div>
+															</div>
+															<div class="row form-field	">
+												
+																<div class="col-md-12">
+																	<textarea class="form-control" name="Add_Rules"
+																		placeholder="Mô tả, giới thiệu chung" id="Add_Rules" rows="3"></textarea>
+																</div>
+															</div>
+															<div class="row">
+																<div class="col-md-12">Mô tả</div>
+															</div>
+															<div class="row form-field	">
+												
+																<div class="col-md-12">
 																	<textarea class="form-control" name="mota"
-																		placeholder="Mô tả" id="mota" rows="3"></textarea>
+																		placeholder="Mô tả, giới thiệu chung" id="mota" rows="3"></textarea>
 																</div>
 															</div>
 															<div class="row form-field">
-																<div class="col-md-9"></div>
+																<div class="col-md-10"></div>
 																<div class="col-md-2">
 																	<button style="width: 100%;" type="submit"
 																		class="btn btn-primary">Save</button>
