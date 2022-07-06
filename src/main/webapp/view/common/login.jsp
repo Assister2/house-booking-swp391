@@ -66,15 +66,13 @@
 </head>
 
 <body>
-	<div class="page-wrapper">
-		<div class="page-content--bge5">
+	<div  class="page-wrapper">
+		<div style="background:-webkit-gradient(linear,left bottom,right top,from(#fc2c77),to(#6c4079))" class="page-content--bge5">
 			<div class="container">
 				<div class="login-wrap">
 					<div class="login-content">
 						<div class="login-logo">
-							<a href="#"> <img
-								src="${pageContext.request.contextPath}/view/house-owner/images/icon/logo.png"
-								alt="CoolAdmin">
+							<a href="${pageContext.request.contextPath}/home"> <img style="height: 150px;weight:150px" src="${pageContext.request.contextPath}/view/house-owner/images/icon/house-booking2.png" alt="house-booking">
 							</a>
 						</div>
 						<div class="login-form">
