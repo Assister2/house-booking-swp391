@@ -28,7 +28,7 @@ public class BuildingDAO {
 		String sql = "select b.*, ( b.building_number + ' ' + s.street_name + ' '+ d.district_name +' '+ c.city_name ) as address\r\n"
 				+ "			from Building b join Street s on b.street_id=s.street_id\r\n"
 				+ "			join District d on s.district_id = d.district_id join City c on d.city_id = c.city_id\r\n"
-				+ "		where b.user_id like ?";
+				+ "		where b.user_id like ? And b.building_status not like 'Removed' ";
 
 		try {
 
@@ -67,7 +67,8 @@ public class BuildingDAO {
 		building.setUserId(rs.getString("user_id"));
 		building.setBuildingArea(rs.getFloat("building_area"));
 		building.setBuildingDetailInfor(rs.getNString("building_infor"));
-		building.setBuildingStatus(rs.getNString("building_status"));		
+		building.setBuildingStatus(rs.getNString("building_status"));
+		building.setBuildingRule(rs.getNString("building_rule"));
 	}
 
 	public int getNumRoom(String building_id) {
@@ -142,8 +143,7 @@ public class BuildingDAO {
 		int count = 1;
 
 		String sql = "select b.building_id,ads.add_serviceId, ads.add_serviceName\r\n"
-				+ "from Building b , Additional_service ads \r\n" 
-				+ "where ";
+				+ "from Building b , Additional_service ads \r\n" + "where ";
 		for (int i = 1; i <= listBuilding.size(); i++) {
 			if (i == 1) {
 				sql += "b.building_id like ?";
@@ -151,8 +151,7 @@ public class BuildingDAO {
 				sql += " or b.building_id like ?";
 			}
 		}
-		sql += "\r\nEXCEPT\r\n" 
-				+ "select bas.building_id, ads.add_serviceID, ads.add_serviceName\r\n"
+		sql += "\r\nEXCEPT\r\n" + "select bas.building_id, ads.add_serviceID, ads.add_serviceName\r\n"
 				+ "from Building_Additional_service bas join Additional_service ads on bas.add_serviceId = ads.add_serviceId\r\n"
 				+ "where ";
 		for (int i = 1; i <= listBuilding.size(); i++) {
@@ -174,7 +173,7 @@ public class BuildingDAO {
 					count++;
 				}
 			}
-			
+
 			ResultSet rs = ps.executeQuery();
 
 			while (rs.next()) {
@@ -197,8 +196,7 @@ public class BuildingDAO {
 		int count = 1;
 
 		String sql = "select bc.building_id, bc.convenient_id, c.convenient_name\r\n"
-				+ "from Convenient c join Building_Convenient bc on c.convenient_id = bc.convenient_id\r\n" 
-				+ "where ";
+				+ "from Convenient c join Building_Convenient bc on c.convenient_id = bc.convenient_id\r\n" + "where ";
 		for (int i = 1; i <= listBuilding.size(); i++) {
 			if (i == 1) {
 				sql += "bc.building_id like ?";
@@ -233,14 +231,13 @@ public class BuildingDAO {
 		return list;
 	}
 
-	public List<Convenient> listConvenientAllowToAdd(List<Building> listBuilding){
+	public List<Convenient> listConvenientAllowToAdd(List<Building> listBuilding) {
 		ArrayList<Convenient> list;
 		list = new ArrayList<Convenient>();
 		int count = 1;
 
 		String sql = "select b.building_id,c.convenient_id, c.convenient_name\r\n"
-				+ "from Building b , Convenient c \r\n"
-				+ "where ";
+				+ "from Building b , Convenient c \r\n" + "where ";
 		for (int i = 1; i <= listBuilding.size(); i++) {
 			if (i == 1) {
 				sql += "b.building_id like ?";
@@ -248,8 +245,7 @@ public class BuildingDAO {
 				sql += " or b.building_id like ?";
 			}
 		}
-		sql += "\r\nEXCEPT\r\n"
-				+ "select bc.building_id, bc.convenient_id, c.convenient_name\r\n"
+		sql += "\r\nEXCEPT\r\n" + "select bc.building_id, bc.convenient_id, c.convenient_name\r\n"
 				+ "	from Convenient c join Building_Convenient bc on c.convenient_id = bc.convenient_id\r\n"
 				+ "	where ";
 		for (int i = 1; i <= listBuilding.size(); i++) {
@@ -271,7 +267,7 @@ public class BuildingDAO {
 					count++;
 				}
 			}
-			
+
 			ResultSet rs = ps.executeQuery();
 
 			while (rs.next()) {
@@ -287,7 +283,7 @@ public class BuildingDAO {
 		}
 		return list;
 	}
-	
+
 	public List<Building> listBuildingType() {
 		ArrayList<Building> list;
 		list = new ArrayList<Building>();
@@ -316,11 +312,10 @@ public class BuildingDAO {
 
 		return list;
 	}
-	
+
 	public boolean AddNewBuilding(Building building) {
 
-		String sql = "Insert into Building\r\n"
-				+ "Values(?,?,?,?,?,?,?,?,?,?,?,?) ";
+		String sql = "Insert into Building\r\n" + "Values(?,?,?,?,?,?,?,?,?,?,?,?) ";
 		try {
 
 			Connection conn = DBUtils.getConnection();
@@ -330,7 +325,7 @@ public class BuildingDAO {
 			ps.setNString(2, building.getBuildingNumber());
 			ps.setNString(3, building.getBuildingName());
 			ps.setFloat(4, building.getBuildingArea());
-			ps.setString(5,building.getBuildingImage());
+			ps.setString(5, building.getBuildingImage());
 			ps.setNString(6, building.getBuildingDesc());
 			ps.setNString(7, building.getBuildingDetailInfor());
 			ps.setString(8, building.getBuildingStatus());
@@ -339,17 +334,82 @@ public class BuildingDAO {
 			ps.setString(11, building.getStreetId());
 			ps.setString(12, building.getUserId());
 
-			 if (ps.executeUpdate()>0) {
-				 return true;
-	         }
-			
+			if (ps.executeUpdate() > 0) {
+				return true;
+			}
 
 		} catch (Exception ex) {
 
 			ex.printStackTrace();
 
 		}
+
+		return false;
+	}
+	
+	public boolean DeleteBuilding(String buildingId) {
+
+		String sql = " UPDATE Building\r\n"
+				+ " SET building_status = 'Removed' "
+				+ " WHERE building_id = ? ";
+		try {
+
+			Connection conn = DBUtils.getConnection();
+
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, buildingId);
+
+			if (ps.executeUpdate() > 0) {
+				return true;
+			}
+
+		} catch (Exception ex) {
+
+			ex.printStackTrace();
+
+		}
+
+		return false;
+	}
+
+	public boolean UpdateBuilding(String buildingId, String buildingName, float area, String buildingType,
+			String buildingInfor, String buildingRules, String buildingDescrip, String imageLink) {
+
+		String sql = " UPDATE Building\r\n"
+				+ " SET building_name = ?, building_area = ?, building_type = ?, building_infor = ?, building_rule = ?, building_desc = ? ";
+
+		if(imageLink != null) {
+			sql += " , buiding_image = ? \r\n"; 
+		}
 		
+		sql += " WHERE building_id = ? ";
+		try {
+
+			Connection conn = DBUtils.getConnection();
+
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setNString(1, buildingName);
+			ps.setFloat(2, area);
+			ps.setNString(3, buildingType);
+			ps.setNString(4, buildingInfor);
+			ps.setNString(5, buildingRules);
+			ps.setNString(6, buildingDescrip);
+			int count = 7;
+			if(imageLink != null) {
+				ps.setString(count++, imageLink);
+			}
+			ps.setNString(count, buildingId);
+
+			if (ps.executeUpdate() > 0) {
+				return true;
+			}
+
+		} catch (Exception ex) {
+
+			ex.printStackTrace();
+
+		}
+
 		return false;
 	}
 }

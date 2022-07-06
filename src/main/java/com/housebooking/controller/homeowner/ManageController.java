@@ -21,6 +21,7 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import com.housebooking.DAOimpl.houseowner.BuildingDAO;
+import com.housebooking.DAOimpl.houseowner.ServiceDAO;
 import com.housebooking.DAOimpl.houseowner.StreetDAO;
 import com.housebooking.Model.Building;
 import com.housebooking.Model.Convenient;
@@ -53,16 +54,22 @@ public class ManageController extends HttpServlet {
 		} else {
 			switch (action) {
 			case "AddNewBuilding":
-				
-				break;
-			case "update":
-
-				break;
-			case "hide":
-
-				break;
-			case "test":
 				AddNewBuilding(request, response);
+				break;
+			case "UpdateBuilding":
+				UpdateBuilding(request, response);
+				break;
+			case "DeleteBuilding":
+				DeleteBuilding(request, response);
+				break;
+			case "AddService":
+				AddService(request, response);
+				break;
+			case "UpdateService":
+				UpdateService(request, response);
+				break;
+			case "DeleteService":
+				DeleteService(request, response);
 				break;
 
 			default:
@@ -90,6 +97,139 @@ public class ManageController extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	protected void DeleteService(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		  
+		String buildingId = request.getParameter("DeleteService_buildingId");
+		String serviceId =  request.getParameter("DeleteService_serviceId");
+		
+		Service service = new Service(buildingId, serviceId, "", 0);
+		
+		try {
+			if(new ServiceDAO().DeleteBuildingService(service)) {
+				request.setAttribute("message", "Xóa thành công");
+			}
+			else {
+				request.setAttribute("message", "Xóa không thành công");
+			}
+		} catch (Exception e) {
+			request.setAttribute("message", "Có lỗi xảy ra");
+		}
+		finally {
+			doDisplay(request, response);  
+		}		
+	}
+	
+	protected void UpdateService(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		  
+		String buildingId = request.getParameter("UpdateService_buildingId");
+		String serviceId =  request.getParameter("UpdateService_serviceId");
+		float price =  0;
+		if(!(request.getParameter("UpdateService_Price") == null) && !request.getParameter("UpdateService_Price").equals("")) {
+			price = Float.parseFloat(request.getParameter("UpdateService_Price"));
+		}		
+		
+		Service service = new Service(buildingId, serviceId, "", price);
+		
+		try {
+			if(new ServiceDAO().UpdateBuildingService(service)) {
+				request.setAttribute("message", "Cập nhật thành công");
+			}
+			else {
+				request.setAttribute("message", "Cập nhật không thành công");
+			}
+		} catch (Exception e) {
+			request.setAttribute("message", "Có lỗi xảy ra");
+		}
+		finally {
+			doDisplay(request, response);  
+		}		
+	}
+	
+	protected void AddService(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		  
+		String buildingId = request.getParameter("AddService_buildingid");
+		String serviceId =  request.getParameter("AddService_serviceId");
+		float price =  0;
+		if(!(request.getParameter("AddService__Price") == null) && !request.getParameter("AddService__Price").equals("")) {
+			price = Float.parseFloat(request.getParameter("AddService__Price"));
+		}
+		Service service = new Service(buildingId,serviceId,"",price);		
+		
+		try {
+			if(new ServiceDAO().AddNewBuildingService(service)) {
+				request.setAttribute("message", "Thêm thành công");
+			}
+			else {
+				request.setAttribute("message", "Thêm không thành công");
+			}
+		} catch (Exception e) {
+			request.setAttribute("message", "Có lỗi xảy ra");
+		}
+		finally {
+			doDisplay(request, response);  
+		}		
+	}
+	
+	protected void DeleteBuilding(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		  
+		String buildingId = request.getParameter("Delete_buildingId");
+		
+		try {
+			if(new BuildingDAO().DeleteBuilding(buildingId)) {
+				request.setAttribute("message", "Xóa thành công");
+			}
+			else {
+				request.setAttribute("message", "Xóa không thành công");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			request.setAttribute("message", "Có lỗi xảy ra");
+		}
+		finally {
+			doDisplay(request, response);  
+		}		
+	}
+	
+	protected void UpdateBuilding(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		  
+		String buildingId = request.getParameter("Update_buildingId");
+		String buildingName = request.getParameter("Update_buildingName");
+		float area = 0;
+		if(!(request.getParameter("Update_area") == null) && !request.getParameter("Update_area").equals("")) {
+			area = Float.parseFloat(request.getParameter("Update_area"));
+		}		
+		
+		String buildingType = request.getParameter("Update_buildingType");
+		String buildingInfor = request.getParameter("Update_buildingInfor");
+		String buildingRules = request.getParameter("Update_buildingRule");
+		String buildingDescrip = request.getParameter("Update_Descrip");
+		
+		String imageLink = "";
+		
+		try {
+			Part part = request.getPart("Update_image");
+			if(!getFileName(part).equals("")) {
+				imageLink = "/view/common/image/building/" + getFileName(part);
+				part.write(Save_Dir + getFileName(part));								
+			}
+			
+			BuildingDAO buildingDAO = new BuildingDAO();
+			if(buildingDAO.UpdateBuilding(buildingId, buildingName, area, buildingType, buildingInfor
+					, buildingRules, buildingDescrip, imageLink.equals("")?null:imageLink)) {
+				request.setAttribute("message", "Cập nhật thành công!");
+			}
+			else {
+				request.setAttribute("message", "Cập nhật không thành công!");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			request.setAttribute("message", "Có lỗi xảy ra");
+		}
+		finally {
+			doDisplay(request, response);  
+		}		
 	}
 	
 	protected void AddNewBuilding(HttpServletRequest request, HttpServletResponse response) throws Exception {

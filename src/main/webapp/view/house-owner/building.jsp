@@ -188,39 +188,260 @@
 		<!-- END HEADER DESKTOP-->
 		<!-- modal large -->
 
-		<c:forEach var="i" begin="1" end="${listBuilding.size() }">			
-				<div class="modal fade" id="building${i }" tabindex="-1" role="dialog"
-					aria-labelledby="building${i }" aria-hidden="true">
+		<c:forEach var="i" begin="1" end="${listBuilding.size() }">
+			<form action="manage" method="post" enctype="multipart/form-data">
+				<input type="hidden" name="action" value="UpdateBuilding">
+				<div class="modal fade" id="building${i }" tabindex="-1"
+					role="dialog" aria-labelledby="building${i }" aria-hidden="true">
 					<div class="modal-dialog modal-lg" role="document">
 						<div class="modal-content">
 							<div class="modal-header">
-								<h5 class="modal-title" id="largeModalLabel">Large Modal</h5>
+								<h5 class="modal-title" id="largeModalLabel">Chỉnh sửa
+									thông tin</h5>
 								<button type="button" class="close" data-dismiss="modal"
 									aria-label="Close">
 									<span aria-hidden="true">&times;</span>
 								</button>
 							</div>
 							<div class="modal-body">
-								<p>There are three species of zebras: the plains zebra, the
-									mountain zebra and the Grévy's zebra. The plains zebra and the
-									mountain zebra belong to the subgenus Hippotigris, but Grévy's
-									zebra is the sole species of subgenus Dolichohippus. The latter
-									resembles an ass, to which it is closely related, while the
-									former two are more horse-like. All three belong to the genus
-									Equus, along with other living equids.</p>
+								<div class="row">
+
+
+									<div class="col-4">
+										<div class="file-upload">
+											<button class="file-upload-btn" type="button"
+												onclick="$('.file-upload-input').trigger( 'click' )">Add
+												Image</button>
+
+											<div class="image-upload-wrap">
+												<input class="file-upload-input" type='file'
+													onchange="readURL(this);" accept="image/*"
+													name="Update_image" multiple="multiple" />
+												<div class="drag-text">
+													<h3>Drag and drop a file or select add Image</h3>
+												</div>
+											</div>
+											<div class="file-upload-content">
+												<img class="file-upload-image" src="#" alt="your image" />
+												<div class="image-title-wrap">
+													<button type="button" onclick="removeUpload()"
+														class="remove-image">
+														Remove <span class="image-title">Uploaded Image</span>
+													</button>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-8">
+										<div class="row">
+											<input type="hidden" name="Update_buildingId"
+												value="${listBuilding[i-1].buildingId}">
+											<div class="col-md-12">
+												<span style="font-weight: bolder;">Tên nhà</span>
+											</div>
+
+										</div>
+										<div class="row form-field">
+											<div class="col-md-12">
+												<input type="text" id="" name="Update_buildingName"
+													placeholder="Nhập tên nhà" class="form-control"
+													required="required"
+													value="${listBuilding[i-1].buildingName}">
+											</div>
+
+										</div>
+
+
+										<div class="row">
+											<div class="col-md-12">
+												<span style="font-weight: bolder;">Thông tin chi tiết</span>
+											</div>
+											<div class="col-md-4">
+												<input type="number" id="" name="Update_area"
+													placeholder="Diện tích" class="form-control"
+													required="required"
+													value="${listBuilding[i-1].buildingArea}">
+											</div>
+
+											<div class="form-group col-md-8">
+												<select class="form-control" id=""
+													name="Update_buildingType" required="required">
+													<option value="${listBuilding[i-1].buildingType}">${listBuilding[i-1].buildingType}</option>
+													<option value="Nhà nguyên căn">Nhà nguyên căn</option>
+													<option value="Phòng riêng">Phòng riêng</option>
+												</select>
+											</div>
+
+										</div>
+
+										<div class="row form-field">
+											<div class="col-md-12">
+												<textarea class="form-control" name="Update_buildingInfor"
+													placeholder="Thông tin hữu ích: nhà gần trường, hướng mặt tiền,.."
+													id="Update_infor" rows="2">${listBuilding[i-1].buildingDetailInfor}</textarea>
+											</div>
+										</div>
+
+										<div class="row form-field">
+
+											<div class="col-md-12">
+												<textarea class="form-control" name="Update_buildingRule"
+													placeholder="Nội quy" id="Update_Rules" rows="3">${listBuilding[i-1].buildingRule}</textarea>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-12">
+												<span style="font-weight: bolder;">Mô tả</span>
+											</div>
+
+										</div>
+										<div class="row form-field	">
+
+											<div class="col-md-12">
+												<textarea class="form-control" name="Update_Descrip"
+													placeholder="Mô tả, giới thiệu chung"
+													id="Update_Descrip${i }" rows="3" required="required">${listBuilding[i-1].buildingDesc}</textarea>
+											</div>
+										</div>
+
+									</div>
+								</div>
 							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-secondary"
 									data-dismiss="modal">Cancel</button>
-								<button type="button" class="btn btn-primary">Confirm</button>
+								<button type="submit" class="btn btn-primary">Save</button>
 							</div>
 						</div>
 					</div>
 				</div>
-
+			</form>
 		</c:forEach>
 
 		<!-- end modal large -->
+
+
+		<!-- modal small -->
+		<c:forEach var="i" begin="1" end="${listBuilding.size() }">
+			<form action="manage" method="post">
+				<input type="hidden" name="action" value="DeleteBuilding"> <input
+					type="hidden" name="Delete_buildingId"
+					value="${listBuilding[i-1].buildingId}">
+				<div class="modal fade" id="delete${i }" tabindex="-1" role="dialog"
+					aria-labelledby="smallmodalLabel" aria-hidden="true">
+					<div class="modal-dialog modal-sm" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="smallmodalLabel">Xác nhận</h5>
+								<button type="button" class="close" data-dismiss="modal"
+									aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								<p style="font-weight: bold;">${listBuilding[i-1].buildingName}</p>
+								<p>Bạn có chắc muốn xóa bài đăng này?</p>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary"
+									data-dismiss="modal">Cancel</button>
+								<button type="submit" class="btn btn-primary">Confirm</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</c:forEach>
+		<!-- end modal small -->
+
+		<c:forEach var="a" begin="1" end="${listBuilding.size() }">
+			<c:forEach var="s" begin="1" end="${listService.size() }">
+				<c:if
+					test="${listService[s-1].buildingID == listBuilding[a-1].buildingId}">
+
+					<!-- modal small -->
+					<form action="manage" method="post">
+					<input type="hidden" name="action" value="UpdateService">
+					<input type="hidden" name="UpdateService_buildingId" value="${listBuilding[a-1].buildingId }">
+					<input type="hidden" name="UpdateService_serviceId" value="${listService[s-1].serviceID }">
+					
+					<div class="modal fade"
+						id="edit${listBuilding[a-1].buildingId}${listService[s-1].serviceID }"
+						tabindex="-1" role="dialog" aria-labelledby="smallmodalLabel"
+						aria-hidden="true">
+						<div class="modal-dialog modal-sm" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="smallmodalLabel">Chỉnh sửa dịch vụ</h5>
+									<button type="button" class="close" data-dismiss="modal"
+										aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body">
+									<p style="font-weight: bold;" >Tên dịch vụ:</p>  ${listService[s-1].serviceName }
+									
+									<p style="font-weight: bold;" >Giá:</p>
+									<input class="form-control" type="number" name="UpdateService_Price" value="${listService[s-1].price }">
+									
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary"
+										data-dismiss="modal">Cancel</button>
+									<button type="submit" class="btn btn-primary">Confirm</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					</form>
+					<!-- end modal small -->
+				</c:if>
+			</c:forEach>
+		</c:forEach>
+		
+		<!-- Delete service -->
+		<c:forEach var="a" begin="1" end="${listBuilding.size() }">
+			<c:forEach var="s" begin="1" end="${listService.size() }">
+				<c:if
+					test="${listService[s-1].buildingID == listBuilding[a-1].buildingId}">
+
+					<!-- modal small -->
+					<form action="manage" method="post">
+					<input type="hidden" name="action" value="DeleteService">
+					<input type="hidden" name="DeleteService_buildingId" value="${listBuilding[a-1].buildingId }">
+					<input type="hidden" name="DeleteService_serviceId" value="${listService[s-1].serviceID }">
+					
+					<div class="modal fade"
+						id="delete${listBuilding[a-1].buildingId}${listService[s-1].serviceID }"
+						tabindex="-1" role="dialog" aria-labelledby="smallmodalLabel"
+						aria-hidden="true">
+						<div class="modal-dialog modal-sm" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="smallmodalLabel">Xóa dịch vụ</h5>
+									<button type="button" class="close" data-dismiss="modal"
+										aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body">
+									<p style="font-weight: bold;" >${listService[s-1].serviceName } - ${listService[s-1].price }(VNĐ)</p>
+									Bạn có chắc muốn xóa dịch vụ này
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary"
+										data-dismiss="modal">Cancel</button>
+									<button type="submit" class="btn btn-primary">Confirm</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					</form>
+					<!-- end modal small -->
+				</c:if>
+			</c:forEach>
+		</c:forEach>
+
 		<!-- MAIN CONTENT-->
 
 		<div class="main-content">
@@ -284,14 +505,23 @@
 															</c:if>
 														</div>
 														<div class="col-8">
-															<h3>${listBuilding[a-1].buildingName }</h3>
+															<div class="row">
+																<div class="col-md-11">
+																	<h3>${listBuilding[a-1].buildingName }</h3>
+																</div>
+																<div class="col-md-1">
+																	<button type="button" data-toggle="modal"
+																		data-target="#delete${a }">X</button>
+
+																</div>
+															</div>
 															<p>
 																<span style="font-weight: bolder;">Loại cho thuê:</span>
 																${listBuilding[a-1].buildingType }
 															</p>
 															<p>
-																<span style="font-weight: bolder;">Trạng thái:</span>
-																${listBuilding[a-1].buildingStatus }
+																<span style="font-weight: bolder;">Trạng thái:</span> <a
+																	href="">${listBuilding[a-1].buildingStatus }</a>
 															</p>
 															<p>
 																<span style="font-weight: bolder;">Địa chỉ:</span>
@@ -358,12 +588,12 @@
 																							</div>
 																						</td>
 																						<td class="table-data-feature">
-																							<button class="item" data-toggle="tooltip"
-																								data-placement="top" title="Edit">
+																							<button class="item" data-toggle="modal"
+																								data-target="#edit${listBuilding[a-1].buildingId}${listService[s-1].serviceID }">
 																								<i class="zmdi zmdi-edit"></i>
 																							</button>
-																							<button class="item" data-toggle="tooltip"
-																								data-placement="top" title="Edit">
+																							<button class="item" data-toggle="modal"
+																								data-target="#delete${listBuilding[a-1].buildingId}${listService[s-1].serviceID }">
 																								<i class="zmdi zmdi-delete"></i>
 																							</button>
 																						</td>
@@ -372,7 +602,9 @@
 																			</c:forEach>
 
 																		</tbody>
+
 																	</table>
+
 																</div>
 																<div class="user-data__footer">
 																	<button class="au-btn au-btn-load" data-toggle="modal"
@@ -460,14 +692,24 @@
 														</div>
 
 														<div class="col-8">
-															<h3>${listBuilding[a-1].buildingName }</h3>
+															<div class="row">
+																<div class="col-md-11">
+																	<h3>${listBuilding[a-1].buildingName }</h3>
+																</div>
+																<div class="col-md-1">
+																	<button type="button" data-toggle="modal"
+																		data-target="#delete${a }">X</button>
+
+																</div>
+															</div>
+
 															<p>
 																<span style="font-weight: bolder;">Loại cho thuê:</span>
 																${listBuilding[a-1].buildingType }
 															</p>
 															<p>
-																<span style="font-weight: bolder;">Trạng thái:</span>
-																${listBuilding[a-1].buildingStatus }
+																<span style="font-weight: bolder;">Trạng thái:</span> <a
+																	href="">${listBuilding[a-1].buildingStatus }</a>
 															</p>
 															<p>
 																<span style="font-weight: bolder;">Địa chỉ:</span>
@@ -487,8 +729,8 @@
 																href="${pageContext.request.contextPath}/building-detail?buildingId=${listBuilding[a-1].buildingId }">Xem
 																chi tiết</a>
 															<p>
-																<a href="#" data-toggle="modal" data-target="#building${a }">Chỉnh
-																	sửa thông tin</a>
+																<a href="#" data-toggle="modal"
+																	data-target="#building${a }">Chỉnh sửa thông tin</a>
 															</p>
 														</div>
 													</div>
@@ -531,14 +773,14 @@
 																						</div>
 																					</td>
 																					<td class="table-data-feature">
-																						<button class="item" data-toggle="tooltip"
-																							data-placement="top" title="Edit">
-																							<i class="zmdi zmdi-edit"></i>
-																						</button>
-																						<button class="item" data-toggle="tooltip"
-																							data-placement="top" title="Edit">
-																							<i class="zmdi zmdi-delete"></i>
-																						</button>
+																						<button class="item" data-toggle="modal"
+																								data-target="#edit${listBuilding[a-1].buildingId}${listService[s-1].serviceID }">
+																								<i class="zmdi zmdi-edit"></i>
+																							</button>
+																						<button class="item" data-toggle="modal"
+																								data-target="#delete${listBuilding[a-1].buildingId}${listService[s-1].serviceID }">
+																								<i class="zmdi zmdi-delete"></i>
+																							</button>
 																					</td>
 																				</tr>
 																			</c:if>
@@ -621,7 +863,7 @@
 											aria-labelledby="nav-contact-tab">
 											<form action="manage" method="post"
 												enctype="multipart/form-data">
-												<input type="hidden" name="action" value="test">
+												<input type="hidden" name="action" value="AddNewBuilding">
 												<div class="tab-pane fade show active" id="nav-home"
 													role="tabpanel" aria-labelledby="nav-home-tab">
 													<br>
@@ -797,37 +1039,42 @@
 									<tr>
 
 										<td>Dịch vụ</td>
-										<td>Giá</td>
+										<td>Giá (VNĐ)</td>
 										<td style="text-align: right;">Action</td>
 									</tr>
 								</thead>
 								<c:forEach var="saa" begin="1"
 									end="${listServiceAllowToAdd.size() }">
-									<c:if
-										test="${listServiceAllowToAdd[saa-1].buildingID == listBuilding[b-1].buildingId}">
-										<tr>
-											<td>
-												<div class="table-data__info">
-													<h6>${listServiceAllowToAdd[saa-1].serviceName }</h6>
-												</div>
-											</td>
-											<td>
-												<div class="table-data__info">
-													<h6>abc</h6>
-												</div>
-											</td>
-											<td class="table-data-feature">
-												<button class="item" data-toggle="tooltip"
-													data-placement="top" title="Add">
-													<i class="zmdi zmdi-plus-circle-o"></i>
-												</button>
-												<button class="item" data-toggle="tooltip"
-													data-placement="top" title="Edit">
-													<i class="zmdi zmdi-delete"></i>
-												</button>
-											</td>
-										</tr>
-									</c:if>
+									<form action="manage" method="post">
+										<input type="hidden" name="action" value="AddService">
+										<c:if
+											test="${listServiceAllowToAdd[saa-1].buildingID == listBuilding[b-1].buildingId}">
+											<input type="hidden" name="AddService_buildingid"
+												value="${listBuilding[b-1].buildingId }">
+											<input type="hidden" name="AddService_serviceId"
+												value="${listServiceAllowToAdd[saa-1].serviceID }">
+											<tr>
+												<td>
+													<div class="table-data__info">
+														<h6>${listServiceAllowToAdd[saa-1].serviceName }</h6>
+													</div>
+												</td>
+												<td>
+													<div class="table-data__info">
+														<input style="width: 90%;" class="form-control"
+															type="number" name="AddService__Price"
+															required="required">
+													</div>
+												</td>
+												<td class="table-data-feature">
+													<button type="submit" class="item" data-toggle="tooltip"
+														data-placement="top" title="Add">
+														<i class="zmdi zmdi-plus-circle-o"></i>
+													</button>
+												</td>
+											</tr>
+										</c:if>
+									</form>
 								</c:forEach>
 								</tbody>
 							</table>
@@ -836,7 +1083,6 @@
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary"
 							data-dismiss="modal">Cancel</button>
-						<button type="button" class="btn btn-primary">Confirm</button>
 					</div>
 				</div>
 			</div>
@@ -930,6 +1176,8 @@
 	</c:forEach>
 	<!-- end modal large -->
 
+	<!-- Lay so luong nha de lam css, js-->
+	<input type="hidden" value="${listBuilding.size() }" id="totalBuilding">
 
 	<script>
 		function readURL(input) {
@@ -965,6 +1213,14 @@
 		$('.image-upload-wrap').bind('dragleave', function() {
 			$('.image-upload-wrap').removeClass('image-dropping');
 		});
+	</script>
+
+	<script>
+		var total = document.getElementById('totalBuilding').value;
+		console.log(total);
+		for (var i = 1; i <= total; i++) {
+			CKEDITOR.replace('Update_Descrip' + i);
+		}
 	</script>
 
 	<script>
