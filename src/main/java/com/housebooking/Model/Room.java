@@ -15,8 +15,6 @@ public class Room {
     private String typeId;
     private String buildingId;
     private String typeName;
-    private float rating;
-    private String address;
     private List<String> roomImages;
 
     public Room() {
@@ -103,23 +101,7 @@ public class Room {
     public void setRoomImages(List<String> roomImages) {
         this.roomImages = roomImages;
     }
-
-    public float getRating() {
-        return rating;
-    }
-
-    public void setRating(float rating) {
-        this.rating = rating;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
+    
     public String getRoomStatus() {
         return roomStatus;
     }
