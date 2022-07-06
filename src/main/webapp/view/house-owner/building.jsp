@@ -186,9 +186,45 @@
 		<!-- HEADER MOBILE-->
 		<jsp:include page="header.jsp"></jsp:include>
 		<!-- END HEADER DESKTOP-->
+		<!-- modal large -->
 
+		<c:forEach var="i" begin="1" end="${listBuilding.size() }">			
+				<div class="modal fade" id="building${i }" tabindex="-1" role="dialog"
+					aria-labelledby="building${i }" aria-hidden="true">
+					<div class="modal-dialog modal-lg" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="largeModalLabel">Large Modal</h5>
+								<button type="button" class="close" data-dismiss="modal"
+									aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								<p>There are three species of zebras: the plains zebra, the
+									mountain zebra and the Grévy's zebra. The plains zebra and the
+									mountain zebra belong to the subgenus Hippotigris, but Grévy's
+									zebra is the sole species of subgenus Dolichohippus. The latter
+									resembles an ass, to which it is closely related, while the
+									former two are more horse-like. All three belong to the genus
+									Equus, along with other living equids.</p>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary"
+									data-dismiss="modal">Cancel</button>
+								<button type="button" class="btn btn-primary">Confirm</button>
+							</div>
+						</div>
+					</div>
+				</div>
+
+		</c:forEach>
+
+		<!-- end modal large -->
 		<!-- MAIN CONTENT-->
+
 		<div class="main-content">
+
 			<div class="section__content section__content--p30">
 				<div class="container-fluid">
 					<div class="row">
@@ -232,7 +268,7 @@
 											<c:if test="${a == 1 }">
 												<div class="tab-pane fade show active" id="nav-${a }"
 													role="tabpanel" aria-labelledby="nav-home${a }">
-													<br>
+													<br> <input type="hidden" name="action" value="update">
 													<div class="row">
 
 														<div class="col-4">
@@ -255,7 +291,7 @@
 															</p>
 															<p>
 																<span style="font-weight: bolder;">Trạng thái:</span>
-																...
+																${listBuilding[a-1].buildingStatus }
 															</p>
 															<p>
 																<span style="font-weight: bolder;">Địa chỉ:</span>
@@ -265,14 +301,20 @@
 																<span style="font-weight: bolder;">Mô tả:</span>
 																${listBuilding[a-1].buildingDesc }
 															</p>
+															<p>
+																<span style="font-weight: bolder;">Thông tin hữu
+																	ích:</span> ${listBuilding[a-1].buildingDetailInfor }
+															</p>
 															Số lượng phòng: <span
 																style="font-weight: bold; padding-left: 5px; padding-right: 5px;">
 																${listBuilding[a-1].numRoom } </span> <a
 																href="${pageContext.request.contextPath}/building-detail?buildingId=${listBuilding[a-1].buildingId }">Xem
 																chi tiết</a>
 															<p>
-																<a href="#">Chỉnh sửa thông tin</a>
+																<a href="#" data-toggle="modal" data-target="#building1">Chỉnh
+																	sửa thông tin</a>
 															</p>
+
 														</div>
 													</div>
 													<hr>
@@ -425,15 +467,19 @@
 															</p>
 															<p>
 																<span style="font-weight: bolder;">Trạng thái:</span>
-																...
+																${listBuilding[a-1].buildingStatus }
 															</p>
 															<p>
 																<span style="font-weight: bolder;">Địa chỉ:</span>
 																${listBuilding[a-1].buildingAddress }
 															</p>
 															<p>
-																<span style="font-weight: bolder;">Mô tả:</span>
+																<span style="font-weight: bolder;">Mô tả chung:</span>
 																${listBuilding[a-1].buildingDesc }
+															</p>
+															<p>
+																<span style="font-weight: bolder;">Thông tin hữu
+																	ích:</span> ${listBuilding[a-1].buildingDetailInfor }
 															</p>
 															Số lượng phòng: <span
 																style="font-weight: bold; padding-left: 5px; padding-right: 5px;">
@@ -441,7 +487,8 @@
 																href="${pageContext.request.contextPath}/building-detail?buildingId=${listBuilding[a-1].buildingId }">Xem
 																chi tiết</a>
 															<p>
-																<a href="#">Chỉnh sửa thông tin</a>
+																<a href="#" data-toggle="modal" data-target="#building${a }">Chỉnh
+																	sửa thông tin</a>
 															</p>
 														</div>
 													</div>
@@ -610,87 +657,100 @@
 														<div class="col-8">
 															<div class="row">
 																<div class="col-md-2">
-																	<label>Tên nhà</label>
+																	<span style="font-weight: bolder;"><label
+																		for="Add_buildingName">Tên nhà</label></span>
+
 																</div>
 																<div class="col-md-10">
-																	<input type="text" id="" name="buildingName"
-																		placeholder="Nhập tên nhà" class="form-control">
+																	<input type="text" id="buildingName"
+																		name="Add_buildingName" placeholder="Nhập tên nhà"
+																		class="form-control" required="required">
 																</div>
 															</div>
 
 															<div class="row">
-																<div class="col-md-12">Địa chỉ</div>
-															</div>
-															<div class="row">
-																<div class="form-group col-md-4">
-																	<select name="state" id="countySel" size="1"
-																		class="form-control">
-																		<option value="" selected="selected">Select
-																			Country</option>
-																	</select>
-																</div>
-																<div class="form-group col-md-4">
-																	<select name="countrya" id="stateSel" size="1"
-																		class="form-control">
-																		<option value="" selected="selected">Please
-																			select Country first</option>
-																	</select>
-																</div>
-																<div class="form-group col-md-4">
-																	<select name="district" id="districtSel" size="1"
-																		class="form-control">
-																		<option value="" selected="selected">Please
-																			select State first</option>
-																	</select>
-																</div>
-															</div>
-															<div class="row">
-																<div class="col-md-12">Thông tin chi tiết</div>
-															</div>
-
-															<div class="row">
-																<div class="col-md-4">
-																	<input type="text" id="" name="building_number"
-																		placeholder="Nhập số nhà" class="form-control">
-																</div>
-
-																<div class="col-md-4">
-																	<input type="number" id="area" name="area"
-																		placeholder="Diện tích" class="form-control">
-																</div>
-
-																<div class="form-group col-md-4">
-																	<select class="form-control" id="" name="building_type">
-																		<option>Loại cho thuê</option>
-																		<option>Nhà nguyên căn</option>
-																		<option>Phòng riêng</option>
-																	</select>
-																</div>
-															</div>
-															<div class="row form-field	">										
 																<div class="col-md-12">
-																	<textarea class="form-control" name="Add_infor"
-																		placeholder="Thông tin hữu ích: nhà gần trường, hướng mặt tiền,.." id="Add_infor" rows="2"></textarea>
+																	<span style="font-weight: bolder;">Địa chỉ</span>
+																</div>
+
+															</div>
+															<div class="row">
+																<div class="form-group col-md-4">
+																	<select name="Add_city" id="countySel" size="1"
+																		class="form-control" required="required">
+																		<option value="" selected="selected">Tỉnh</option>
+																	</select>
+																</div>
+																<div class="form-group col-md-4">
+																	<select name="Add_disctrict" id="stateSel" size="1"
+																		class="form-control" required="required">
+																		<option value="" selected="selected">Huyện/Quận</option>
+																	</select>
+																</div>
+																<div class="form-group col-md-4">
+																	<select name="Add_street" id="districtSel" size="1"
+																		class="form-control" required="required">
+																		<option value="" selected="selected">Đường</option>
+																	</select>
 																</div>
 															</div>
 															<div class="row">
-																<div class="col-md-12">Nội quy</div>
+																<div class="col-md-12">
+																	<span style="font-weight: bolder;">Thông tin chi
+																		tiết</span>
+																</div>
+
 															</div>
-															<div class="row form-field	">
-												
+
+															<div class="row">
+																<div class="col-md-4">
+																	<input type="text" id="" name="Add_buildingNumber"
+																		placeholder="Nhập số nhà" class="form-control"
+																		required="required">
+																</div>
+
+																<div class="col-md-4">
+																	<input type="number" id="Add_are" name="Add_area"
+																		placeholder="Diện tích" class="form-control"
+																		required="required">
+																</div>
+
+																<div class="form-group col-md-4">
+																	<select class="form-control" id="Add_buildingType"
+																		name="Add_buildingType" required="required">
+																		<option>Loại cho thuê</option>
+																		<option value="Nhà nguyên căn">Nhà nguyên căn</option>
+																		<option value="Phòng riêng">Phòng riêng</option>
+																	</select>
+																</div>
+															</div>
+															<div class="row form-field">
+																<div class="col-md-12">
+																	<textarea class="form-control" name="Add_Infor"
+																		placeholder="Thông tin hữu ích: nhà gần trường, hướng mặt tiền,.."
+																		id="Add_infor" rows="2"></textarea>
+																</div>
+															</div>
+
+															<div class="row form-field">
+
 																<div class="col-md-12">
 																	<textarea class="form-control" name="Add_Rules"
-																		placeholder="Mô tả, giới thiệu chung" id="Add_Rules" rows="3"></textarea>
+																		placeholder="Nội quy" id="Add_Rules" rows="3"></textarea>
 																</div>
 															</div>
 															<div class="row">
-																<div class="col-md-12">Mô tả</div>
+																<div class="col-md-12">
+																	<span style="font-weight: bolder;">Mô tả</span>
+																</div>
+
 															</div>
 															<div class="row form-field	">
-												
+
 																<div class="col-md-12">
-																	<textarea class="form-control" name="mota"
-																		placeholder="Mô tả, giới thiệu chung" id="mota" rows="3"></textarea>
+																	<textarea class="form-control" name="Add_Descrip"
+																		placeholder="Mô tả, giới thiệu chung" id="mota"
+																		rows="3" required="required"></textarea>
 																</div>
 															</div>
 															<div class="row form-field">
@@ -785,6 +845,29 @@
 
 	<!-- end modal large -->
 
+	<!-- modal small -->
+	<div class="modal fade" id="smallmodal" tabindex="-1" role="dialog"
+		aria-labelledby="smallmodalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-sm" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="smallmodalLabel">Thông báo</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<p>${message }</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end modal small -->
+
 	<!-- modal large -->
 	<c:forEach var="lb" begin="1" end="${listBuilding.size() }">
 		<div class="modal fade" id="ModalTienNghi${lb }" tabindex="-1"
@@ -833,6 +916,8 @@
 							</tbody>
 						</table>
 					</div>
+
+
 
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary"
@@ -976,6 +1061,13 @@
 			}
 		}
 	</script>
+	<c:if test="${message != null }">
+		<script>
+			let myModal = new bootstrap.Modal(document
+					.getElementById('smallmodal'), {});
+			myModal.show();
+		</script>
+	</c:if>
 </body>
 
 </html>

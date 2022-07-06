@@ -1,5 +1,8 @@
 package com.housebooking.controller.homeowner;
 import java.io.IOException;
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -18,6 +21,7 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import com.housebooking.DAOimpl.houseowner.BuildingDAO;
+import com.housebooking.DAOimpl.houseowner.StreetDAO;
 import com.housebooking.Model.Building;
 import com.housebooking.Model.Convenient;
 import com.housebooking.Model.Service;
@@ -90,17 +94,51 @@ public class ManageController extends HttpServlet {
 	
 	protected void AddNewBuilding(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		  
-		String description = request.getParameter("buildingName");
-		System.out.println(description);
+		LocalDateTime dateTime = LocalDateTime.now().plus(Duration.of(10, ChronoUnit.MINUTES));
+		String buildingId = dateTime.toString();
+		String buildingName = request.getParameter("Add_buildingName");
+		String buildingNumber = request.getParameter("Add_buildingNumber");
+		float area = 0;
+		if(!(request.getParameter("Add_area") == null) && !request.getParameter("Add_area").equals("")) {
+			area = Float.parseFloat(request.getParameter("Add_area"));
+		}		
+		String buildingType = request.getParameter("Add_buildingType");
+		String buildingInfor = request.getParameter("Add_Infor");
+		String buildingRules = request.getParameter("Add_Rules");
+		String buildingDescrip = request.getParameter("Add_Descrip");
+		String buidingStatus = "Waiting";
+		
+		String city = request.getParameter("Add_city");
+		String district = request.getParameter("Add_disctrict");
+		String street = request.getParameter("Add_street");
+		
+		StreetDAO streetDAO = new StreetDAO();
+		String streetNumber = streetDAO.GetStreetNumber(city, district, street);
+		String imageLink = "";
+		HttpSession ss = request.getSession(true);
+		UserSession userSession = (UserSession) ss.getAttribute("usersession");
 		
 		try {
 			Part part = request.getPart("image");
 			part.write(Save_Dir + getFileName(part));
+			imageLink = "/view/common/image/building/" + getFileName(part);
+			
+			Building building = new Building(buildingId, buildingDescrip, buildingName
+					, buildingType, buildingRules, buidingStatus, imageLink
+					, null, streetNumber, userSession.getUser().getUserId(), 0, 0, area, buildingInfor, buildingNumber);
+			
+			if(new BuildingDAO().AddNewBuilding(building)) {
+				request.setAttribute("message", "Thêm thành công!");
+			}
+			else {
+				request.setAttribute("message", "Thêm thất bại!");
+			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			request.setAttribute("message", "Có lỗi xảy ra");
 		}
-		
-		doDisplay(request, response);  
+		finally {
+			doDisplay(request, response);  
+		}		
 	}
 	
 	private String getFileName(Part part) {

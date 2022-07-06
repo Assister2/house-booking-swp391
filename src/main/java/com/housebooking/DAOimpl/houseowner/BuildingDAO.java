@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,6 +65,9 @@ public class BuildingDAO {
 		building.setBuildingImage(rs.getString("buiding_image"));
 		building.setStreetId(rs.getString("street_id"));
 		building.setUserId(rs.getString("user_id"));
+		building.setBuildingArea(rs.getFloat("building_area"));
+		building.setBuildingDetailInfor(rs.getNString("building_infor"));
+		building.setBuildingStatus(rs.getNString("building_status"));		
 	}
 
 	public int getNumRoom(String building_id) {
@@ -309,5 +315,41 @@ public class BuildingDAO {
 		}
 
 		return list;
+	}
+	
+	public boolean AddNewBuilding(Building building) {
+
+		String sql = "Insert into Building\r\n"
+				+ "Values(?,?,?,?,?,?,?,?,?,?,?,?) ";
+		try {
+
+			Connection conn = DBUtils.getConnection();
+
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, building.getBuildingId());
+			ps.setNString(2, building.getBuildingNumber());
+			ps.setNString(3, building.getBuildingName());
+			ps.setFloat(4, building.getBuildingArea());
+			ps.setString(5,building.getBuildingImage());
+			ps.setNString(6, building.getBuildingDesc());
+			ps.setNString(7, building.getBuildingDetailInfor());
+			ps.setString(8, building.getBuildingStatus());
+			ps.setNString(9, building.getBuildingType());
+			ps.setNString(10, building.getBuildingRule());
+			ps.setString(11, building.getStreetId());
+			ps.setString(12, building.getUserId());
+
+			 if (ps.executeUpdate()>0) {
+				 return true;
+	         }
+			
+
+		} catch (Exception ex) {
+
+			ex.printStackTrace();
+
+		}
+		
+		return false;
 	}
 }

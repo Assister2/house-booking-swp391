@@ -6,14 +6,65 @@ public class Building {
 	private String buildingName;
 	private String buildingType;
 	private String buildingRule;
+	private String buildingStatus;
 	private String buildingImage;
+	//Ko lu, chi load
 	private String buildingAddress;
 	private String streetId;
 	private String userId;
+	//Ko lu, chi load
 	private int numRoom;
+	//Ko lu, chi load
 	private float rating;
+	private float buildingArea;
+	private String buildingDetailInfor;
+	private String buildingNumber;
 	
-	
+	public float getBuildingArea() {
+		return buildingArea;
+	}
+	public void setBuildingArea(float buildingArea) {
+		this.buildingArea = buildingArea;
+	}
+	public String getBuildingDetailInfor() {
+		return buildingDetailInfor;
+	}
+	public void setBuildingDetailInfor(String buildingDetailInfor) {
+		this.buildingDetailInfor = buildingDetailInfor;
+	}
+	public String getBuildingNumber() {
+		return buildingNumber;
+	}
+	public void setBuildingNumber(String buildingNumber) {
+		this.buildingNumber = buildingNumber;
+	}
+	public Building(String buildingId, String buildingDesc, String buildingName, String buildingType,
+			String buildingRule, String buildingStatus, String buildingImage, String buildingAddress, String streetId,
+			String userId, int numRoom, float rating, float buildingArea, String buildingDetailInfor,
+			String buildingNumber) {
+		super();
+		this.buildingId = buildingId;
+		this.buildingDesc = buildingDesc;
+		this.buildingName = buildingName;
+		this.buildingType = buildingType;
+		this.buildingRule = buildingRule;
+		this.buildingStatus = buildingStatus;
+		this.buildingImage = buildingImage;
+		this.buildingAddress = buildingAddress;
+		this.streetId = streetId;
+		this.userId = userId;
+		this.numRoom = numRoom;
+		this.rating = rating;
+		this.buildingArea = buildingArea;
+		this.buildingDetailInfor = buildingDetailInfor;
+		this.buildingNumber = buildingNumber;
+	}
+	public String getBuildingStatus() {
+		return buildingStatus;
+	}
+	public void setBuildingStatus(String buildingStatus) {
+		this.buildingStatus = buildingStatus;
+	}
 	public String getBuildingRule() {
 		return buildingRule;
 	}
