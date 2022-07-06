@@ -24,18 +24,6 @@ public class LoginController extends HttpServlet {
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		String action = request.getParameter("action");
-
-		if (action == null) {
-			doDisplay(request, response);
-		} else if (action.equals("login")) {
-			doLogin(request, response);
-		}
-
-	}
 
 	protected void doLogin(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
