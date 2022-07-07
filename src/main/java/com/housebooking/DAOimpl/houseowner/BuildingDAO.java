@@ -55,7 +55,7 @@ public class BuildingDAO {
 
 		return list;
 	}
-	
+
 	public Building Find(String buildingId) {
 		Building building = new Building();
 
@@ -106,7 +106,8 @@ public class BuildingDAO {
 		int result = 0;
 
 		String sql = "select count(r.room_id)as roomNum\r\n"
-				+ "from Room r join building b on r.building_id = b.building_id\r\n" + "where b.building_id like ?";
+				+ " from Room r join building b on r.building_id = b.building_id\r\n"
+				+ " where b.building_id like ? And r.room_status not like 'Removed' ";
 		try {
 
 			Connection conn = DBUtils.getConnection();
@@ -377,12 +378,10 @@ public class BuildingDAO {
 
 		return false;
 	}
-	
+
 	public boolean DeleteBuilding(String buildingId) {
 
-		String sql = " UPDATE Building\r\n"
-				+ " SET building_status = 'Removed' "
-				+ " WHERE building_id = ? ";
+		String sql = " UPDATE Building\r\n" + " SET building_status = 'Removed' " + " WHERE building_id = ? ";
 		try {
 
 			Connection conn = DBUtils.getConnection();
@@ -409,10 +408,10 @@ public class BuildingDAO {
 		String sql = " UPDATE Building\r\n"
 				+ " SET building_name = ?, building_area = ?, building_type = ?, building_infor = ?, building_rule = ?, building_desc = ? ";
 
-		if(imageLink != null) {
-			sql += " , buiding_image = ? \r\n"; 
+		if (imageLink != null) {
+			sql += " , buiding_image = ? \r\n";
 		}
-		
+
 		sql += " WHERE building_id = ? ";
 		try {
 
@@ -426,7 +425,7 @@ public class BuildingDAO {
 			ps.setNString(5, buildingRules);
 			ps.setNString(6, buildingDescrip);
 			int count = 7;
-			if(imageLink != null) {
+			if (imageLink != null) {
 				ps.setString(count++, imageLink);
 			}
 			ps.setNString(count, buildingId);

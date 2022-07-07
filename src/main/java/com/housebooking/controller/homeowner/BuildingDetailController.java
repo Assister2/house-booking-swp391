@@ -49,7 +49,7 @@ public class BuildingDetailController extends HttpServlet {
 				AddRoom(request, response);
 				break;
 			case "DeleteRoom":
-
+				DeleteRoom(request, response);
 				break;
 			case "UpdateRoom":
 				UpdateRoom(request, response);
@@ -61,6 +61,27 @@ public class BuildingDetailController extends HttpServlet {
 			}
 		}
 
+	}
+	
+	protected void DeleteRoom(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	
+		String roomId = request.getParameter("roomId");
+
+		RoomDAO roomDAO = new RoomDAO();
+
+		try {
+			if(roomDAO.DeleteRoom(roomId)) {
+				request.setAttribute("message", "Xóa thành công!");
+			} else {
+				request.setAttribute("message", "Xóa không thành công!");
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			request.setAttribute("message", "Có lỗi xảy ra");
+		} finally {
+			doDisplay(request, response);
+		}
 	}
 	
 	protected void AddRoom(HttpServletRequest request, HttpServletResponse response) throws Exception {

@@ -255,5 +255,34 @@ public class RoomDAO {
 
 		return false;
 	}
+	
+	
+
+	public boolean DeleteRoom(String roomId) {
+
+		String sql = " UPDATE Room\r\n"
+				+ " SET room_status = 'Removed' "
+				+ " WHERE room_id = ? ";
+		try {
+
+			Connection conn = DBUtils.getConnection();
+
+			PreparedStatement ps = conn.prepareStatement(sql);
+			
+			ps.setString(1, roomId);
+
+			if (ps.executeUpdate() > 0) {
+				return true;
+			}
+
+		} catch (Exception ex) {
+
+			ex.printStackTrace();
+
+		}
+
+		return false;
+	}
+	
 
 }

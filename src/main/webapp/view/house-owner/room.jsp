@@ -263,7 +263,7 @@
 
 		<!--  Delete Model -->
 		<c:forEach var="i" begin="1" end="${listRoom.size() }">
-			<form action="building-detail" method="get">
+			<form action="building-detail" method="post">
 				<div class="modal fade" id="delete${i }" tabindex="-1" role="dialog"
 					aria-labelledby="smallmodalLabel" aria-hidden="true">
 					<div class="modal-dialog modal-sm" role="document">
@@ -276,7 +276,9 @@
 								</button>
 							</div>
 							<div class="modal-body">
-								<input type="hidden" name="action" value="Delete"> <input
+								<input type="hidden" name="action" value="DeleteRoom"> 
+								<input type="hidden" name="buildingId" value="${building.buildingId }">
+								<input
 									type="hidden" name="roomId" value="${listRoom[i-1].roomId}">
 								<b>${listRoom[i-1].roomName}</b>
 								<p>Các đơn đặt sẽ <b>bị hủy</b></p>

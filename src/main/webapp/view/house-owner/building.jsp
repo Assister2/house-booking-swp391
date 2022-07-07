@@ -321,7 +321,7 @@
 		<!-- end modal large -->
 
 
-		<!-- modal small -->
+		<!-- Delete modal small -->
 		<c:forEach var="i" begin="1" end="${listBuilding.size() }">
 			<form action="manage" method="post">
 				<input type="hidden" name="action" value="DeleteBuilding"> <input
