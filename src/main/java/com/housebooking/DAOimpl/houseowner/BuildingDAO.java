@@ -55,6 +55,37 @@ public class BuildingDAO {
 
 		return list;
 	}
+	
+	public Building Find(String buildingId) {
+		Building building = new Building();
+
+		String sql = "select b.*, ( b.building_number + ' ' + s.street_name + ' '+ d.district_name +' '+ c.city_name ) as address\r\n"
+				+ "			from Building b join Street s on b.street_id=s.street_id\r\n"
+				+ "			join District d on s.district_id = d.district_id join City c on d.city_id = c.city_id\r\n"
+				+ "		where b.building_id like ? And b.building_status not like 'Removed' ";
+
+		try {
+
+			Connection conn = DBUtils.getConnection();
+
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, buildingId);
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				fillDataBuilding(rs, building);
+				int numRoom = getNumRoom(rs.getString("building_id"));
+				building.setNumRoom(numRoom);
+			}
+
+		} catch (Exception ex) {
+
+			ex.printStackTrace();
+
+		}
+
+		return building;
+	}
 
 	private void fillDataBuilding(ResultSet rs, Building building) throws SQLException {
 		building.setBuildingId(rs.getString("building_id"));

@@ -107,6 +107,194 @@
 		</div>
 		<!-- end Message model -->
 
+		<!-- Add model -->
+		<form action="building-detail" method="post"
+				enctype="multipart/form-data">
+			<div class="modal fade" id="AddModal" tabindex="-1" role="dialog"
+				aria-labelledby="mediumModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-lg" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="mediumModalLabel">Thêm mới phòng</h5>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<div class="card">
+								<div class="row">
+									<div class="col-md-4">
+										<div class="file-upload_1_0">
+
+											<div class="image-upload-wrap_1_0">
+												<input class="file-upload-input_1_0" type='file'
+													onchange="readURL_1_0(this);" accept="image/*"
+													name="image_1" multiple="multiple" required="required"/>
+												<div class="drag-text_1_0">
+													<h3>Drag and drop a file or select add Image</h3>
+												</div>
+											</div>
+											<div class="file-upload-content_1_0">
+												<img class="file-upload-image_1_0" src="#" alt="your image" />
+												<div class="image-title-wrap_1_0">
+													<button type="button" onclick="removeUpload_1_0()"
+														class="remove-image_1_0">
+														Remove <span class="image-title_1_0">Uploaded Image</span>
+													</button>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="col-md-4">
+										<div class="file-upload_2_0">
+
+											<div class="image-upload-wrap_2_0">
+												<input class="file-upload-input_2_0" type='file'
+													onchange="readURL_2_0(this);" accept="image/*"
+													name="image_2" multiple="multiple"  required="required"/>
+												<div class="drag-text_2_0">
+													<h3>Drag and drop a file or select add Image</h3>
+												</div>
+											</div>
+											<div class="file-upload-content_2_0">
+												<img class="file-upload-image_2_0" src="#" alt="your image" />
+												<div class="image-title-wrap_2_0">
+													<button type="button" onclick="removeUpload_2_0()"
+														class="remove-image_2_0">
+														Remove <span class="image-title_2_0">Uploaded Image</span>
+													</button>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="col-md-4">
+										<div class="file-upload_3_0">
+
+											<div class="image-upload-wrap_3_0">
+												<input class="file-upload-input_3_0" type='file'
+													onchange="readURL_3_0(this);" accept="image/*"
+													name="image_3" multiple="multiple"  required="required"/>
+												<div class="drag-text_3_0">
+													<h3>Drag and drop a file or select add Image</h3>
+												</div>
+											</div>
+											<div class="file-upload-content_3_0">
+												<img class="file-upload-image_3_0" src="#" alt="your image" />
+												<div class="image-title-wrap_3_0">
+													<button type="button" onclick="removeUpload_3_0()"
+														class="remove-image_3_0">
+														Remove <span class="image-title_3_0">Uploaded Image</span>
+													</button>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="card-body">
+								<input type="hidden" name="action" value="AddRoom">
+								<input type="hidden" name="buildingId" value="${building.buildingId }">
+
+									<div class="form-group">
+										<label for="roomName">Tên phòng:</label> <input type="text"
+											class="form-control" id="roomName"
+											placeholder="Enter Last Name" name="roomName" value=""
+											required>
+									</div>
+
+									<div class="form-group">
+										<label for="status">Trạng thái hiển thị:</label> <select
+											class="form-control" id="status" name="roomStatus">
+											<option value="active">active</option>
+											<option value="hide">hide</option>
+
+										</select>
+									</div>
+									
+									<div class="form-group">
+										<label for="status">Loai phòng:</label> <select
+											class="form-control" id="status" name="type">
+											<c:forEach var="type" items="${listType }">
+												<option value="${type.typeId }">${type.typeName }</option>
+											</c:forEach>
+											
+										</select>
+									</div>
+
+									<div class="form-group">
+										<label for="price">Giá (VNĐ):</label> <input type="number"
+											class="form-control" id="price" placeholder="Enter Last Name"
+											name="price" value="" required>
+									</div>
+
+									<div class="form-group">
+										<label for="bed">Số giường nằm:</label> <input id="bed"
+											class="form-control" type="number" name="bed" value="">
+									</div>
+
+									<div class="form-group">
+										<label for="area">Diện tích:</label> <input
+											class="form-control" type="number" name="area" id="area"
+											value="">
+									</div>
+
+									<div class="form-group">
+										<label for="Update_Descript">Mô tả:</label>
+										<textarea rows="" cols="" id="Update_Descript"
+											name="Update_Descript"></textarea>
+									</div>
+
+								</div>
+							</div>
+							<div style="text-align: right;">
+								<button type="button" class="btn btn-secondary"
+									data-dismiss="modal">Cancel</button>
+								<button type="submit" class="btn btn-primary">Xác nhận</button>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+		<!-- end Add model -->
+
+		<!--  Delete Model -->
+		<c:forEach var="i" begin="1" end="${listRoom.size() }">
+			<form action="building-detail" method="get">
+				<div class="modal fade" id="delete${i }" tabindex="-1" role="dialog"
+					aria-labelledby="smallmodalLabel" aria-hidden="true">
+					<div class="modal-dialog modal-sm" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="smallmodalLabel">Xóa bài đăng</h5>
+								<button type="button" class="close" data-dismiss="modal"
+									aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								<input type="hidden" name="action" value="Delete"> <input
+									type="hidden" name="roomId" value="${listRoom[i-1].roomId}">
+								<b>${listRoom[i-1].roomName}</b>
+								<p>Các đơn đặt sẽ <b>bị hủy</b></p>
+								<p>Bạn có chắc muốn xóa bài viết này.</p>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary"
+									data-dismiss="modal">Cancel</button>
+								<button type="submit" class="btn btn-primary">Xác nhận</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</c:forEach>
+		<!-- end Delete Model-->
+
+
 		<!-- modal large -->
 		<c:forEach var="i" begin="1" end="${listRoom.size() }">
 			<form action="building-detail" method="post"
@@ -295,6 +483,35 @@
 			<div class="section__content section__content--p30">
 				<div class="container-fluid">
 
+					<div class="row">
+						<div class="col-md-12">
+							<div class="card">
+								<div class="card-header">
+									<strong class="card-title">${building.buildingName } <small>
+											<c:if test="${building.buildingStatus == 'active'}">
+												<span class="badge badge-success float-right mt-1">Active</span>
+											</c:if> <c:if test="${building.buildingStatus == 'not active'}">
+												<span class="badge badge-warning pull-right r-activity">Not
+													active</span>
+											</c:if>
+									</small>
+									</strong>
+								</div>
+								<div class="card-body">
+									<p class="card-text">
+										Số phòng: ${building.numRoom} <a style="margin-left: 5px;"
+											href="" data-toggle="modal" data-target="#AddModal"
+											class="badge badge-success mt-1"> Thêm</a>
+									</p>
+									<p class="card-text">Địa chỉ: ${building.buildingAddress}</p>
+									<p class="card-text">${building.buildingDesc}</p>
+								</div>
+							</div>
+						</div>
+
+					</div>
+
+
 					<c:forEach var="i" begin="1" end="${listRoom.size() }">
 						<c:if test="${i % 3 == 1 }">
 							<div class="row">
@@ -343,6 +560,8 @@
 									<div style="text-align: right;">
 										<button class="btn btn-primary" data-toggle="modal"
 											data-target="#edit${i }">Chỉnh sửa</button>
+										<button class="btn btn-danger" data-toggle="modal"
+											data-target="#delete${i }">Xóa</button>
 									</div>
 
 								</div>
@@ -413,6 +632,10 @@
 		for (var i = 1; i <= total; i++) {
 			CKEDITOR.replace('Update_Descript' + i);
 		}
+	</script>
+
+	<script>
+			CKEDITOR.replace('Update_Descript');
 	</script>
 
 	<c:if test="${message != null }">

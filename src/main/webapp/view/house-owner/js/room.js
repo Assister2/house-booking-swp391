@@ -1653,3 +1653,110 @@ $('.image-upload-wrap_3_15').bind('dragover_3_15', function() {
 $('.image-upload-wrap_3_15').bind('dragleave_3_15', function() {
 	$('.image-upload-wrap_3_15').removeClass('image-dropping_3_15');
 });
+
+
+
+function readURL_1_0(input) {
+	if (input.files && input.files[0]) {
+
+		var reader = new FileReader();
+
+		reader.onload = function(e) {
+			$('.image-upload-wrap_1_0').hide();
+
+			$('.file-upload-image_1_0').attr('src', e.target.result);
+			$('.file-upload-content_1_0').show();
+
+			$('.image-title_1_0').html(input.files[0].name);
+		};
+
+		reader.readAsDataURL(input.files[0]);
+
+	} else {
+		removeUpload_1_0();
+	}
+}
+
+function removeUpload_1_0() {
+	$('.file-upload-input_1_0').replaceWith(
+		$('.file-upload-input_1_0').clone());
+	$('.file-upload-content_1_0').hide();
+	$('.image-upload-wrap_1_0').show();
+}
+$('.image-upload-wrap_1_0').bind('dragover_1_0', function() {
+	$('.image-upload-wrap_1_0').addClass('image-dropping_1_0');
+});
+$('.image-upload-wrap_1_0').bind('dragleave_1_0', function() {
+	$('.image-upload-wrap_1_0').removeClass('image-dropping_1_0');
+});
+
+
+
+function readURL_2_0(input) {
+	if (input.files && input.files[0]) {
+
+		var reader = new FileReader();
+
+		reader.onload = function(e) {
+			$('.image-upload-wrap_2_0').hide();
+
+			$('.file-upload-image_2_0').attr('src', e.target.result);
+			$('.file-upload-content_2_0').show();
+
+			$('.image-title_2_0').html(input.files[0].name);
+		};
+
+		reader.readAsDataURL(input.files[0]);
+
+	} else {
+		removeUpload_2_0();
+	}
+}
+
+function removeUpload_2_0() {
+	$('.file-upload-input_2_0').replaceWith(
+		$('.file-upload-input_2_0').clone());
+	$('.file-upload-content_2_0').hide();
+	$('.image-upload-wrap_2_0').show();
+}
+$('.image-upload-wrap_2_0').bind('dragover_2_0', function() {
+	$('.image-upload-wrap_2_0').addClass('image-dropping_2_0');
+});
+$('.image-upload-wrap_2_0').bind('dragleave_2_0', function() {
+	$('.image-upload-wrap_2_0').removeClass('image-dropping_2_0');
+});
+
+
+function readURL_3_0(input) {
+	if (input.files && input.files[0]) {
+
+		var reader = new FileReader();
+
+		reader.onload = function(e) {
+			$('.image-upload-wrap_3_0').hide();
+
+			$('.file-upload-image_3_0').attr('src', e.target.result);
+			$('.file-upload-content_3_0').show();
+
+			$('.image-title_3_0').html(input.files[0].name);
+		};
+
+		reader.readAsDataURL(input.files[0]);
+
+	} else {
+		removeUpload_3_0();
+	}
+}
+
+function removeUpload_3_0() {
+	$('.file-upload-input_3_0').replaceWith(
+		$('.file-upload-input_3_0').clone());
+	$('.file-upload-content_3_0').hide();
+	$('.image-upload-wrap_3_0').show();
+}
+$('.image-upload-wrap_3_0').bind('dragover_3_0', function() {
+	$('.image-upload-wrap_3_0').addClass('image-dropping_3_0');
+});
+$('.image-upload-wrap_3_0').bind('dragleave_3_0', function() {
+	$('.image-upload-wrap_3_0').removeClass('image-dropping_3_0');
+});

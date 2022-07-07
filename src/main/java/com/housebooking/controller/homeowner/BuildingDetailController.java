@@ -1,6 +1,9 @@
 package com.housebooking.controller.homeowner;
 
 import java.io.IOException;
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Collection;
 import java.util.List;
 
@@ -15,7 +18,10 @@ import javax.servlet.http.Part;
 
 import com.housebooking.DAOimpl.houseowner.BuildingDAO;
 import com.housebooking.DAOimpl.houseowner.RoomDAO;
+import com.housebooking.DAOimpl.houseowner.TypeOfRoomDAO;
+import com.housebooking.Model.Building;
 import com.housebooking.Model.Room;
+import com.housebooking.Model.TypeOfRoom;
 
 /**
  * Servlet implementation class BuildingDetailController
@@ -39,8 +45,8 @@ public class BuildingDetailController extends HttpServlet {
 			doDisplay(request, response);
 		} else {
 			switch (action) {
-			case "AddNewRoom":
-
+			case "AddRoom":
+				AddRoom(request, response);
 				break;
 			case "DeleteRoom":
 
@@ -55,6 +61,74 @@ public class BuildingDetailController extends HttpServlet {
 			}
 		}
 
+	}
+	
+	protected void AddRoom(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+		LocalDateTime dateTime = LocalDateTime.now().plus(Duration.of(10, ChronoUnit.MINUTES));
+		String roomId = dateTime.toString();
+		
+		String buildingId = request.getParameter("buildingId");
+		String roomName = request.getParameter("roomName");
+		String roomStatus = request.getParameter("roomStatus");
+		String typeId = request.getParameter("type");
+		
+		float area = 0;
+		if (!(request.getParameter("area") == null) && !request.getParameter("area").equals("")) {
+			area = Float.parseFloat(request.getParameter("area"));
+		}
+		
+		float price = 0;
+		if (!(request.getParameter("price") == null) && !request.getParameter("price").equals("")) {
+			price = Float.parseFloat(request.getParameter("price"));
+		}
+		
+		int bed = 0;
+		if (!(request.getParameter("bed") == null) && !request.getParameter("bed").equals("")) {
+			bed = Integer.parseInt(request.getParameter("bed"));
+		}
+		
+		String roomDescript = request.getParameter("Update_Descript");
+
+		String imageLink = "";
+
+		RoomDAO roomDAO = new RoomDAO();
+
+		try {
+			Part part1 = request.getPart("image_1");
+			Part part2 = request.getPart("image_2");
+			Part part3 = request.getPart("image_3");
+			
+			if (roomDAO.AddRoom(roomId, roomName, roomStatus, price, bed, area, roomDescript, typeId, buildingId)) {
+				request.setAttribute("message", "Thêm thành công!");
+			} else {
+				request.setAttribute("message", "Thêm không thành công!");
+			}
+
+			if (!getFileName(part1).equals("")) {
+				imageLink = "/view/common/image/room/" + getFileName(part1);
+				part1.write(Save_Dir + getFileName(part1));
+				roomDAO.InsertRoomImage(roomId, imageLink, "Hình 1");
+			}
+
+			if (!getFileName(part2).equals("")) {
+				imageLink = "/view/common/image/room/" + getFileName(part2);
+				part1.write(Save_Dir + getFileName(part2));
+				roomDAO.InsertRoomImage(roomId, imageLink, "Hình 2");
+			}
+
+			if (!getFileName(part3).equals("")) {
+				imageLink = "/view/common/image/room/" + getFileName(part3);
+				part1.write(Save_Dir + getFileName(part3));
+				roomDAO.InsertRoomImage(roomId, imageLink, "Hình 3");
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			request.setAttribute("message", "Có lỗi xảy ra");
+		} finally {
+			doDisplay(request, response);
+		}
 	}
 
 	protected void UpdateRoom(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -141,10 +215,15 @@ public class BuildingDetailController extends HttpServlet {
 		String buildingId = request.getParameter("buildingId");
 
 		RoomDAO roomDAO = new RoomDAO();
-
+		BuildingDAO buildingDAO = new BuildingDAO();
+		
 		List<Room> listRoom = roomDAO.list(buildingId);
+		Building building = buildingDAO.Find(buildingId);
+		List<TypeOfRoom> listTypeOfRoom = new TypeOfRoomDAO().list();
 
+		request.setAttribute("listType", listTypeOfRoom);
 		request.setAttribute("listRoom", listRoom);
+		request.setAttribute("building", building);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/view/house-owner/room.jsp");
 		rd.forward(request, response);

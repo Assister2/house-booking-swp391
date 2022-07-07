@@ -164,6 +164,33 @@ public class RoomDAO {
 		return false;
 	}
 	
+	public boolean InsertRoomImage(String roomId, String linkImage, String imageName) {
+
+		String sql = " INSERT INTO Room_Images\r\n"
+				+ " VALUES(?,?,?) ";
+		try {
+
+			Connection conn = DBUtils.getConnection();
+
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, roomId);
+			ps.setString(2, linkImage);
+			ps.setNString(3, imageName);
+			if (ps.executeUpdate() > 0) {	
+				return true;
+			}
+
+		} catch (Exception ex) {
+
+			ex.printStackTrace();
+
+		}
+
+		return false;
+	}
+	
+	
+	
 	public boolean UpdateRoom(String roomId, String roomName, String status, float price,
 			int bed, float area, String roomDiscript) {
 
@@ -183,6 +210,39 @@ public class RoomDAO {
 			ps.setNString(6, roomDiscript);
 			ps.setString(7, roomId);
 
+			if (ps.executeUpdate() > 0) {
+				return true;
+			}
+
+		} catch (Exception ex) {
+
+			ex.printStackTrace();
+
+		}
+
+		return false;
+	}
+	
+	public boolean AddRoom(String roomId, String roomName, String status, float price,
+			int bed, float area, String roomDiscript, String typeId, String buildingId) {
+
+		String sql = " INSERT INTO Room\r\n"
+				+ "VALUES(?,?,?,?,?,?,?,?,?) ";
+		try {
+
+			Connection conn = DBUtils.getConnection();
+
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, roomId);
+			ps.setNString(2, roomName);
+			ps.setFloat(3, area);
+			ps.setNString(4, status);
+			ps.setNString(5, roomDiscript);
+			ps.setInt(6, bed);
+			ps.setFloat(7, price);
+			ps.setString(8, typeId);
+			ps.setString(9, buildingId);
+			
 			if (ps.executeUpdate() > 0) {
 				return true;
 			}
