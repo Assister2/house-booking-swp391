@@ -15,6 +15,7 @@ public class Room {
     private String typeId;
     private String buildingId;
     private String typeName;
+    private String currentStatus;
     private List<String> roomImages;
 
     public Room() {
@@ -22,7 +23,18 @@ public class Room {
         this.roomImages = new ArrayList<String>();
     }
 
-    public int getBed() {
+    
+    public String getCurrentStatus() {
+		return currentStatus;
+	}
+
+
+	public void setCurrentStatus(String currentStatus) {
+		this.currentStatus = currentStatus;
+	}
+
+
+	public int getBed() {
 		return bed;
 	}
 
