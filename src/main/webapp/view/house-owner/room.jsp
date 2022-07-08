@@ -317,6 +317,12 @@
 								</button>
 							</div>
 							<div class="modal-body">
+							<input type="hidden" name="originImage1"
+													value="${listRoom[i-1].roomImages[0]}"> <input
+													type="hidden" name="originImage2"
+													value="${listRoom[i-1].roomImages[1]}"> <input
+													type="hidden" name="originImage3"
+													value="${listRoom[i-1].roomImages[2]}">
 								<div class="card">
 									<div class="row">
 										<div class="col-md-4">
@@ -331,12 +337,7 @@
 															src="${pageContext.request.contextPath}${listRoom[i-1].roomImages[0]}">
 													</div>
 												</div>
-												<input type="hidden" name="originImage1"
-													value="${listRoom[i-1].roomImages[0]}"> <input
-													type="hidden" name="originImage2"
-													value="${listRoom[i-1].roomImages[1]}"> <input
-													type="hidden" name="originImage3"
-													value="${listRoom[i-1].roomImages[2]}">
+												
 												<div
 													class="file-upload-content_1_${i } file-upload-content_*_*">
 													<img

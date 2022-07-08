@@ -32,9 +32,17 @@
                        
                         <li>
                             <a href="${pageContext.request.contextPath}/manage-bill">
-                                <i class="fas fa-table"></i>Thanh toán</a>
+                                <i class="fas fa-table"></i>Yêu cầu đặt phòng</a>
                         </li>
-                       
+                        
+                        <li>
+                            <a href="${pageContext.request.contextPath}/manage-bill">
+                                <i class="fas fa-table"></i>Hóa đơn</a>
+                        </li>
+                        <li>
+                            <a href="${pageContext.request.contextPath}/my-account">
+                                <i class="fas fa-table"></i>Tài khoản</a>
+                        </li>
                     </ul>
                 </div>
             </nav>
@@ -61,9 +69,19 @@
                                 <i class="fas fa-table"></i>Quản lý</a>
                         </li>
                        
+                         <li>
+                            <a href="${pageContext.request.contextPath}/manage-bill">
+                                <i class="fas fa-table"></i>Yêu cầu đặt phòng</a>
+                        </li>
+                        
                         <li>
                             <a href="${pageContext.request.contextPath}/manage-bill">
-                                <i class="fas fa-table"></i>Thanh toán</a>
+                                <i class="fas fa-table"></i>Hóa đơn</a>
+                        </li>
+                        
+                         <li>
+                            <a href="${pageContext.request.contextPath}/my-account">
+                                <i class="fas fa-table"></i>Tài khoản</a>
                         </li>
                         
                     </ul>
