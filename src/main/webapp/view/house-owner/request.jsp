@@ -451,23 +451,41 @@
 					<div class="row">
 						<div class="col-md-12">
 							<!-- DATA TABLE -->
-							<h3 class="title-5 m-b-35">Chi tiết đặt phòng</h3>
+							<h3 class="title-5 m-b-35">Yêu cầu đặt phòng</h3>
 							<div class="table-data__tool">
+							<!-- <div class="row">
+																<div class="form-group col-md-4">
+																	<select name="Add_city" id="countySel" size="1"
+																		class="form-control" required="required">
+																		<option value="" selected="selected">Tỉnh</option>
+																	</select>
+																</div>
+																<div class="form-group col-md-4">
+																	<select name="Add_disctrict" id="stateSel" size="1"
+																		class="form-control" required="required">
+																		<option value="" selected="selected">Huyện/Quận</option>
+																	</select>
+																</div>
+																<div class="form-group col-md-4">
+																	<select name="Add_street" id="districtSel" size="1"
+																		class="form-control" required="required">
+																		<option value="" selected="selected">Đường</option>
+																	</select>
+																</div>
+															</div> -->
 								<div class="table-data__tool-left">
 									<div class="rs-select2--light rs-select2--md">
-										<select class="js-select2" name="property">
-											<option selected="selected">All Properties</option>
-											<option value="">Option 1</option>
-											<option value="">Option 2</option>
-										</select>
+										<select name="Add_city" id="countySel" size="1"
+																		class="js-select2" required="required">
+																		<option value="" selected="selected">All Properties</option>
+																	</select>
 										<div class="dropDownSelect2"></div>
 									</div>
 									<div class="rs-select2--light rs-select2--sm">
-										<select class="js-select2" name="time">
-											<option selected="selected">Today</option>
-											<option value="">3 Days</option>
-											<option value="">1 Week</option>
-										</select>
+										<select name="Add_disctrict" id="stateSel" size="1"
+																		class="js-select2" required="required">
+																		<option value="" selected="selected">Huyện/Quận</option>
+																	</select>
 										<div class="dropDownSelect2"></div>
 									</div>
 									<button class="au-btn-filter">
@@ -769,6 +787,51 @@
 	<!-- Main JS-->
 	<script
 		src="${pageContext.request.contextPath}/view/house-owner/js/main.js"></script>
+		
+		<script>
+		var stateObject = {
+			"Theo nga" : {
+				"Quận 1" : [ "Nguyễn Huệ", "North Delhi" ],
+				"QUận 2" : [ "Thiruvananthapuram", "Palakkad" ],
+				"Thủ Đức" : [ "North Goa", "South Goa" ],
+			},
+			"Australia" : {
+				"South Australia" : [ "Dunstan", "Mitchell" ],
+				"Victoria" : [ "Altona", "Euroa" ]
+			}
+		}
+
+		window.onload = function() {
+			var countySel = document.getElementById("countySel"), stateSel = document
+					.getElementById("stateSel"), districtSel = document
+					.getElementById("districtSel");
+			for ( var country in stateObject) {
+				countySel.options[countySel.options.length] = new Option(
+						country, country);
+			}
+			countySel.onchange = function() {
+				stateSel.length = 1; // remove all options bar first
+				districtSel.length = 1; // remove all options bar first
+				if (this.selectedIndex < 1)
+					return; // done 
+				for ( var state in stateObject[this.value]) {
+					stateSel.options[stateSel.options.length] = new Option(
+							state, state);
+				}
+			}
+			countySel.onchange(); // reset in case page is reloaded
+			stateSel.onchange = function() {
+				districtSel.length = 1; // remove all options bar first
+				if (this.selectedIndex < 1)
+					return; // done 
+				var district = stateObject[countySel.value][this.value];
+				for (var i = 0; i < district.length; i++) {
+					districtSel.options[districtSel.options.length] = new Option(
+							district[i], district[i]);
+				}
+			}
+		}
+	</script>
 
 </body>
 

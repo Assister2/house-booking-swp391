@@ -106,7 +106,7 @@ html[xmlns] .flexslider .slides {
 }
 
 .flexslider .slides img {
-	height: auto;
+	height: 170px;
 }
 
 .flex-viewport {
@@ -225,8 +225,8 @@ html[xmlns] .flexslider .slides {
 }
 
 .flex-control-thumbs img {
-	width: 100%;
-	height: auto;
+	width: 88px;
+	height: 70px;
 	display: block;
 	opacity: .7;
 	cursor: pointer;

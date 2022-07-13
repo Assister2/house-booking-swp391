@@ -1,5 +1,9 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -471,7 +475,8 @@
 							<div class="modal-dialog modal-sm" role="document">
 								<div class="modal-content">
 									<div class="modal-header">
-										<h5 class="modal-title" id="smallmodalLabel">Xóa tiện nghi</h5>
+										<h5 class="modal-title" id="smallmodalLabel">Xóa tiện
+											nghi</h5>
 										<button type="button" class="close" data-dismiss="modal"
 											aria-label="Close">
 											<span aria-hidden="true">&times;</span>
@@ -645,11 +650,13 @@
 																								<h6>${listService[s-1].serviceName }</h6>
 																							</div>
 																						</td>
-																						<td>
+																						<td><fmt:formatNumber var="gia"
+																								value="${listService[s-1].price }" type="currency"
+																								minFractionDigits="0" currencySymbol="" />
+
 																							<div class="table-data__info">
-																								<h6>${listService[s-1].price }k</h6>
-																							</div>
-																						</td>
+																								<h6>${gia } VNĐ</h6>
+																							</div></td>
 																						<td class="table-data-feature">
 																							<button class="item" data-toggle="modal"
 																								data-target="#edit${listBuilding[a-1].buildingId}${listService[s-1].serviceID }">

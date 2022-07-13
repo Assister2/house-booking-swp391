@@ -48,6 +48,82 @@ public class AdminDAO {
         return list;
     }
 
+    public int getCountWaitingRoom() {
+        int count = 0;
+        String sql = "select count(room_id) as count\n"
+                + " from Room\n"
+                + " where room_status like 'waiting'";
+
+        try {
+
+            Connection conn = DBUtils.getConnection();
+
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                count = rs.getInt(1);
+            }
+
+        } catch (Exception ex) {
+
+            ex.printStackTrace();
+
+        }
+        return count;
+    }
+
+    public int getCountUsers() {
+        int count = 0;
+        String sql = "Select COUNT(user_id)\n"
+                + " from Users";
+
+        try {
+
+            Connection conn = DBUtils.getConnection();
+
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                count = rs.getInt(1);
+            }
+
+        } catch (Exception ex) {
+
+            ex.printStackTrace();
+
+        }
+        return count;
+    }
+
+    public int getCountActiveRoom() {
+        int count = 0;
+        String sql = "select count(room_id) as count\n"
+                + " from Room\n"
+                + " where room_status like 'active'";
+
+        try {
+
+            Connection conn = DBUtils.getConnection();
+
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                count = rs.getInt(1);
+            }
+
+        } catch (Exception ex) {
+
+            ex.printStackTrace();
+
+        }
+        return count;
+    }
     private void fillDataInRoom(ResultSet rs, Room room) throws SQLException {
         room.setRoomId(rs.getString("room_id"));
         room.setRoomName(rs.getNString("room_name"));
@@ -95,6 +171,7 @@ public class AdminDAO {
         return true;
 
     }
+
     public boolean setRoomHiddenStatusByID(String rID) {
         String query = "UPDATE Room\n"
                 + " SET room_status = 'hidden'\n"
@@ -111,4 +188,8 @@ public class AdminDAO {
 
     }
 
+    public static void main(String[] args) {
+        AdminDAO dao = new AdminDAO();
+        System.out.println(dao.getCountActiveRoom());
+    }
 }

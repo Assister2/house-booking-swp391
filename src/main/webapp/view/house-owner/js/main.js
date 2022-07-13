@@ -1008,7 +1008,7 @@
               borderWidth: "1",
               backgroundColor: "rgba(0, 123, 255, 0.5)",
               pointHighlightStroke: "rgba(26,179,148,1)",
-              data: [16, 32, 18, 26, 42, 33, 44]
+              data: [16, 32, 18, 26, 42, 33, 100]
             }
           ]
         },
