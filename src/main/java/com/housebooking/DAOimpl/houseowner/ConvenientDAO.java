@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 
 import com.housebooking.Model.Convenient;
-import com.housebooking.Model.Service;
 import com.housebooking.Utils.DBUtils;
 
 public class ConvenientDAO {

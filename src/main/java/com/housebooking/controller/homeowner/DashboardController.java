@@ -38,13 +38,28 @@ public class DashboardController extends HttpServlet {
 		HashMap<String, Double> listPercentByBuilding = billDAO.listPercentByBuilding(userID);
 		List<Integer> AmountBillInThisWeek = billDAO.getBillInThisWeek(userID);
 		List<Integer> AmountBillInLastWeek = billDAO.getBillInLastWeek(userID);
+		List<Integer> AmountBill2WeeksAgo = billDAO.getBill2WeeksAgo(userID);
 		LinkedHashMap<String, Integer> listLast12MonthBillAmount = billDAO.getLast12MonthBillAmount(userID);
+		LinkedHashMap<String, Integer> listLast12MonthBillTotal = billDAO.getLast12MonthBillTotal(userID);
+		int amountBillInLast12Moth = 0;
+		for(Integer i : listLast12MonthBillAmount.values()) {
+			amountBillInLast12Moth +=i;
+		}
+		int totalBillInLast12Moth = 0;
+		for(Integer i : listLast12MonthBillTotal.values()) {
+			totalBillInLast12Moth +=i;
+		}
 		
+		request.setAttribute("totalBillInLast12Moth", totalBillInLast12Moth);
+		request.setAttribute("amountBillInLast12Moth", amountBillInLast12Moth);
+		request.setAttribute("listLast12MonthBillTotal", listLast12MonthBillTotal);
 		request.setAttribute("listLast12MonthBillAmount", listLast12MonthBillAmount);
+		request.setAttribute("AmountBill2WeeksAgo", AmountBill2WeeksAgo);
 		request.setAttribute("AmountBillInThisWeek", AmountBillInThisWeek);
 		request.setAttribute("AmountBillInLastWeek", AmountBillInLastWeek);
 		request.setAttribute("listPercentByBuilding", listPercentByBuilding);
 		request.setAttribute("listRequestToday", listRequestToday);
+		
 
 		doDisplay(request, response);
 	}
