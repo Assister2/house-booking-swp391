@@ -2,6 +2,7 @@ package com.housebooking.controller.homeowner;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -31,10 +32,17 @@ public class DashboardController extends HttpServlet {
 		HttpSession ss = request.getSession(true);
 		UserSession userSession = (UserSession) ss.getAttribute("usersession");
 		BillDAO billDAO = new BillDAO();
+		String userID = userSession.getUser().getUserId();
 		
-		List<Bill> listRequestToday = billDAO.list(userSession.getUser().getUserId());
-		HashMap<String, Double> listPercentByBuilding = billDAO.listPercentByBuilding(userSession.getUser().getUserId());
+		List<Bill> listRequestToday = billDAO.list(userID);
+		HashMap<String, Double> listPercentByBuilding = billDAO.listPercentByBuilding(userID);
+		List<Integer> AmountBillInThisWeek = billDAO.getBillInThisWeek(userID);
+		List<Integer> AmountBillInLastWeek = billDAO.getBillInLastWeek(userID);
+		LinkedHashMap<String, Integer> listLast12MonthBillAmount = billDAO.getLast12MonthBillAmount(userID);
 		
+		request.setAttribute("listLast12MonthBillAmount", listLast12MonthBillAmount);
+		request.setAttribute("AmountBillInThisWeek", AmountBillInThisWeek);
+		request.setAttribute("AmountBillInLastWeek", AmountBillInLastWeek);
 		request.setAttribute("listPercentByBuilding", listPercentByBuilding);
 		request.setAttribute("listRequestToday", listRequestToday);
 

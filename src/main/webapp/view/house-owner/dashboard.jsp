@@ -192,15 +192,15 @@
 
 					<div class="row">
 						<div class="col-lg-6">
-							<div class="au-card m-b-30" style="height: 85%;">
+							<div class="au-card m-b-30" style="height: 90%;">						
 								<div class="au-card-inner">
 									<h3 class="title-2 m-b-40">Tình trạng 2 tuần gần nhất</h3>
 									<canvas id="lineChart"></canvas>
-								</div>
+								</div>	
 							</div>
 						</div>
 						<div class="col-lg-6">
-							<div class="au-card chart-percent-card" style="height: 85%;">
+							<div class="au-card chart-percent-card" style="height: 90%;">
 								<div class="au-card-inner">
 									<h3 class="title-2 tm-b-5">Thu nhập theo nhà</h3>
 									<div class="row no-gutters">
@@ -479,7 +479,6 @@
 						</div>
 						<!-- END MAIN CONTENT-->
 						<!-- END PAGE CONTAINER-->
-
 					</div>
 
 
@@ -531,18 +530,31 @@
 			(function($) { </c:if> 
 			
 			<c:if test="${1 != 0 }">
-		//WidgetChart 1
+		//WidgetChart 12
 		var ctx = document.getElementById("widgetChart12");
 		if (ctx) {
 			ctx.height = 130;
 			var myChart = new Chart(ctx, {
 				type : 'line',
 				data : {
-					labels : [ 'January', 'February', 'March', 'April',
-							'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+					labels : [ 
+						<c:set var="count" value="${1}"></c:set>
+	            	  <c:forEach var="item" items="${listLast12MonthBillAmount }">
+	            	  "${item.key}"
+	            	  <c:if test="${count < listLast12MonthBillAmount.size()}">,</c:if>
+		        	  <c:set var="count" value="${count + 1}"></c:set>
+						</c:forEach>
+						],
 					type : 'line',
 					datasets : [ {
-						data : [ 80, 72, 54, 62, 64, 71, 53, 60, 65, 34, 55, 50 ],
+						data : [ 
+							<c:set var="count" value="${1}"></c:set>
+		            	  <c:forEach var="item" items="${listLast12MonthBillAmount }">
+		            	  "${item.value}"
+		            	  <c:if test="${count < listLast12MonthBillAmount.size()}">,</c:if>
+			        	  <c:set var="count" value="${count + 1}"></c:set>
+							</c:forEach>
+							],
 						label : 'Số đơn',
 						backgroundColor : 'rgba(255,255,255,.1)',
 						borderColor : 'rgba(255,255,255,.55)',
@@ -680,6 +692,102 @@
 			</script>
 
 					</c:if>
+					
+					
+					<c:if test="${1 != 0 }">
+						<script>
+			(function($) { </c:if> <c:if test="${1 != 0 }"> 
+					
+			
+			var ctx = document.getElementById("lineChart");
+		    if (ctx) {
+		      ctx.height = 194;
+		      var myChart = new Chart(ctx, {
+		        type: 'line',
+		        data: {
+		          labels: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+		          defaultFontFamily: "Poppins",
+		          datasets: [
+		            {
+		              label: "Tuần trước",
+		              borderColor: "rgba(0,0,0,.09)",
+		              borderWidth: "1",
+		              backgroundColor: "rgba(0,0,0,.07)",
+		              data: [
+		            	  
+		            	  <c:set var="count" value="${1}"></c:set>
+		            	  <c:forEach var="item" items="${AmountBillInLastWeek }">
+						${item}
+						<c:if test="${count < AmountBillInLastWeek.size()}">,</c:if>
+		        	  <c:set var="count" value="${count + 1}"></c:set>
+						</c:forEach>
+		            
+		            ]
+		            },
+		            {
+		              label: "Tuần này",
+		              borderColor: "rgba(0, 123, 255, 0.9)",
+		              borderWidth: "1",
+		              backgroundColor: "rgba(0, 123, 255, 0.5)",
+		              pointHighlightStroke: "rgba(26,179,148,1)",
+		              data: [
+
+		            	  <c:set var="count" value="${1}"></c:set>
+		            	  <c:forEach var="item" items="${AmountBillInThisWeek }">
+							${item}
+							<c:if test="${count < AmountBillInThisWeek.size()}">,</c:if>
+			        	  <c:set var="count" value="${count + 1}"></c:set>
+							</c:forEach>
+		            	  
+		            	  ]
+		            }
+		          ]
+		        },
+		        options: {
+		          legend: {
+		            position: 'top',
+		            labels: {
+		              fontFamily: 'Poppins'
+		            }
+
+		          },
+		          responsive: true,
+		          tooltips: {
+		            mode: 'index',
+		            intersect: false
+		          },
+		          hover: {
+		            mode: 'nearest',
+		            intersect: true
+		          },
+		          scales: {
+		            xAxes: [{
+		              ticks: {
+		                fontFamily: "Poppins"
+
+		              }
+		            }],
+		            yAxes: [{
+		              ticks: {
+		                beginAtZero: true,
+		                fontFamily: "Poppins"
+		              }
+		            }]
+		          }
+
+		        }
+		      });
+		    }
+			
+			    })(jQuery);
+			</script>
+
+					</c:if>
+					
+					
+
+					
+					
 </body>
 
 </html>
