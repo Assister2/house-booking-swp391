@@ -85,6 +85,33 @@ public class ServiceDAO {
 		return false;
 	}
 	
+	private Service Find(String serviceId) {
+		Service service = null;
+		String sql = " Select * from Additional_service Where add_serviceId = ?";
+
+		try {
+
+			Connection conn = DBUtils.getConnection();
+
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, serviceId);
+			
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				service = new Service();
+				service.setServiceName(rs.getString("add_serviceName"));
+			}
+
+		} catch (Exception ex) {
+
+			ex.printStackTrace();
+
+		}
+
+		return service;
+	}
+	
 	public List<ServiceUsed> listServiceUsed(String billId, String roomId){
 		ArrayList<ServiceUsed> list;
 		list = new ArrayList<ServiceUsed>();
@@ -108,6 +135,7 @@ public class ServiceDAO {
 				serviceUsed.setServiceId(rs.getString("add_serviceId"));
 				serviceUsed.setAmount(rs.getInt("amount"));
 				serviceUsed.setPrice(rs.getFloat("price"));
+				serviceUsed.setServiceName(Find(rs.getString("add_serviceId")).getServiceName());
 				list.add(serviceUsed);
 			}
 

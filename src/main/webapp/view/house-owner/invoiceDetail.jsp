@@ -338,24 +338,24 @@ hr {
 												</div>
 
 												<c:forEach var="i" begin="2"
-													end="${listServiceUsed.size() }">
+													end="${listServiceUsed.size() +1 }">
 													<c:if test="${i % 2 == 0 }">
 														<div class="row mb-2 mb-sm-0 py-25 bgc-default-l4">
 															<div class="d-none d-sm-block col-1">${i }</div>
-															<div class="col-9 col-sm-5">Web hosting</div>
-															<div class="d-none d-sm-block col-2">1</div>
-															<div class="d-none d-sm-block col-2 text-95">$15</div>
-															<div class="col-2 text-secondary-d2">$15</div>
+															<div class="col-9 col-sm-5">${listServiceUsed[i-2].serviceName }</div>
+															<div class="d-none d-sm-block col-2">${listServiceUsed[i-2].amount }</div>
+															<div class="d-none d-sm-block col-2 text-95">${listServiceUsed[i-2].price }</div>
+															<div class="col-2 text-secondary-d2">${listServiceUsed[i-2].amount * listServiceUsed[i-2].price}</div>
 														</div>
 													</c:if>
 
 													<c:if test="${i % 2 != 0 }">
 														<div class="row mb-2 mb-sm-0 py-25">
 															<div class="d-none d-sm-block col-1">3</div>
-															<div class="col-9 col-sm-5">Software development</div>
-															<div class="d-none d-sm-block col-2">--</div>
-															<div class="d-none d-sm-block col-2 text-95">$1,000</div>
-															<div class="col-2 text-secondary-d2">$1,000</div>
+															<div class="col-9 col-sm-5">${listServiceUsed[i-2].serviceName }</div>
+															<div class="d-none d-sm-block col-2">${listServiceUsed[i-2].amount }</div>
+															<div class="d-none d-sm-block col-2 text-95">${listServiceUsed[i-2].price }</div>
+															<div class="col-2 text-secondary-d2">${listServiceUsed[i-2].amount * listServiceUsed[i-2].price}</div>
 														</div>
 													</c:if>
 													 
@@ -380,7 +380,6 @@ hr {
 													</div>
 
 													<div class="row my-2">
-														<div class="col-7 text-right">Tax (10%)</div>
 														<div class="col-5">
 															<span class="text-110 text-secondary-d1">$225</span>
 														</div>
@@ -396,12 +395,15 @@ hr {
 											</div>
 
 											<hr />
-
+											
 											<div>
 												<span class="text-secondary-d1 text-105">Thank you
-													for your business</span> <a href="#"
-													class="btn btn-info btn-bold px-4 float-right mt-3 mt-lg-0">Pay
-													Now</a>
+													for your business</span>
+													<c:if test="${bill.status != 'Đã thanh toán' }">
+														<a href="#"
+														class="btn btn-info btn-bold px-4 float-right mt-3 mt-lg-0">Save</a>
+													</c:if>
+													 
 											</div>
 										</div>
 									</div>

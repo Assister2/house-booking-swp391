@@ -160,7 +160,7 @@ public class BillDAO {
 		String sql = " Select bi.*\r\n" + " From Building b join Users u on b.user_id = u.user_id\r\n"
 				+ " Join Room r on b.building_id = r.building_id\r\n"
 				+ " Join Bill_detail bd on bd.room_id = r.room_id\r\n" + " Join Bill bi on bd.bill_id = bi.bill_id\r\n"
-				+ " Where u.user_id = ? AND b.building_status not like 'Removed' AND (bi.status like N'%Đã xác nhận%' OR bi.status like N'%Đã thánh toán%')";
+				+ " Where u.user_id = ? AND b.building_status not like 'Removed' AND (bi.status like N'%Đã xác nhận%' OR bi.status like N'%Đã thanh toán%')";
 
 		if (properties.equalsIgnoreCase("Theo ngày")) {
 			switch (detailProperties) {
