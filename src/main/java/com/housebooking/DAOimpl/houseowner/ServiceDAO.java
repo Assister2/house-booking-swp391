@@ -2,9 +2,13 @@ package com.housebooking.DAOimpl.houseowner;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.housebooking.Model.Building;
 import com.housebooking.Model.Service;
+import com.housebooking.Model.ServiceUsed;
 import com.housebooking.Utils.DBUtils;
 
 public class ServiceDAO {
@@ -79,5 +83,40 @@ public class ServiceDAO {
 		}
 
 		return false;
+	}
+	
+	public List<ServiceUsed> listServiceUsed(String billId, String roomId){
+		ArrayList<ServiceUsed> list;
+		list = new ArrayList<ServiceUsed>();
+
+		String sql = " Select *\r\n"
+				+ " From ServiceUsed\r\n"
+				+ " Where bill_id = ? AND room_id = ?";
+
+		try {
+
+			Connection conn = DBUtils.getConnection();
+
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, billId);
+			ps.setString(2, roomId);
+			
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				ServiceUsed serviceUsed = new ServiceUsed();
+				serviceUsed.setServiceId(rs.getString("add_serviceId"));
+				serviceUsed.setAmount(rs.getInt("amount"));
+				serviceUsed.setPrice(rs.getFloat("price"));
+				list.add(serviceUsed);
+			}
+
+		} catch (Exception ex) {
+
+			ex.printStackTrace();
+
+		}
+
+		return list;
 	}
 }

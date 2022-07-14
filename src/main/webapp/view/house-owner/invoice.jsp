@@ -252,25 +252,20 @@
 												</td>
 												<td>
 													<div class="table-data-feature">
-														<c:if test="${item.status == 'Chờ xác nhận'}">
-															<button class="item" data-toggle="modal"
-															data-target="#approve${item.billID }"
-															data-placement="top" title="Xác nhận">
-															<i class="zmdi zmdi-check"></i>
-														</button>
-														<button class="item" data-toggle="modal"
-															data-target="#deny${item.billID }" data-placement="top"
-															title="Từ chối">X</button>
+														<c:if test="${item.status == 'Đã xác nhận'}">
+															<a type="button" class="item" href="${pageContext.request.contextPath}/manage-BillDetail?billId=${item.billID}"
+															data-placement="top" title="Chỉnh sửa chi tiết hóa đơn">
+															<i class="zmdi zmdi-edit"></i>
+														</a>
+														
 														</c:if>
-														<c:if test="${item.status != 'Chờ xác nhận'}">
+														<c:if test="${item.status == 'Đã thanh toán'}">
 															<button class="item" data-toggle="tooltip"
 															data-target="#approve${item.billID }"
 															data-placement="top" title="Không thể chỉnh sửa">
 															<i class="fa fa-eye"></i>
 														</button>
-														<button class="item" data-toggle="tooltip"
-															data-target="#deny${item.billID }" data-placement="top"
-															title="Không thể chỉnh sửa"><i class="zmdi zmdi-mail-send"></i></button>
+														
 														</c:if>
 														<button class="item" data-toggle="tooltip"
 															data-placement="top" title="More">

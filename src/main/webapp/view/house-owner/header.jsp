@@ -36,7 +36,7 @@
                         </li>
                         
                         <li>
-                            <a href="${pageContext.request.contextPath}/manage-bill">
+                            <a href="${pageContext.request.contextPath}/invoice-manage">
                                 <i class="fas fa-table"></i>Thanh toán</a>
                         </li>
                         <li>
@@ -75,7 +75,7 @@
                         </li>
                         
                         <li>
-                            <a href="${pageContext.request.contextPath}/manage-bill">
+                            <a href="${pageContext.request.contextPath}/invoice-manage">
                                 <i class="fas fa-table"></i>Thanh toán</a>
                         </li>
                         
