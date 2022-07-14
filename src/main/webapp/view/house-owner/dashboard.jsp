@@ -124,7 +124,7 @@
 											<i class="zmdi zmdi-account-o"></i>
 										</div>
 										<div class="text">
-											<h2>10368</h2>
+											<h2>${amountBillInLast12Moth}</h2>
 											<span>Đơn đặt theo tháng</span>
 										</div>
 									</div>
@@ -178,7 +178,7 @@
 											<i class="zmdi zmdi-money"></i>
 										</div>
 										<div class="text">
-											<h2>$1,060,386</h2>
+											<h2>${totalBillInLast12Moth}VND</h2>
 											<span>Doanh thu tháng</span>
 										</div>
 									</div>
@@ -192,11 +192,11 @@
 
 					<div class="row">
 						<div class="col-lg-6">
-							<div class="au-card m-b-30" style="height: 90%;">						
+							<div class="au-card m-b-30" style="height: 90%;">
 								<div class="au-card-inner">
 									<h3 class="title-2 m-b-40">Tình trạng 2 tuần gần nhất</h3>
 									<canvas id="lineChart"></canvas>
-								</div>	
+								</div>
 							</div>
 						</div>
 						<div class="col-lg-6">
@@ -249,7 +249,7 @@
 																style="background-color: #f198ef !important;"></span>
 															<span>${item.key }</span>
 														</c:if>
-														
+
 													</div>
 													<c:set var="count" value="${count + 1 }"></c:set>
 												</c:forEach>
@@ -692,8 +692,8 @@
 			</script>
 
 					</c:if>
-					
-					
+
+
 					<c:if test="${1 != 0 }">
 						<script>
 			(function($) { </c:if> <c:if test="${1 != 0 }"> 
@@ -708,6 +708,24 @@
 		          labels: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
 		          defaultFontFamily: "Poppins",
 		          datasets: [
+		        	  
+			            {
+				              label: "2 Tuần trước",
+				              borderColor: "rgba(2, 237, 10, 0.9)",
+				              borderWidth: "1",
+				              backgroundColor: "rgba(2, 237, 10, 0.5)",
+				              pointHighlightStroke: "rgba(26,179,148,1)",
+				              data: [
+
+				            	  <c:set var="count" value="${1}"></c:set>
+				            	  <c:forEach var="item" items="${AmountBill2WeeksAgo }">
+									${item}
+									<c:if test="${count < AmountBill2WeeksAgo.size()}">,</c:if>
+					        	  <c:set var="count" value="${count + 1}"></c:set>
+									</c:forEach>
+				            	  
+				            	  ]
+				            },
 		            {
 		              label: "Tuần trước",
 		              borderColor: "rgba(0,0,0,.09)",
@@ -741,6 +759,7 @@
 		            	  
 		            	  ]
 		            }
+		            
 		          ]
 		        },
 		        options: {
@@ -783,11 +802,65 @@
 			</script>
 
 					</c:if>
-					
-					
 
+
+					<c:if test="${1 != 0 }">
+						<script>
+			(function($) { </c:if> <c:if test="${1 != 0 }"> 
 					
-					
+			var ctx = document.getElementById("widgetChart4");
+		    if (ctx) {
+		      ctx.height = 115;
+		      var myChart = new Chart(ctx, {
+		        type: 'bar',
+		        data: {
+		          labels: [<c:set var="count" value="${1}"></c:set>
+            	  <c:forEach var="item" items="${listLast12MonthBillTotal }">
+            	  "${item.key}"
+            	  <c:if test="${count < listLast12MonthBillTotal.size()}">,</c:if>
+	        	  <c:set var="count" value="${count + 1}"></c:set>
+					</c:forEach>],
+		          datasets: [
+		            {
+		              label: "Tổng doanh thu",
+		              data: [
+		            	  <c:set var="count" value="${1}"></c:set>
+		            	  <c:forEach var="item" items="${listLast12MonthBillTotal }">
+		            	  "${item.value}" 
+		            	  <c:if test="${count < listLast12MonthBillTotal.size()}">,</c:if>
+			        	  <c:set var="count" value="${count + 1}"></c:set>
+							</c:forEach>
+		              ],
+		              borderColor: "transparent",
+		              borderWidth: "0",
+		              backgroundColor: "rgba(255,255,255,.3)"
+		            }
+		          ]
+		        },
+		        options: {
+		          maintainAspectRatio: true,
+		          legend: {
+		            display: false
+		          },
+		          scales: {
+		            xAxes: [{
+		              display: false,
+		              categoryPercentage: 1,
+		              barPercentage: 0.65
+		            }],
+		            yAxes: [{
+		              display: false
+		            }]
+		          }
+		        }
+		      });
+		    }
+			
+			
+			    })(jQuery);
+			</script>
+
+					</c:if>
 </body>
 
 </html>

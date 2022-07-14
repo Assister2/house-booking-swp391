@@ -272,12 +272,13 @@ public class BillDAO {
 		for (int i = 0; i < 7; i++) {
 			result.add(i, 0);
 		}
-		String sql = " Select count(bi.bill_id) as AmountBill, DATENAME(WEEKDAY, bi.date) as datename\r\n"
+		String sql = "Select count(bi.bill_id) as AmountBill, DATENAME(WEEKDAY, bi.date) as datename\r\n"
 				+ "From Building b join Users u on b.user_id = u.user_id\r\n"
 				+ "	Join Room r on b.building_id = r.building_id\r\n"
-				+ "	Join Bill_detail bd on bd.room_id = r.room_id\r\n" + "	Join Bill bi on bd.bill_id = bi.bill_id\r\n"
-				+ "Where u.user_id = ? AND DATEPART(DAY, bi.date) >= DATEPART(DAY,CAST( DATEADD(dd,  0, DATEADD(ww, DATEDIFF(ww, 0, DATEADD(dd, -1, GETDATE())), 0)) AS Date)) \r\n"
-				+ "AND DATEPART(DAY, bi.date) <= DATEPART(DAY,CAST( DATEADD(dd,  6, DATEADD(ww, DATEDIFF(ww, 0, DATEADD(dd, -1, GETDATE())), 0)) AS Date)) \r\n"
+				+ "	Join Bill_detail bd on bd.room_id = r.room_id\r\n"
+				+ "	Join Bill bi on bd.bill_id = bi.bill_id\r\n"
+				+ "Where u.user_id = ? AND DATEPART(DAYOFYEAR, bi.date) >= DATEPART(DAYOFYEAR,CAST( DATEADD(dd,  0, DATEADD(ww, DATEDIFF(ww, 0, DATEADD(dd, -1, GETDATE())) , 0)) AS Date)) \r\n"
+				+ "AND DATEPART(DAYOFYEAR, bi.date) <= DATEPART(DAYOFYEAR,CAST( DATEADD(dd,  6, DATEADD(ww, DATEDIFF(ww, 0, DATEADD(dd, -1, GETDATE())) , 0)) AS Date)) \r\n"
 				+ "Group by DATENAME(WEEKDAY, bi.date)";
 
 		try {
@@ -328,14 +329,72 @@ public class BillDAO {
 		for (int i = 0; i < 7; i++) {
 			result.add(i, 0);
 		}
-		String sql = " Select count(bi.bill_id) as AmountBill, DATENAME(WEEKDAY, bi.date) as datename\r\n"
+		String sql = "Select count(bi.bill_id) as AmountBill, DATENAME(WEEKDAY, bi.date) as datename\r\n"
 				+ "From Building b join Users u on b.user_id = u.user_id\r\n"
 				+ "	Join Room r on b.building_id = r.building_id\r\n"
 				+ "	Join Bill_detail bd on bd.room_id = r.room_id\r\n"
 				+ "	Join Bill bi on bd.bill_id = bi.bill_id\r\n"
-				+ "Where u.user_id = ? AND DATEPART(DAY, bi.date) >= DATEPART(DAY,CAST(DATEADD(dd,  0, DATEADD(ww, DATEDIFF(ww, 0, DATEADD(dd, -1, GETDATE())) - 1, 0)) AS Date)) \r\n"
-				+ "AND DATEPART(DAY, bi.date) <= DATEPART(DAY,CAST(DATEADD(dd,  6, DATEADD(ww, DATEDIFF(ww, 0, DATEADD(dd, -1, GETDATE())) - 1, 0)) AS Date)) \r\n"
+				+ "Where u.user_id = ? AND DATEPART(DAYOFYEAR, bi.date) >= DATEPART(DAYOFYEAR,CAST( DATEADD(dd,  0, DATEADD(ww, DATEDIFF(ww, 0, DATEADD(dd, -1, GETDATE())) -1, 0)) AS Date)) \r\n"
+				+ "AND DATEPART(DAYOFYEAR, bi.date) <= DATEPART(DAYOFYEAR,CAST( DATEADD(dd,  6, DATEADD(ww, DATEDIFF(ww, 0, DATEADD(dd, -1, GETDATE())) -1, 0)) AS Date)) \r\n"
 				+ "Group by DATENAME(WEEKDAY, bi.date)";
+
+		try {
+
+			Connection conn = DBUtils.getConnection();
+
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, userID);
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				switch (rs.getString("datename")) {
+				case "Monday":
+					result.set(0, rs.getInt("AmountBill"));
+					break;
+				case "Tuesday":
+					result.set(1, rs.getInt("AmountBill"));
+					break;
+				case "Wednesday":
+					result.set(2, rs.getInt("AmountBill"));
+					break;
+				case "Thursday":
+					result.set(3, rs.getInt("AmountBill"));
+					break;
+				case "Friday":
+					result.set(4, rs.getInt("AmountBill"));
+					break;
+				case "Saturday":
+					result.set(5, rs.getInt("AmountBill"));
+					break;
+				case "Sunday":
+					result.set(6, rs.getInt("AmountBill"));
+					break;
+				}
+			}
+
+		} catch (Exception ex) {
+
+			ex.printStackTrace();
+
+		}
+
+		return result;
+	}
+	
+	public List<Integer> getBill2WeeksAgo(String userID) {
+		List<Integer> result = new ArrayList<Integer>();
+		for (int i = 0; i < 7; i++) {
+			result.add(i, 0);
+		}
+		String sql = "Select count(bi.bill_id) as AmountBill, DATENAME(WEEKDAY, bi.date) as datename\r\n"
+				+ "From Building b join Users u on b.user_id = u.user_id\r\n"
+				+ "	Join Room r on b.building_id = r.building_id\r\n"
+				+ "	Join Bill_detail bd on bd.room_id = r.room_id\r\n"
+				+ "	Join Bill bi on bd.bill_id = bi.bill_id\r\n"
+				+ "Where u.user_id = ? AND DATEPART(DAYOFYEAR, bi.date) >= DATEPART(DAYOFYEAR,CAST( DATEADD(dd,  0, DATEADD(ww, DATEDIFF(ww, 0, DATEADD(dd, -1, GETDATE())) -2, 0)) AS Date)) \r\n"
+				+ "AND DATEPART(DAYOFYEAR, bi.date) <= DATEPART(DAYOFYEAR,CAST( DATEADD(dd,  6, DATEADD(ww, DATEDIFF(ww, 0, DATEADD(dd, -1, GETDATE())) -2, 0)) AS Date)) \r\n"
+				+ "Group by DATENAME(WEEKDAY, bi.date)";
+
 
 		try {
 
@@ -406,6 +465,42 @@ public class BillDAO {
 
 			while (rs.next()) {
 				result.put(rs.getString("month"),rs.getInt("totalRequestLast12Month"));
+			}
+
+		} catch (Exception ex) {
+
+			ex.printStackTrace();
+
+		}
+
+		return result;
+	}
+	
+	public LinkedHashMap<String, Integer> getLast12MonthBillTotal(String userID) {
+		LinkedHashMap<String, Integer> result = new LinkedHashMap<String, Integer>();
+		
+		
+		String sql = "Select sum(bi.total) as totalBillLast12Month, DATENAME(MONTH, bi.date) as month\r\n"
+				+ "From Building b join Users u on b.user_id = u.user_id\r\n"
+				+ "	Join Room r on b.building_id = r.building_id\r\n"
+				+ "	Join Bill_detail bd on bd.room_id = r.room_id\r\n"
+				+ "	Join Bill bi on bd.bill_id = bi.bill_id\r\n"
+				+ "Where u.user_id = ? \r\n"
+				+ "AND bi.date >= CAST(DATEADD(mm, DATEDIFF(mm, 1, CAST(DATEADD(month, -11, GETDATE()) as date)), 0) as date)\r\n"
+				+ "AND bi.date <= CAST( GETDATE() AS Date ) AND b.building_status not like 'Removed'\r\n"
+				+ "GROUP BY Year(bi.date), MONTH(bi.date), u.user_id, DATENAME(MONTH, bi.date)\r\n"
+				+ "Order by Year(bi.date) asc";
+
+		try {
+
+			Connection conn = DBUtils.getConnection();
+
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, userID);
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				result.put(rs.getString("month"),rs.getInt("totalBillLast12Month"));
 			}
 
 		} catch (Exception ex) {
