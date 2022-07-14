@@ -1,45 +1,4 @@
-/*------------------------------------------------------------------
-[Master Stylesheet]
 
-Project:  CoolAdmin
-Version:	1.0
-Last change:	08/10/2018 [Add Define a table of contents Link]
-Assigned to:	Hau Nguyen
-Primary use:	Open Source
--------------------------------------------------------------------*/
-/*------------------------------------------------------------------
-[LAYOUT]
-
-* body
-    + Header / header
-	+ Page Content / .page-content .name-page
-        + Section Layouts / section .name-section
-        ...
-	+ Footer / footer
-
--------------------------------------------------------------------*/
-/*------------------------------------------------------------------
-# [Color codes]
-
-# Text Color (text): #666666
-# Text Color Deep (Text, title): #333333
-
-------------------------------------------------------------------*/
-/*------------------------------------------------------------------
-[Typography]
-
-Notes:	decreasing heading by 0.4em with every subsequent heading level
--------------------------------------------------------------------*/
-/*-----------------------------------------------------*/
-/*                   SETTINGS                          */
-/*-----------------------------------------------------*/
-/*-----------------------------------------------------*/
-/*                   TOOLS                             */
-/*-----------------------------------------------------*/
-/*-----------------------------------------------------*/
-/*                   GENERIC                           */
-/*-----------------------------------------------------*/
-/* ----- Normalize ----- */
 * {
 	margin: 0;
 	padding: 0;
@@ -587,63 +546,48 @@ section {
 	z-index: 100000;
 }
 
-@
--webkit-keyframes spinner { 0% {
+@-webkit-keyframes spinner { 0% {
 	-webkit-transform: rotate(0deg);
 	transform: rotate(0deg);
 }
 
-100
-%
-{
--webkit-transform
-:
+100%{
+-webkit-transform:
 rotate(
 360deg
 );
-transform
-:
+transform:
 rotate(
 360deg
 );
 }
 }
-@
--moz-keyframes spinner { 0% {
+@-moz-keyframes spinner { 0% {
 	-webkit-transform: rotate(0deg);
 	-moz-transform: rotate(0deg);
 	transform: rotate(0deg);
 }
 
-100
-%
+100%
 {
--webkit-transform
-:
+-webkit-transform:
 rotate(
 360deg
 );
--moz-transform
-:
-rotate(
+-moz-transform:rotate(
 360deg
 );
-transform
-:
-rotate(
+transform:rotate(
 360deg
 );
 }
-}
-@
--o-keyframes spinner { 0% {
+} @-o-keyframes spinner { 0% {
 	-webkit-transform: rotate(0deg);
 	-o-transform: rotate(0deg);
 	transform: rotate(0deg);
 }
 
-100
-%
+100%
 {
 -webkit-transform
 :
@@ -662,16 +606,14 @@ rotate(
 );
 }
 }
-@
-keyframes spinner { 0% {
+@keyframes spinner { 0% {
 	-webkit-transform: rotate(0deg);
 	-moz-transform: rotate(0deg);
 	-o-transform: rotate(0deg);
 	transform: rotate(0deg);
 }
 
-100
-%
+100%
 {
 -webkit-transform
 :
@@ -4722,6 +4664,7 @@ rotate(
 .status--denied {
 	color: #fa4251;
 }
+
 
 .table-data3 thead {
 	background: #333;

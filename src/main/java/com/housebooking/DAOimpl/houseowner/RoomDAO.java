@@ -52,6 +52,44 @@ public class RoomDAO {
 		return list;
 	}
 
+	public Room Find(String roomId) {
+		Room room = null;
+
+		String sql = " Select r.*, t.type_name \r\n"
+				+ " From Room r join Building b on b.building_id = r.building_id\r\n"
+				+ "	join Type_Of_Room t on t.type_id = r.type_id\r\n"
+				+ " Where r.room_id like ?";
+
+		try {
+
+			Connection conn = DBUtils.getConnection();
+
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, roomId);
+
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				room = new Room();
+				fillDataInRoom(rs, room);
+				room.setRoomImages(findImages(room.getRoomId()));
+				if(IsFreeNow(room.getRoomId())) {
+					room.setCurrentStatus("Trống");				
+				}
+				else {
+					room.setCurrentStatus("Đang được thuê");
+				}
+			}
+
+		} catch (Exception ex) {
+
+			ex.printStackTrace();
+
+		}
+
+		return room;
+	}
+	
 	public List<Room> list(String buildingId) {
 		ArrayList<Room> list;
 		list = new ArrayList<Room>();

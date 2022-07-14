@@ -55,6 +55,7 @@ public class AdminControl extends HttpServlet {
 			throws ServletException, IOException {
 
 		AdminDAO dao = new AdminDAO();
+		
 		List<Room> list = dao.getAllRoom();
 		request.setAttribute("listR", list);
 		request.getRequestDispatcher("/view/admin/Dashmin.jsp").forward(request, response);

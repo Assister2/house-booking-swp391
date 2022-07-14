@@ -38,7 +38,80 @@ public class BillDAO {
 				billDetail.setPrice(rs.getDouble("price"));
 				billDetail.setNote(rs.getNString("note"));
 				billDetail.setExpense(rs.getDouble("expense"));
+				billDetail.setRoom(new RoomDAO().Find(rs.getString("room_id")));
 				list.add(billDetail);
+			}
+
+		} catch (Exception ex) {
+
+			ex.printStackTrace();
+
+		}
+
+		return list;
+	}
+
+	public List<Bill> GetAll(String userID, int start, int end, String properties, String detailProperties) {
+		ArrayList<Bill> list;
+		list = new ArrayList<Bill>();
+
+		String sql = " Select bi.*\r\n" + " From Building b join Users u on b.user_id = u.user_id\r\n"
+				+ " Join Room r on b.building_id = r.building_id\r\n"
+				+ " Join Bill_detail bd on bd.room_id = r.room_id\r\n" + " Join Bill bi on bd.bill_id = bi.bill_id\r\n"
+				+ " Where u.user_id = ? AND b.building_status not like 'Removed' ";
+
+		if (properties.equalsIgnoreCase("Theo ngày")) {
+			switch (detailProperties) {
+			case "Hôm nay":
+				sql += " AND bi.date >= CAST(GETDATE() as date) ";
+				break;
+			case "Tháng này": 
+				sql += " AND bi.date >= CAST(DATEADD(mm, DATEDIFF(mm, 1, CAST(DATEADD(month, 0, GETDATE()) as date)), 0) as date)";
+				break;
+			case "Tuần này": 
+				sql += " AND DATEPART(WEEK, bi.date) >= DATEPART(WEEK,CAST(GETDATE() as date))";
+				break;
+			default:
+				break;
+			}
+		} else if (properties.equalsIgnoreCase("Theo trạng thái")) {
+			switch (detailProperties) {
+			case "Chờ xác nhận":
+				sql += " AND bi.status like N'%Chờ xác nhận%' ";
+				break;
+			case "Đã xác nhận": 
+				sql +=  " AND bi.status like N'%Đã xác nhận%' ";
+				break;
+			case "Đã thanh toán": 
+				sql +=  " AND bi.status like N'%Đã thanh toán%' ";
+				break;
+			default:
+				break;
+			}
+		} else if (properties.equalsIgnoreCase("Theo nhà")) {
+			sql += " AND b.building_id like " + detailProperties;
+		}
+
+		if (start != -1 && end != -1) {
+			sql += " Order by bi.bill_id ASC\r\n" + " OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
+		}
+		try {
+
+			Connection conn = DBUtils.getConnection();
+
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, userID);
+			if (start != -1 && end != -1) {
+				ps.setInt(2, start);
+				ps.setInt(3, end);
+			}
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				Bill bill = new Bill();
+				FillBillData(rs, bill);
+				bill.setBillDetail(listBillDetail(bill.getBillID()));
+				list.add(bill);
 			}
 
 		} catch (Exception ex) {
@@ -81,6 +154,56 @@ public class BillDAO {
 		}
 
 		return list;
+	}
+	
+	public boolean Approve(String billId) {
+
+		String sql = " Update Bill\r\n"
+				+ " SET status = N'Đã xác nhận'\r\n"
+				+ " Where bill_id = ? ";
+
+		try {
+
+			Connection conn = DBUtils.getConnection();
+
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, billId);
+			if(ps.executeUpdate() > 0) {
+				return true;
+			}
+
+		} catch (Exception ex) {
+
+			ex.printStackTrace();
+
+		}
+
+		return false;
+	}
+	
+	public boolean Deny(String billId) {
+
+		String sql = " Update Bill\r\n"
+				+ " SET status = N'Đã từ chối'\r\n"
+				+ " Where bill_id = ? ";
+
+		try {
+
+			Connection conn = DBUtils.getConnection();
+
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, billId);
+			if(ps.executeUpdate() > 0) {
+				return true;
+			}
+
+		} catch (Exception ex) {
+
+			ex.printStackTrace();
+
+		}
+
+		return false;
 	}
 
 	private Double TotalIncomeByUser(String userID) {
@@ -132,7 +255,8 @@ public class BillDAO {
 			ResultSet rs = ps.executeQuery();
 
 			while (rs.next()) {
-				list.put(rs.getString("building_id"), Math.round((rs.getDouble("Total") / totalIncome * 100.0 )* 10.0)/ 10.0);
+				list.put(rs.getString("building_id"),
+						Math.round((rs.getDouble("Total") / totalIncome * 100.0) * 10.0) / 10.0);
 			}
 
 		} catch (Exception ex) {

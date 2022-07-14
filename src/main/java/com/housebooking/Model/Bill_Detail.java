@@ -9,6 +9,14 @@ public class Bill_Detail {
 	private double price;
 	private String note;
 	private double expense;
+	private Room room;
+	
+	public Room getRoom() {
+		return room;
+	}
+	public void setRoom(Room room) {
+		this.room = room;
+	}
 	public String getRoomId() {
 		return roomId;
 	}
