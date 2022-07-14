@@ -24,8 +24,8 @@ public class Bill_Detail {
 	public Date getEndDate() {
 		return endDate;
 	}
-	public void setEndDate(Date enðate) {
-		this.endDate = enðate;
+	public void setEndDate(Date enddate) {
+		this.endDate = enddate;
 	}
 	public double getPrice() {
 		return price;
