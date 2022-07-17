@@ -651,25 +651,28 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<script>
 		//<![CDATA[ 
 		$(window).load(
-				function() {
+				
+				function() {<c:if test="${1 == 1}">
 					var dollarUSLocale = Intl.NumberFormat('en-US');
+					
 					$("#slider-range").slider(
 							{
 								range : true,
 								min : 0,
 								max : 5000000,
-								values : [ 0, 5000000 ],
+								values : [ ${fromPrice},  ${toPrice} ],
 								slide : function(event, ui) {
 									$("#amount").val(
 											"" + dollarUSLocale.format(ui.values[0]) + " - "
 													+ dollarUSLocale.format(ui.values[1]));
 								}
 							});
+					
 					$("#amount").val(
 							dollarUSLocale.format($("#slider-range").slider("values", 0))
 									+ " - "
 									+ dollarUSLocale.format($("#slider-range").slider("values", 1)));
-
+					</c:if>
 				}); //]]>
 	</script>
 	<!-- //price range (top products) -->

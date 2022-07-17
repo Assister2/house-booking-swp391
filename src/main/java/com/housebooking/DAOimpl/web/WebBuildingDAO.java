@@ -19,15 +19,14 @@ import com.housebooking.Utils.DBUtils;
 
 public class WebBuildingDAO {
 	public List<Building> list(LocalDate startDate, LocalDate endDate, String city, int start, int end,
-			String[] buildingType, String[] convenient, double rating, String[] district, String sort) {
+			String[] buildingType, String[] convenient, double rating, String[] district, String sort, float fromPrice, float toPrice) {
 		ArrayList<Building> list;
 		list = new ArrayList<Building>();
-		String direct = sort.equals("up") ? "ASC" : "DESC";
 
 		String sql = " DECLARE @startDate as date = ?\r\n" + " DECLARE @endDate as date = ?\r\n"
 				+ " DECLARE @city as nvarchar(100) = ?\r\n" + " DECLARE @start as int = ?\r\n"
 				+ "	DECLARE @end as int = ?\r\n"
-				+ " Select  b.building_id, b.building_number,b.building_name, b.building_desc, b.buiding_image, b.building_type, b.building_rule, ( b.building_number + ' ' + st.street_name + ' '+ dis.district_name +' '+ ci.city_name ) as address,ISNULL(Round(AVG(rating*1.0),1),0) as rating\r\n"
+				+ " Select  b.building_id, b.building_number,b.building_name, b.building_desc, b.buiding_image, b.building_type, b.building_rule, ( b.building_number + ' ' + st.street_name + ' '+ dis.district_name +' '+ ci.city_name ) as address,ISNULL(Round(AVG(rating*1.0),1),0) as rating, AVG(r.room_price) as avaragePrice \r\n"
 				+ " from Room r join Type_Of_Room t on r.type_id = t.type_id\r\n"
 				+ "	join Building b on r.building_id = b.building_id\r\n"
 				+ "	join Street st on b.street_id = st.street_id\r\n"
@@ -88,8 +87,24 @@ public class WebBuildingDAO {
 		if(rating != 0 ) {
 			sql += " Having ISNULL(Round(AVG(fb.rating*1.0),1),0) Between CAST(? AS int) AND (CAST(? AS int) + 1) \r\n";
 		}
-		sql	+= " Order by b.building_id ASC\r\n"
-				+ " OFFSET @start ROWS FETCH NEXT @end ROWS ONLY";
+		
+		if(rating != 0) {
+			sql += " AND (AVG(r.room_price) >= ? and AVG(r.room_price) <= ? )";
+		}
+		else {
+			sql += " Having (AVG(r.room_price) >= ? and AVG(r.room_price) <= ? )";
+		}
+		
+		if(sort.equals("up")) {
+			sql	+= " Order by avaragePrice ASC ";
+		}else if (sort.equals("down")) {
+			sql	+= " Order by avaragePrice DESC ";
+		}
+		else {
+			sql	+= " Order by b.building_id ASC ";				
+		}
+		
+		sql += " OFFSET @start ROWS FETCH NEXT @end ROWS ONLY";
 		
 		try {
 
@@ -128,13 +143,17 @@ public class WebBuildingDAO {
 				ps.setInt(count++, (int) rating);
 			}
 			
+			ps.setFloat(count++, fromPrice);
+			ps.setFloat(count++, toPrice);
+			
+			//System.out.println(sql);
 			ResultSet rs = ps.executeQuery();
 
 			while (rs.next()) {
 				Building building = new Building();
 
 				fillBuildingData(building, rs);
-				building.setAvgPrice(getAvgPrice(building.getBuildingId()));
+				building.setAvgPrice(rs.getFloat("avaragePrice"));
 				list.add(building);
 			}
 
@@ -147,34 +166,9 @@ public class WebBuildingDAO {
 		return list;
 	}
 	
-	public float getAvgPrice(String buildingId) {
-		float result = 0;
 
-		String sql = " Select AVG(r.room_price) as averagePrice\r\n"
-				+ " From Building b join Room r on r.building_id = b.building_id\r\n"
-				+ " Where b.building_id like ?\r\n"
-				+ " Group by b.building_id";
-		try {
-
-			Connection conn = DBUtils.getConnection();
-
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setString(1, buildingId);
-			ResultSet rs = ps.executeQuery();
-
-			while (rs.next()) {
-				result = rs.getFloat("averagePrice");
-			}
-
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-		
-		return result;
-	}
-
-	public int totalRecords(LocalDate startDate, LocalDate endDate, String city, String[] buildingType, String[] convenient, double rating, String[] district) {
-		return list(startDate, endDate, city, 0, 1000, buildingType, convenient, rating, district, "ASC").size();
+	public int totalRecords(LocalDate startDate, LocalDate endDate, String city, String[] buildingType, String[] convenient, double rating, String[] district, float fromPrice, float toPrice) {
+		return list(startDate, endDate, city, 0, 1000, buildingType, convenient, rating, district, "ASC", fromPrice, toPrice).size();
 	}
 
 	public int getNumRoom(String building_id) {

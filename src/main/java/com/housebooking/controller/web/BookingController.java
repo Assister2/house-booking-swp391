@@ -99,7 +99,18 @@ public class BookingController extends HttpServlet {
 		if (request.getParameterValues("districtOption") != null) {
 			district = request.getParameterValues("districtOption");
 		}
-
+		
+		float fromPrice = 0;
+		float toPrice = 5000000;
+		// Lay khoang gia
+		if(request.getParameter("price") != null) {
+			String price = request.getParameter("price");
+			String[] arrOfStr = price.split(" - ");
+			fromPrice = Float.parseFloat(arrOfStr[0].replace(",", ""));
+			toPrice = Float.parseFloat(arrOfStr[1].replace(",", ""));
+			//System.out.println(price);
+		}
+			
 		// Lay huong sort
 		String sort = request.getParameter("sort") == null ? "" : request.getParameter("sort");
 
@@ -109,28 +120,17 @@ public class BookingController extends HttpServlet {
 		WebBuildingDAO webBuildingDAO = new WebBuildingDAO();
 
 		listBuilding = webBuildingDAO.list(date1, date2, city, (page - 1) * recordsPerPage, recordsPerPage,
-				buildingType, convenient, rating, district, sort);
+				buildingType, convenient, rating, district, sort, fromPrice, toPrice);
 
-		if (sort != null && !sort.equals("")) {
-			if (sort.equals("up")) {
-				Collections.sort(listBuilding, new Building());
-			} else {
-				Collections.sort(listBuilding, new Comparator<Building>() {
-					@Override
-					public int compare(Building o1, Building o2) {
-						return (int) -(o1.getAvgPrice() - o2.getAvgPrice());
-					}
-				});
-			}
-		}
-
-		int totalRecords = webBuildingDAO.totalRecords(date1, date2, city, buildingType, convenient, rating, district);
+		int totalRecords = webBuildingDAO.totalRecords(date1, date2, city, buildingType, convenient, rating, district, fromPrice, toPrice);
 
 		// Tinh so trang
 		int noOfPages = (int) Math.ceil(totalRecords * 1.0 / recordsPerPage);
 
 		listDistrict = new DistrictDAO().list(city);
 
+		request.setAttribute("fromPrice", fromPrice);
+		request.setAttribute("toPrice", toPrice);
 		request.setAttribute("districtChoose", district);
 		request.setAttribute("ratingScale", rating);
 		request.setAttribute("convenientChoose", convenient);
