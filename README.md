@@ -26,4 +26,3 @@
 * **For House owner:** Simple, convenient for observation and management
 
 * **For Admin:** 
-## `ER Diagram`
