@@ -127,12 +127,14 @@ public class WebBuildingDAO {
 				ps.setInt(count++, (int) rating);
 				ps.setInt(count++, (int) rating);
 			}
+			
 			ResultSet rs = ps.executeQuery();
 
 			while (rs.next()) {
 				Building building = new Building();
 
 				fillBuildingData(building, rs);
+				building.setAvgPrice(getAvgPrice(building.getBuildingId()));
 				list.add(building);
 			}
 
@@ -143,6 +145,32 @@ public class WebBuildingDAO {
 		}
 
 		return list;
+	}
+	
+	public float getAvgPrice(String buildingId) {
+		float result = 0;
+
+		String sql = " Select AVG(r.room_price) as averagePrice\r\n"
+				+ " From Building b join Room r on r.building_id = b.building_id\r\n"
+				+ " Where b.building_id like ?\r\n"
+				+ " Group by b.building_id";
+		try {
+
+			Connection conn = DBUtils.getConnection();
+
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, buildingId);
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				result = rs.getFloat("averagePrice");
+			}
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		
+		return result;
 	}
 
 	public int totalRecords(LocalDate startDate, LocalDate endDate, String city, String[] buildingType, String[] convenient, double rating, String[] district) {

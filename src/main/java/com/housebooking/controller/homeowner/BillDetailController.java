@@ -18,10 +18,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.housebooking.DAOimpl.houseowner.BillDAO;
+import com.housebooking.DAOimpl.houseowner.BuildingDAO;
 import com.housebooking.DAOimpl.houseowner.RoomDAO;
 import com.housebooking.DAOimpl.houseowner.ServiceDAO;
 import com.housebooking.Model.Bill;
 import com.housebooking.Model.Room;
+import com.housebooking.Model.Service;
 import com.housebooking.Model.ServiceUsed;
 import com.housebooking.Model.User;
 
@@ -32,26 +34,99 @@ public class BillDetailController extends HttpServlet {
     
 	protected void Proccess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action = request.getParameter("action");
+		if(action != null && !action.equals("")) {
+			switch (action) {
+			case "addService":
+				AddService(request, response);
+				break;
+			case "deleteService":
+				DeleteService(request, response);
+				break;
+			case "save":
+				Save(request, response);
+				break;
+
+			default:
+				doDisplay(request, response);
+				break;
+			}
+		}
+		else {
+			doDisplay(request, response);
+		}	
+	}
+	
+	protected void Save(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String billId = request.getParameter("billId");
+		float total = 0;
+		if (!(request.getParameter("total") == null) && !request.getParameter("total").equals("")) {
+			total = Float.parseFloat(request.getParameter("total"));
+		}
 		
 		BillDAO billDAO = new BillDAO();
-		UserDAO userDAO = new UserDAO();
-		RoomDAO roomDAO = new RoomDAO();
 		ServiceDAO serviceDAO = new ServiceDAO();
+//		RoomDAO roomDAO = new RoomDAO();
+//		Bill bill = billDAO.Find(billId);
+//		Room room = roomDAO.Find(bill.getBillDetail().get(0).getRoomId());
+//		
+//		Service service = serviceDAO.FindInABuilding(serviceId, room.getBuildingId());
+		if(billDAO.SavePaidBill(billId, total)) {
+			request.setAttribute("message", "Cập nhật thành công");
+		}
+		else {
+			request.setAttribute("message", "Cập nhật không thành công");
+		}
 		
+		response.sendRedirect("manage-BillDetail?billId=" + billId);
+	}
+	
+	protected void DeleteService(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String billId = request.getParameter("billId");
+		String serviceId = request.getParameter("serviceId");
+		String roomId = request.getParameter("roomId");
+		
+		//BillDAO billDAO = new BillDAO();
+		ServiceDAO serviceDAO = new ServiceDAO();
+//		RoomDAO roomDAO = new RoomDAO();
+//		Bill bill = billDAO.Find(billId);
+//		Room room = roomDAO.Find(bill.getBillDetail().get(0).getRoomId());
+//		
+//		Service service = serviceDAO.FindInABuilding(serviceId, room.getBuildingId());
+		if(serviceDAO.DeleteServiceUsed(serviceId, roomId, billId)) {
+			request.setAttribute("message", "Thêm thành công");
+		}
+		else {
+			request.setAttribute("message", "Thêm không thành công");
+		}
+		
+		response.sendRedirect("manage-BillDetail?billId=" + billId);
+	}
+	
+	protected void AddService(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String billId = request.getParameter("billId");
+		String serviceId = request.getParameter("serviceId");
+		String roomId = request.getParameter("roomId");
+		
+		int amount = 0;
+		if (!(request.getParameter("amount") == null) && !request.getParameter("amount").equals("")) {
+			amount = Integer.parseInt(request.getParameter("amount"));
+		}
+		
+		BillDAO billDAO = new BillDAO();
+		ServiceDAO serviceDAO = new ServiceDAO();
+		RoomDAO roomDAO = new RoomDAO();
 		Bill bill = billDAO.Find(billId);
-		User user = userDAO.find(bill.getUserId());
 		Room room = roomDAO.Find(bill.getBillDetail().get(0).getRoomId());
-		List<ServiceUsed> listServiceUsed = serviceDAO.listServiceUsed(billId, room.getRoomId());
 		
-		int dateRange = DateRange(bill.getBillDetail().get(0).getStartDate(), bill.getBillDetail().get(0).getEndDate());
+		Service service = serviceDAO.FindInABuilding(serviceId, room.getBuildingId());
+		if(serviceDAO.AddServiceUsed(serviceId, roomId, billId, service.getPrice(), amount)) {
+			request.setAttribute("message", "Thêm thành công");
+		}
+		else {
+			request.setAttribute("message", "Thêm không thành công");
+		}
 		
-		request.setAttribute("listServiceUsed", listServiceUsed);
-		request.setAttribute("room", room);
-		request.setAttribute("dateRange", dateRange);
-		request.setAttribute("user", user);
-		request.setAttribute("bill", bill);
-		doDisplay(request, response);
+		response.sendRedirect("manage-BillDetail?billId=" + billId);
 	}
 	
 	private int DateRange(Date d1, Date d2) {
@@ -79,6 +154,29 @@ public class BillDetailController extends HttpServlet {
 	}
 	
 	protected void doDisplay(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String billId = request.getParameter("billId");
+		
+		BillDAO billDAO = new BillDAO();
+		UserDAO userDAO = new UserDAO();
+		RoomDAO roomDAO = new RoomDAO();
+		//BuildingDAO buildingDAO = new BuildingDAO();
+		ServiceDAO serviceDAO = new ServiceDAO();
+		
+		Bill bill = billDAO.Find(billId);
+		User user = userDAO.find(bill.getUserId());
+		Room room = roomDAO.Find(bill.getBillDetail().get(0).getRoomId());
+		List<ServiceUsed> listServiceUsed = serviceDAO.listServiceUsed(billId, room.getRoomId());
+		List<Service> listService = serviceDAO.listService(room.getBuildingId());
+		
+		int dateRange = DateRange(bill.getBillDetail().get(0).getStartDate(), bill.getBillDetail().get(0).getEndDate());
+		
+		request.setAttribute("listService", listService);
+		request.setAttribute("listServiceUsed", listServiceUsed);
+		request.setAttribute("room", room);
+		request.setAttribute("dateRange", dateRange);
+		request.setAttribute("user", user);
+		request.setAttribute("bill", bill);
+		//doDisplay(request, response);
 		RequestDispatcher rd = request.getRequestDispatcher("/view/house-owner/invoiceDetail.jsp");
         rd.forward(request, response);
 	}

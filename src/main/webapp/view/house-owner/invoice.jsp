@@ -93,6 +93,63 @@
 		</div>
 		<!-- end modal small -->
 
+		<!-- modal medium -->
+		<div class="modal fade" id="addBill" tabindex="-1" role="dialog"
+			aria-labelledby="mediumModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-lg" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="mediumModalLabel">Thêm hóa đơn</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div class="form-group row">
+
+							<div class="col-md-6">
+								Nhà:
+								<select name="building" id="addBuilding" size="1"
+									class=" form-control">
+									<c:if test="${properties != null}">
+										<option value="" selected="selected">${properties }</option>
+									</c:if>
+									<c:if test="${properties == null}">
+										<option value="" selected="selected">All Properties</option>
+									</c:if>
+								</select>
+								<div class="dropDownSelect2"></div>
+							</div>
+							<div class="col-md-6">
+							Phòng
+								<select name="room" id="addRoom" size="1" class="form-control">
+									<c:if test="${detailProperties != null}">
+										<option value="" selected="selected">${detailProperties }</option>
+									</c:if>
+									<c:if test="${detailProperties == null}">
+										<option value="" selected="selected">All</option>
+									</c:if>
+								</select>
+								<div class="dropDownSelect2"></div>
+							</div>
+						</div>
+
+						Ngày đến<input type="date" class="form-control" name="startDate">
+						Ngày về<input type="date" class="form-control" name="endDate">
+						Khách hàng<input type="text" class="form-control" name="customer">
+						Số điện thoại<input type="text" class="form-control" name="phoneNumber">
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal">Cancel</button>
+						<button type="button" class="btn btn-primary">Confirm</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- end modal medium -->
+
 		<c:forEach var="item" items="${listBillDefault }">
 			<!-- modal small -->
 			<form action="manage-bill">
@@ -201,7 +258,8 @@
 									</form>
 								</div>
 								<div class="table-data__tool-right">
-									<button class="au-btn au-btn-icon au-btn--green au-btn--small">
+									<button class="au-btn au-btn-icon au-btn--green au-btn--small"
+										data-toggle="modal" data-target="#addBill">
 										<i class="zmdi zmdi-plus"></i>add item
 									</button>
 									<div class="rs-select2--dark rs-select2--sm rs-select2--dark2">
@@ -238,27 +296,27 @@
 												<td>${item.billDetail[0].startDate }</td>
 												<td>${item.billDetail[0].endDate }</td>
 												<td><c:if test="${item.status == 'Đã xác nhận' }">
+														<span class="status--denied">Chưa thanh toán</span>
+													</c:if> <c:if test="${item.status == 'Đã thanh toán' }">
 														<span class="status--process">${item.status }</span>
-													</c:if>
-													<c:if test="${item.status == 'Đã thanh toán' }">
-														<span class="status--process">${item.status }</span>
-													</c:if>
-												</td>
+													</c:if></td>
 												<td>
 													<div class="table-data-feature">
 														<c:if test="${item.status == 'Đã xác nhận'}">
-															<a type="button" class="item" href="${pageContext.request.contextPath}/manage-BillDetail?billId=${item.billID}"
-															data-placement="top" title="Chỉnh sửa chi tiết hóa đơn">
-															<i class="zmdi zmdi-edit"></i>
-														</a>
-														
+															<a type="button" class="item"
+																href="${pageContext.request.contextPath}/manage-BillDetail?billId=${item.billID}"
+																data-placement="top" title="Chỉnh sửa chi tiết hóa đơn">
+																<i class="zmdi zmdi-edit"></i>
+															</a>
+
 														</c:if>
 														<c:if test="${item.status == 'Đã thanh toán'}">
-															<a type="button" class="item" href="${pageContext.request.contextPath}/manage-BillDetail?billId=${item.billID}"
-															data-placement="top" title="Xem chi tiết">
-															<i class="fa fa-eye"></i>
-														</a>
-														
+															<a type="button" class="item"
+																href="${pageContext.request.contextPath}/manage-BillDetail?billId=${item.billID}"
+																data-placement="top" title="Xem chi tiết"> <i
+																class="fa fa-eye"></i>
+															</a>
+
 														</c:if>
 														<button class="item" data-toggle="tooltip"
 															data-placement="top" title="More">
@@ -301,7 +359,7 @@
 							</c:if>
 						</ul>
 					</div>
-					
+
 					<!-- <div class="row m-t-30">
                             <div class="col-md-12">
                                 <div class="table-responsive m-b-40">
@@ -458,6 +516,48 @@
 		window.onload = function() {
 			var countySel = document.getElementById("countySel"), stateSel = document
 					.getElementById("stateSel");
+			for ( var country in stateObject) {
+				countySel.options[countySel.options.length] = new Option(
+						country, country);
+			}
+			countySel.onchange = function() {
+				stateSel.length = 1; // remove all options bar first
+				if (this.selectedIndex < 1)
+					return; // done 
+				for ( var state in stateObject[this.value]) {
+					stateSel.options[stateSel.options.length] = new Option(
+							state, state);
+				}
+			}
+			countySel.onchange(); // reset in case page is reloaded
+			stateSel.onchange = function() {
+				if (this.selectedIndex < 1)
+					return; // done 
+			}
+		}
+	</script>
+
+	<script>
+		var stateObject = {
+			"Theo ngày" : {
+				"Hôm nay" : [ "Nguyễn Huệ", "North Delhi" ],
+				"Tuần này" : [ "Thiruvananthapuram", "Palakkad" ],
+				"Tháng này" : [ "North Goa", "South Goa" ],
+			},
+			"Theo trạng thái" : {
+				"Chờ xác nhận" : [ "Altona", "Euroa" ],
+				"Đã xác nhận" : [ "Altona", "Euroa" ],
+				"Đã thanh toán" : [ "Altona", "Euroa" ]
+			},
+			"Theo nhà" : {
+				"Alberta" : [ "Acadia", "Bighorn" ],
+				"Columbia" : [ "Washington", "" ]
+			},
+		}
+
+		window.onload = function() {
+			var countySel = document.getElementById("addBuilding"), stateSel = document
+					.getElementById("addRoom");
 			for ( var country in stateObject) {
 				countySel.options[countySel.options.length] = new Option(
 						country, country);

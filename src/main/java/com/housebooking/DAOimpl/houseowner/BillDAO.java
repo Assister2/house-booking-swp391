@@ -88,7 +88,7 @@ public class BillDAO {
 		String sql = " Select bi.*\r\n" + " From Building b join Users u on b.user_id = u.user_id\r\n"
 				+ " Join Room r on b.building_id = r.building_id\r\n"
 				+ " Join Bill_detail bd on bd.room_id = r.room_id\r\n" + " Join Bill bi on bd.bill_id = bi.bill_id\r\n"
-				+ " Where u.user_id = ? AND b.building_status not like 'Removed' ";
+				+ " Where u.user_id = ? AND b.building_status not like 'Removed' AND bi.status not like N'%Đã thanh toán%'";
 
 		if (properties.equalsIgnoreCase("Theo ngày")) {
 			switch (detailProperties) {
@@ -270,6 +270,32 @@ public class BillDAO {
 
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, billId);
+			if(ps.executeUpdate() > 0) {
+				return true;
+			}
+
+		} catch (Exception ex) {
+
+			ex.printStackTrace();
+
+		}
+
+		return false;
+	}
+	
+	public boolean SavePaidBill(String billId, float total) {
+
+		String sql = " Update Bill\r\n"
+				+ " SET status = N'Đã thanh toán', total = ?\r\n"
+				+ " Where bill_id = ? ";
+
+		try {
+
+			Connection conn = DBUtils.getConnection();
+
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setFloat(1, total);
+			ps.setString(2, billId);
 			if(ps.executeUpdate() > 0) {
 				return true;
 			}

@@ -37,7 +37,7 @@
                         
                         <li>
                             <a href="${pageContext.request.contextPath}/invoice-manage">
-                                <i class="fas fa-table"></i>Thanh toán</a>
+                                <i class="fas fa-table"></i>Hóa đơn</a>
                         </li>
                         <li>
                             <a href="${pageContext.request.contextPath}/my-account">
@@ -76,7 +76,7 @@
                         
                         <li>
                             <a href="${pageContext.request.contextPath}/invoice-manage">
-                                <i class="fas fa-table"></i>Thanh toán</a>
+                                <i class="fas fa-table"></i>Hóa đơn</a>
                         </li>
                         
                          <li>

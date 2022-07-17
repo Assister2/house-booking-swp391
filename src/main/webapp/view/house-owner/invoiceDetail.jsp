@@ -211,7 +211,71 @@ hr {
 	<div class="page-wrapper">
 		<jsp:include page="header.jsp"></jsp:include>
 		<!-- END HEADER DESKTOP-->
+		<!-- modal small -->
+		<div class="modal fade" id="smallmodal" tabindex="-1" role="dialog"
+			aria-labelledby="smallmodalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-sm" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="smallmodalLabel">Thông báo</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<p>${message }</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- end modal small -->
 
+		<!-- modal medium -->
+		<form action="manage-BillDetail" method="get">
+			<div class="modal fade" id="addService" tabindex="-1" role="dialog"
+				aria-labelledby="mediumModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-lg" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="mediumModalLabel">Thêm dịch vụ</h5>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<input type="hidden" name="action" value="addService"> <input
+								type="hidden" name="billId" value="${param.billId }"> <input
+								type="hidden" name="roomId" value="${room.roomId }">
+							<div class="form-group row">
+								<div class="col-md-7">
+									<select class="form-control" name="serviceId">
+										<c:forEach var="item" items="${listService }">
+											<option value="${item.serviceID }">${item.serviceName }</option>
+										</c:forEach>
+									</select>
+								</div>
+
+								<div class="col-md-5">
+									<input class="form-control" type="number" name="amount"
+										required="required" placeholder="Số lượng">
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary"
+								data-dismiss="modal">Cancel</button>
+							<button type="submit" class="btn btn-primary">Confirm</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+		<!-- end modal medium -->
 
 		<!-- MAIN CONTENT-->
 		<div class="main-content">
@@ -222,7 +286,9 @@ hr {
 						<div class="car-body">
 							<div class="page-header text-blue-d2">
 								<h1 class="page-title text-secondary-d1">
-									Hóa đơn <small class="page-info"> <i
+									<a style="color: #728299;"
+										href="${pageContext.request.contextPath}/invoice-manage">Hóa
+										đơn</a> <small class="page-info"> <i
 										class="fa fa-angle-double-right text-80"></i> ID:
 										#${bill.billID }
 									</small>
@@ -311,6 +377,7 @@ hr {
 											<!-- /.col -->
 										</div>
 
+
 										<div class="mt-4">
 											<div class="row text-600 text-white bgc-default-tp1 py-25">
 												<div class="d-none d-sm-block col-1">#</div>
@@ -318,6 +385,7 @@ hr {
 												<div class="d-none d-sm-block col-4 col-sm-2">Số lượng</div>
 												<div class="d-none d-sm-block col-sm-2">Đơn giá</div>
 												<div class="col-2">Thành tiền</div>
+
 											</div>
 
 											<div class="text-95 text-secondary-d3">
@@ -335,6 +403,7 @@ hr {
 														minFractionDigits="0" currencySymbol="" />
 													<div class="col-2 text-secondary-d2">${totalHired }
 														VNĐ</div>
+													<c:set var="totalPay" value="${dateRange * room.price }"></c:set>
 												</div>
 
 												<c:forEach var="i" begin="2"
@@ -342,25 +411,73 @@ hr {
 													<c:if test="${i % 2 == 0 }">
 														<div class="row mb-2 mb-sm-0 py-25 bgc-default-l4">
 															<div class="d-none d-sm-block col-1">${i }</div>
-															<div class="col-9 col-sm-5">${listServiceUsed[i-2].serviceName }</div>
+															<div class="col-9 col-sm-5">
+																<c:if test="${bill.status != 'Đã thanh toán'}">
+																	<a type="button" class="btn btn-small btn-sm"
+																		href="${pageContext.request.contextPath}/manage-BillDetail?billId=${param.billId}&action=deleteService&roomId=${room.roomId}&serviceId=${listServiceUsed[i-2].serviceId}"
+																		title="delete"><i class="fa fa-minus"></i> </a>
+																</c:if>
+																${listServiceUsed[i-2].serviceName }
+															</div>
 															<div class="d-none d-sm-block col-2">${listServiceUsed[i-2].amount }</div>
-															<div class="d-none d-sm-block col-2 text-95">${listServiceUsed[i-2].price }</div>
-															<div class="col-2 text-secondary-d2">${listServiceUsed[i-2].amount * listServiceUsed[i-2].price}</div>
+															<fmt:formatNumber var="servicePrice"
+																value="${listServiceUsed[i-2].price }" type="currency"
+																minFractionDigits="0" currencySymbol="" />
+															<div class="d-none d-sm-block col-2 text-95">${servicePrice }
+																VNĐ</div>
+															<fmt:formatNumber var="servicePriceTotal"
+																value="${listServiceUsed[i-2].amount * listServiceUsed[i-2].price}"
+																type="currency" minFractionDigits="0" currencySymbol="" />
+															<div class="col-2 text-secondary-d2">${servicePriceTotal }
+																VNĐ</div>
 														</div>
+														<c:set var="totalPay"
+															value="${totalPay + listServiceUsed[i-2].amount * listServiceUsed[i-2].price}"></c:set>
 													</c:if>
 
 													<c:if test="${i % 2 != 0 }">
 														<div class="row mb-2 mb-sm-0 py-25">
-															<div class="d-none d-sm-block col-1">3</div>
-															<div class="col-9 col-sm-5">${listServiceUsed[i-2].serviceName }</div>
-															<div class="d-none d-sm-block col-2">${listServiceUsed[i-2].amount }</div>
-															<div class="d-none d-sm-block col-2 text-95">${listServiceUsed[i-2].price }</div>
-															<div class="col-2 text-secondary-d2">${listServiceUsed[i-2].amount * listServiceUsed[i-2].price}</div>
+															<div class="d-none d-sm-block col-1">${i }</div>
+															<div class="col-9 col-sm-5">
+																<c:if test="${bill.status != 'Đã thanh toán'}">
+																	<a type="button" class="btn btn-small btn-sm"
+																		href="${pageContext.request.contextPath}/manage-BillDetail?billId=${param.billId}&action=deleteService&roomId=${room.roomId}&serviceId=${listServiceUsed[i-2].serviceId}"
+																		title="delete"><i class="fa fa-minus"></i> </a>
+																</c:if>
+																${listServiceUsed[i-2].serviceName }
+															</div>
+															<div class="d-none d-sm-block col-2">
+																${listServiceUsed[i-2].amount }</div>
+															<fmt:formatNumber var="servicePrice"
+																value="${listServiceUsed[i-2].price }" type="currency"
+																minFractionDigits="0" currencySymbol="" />
+															<div class="d-none d-sm-block col-2 text-95">${servicePrice }
+																VNĐ</div>
+															<fmt:formatNumber var="servicePriceTotal"
+																value="${listServiceUsed[i-2].amount * listServiceUsed[i-2].price}"
+																type="currency" minFractionDigits="0" currencySymbol="" />
+															<div class="col-2 text-secondary-d2">${servicePriceTotal }
+																VNĐ</div>
 														</div>
+														<c:set var="totalPay"
+															value="${totalPay + listServiceUsed[i-2].amount * listServiceUsed[i-2].price}"></c:set>
 													</c:if>
-													 
+
 												</c:forEach>
-												
+												<c:if test="${bill.status != 'Đã thanh toán'}">
+													<div class="row mb-2 mb-sm-0 py-25">
+														<div class="d-none d-sm-block col-1">
+															<button type="button" class="btn btn-info"
+																data-toggle="modal" data-target="#addService">Thêm
+																dịch vụ</button>
+														</div>
+														<div class="col-9 col-sm-5"></div>
+														<div class="d-none d-sm-block col-2"></div>
+														<div class="d-none d-sm-block col-2 text-95"></div>
+														<div class="col-2 text-secondary-d2"></div>
+													</div>
+												</c:if>
+
 											</div>
 
 											<div class="row border-b-2 brc-default-l2"></div>
@@ -368,42 +485,38 @@ hr {
 											<div class="row mt-3">
 												<div
 													class="col-12 col-sm-7 text-grey-d2 text-95 mt-2 mt-lg-0">
-													Extra note such as company or payment information...</div>
+												</div>
 
 												<div
-													class="col-12 col-sm-5 text-grey text-90 order-first order-sm-last"><hr>
-													<div class="row my-2">
-														<div class="col-7 text-right">SubTotal</div>
-														<div class="col-5">
-															<span class="text-120 text-secondary-d1">$2,250</span>
-														</div>
-													</div>
+													class="col-12 col-sm-5 text-grey text-90 order-first order-sm-last">
+													<hr>
 
-													<div class="row my-2">
-														<div class="col-5">
-															<span class="text-110 text-secondary-d1">$225</span>
-														</div>
-													</div>
+
 
 													<div class="row my-2 align-items-center bgc-primary-l3 p-2">
-														<div class="col-7 text-right">Total Amount</div>
-														<div class="col-5">
-															<span class="text-150 text-success-d3 opacity-2">$2,475</span>
+														<div class="col-6 text-right">Thành tiền</div>
+														<div class="col-6">
+															<fmt:formatNumber var="total" value="${totalPay}"
+																type="currency" minFractionDigits="0" currencySymbol="" />
+															<span class="text-150 text-success-d3 opacity-2">${total }
+																VNĐ</span>
 														</div>
 													</div>
 												</div>
 											</div>
 
 											<hr />
-											
+
 											<div>
-												<span class="text-secondary-d1 text-105">Thank you
-													for your business</span>
-													<c:if test="${bill.status != 'Đã thanh toán' }">
-														<a href="#"
-														class="btn btn-info btn-bold px-4 float-right mt-3 mt-lg-0">Save</a>
-													</c:if>
-													 
+												<span class="text-secondary-d1 text-105">thank you
+													for trusting our business</span>
+												<c:if test="${bill.status != 'Đã thanh toán' }">
+													<a
+														href="${pageContext.request.contextPath}/manage-BillDetail?action=save&billId=${param.billId}&total=${totalPay}"
+														class="btn btn-info btn-bold px-4 float-right mt-3 mt-lg-0">Lưu
+														hóa đơn</a>
+												</c:if>
+
 											</div>
 										</div>
 									</div>

@@ -1,6 +1,8 @@
 package com.housebooking.Model;
 
-public class Building {
+import java.util.Comparator;
+
+public class Building implements Comparator<Building>{
 	private String buildingId;
 	private String buildingDesc;
 	private String buildingName;
@@ -19,7 +21,14 @@ public class Building {
 	private float buildingArea;
 	private String buildingDetailInfor;
 	private String buildingNumber;
+	private float avgPrice;
 	
+	public float getAvgPrice() {
+		return avgPrice;
+	}
+	public void setAvgPrice(float avgPrice) {
+		this.avgPrice = avgPrice;
+	}
 	public float getBuildingArea() {
 		return buildingArea;
 	}
@@ -142,4 +151,10 @@ public class Building {
 		// TODO Auto-generated method stub
 		return buildingAddress.toString() ;
 	}
+	
+	@Override
+	public int compare(Building o1, Building o2) {
+		 return (int) (o1.getAvgPrice() - o2.getAvgPrice());
+	}
+	
 }

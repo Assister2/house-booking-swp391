@@ -1,6 +1,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
 <html lang="eng">
@@ -455,7 +457,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									<div class="grid_meta">
 										<div class="product_price infor">
 											<div class="grid-price ">
-												<span class="money ">Giá trung bình: </span> 900,000 VNĐ/ 1 ngày <a>(chưa làm :3)</a>
+											<fmt:formatNumber var="avg" value="${building.avgPrice }"
+												type="currency" minFractionDigits="0" currencySymbol="" />
+												<span class="money ">Giá trung bình: </span> ${avg } VNĐ/ 1 ngày
 											</div>
 										</div>
 

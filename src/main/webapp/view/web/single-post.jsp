@@ -850,7 +850,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 		<c:set var="listNear" value="${listNearRoom }"></c:set>
 		<!-- /new_arrivals -->
-		<div class="new_arrivals">
+		<%-- <div class="new_arrivals">
 			<h3>Near this place</h3>
 			<!-- /womens -->
 			<c:forEach var="room" items="${listNear }">
@@ -1032,7 +1032,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			</c:forEach>
 
 			<div class="clearfix"></div>
-		</div>
+		</div> --%>
 	</div>
 	</div>
 
