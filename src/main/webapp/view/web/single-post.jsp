@@ -413,7 +413,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						class="scroll"> (Xem đánh giá)</a></span>
 				</div>
 				<p>
-					<span class="item_price">Giá trung bình: 999k per day</span>
+				<fmt:formatNumber var="buildingPrice" value="${building.avgPrice }"
+												type="currency" minFractionDigits="0" currencySymbol="" />
+					<span class="item_price">Giá trung bình: ${buildingPrice } /ngày</span>
 				</p>
 				<div>
 					<p style="font-size: 16px;">Loại: ${building.buildingType }</p>

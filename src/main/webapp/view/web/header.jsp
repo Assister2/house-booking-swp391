@@ -10,7 +10,7 @@
 		<div class="logo">
 			<h1>
 				<a class="navbar-brand"
-					href="${pageContext.request.contextPath}/home"><span>Heart</span></a>
+					href="${pageContext.request.contextPath}/home"><span>Home</span></a>
 				<a class="navbar-brand"
 					href="${pageContext.request.contextPath}/home"> <i> 
 						Booking</i></a>

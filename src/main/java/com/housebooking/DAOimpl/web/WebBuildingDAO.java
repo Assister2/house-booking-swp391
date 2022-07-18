@@ -221,6 +221,7 @@ public class WebBuildingDAO {
 
 			while (rs.next()) {
 				fillBuildingData(building, rs);
+				building.setAvgPrice(getAvgPrice(buildingId));
 			}
 
 		} catch (Exception ex) {
@@ -230,6 +231,32 @@ public class WebBuildingDAO {
 		}
 
 		return building;
+	}
+	
+	private float getAvgPrice(String buildingId) {
+		float result = 0;
+
+		String sql = " Select AVG(r.room_price) as averagePrice\r\n"
+				+ " From Building b join Room r on r.building_id = b.building_id\r\n"
+				+ " Where b.building_id like ?\r\n"
+				+ " Group by b.building_id";
+		try {
+
+			Connection conn = DBUtils.getConnection();
+
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, buildingId);
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				result = rs.getFloat("averagePrice");
+			}
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+
+		return result;
 	}
 
 	private void fillBuildingData(Building building, ResultSet rs) throws SQLException {

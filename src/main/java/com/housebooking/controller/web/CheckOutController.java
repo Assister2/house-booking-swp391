@@ -2,6 +2,8 @@ package com.housebooking.controller.web;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -63,6 +65,8 @@ public class CheckOutController extends HttpServlet {
 		Date startDate = Date.valueOf(request.getParameter("startDate"));
 		Date endDate = Date.valueOf(request.getParameter("endDate"));
 		
+		int dateRange = DateRange(startDate, endDate) == 0?1:DateRange(startDate, endDate);
+		
 		HttpSession ss = request.getSession(true);
 		UserSession userSession = (UserSession) ss.getAttribute("usersession");
 		
@@ -72,12 +76,28 @@ public class CheckOutController extends HttpServlet {
 		Room room = roomDAO.Find(roomId);
 		Building building = webBuildingDAO.find(buildingId);
 		
+		request.setAttribute("dateRange", dateRange);
 		request.setAttribute("startDate", startDate);
 		request.setAttribute("endDate", endDate);
 		request.setAttribute("room", room);
 		request.setAttribute("building", building);
 		RequestDispatcher rd = request.getRequestDispatcher("/view/web/checkout.jsp");
 		rd.forward(request, response);
+	}
+	
+	private int DateRange(Date d1, Date d2) {
+		try {
+		    LocalDate dateBefore = LocalDate.parse(d1.toString());
+		    LocalDate dateAfter = LocalDate.parse(d2.toString());
+
+		    // Approach 1
+		    int daysDiff = (int) ChronoUnit.DAYS.between(dateBefore, dateAfter);
+		    return daysDiff;
+		}catch(Exception e){
+		    e.printStackTrace();
+		}
+		
+		return 0;
 	}
  
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

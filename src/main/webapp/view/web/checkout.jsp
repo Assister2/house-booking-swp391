@@ -409,7 +409,7 @@ body {
 					</div>
 
 					<div class="col-md-9">
-						<div class="c">Ten nha</div>
+						<div class="c">${building.buildingName }</div>
 						<div class="d"
 							style="display: flex; z-index: 1; position: sticky; transition: all .4s; align-items: center; border-bottom: 1px solid #E2E8F0;">
 							<span style="width: 16px; height: 16px; margin-right: 6px;"><svg
@@ -459,7 +459,7 @@ body {
 
 			<div id="panel" class="main col-md-12">
 				<form action="check-out" method="get">
-					<h2>Xác nhận thông tin</h2>
+					<h2 class="form-field">Xác nhận thông tin</h2>
 					<label for="name">Khách hàng</label> <input
 						class="form-control form-field" type="text"
 						placeholder="tên khách hàng" name="name" id="name"
@@ -493,16 +493,25 @@ body {
 				<b>${room.roomName } </b>
 			</div>
 			<div>
-				<p >Giá: ${room.price }/ 1 ngày</p>
+			<fmt:formatNumber var="roomPrice" value="${room.price }"
+												type="currency" minFractionDigits="0" currencySymbol="" />
+				<p >Giá: ${roomPrice } VNĐ/ 1 ngày</p>
 			</div>
 			<div>
 				<p>${room.roomDesc }</p>
 			</div>
 			<div>
-				<p>Số ngày ở: ...</p>
+			
+				<p>Số ngày ở: ${dateRange } ngày</p>
 			</div>
 			<div>
-				<p>Tổng tiền: ...</p>
+			<fmt:formatNumber var="total" value="${dateRange*room.price }"
+												type="currency" minFractionDigits="0" currencySymbol="" />
+				<p>Tổng tiền: ${total  } VNĐ</p>
+			</div>
+			
+			<div>
+				<p>Note: Chưa bao gồm các chi phí dịch vụ</p>
 			</div>
 			
 		</div>

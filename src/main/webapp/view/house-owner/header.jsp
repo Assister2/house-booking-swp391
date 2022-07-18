@@ -27,7 +27,7 @@
                                            
                         <li>
                             <a href="${pageContext.request.contextPath}/manage">
-                                <i class="fas fa-table"></i>Quản lý</a>
+                                <i class="fa fa-home"></i>Quản lý</a>
                         </li>
                        
                         <li>
@@ -37,11 +37,11 @@
                         
                         <li>
                             <a href="${pageContext.request.contextPath}/invoice-manage">
-                                <i class="fas fa-table"></i>Hóa đơn</a>
+                                <i class="fa fa-file-text"></i>Hóa đơn</a>
                         </li>
                         <li>
                             <a href="${pageContext.request.contextPath}/my-account">
-                                <i class="fas fa-table"></i>Tài khoản</a>
+                                <i class="fa fa-user"></i>Tài khoản</a>
                         </li>
                     </ul>
                 </div>
@@ -66,7 +66,7 @@
                                            
                         <li>
                             <a href="${pageContext.request.contextPath}/manage">
-                                <i class="fas fa-table"></i>Quản lý</a>
+                                <i class="fa fa-home"></i>Quản lý</a>
                         </li>
                        
                          <li>
@@ -76,12 +76,12 @@
                         
                         <li>
                             <a href="${pageContext.request.contextPath}/invoice-manage">
-                                <i class="fas fa-table"></i>Hóa đơn</a>
+                                <i class="fa fa-file-text"></i>Hóa đơn</a>
                         </li>
                         
                          <li>
                             <a href="${pageContext.request.contextPath}/my-account">
-                                <i class="fas fa-table"></i>Tài khoản</a>
+                                <i class="fa fa-user"></i>Tài khoản</a>
                         </li>
                         
                     </ul>
