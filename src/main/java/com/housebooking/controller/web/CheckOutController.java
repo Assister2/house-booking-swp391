@@ -1,6 +1,7 @@
 package com.housebooking.controller.web;
 
 import java.io.IOException;
+import java.sql.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,6 +9,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.housebooking.DAOimpl.houseowner.RoomDAO;
+import com.housebooking.DAOimpl.web.WebBuildingDAO;
+import com.housebooking.Model.Building;
+import com.housebooking.Model.Room;
+import com.housebooking.Model.UserSession;
 
 /**
  * Servlet implementation class CheckOutController
@@ -25,6 +33,49 @@ public class CheckOutController extends HttpServlet {
     }
     
 	protected void Process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
+
+		String action = request.getParameter("action");
+
+		if (action == null || action.equals("")) {
+			doDisplay(request, response);
+		} else {
+			switch (action) {
+			case "approve":
+				Approve(request, response);
+				break;
+
+			default:
+				doDisplay(request, response);
+				break;
+			}
+		}
+	}
+	
+	protected void Approve(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+	}
+	
+	protected void doDisplay(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String buildingId = request.getParameter("buildingId");
+		String roomId = request.getParameter("roomId");
+		Date startDate = Date.valueOf(request.getParameter("startDate"));
+		Date endDate = Date.valueOf(request.getParameter("endDate"));
+		
+		HttpSession ss = request.getSession(true);
+		UserSession userSession = (UserSession) ss.getAttribute("usersession");
+		
+		RoomDAO roomDAO = new RoomDAO();
+		WebBuildingDAO webBuildingDAO = new WebBuildingDAO();
+		
+		Room room = roomDAO.Find(roomId);
+		Building building = webBuildingDAO.find(buildingId);
+		
+		request.setAttribute("startDate", startDate);
+		request.setAttribute("endDate", endDate);
+		request.setAttribute("room", room);
+		request.setAttribute("building", building);
 		RequestDispatcher rd = request.getRequestDispatcher("/view/web/checkout.jsp");
 		rd.forward(request, response);
 	}

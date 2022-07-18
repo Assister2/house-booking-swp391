@@ -65,6 +65,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	
 	
 	
+	
 
 		addEventListener("load", function () {
 			setTimeout(hideURLbar, 0);
@@ -74,6 +75,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			window.scrollTo(0, 1);
 		}
 	
+
 
 
 
@@ -369,6 +371,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 body {
 	background-color: #EDF2F7;
 }
+
+.form-field {
+	margin-bottom: 10px;
+}
 </style>
 
 </head>
@@ -385,9 +391,6 @@ body {
 		<jsp:include page="commontool.jsp"></jsp:include>
 
 	</div>
-	
-	<div class="text-center"><h1>Trang chưa format</h1></div>
-	
 
 	<div style="width: 80%; margin-left: auto; margin-right: auto;">
 		<div class="col-md-7">
@@ -415,7 +418,8 @@ body {
 										d="M2 14v-1.333A2.667 2.667 0 014.667 10h2.666A2.667 2.667 0 0110 12.667V14m.667-11.913a2.667 2.667 0 010 5.166M14 14v-1.333a2.667 2.667 0 00-2-2.567M8.667 4.667a2.667 2.667 0 11-5.334 0 2.667 2.667 0 015.334 0z"
 										stroke="#4A5568" stroke-linecap="round"
 										stroke-linejoin="round"></path></svg></span> <span
-								class="MuiBox-root jss1071">Sức chứa tối đa 2 người</span>  <span class="MuiBox-root jss1074"
+								class="MuiBox-root jss1071">Sức chứa tối đa 2 người</span> <span
+								class="MuiBox-root jss1074"
 								style="margin-left: 30%; width: 16px; height: 16px; margin-right: 6px;"><svg
 									width="16" height="16" fill="none">
 									<path
@@ -425,7 +429,7 @@ body {
 									<path d="M11.333 11.333L5 5M11.334 8.333v3h-3M4.667 7.667v-3h3"
 										stroke="#4A5568" stroke-miterlimit="10" stroke-linecap="round"
 										stroke-linejoin="round"></path></svg></span><span
-								class="MuiBox-root jss1075">35m2</span>
+								class="MuiBox-root jss1075">${building.buildingArea } m2</span>
 						</div>
 						<div class="row" style="height: 75%;">
 							<div class="col-md-12 discript">
@@ -438,15 +442,11 @@ body {
 											d="M11.771 11.105l-2.828 2.828a1.333 1.333 0 01-1.885 0l-2.83-2.828a5.333 5.333 0 117.543 0v0z"
 											stroke="#1A202C" stroke-linecap="round"
 											stroke-linejoin="round"></path></svg>
-									<p>Địa chỉ:........</p>
+									<p> Địa chỉ: ${building.buildingAddress }</p>
 								</div>
 								<div class="row" style="margin-top: 10px;">
-									<div class="col-md-6">
-										Ngày đến: __/__/____
-									</div>
-									<div class="col-md-6">
-										Ngày về: __/__/____
-									</div>
+									<div class="col-md-6">Ngày đến: ${startDate }</div>
+									<div class="col-md-6">Ngày về: ${endDate }</div>
 								</div>
 
 							</div>
@@ -456,21 +456,30 @@ body {
 
 				</div>
 			</div>
-			
+
 			<div id="panel" class="main col-md-12">
-				<h2>Thông tin đơn hàng</h2>
-				<label for="name">Khách hàng</label>
-				<input class="form-control" type="text" placeholder="tên khách hàng" name="name" id = "name" value="${usersession.user.name }" disabled="disabled">
-				
-				<label for="phone">Số điện thoại</label>
-				<input class="form-control" type="text" placeholder="tên khách hàng" name="phone" id = "phone" value="${usersession.user.phoneNumber }" disabled="disabled">
-				
-				<label for="email">Email</label>
-				<input class="form-control" type="Email" placeholder="tên khách hàng" name="email" id = "email" value="${usersession.user.email }" disabled="disabled">
-				
-				<input type="checkbox" required="required"> Tôi đã đọc kỹ thông tin
-				<br>
-				<input type="submit" class="btn btn-primary" value="Gửi yêu cầu đặt phòng">
+				<form action="check-out" method="get">
+					<h2>Xác nhận thông tin</h2>
+					<label for="name">Khách hàng</label> <input
+						class="form-control form-field" type="text"
+						placeholder="tên khách hàng" name="name" id="name"
+						value="${usersession.user.name }" disabled="disabled"> <label
+						for="phone">Số điện thoại</label> <input
+						class="form-control form-field" type="text"
+						placeholder="tên khách hàng" name="phone" id="phone"
+						value="${usersession.user.phoneNumber }" disabled="disabled">
+
+					<label for="email">Email</label> <input
+						class="form-control form-field" type="Email"
+						placeholder="tên khách hàng" name="email" id="email"
+						value="${usersession.user.email }" disabled="disabled"> <input
+						type="checkbox" required="required" class="form-field">
+					Tôi đã đọc kỹ thông tin <br>
+					<div style="text-align: right;">
+						<button type="submit" class="btn btn-primary">Xác nhận</button>
+					</div>
+
+				</form>
 			</div>
 		</div>
 
@@ -480,11 +489,22 @@ body {
 			<img alt="" class="img-responsive"
 				style="width: 432px; height: 114px; border-radius: 5px;"
 				src="https://q-xx.bstatic.com/xdata/images/hotel/840x460/205684046.jpg?k=edd4b442376ac9cf1784cb06c8de0dc8a6037a871e50f060ba8bbcdc297cb74a&o=">
-			<b>Ten cua phong: </b>
-			<p>Giá: .../ 1 ngày</p>
-			<p>Thông tin này kia các kiểu</p>
-			<p>Số ngày ở: ...</p>
-			<p>Tổng tiền:...</p>
+			<div>
+				<b>${room.roomName } </b>
+			</div>
+			<div>
+				<p >Giá: ${room.price }/ 1 ngày</p>
+			</div>
+			<div>
+				<p>${room.roomDesc }</p>
+			</div>
+			<div>
+				<p>Số ngày ở: ...</p>
+			</div>
+			<div>
+				<p>Tổng tiền: ...</p>
+			</div>
+			
 		</div>
 	</div>
 
