@@ -51,6 +51,33 @@ public class RoomDAO {
 
 		return list;
 	}
+	
+	public int Count() {
+
+		int re = 0;
+		String sql = " Select count(room_id) as count\r\n"
+				+ " from Room";
+
+		try {
+
+			Connection conn = DBUtils.getConnection();
+
+			PreparedStatement ps = conn.prepareStatement(sql);
+
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				re = rs.getInt("count");
+			}
+
+		} catch (Exception ex) {
+
+			ex.printStackTrace();
+
+		}
+
+		return re;
+	}
 
 	public Room Find(String roomId) {
 		Room room = null;

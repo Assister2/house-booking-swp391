@@ -2,11 +2,8 @@ package com.housebooking.controller.web;
 
 import java.io.IOException;
 import java.sql.Date;
-import java.time.Duration;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Locale;
 
@@ -74,12 +71,12 @@ public class PostController extends HttpServlet {
 		int report = 0;
 		Date date = new Date(System.currentTimeMillis());
 		String status = "On";
-		LocalDateTime dateTime = LocalDateTime.now().plus(Duration.of(10, ChronoUnit.MINUTES));
-		String feedbackId = dateTime.toString();
+		FeedbackDAO feedbackDAO = new FeedbackDAO();
+		String feedbackId = "fb_" + feedbackDAO.Count();
 		
 		Feedback feedback = new Feedback(feedbackId, comment, rating, status, date, report, buildingId, userSession.getUser(),replyTo);
 		
-		FeedbackDAO feedbackDAO = new FeedbackDAO();
+		
 	
 		if(feedbackDAO.add(feedback)) {
 			request.setAttribute("mess", "Comment thành công!");

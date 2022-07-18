@@ -1,8 +1,6 @@
-package com.housebooking.controller.web;
+package com.housebooking.controller.admin;
 
 import java.io.IOException;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class MakeRequest
+ * Servlet implementation class DashboardController
  */
-@WebServlet("/make-request")
-public class MakeRequest extends HttpServlet {
+@WebServlet(name = "AdminDashboardController", urlPatterns = { "/AdminDashboard" })
+public class DashboardController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MakeRequest() {
+    public DashboardController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,8 +26,7 @@ public class MakeRequest extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		request.getRequestDispatcher("/view/web/requesting.jsp").forward(request, response);
+		request.getRequestDispatcher("/view/admin/dashboard.jsp").forward(request, response);
 	}
 
 	/**

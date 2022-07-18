@@ -1,10 +1,6 @@
 package com.housebooking.controller.homeowner;
 
 import java.io.IOException;
-import java.time.Duration;
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
-import java.util.Collection;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -86,8 +82,8 @@ public class BuildingDetailController extends HttpServlet {
 	
 	protected void AddRoom(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-		LocalDateTime dateTime = LocalDateTime.now().plus(Duration.of(10, ChronoUnit.MINUTES));
-		String roomId = dateTime.toString();
+		RoomDAO roomDAO = new RoomDAO();
+		String roomId = "room_" + roomDAO.Count();
 		
 		String buildingId = request.getParameter("buildingId");
 		String roomName = request.getParameter("roomName");
@@ -112,8 +108,6 @@ public class BuildingDetailController extends HttpServlet {
 		String roomDescript = request.getParameter("Update_Descript");
 
 		String imageLink = "";
-
-		RoomDAO roomDAO = new RoomDAO();
 
 		try {
 			Part part1 = request.getPart("image_1");

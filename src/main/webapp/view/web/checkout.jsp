@@ -66,6 +66,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	
 	
 	
+	
 
 		addEventListener("load", function () {
 			setTimeout(hideURLbar, 0);
@@ -75,6 +76,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			window.scrollTo(0, 1);
 		}
 	
+
 
 
 
@@ -392,23 +394,53 @@ body {
 
 	</div>
 
+	<div id="smallModel" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Thông báo</h4>
+				</div>
+				<div class="modal-body">
+				<c:if test="${param.message == 'success' }">
+					<p>Gửi yêu cầu đặt phòng thành công, chủ phòng sẽ liên hệ với bạn trong thời gian sớm nhất</p>
+					<p>Xin cảm ơn quý khách đã sử dụng dụng vụ!</p>
+					<a href="${pageContext.request.contextPath}/sa">Xem yêu cầu</a>
+				</c:if>
+					
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	<!-- end modal small -->
+
+	<!-- Trigger the modal with a button -->
+	<button type="button" style="display: none;" id="showMessage"
+		class="showMess btn btn-info btn-lg" data-toggle="modal"
+		data-target="#smallModel">Open Modal</button>
+
 	<div style="width: 80%; margin-left: auto; margin-right: auto;">
 		<div class="col-md-7">
 			<div id="panel" class="main col-md-12" style="margin-top: 20px;">
 				<div class="b row">
-					<div class="col-md-3">
+					<div class="col-md-4">
 						<div class="grid images_3_of_2">
 							<div class="flexslider">
 								<div class="thumb-image">
 									<img style="border-radius: 5px;"
-										src="https://kienviet.net/wp-content/uploads/2021/02/13-1.jpg"
+										src="${pageContext.request.contextPath}${building.buildingImage}"
 										data-imagezoom="true" class="img-responsive">
 								</div>
 							</div>
 						</div>
 					</div>
-
-					<div class="col-md-9">
+					<div class="col-md-8">
 						<div class="c">${building.buildingName }</div>
 						<div class="d"
 							style="display: flex; z-index: 1; position: sticky; transition: all .4s; align-items: center; border-bottom: 1px solid #E2E8F0;">
@@ -442,7 +474,7 @@ body {
 											d="M11.771 11.105l-2.828 2.828a1.333 1.333 0 01-1.885 0l-2.83-2.828a5.333 5.333 0 117.543 0v0z"
 											stroke="#1A202C" stroke-linecap="round"
 											stroke-linejoin="round"></path></svg>
-									<p> Địa chỉ: ${building.buildingAddress }</p>
+									<p>Địa chỉ: ${building.buildingAddress }</p>
 								</div>
 								<div class="row" style="margin-top: 10px;">
 									<div class="col-md-6">Ngày đến: ${startDate }</div>
@@ -472,10 +504,18 @@ body {
 					<label for="email">Email</label> <input
 						class="form-control form-field" type="Email"
 						placeholder="tên khách hàng" name="email" id="email"
-						value="${usersession.user.email }" disabled="disabled"> <input
-						type="checkbox" required="required" class="form-field">
-					Tôi đã đọc kỹ thông tin <br>
+						value="${usersession.user.email }" disabled="disabled"> <label
+						for="note">Note</label>
+					<textarea rows="5" cols="" name="note" class="form-control form-field"></textarea>
+					<input id="approve" type="checkbox" required="required" class="form-field"> <label for="approve">Tôi
+					đã đọc kỹ thông tin</label> <br>
 					<div style="text-align: right;">
+						<input type="hidden" name="action" value="approve"> <input
+							type="hidden" name="buildingId" value="${building.buildingId }">
+						<input type="hidden" name="roomId" value="${room.roomId }">
+						<input type="hidden" name="startDate" value="${param.startDate }">
+						<input type="hidden" name="endDate" value="${param.endDate }">
+						<input type="hidden" name="price" value="${room.price }">
 						<button type="submit" class="btn btn-primary">Xác nhận</button>
 					</div>
 
@@ -486,34 +526,37 @@ body {
 
 		<div id="panel" class="main2 col-md-4"
 			style="margin-top: 20px; margin-left: 20px;">
-			<img alt="" class="img-responsive"
-				style="width: 432px; height: 114px; border-radius: 5px;"
-				src="https://q-xx.bstatic.com/xdata/images/hotel/840x460/205684046.jpg?k=edd4b442376ac9cf1784cb06c8de0dc8a6037a871e50f060ba8bbcdc297cb74a&o=">
+			<div style="margin-bottom: 20px;">
+				<img alt="" class="img-responsive"
+					style="height: 100%; width: 100%; border-radius: 5px;"
+					src="${pageContext.request.contextPath}${room.roomImages[0]}">
+			</div>
+			
 			<div>
-				<b>${room.roomName } </b>
+				<h3>${room.roomName } </h3>
 			</div>
 			<div>
-			<fmt:formatNumber var="roomPrice" value="${room.price }"
-												type="currency" minFractionDigits="0" currencySymbol="" />
-				<p >Giá: ${roomPrice } VNĐ/ 1 ngày</p>
+				<fmt:formatNumber var="roomPrice" value="${room.price }"
+					type="currency" minFractionDigits="0" currencySymbol="" />
+				<p>Giá: ${roomPrice } VNĐ/ 1 ngày</p>
 			</div>
 			<div>
 				<p>${room.roomDesc }</p>
 			</div>
 			<div>
-			
+
 				<p>Số ngày ở: ${dateRange } ngày</p>
 			</div>
 			<div>
-			<fmt:formatNumber var="total" value="${dateRange*room.price }"
-												type="currency" minFractionDigits="0" currencySymbol="" />
+				<fmt:formatNumber var="total" value="${dateRange*room.price }"
+					type="currency" minFractionDigits="0" currencySymbol="" />
 				<p>Tổng tiền: ${total  } VNĐ</p>
 			</div>
-			
+
 			<div>
 				<p>Note: Chưa bao gồm các chi phí dịch vụ</p>
 			</div>
-			
+
 		</div>
 	</div>
 
@@ -627,6 +670,15 @@ body {
 		});
 	</script>
 
+	<c:if test="${param.message != null}">
+		<script>
+			function myFunction() {
+				document.getElementById("showMessage").click();
+			}
+
+			myFunction();
+		</script>
+	</c:if>
 
 </body>
 

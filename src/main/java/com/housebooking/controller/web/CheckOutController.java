@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,7 +16,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.housebooking.DAOimpl.houseowner.RoomDAO;
+import com.housebooking.DAOimpl.web.BillDAO;
 import com.housebooking.DAOimpl.web.WebBuildingDAO;
+import com.housebooking.Model.Bill;
+import com.housebooking.Model.Bill_Detail;
 import com.housebooking.Model.Building;
 import com.housebooking.Model.Room;
 import com.housebooking.Model.UserSession;
@@ -56,20 +61,79 @@ public class CheckOutController extends HttpServlet {
 	}
 	
 	protected void Approve(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String buildingId = request.getParameter("buildingId");
+		String roomId = request.getParameter("roomId");
+		String startDate1 = request.getParameter("startDate");
+		String endDate1 = request.getParameter("endDate");
+		String note = request.getParameter("note");
 		
+		String[] arrStartDate = startDate1.split("/");
+		Date startDate = Date.valueOf(arrStartDate[2] + "-" + arrStartDate[0] + "-" + arrStartDate[1]);
+		String[] arrEndDate = endDate1.split("/");
+		Date endDate = Date.valueOf(arrEndDate[2] + "-" + arrEndDate[0] + "-" + arrEndDate[1]);
+		
+		float price = 0;
+		if(request.getParameter("price")!=null && !request.getParameter("price").equals("")) {
+			price = Float.parseFloat(request.getParameter("price"));
+		}
+		
+		//LocalDate orderDate = LocalDate.now();
+		Date date = new Date(System.currentTimeMillis());
+		String billId = "Bill_" + new BillDAO().Count();
+		String status = "Chờ xác nhận";
+		HttpSession ss = request.getSession(true);
+		UserSession userSession = (UserSession) ss.getAttribute("usersession");
+		
+		Bill bill = new Bill(billId, date, 0, status, userSession.getUser().getUserId());
+		List<Bill_Detail> lisBill_Details = new ArrayList<Bill_Detail>();
+		Bill_Detail bill_Detail = new Bill_Detail(roomId, startDate, endDate, price, note, 0);
+		lisBill_Details.add(bill_Detail);
+		
+		bill.setBillDetail(lisBill_Details);
+		
+		BillDAO billDAO = new BillDAO();
+		if(billDAO.Insert(bill)) {
+			billDAO.InsertBillDetail(bill);
+			request.setAttribute("message", "Đặt phòng thành công");
+		}
+		else {
+			request.setAttribute("message", "Đặt phòng không thành công");
+		}
+		
+		int dateRange = DateRange(startDate, endDate) == 0?1:DateRange(startDate, endDate);
+
+		RoomDAO roomDAO = new RoomDAO();
+		WebBuildingDAO webBuildingDAO = new WebBuildingDAO();
+		
+		Room room = roomDAO.Find(roomId);
+		Building building = webBuildingDAO.find(buildingId);
+		
+		request.setAttribute("dateRange", dateRange);
+		request.setAttribute("startDate", startDate);
+		request.setAttribute("endDate", endDate);
+		request.setAttribute("room", room);
+		request.setAttribute("building", building);
+		response.sendRedirect("check-out?buildingId=" + buildingId + "&roomId=" + roomId + "&startDate=" +startDate1 + "&endDate=" + endDate1 + "&message=success");
+//		RequestDispatcher rd = request.getRequestDispatcher("/view/web/checkout.jsp");
+//		rd.forward(request, response);
 	}
 	
 	protected void doDisplay(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String buildingId = request.getParameter("buildingId");
 		String roomId = request.getParameter("roomId");
-		Date startDate = Date.valueOf(request.getParameter("startDate"));
-		Date endDate = Date.valueOf(request.getParameter("endDate"));
+		String startDate1 = request.getParameter("startDate");
+		String endDate1 = request.getParameter("endDate");
 		
-		int dateRange = DateRange(startDate, endDate) == 0?1:DateRange(startDate, endDate);
+		String[] arrStartDate = startDate1.split("/");
+		Date startDate = Date.valueOf(arrStartDate[2] + "-" + arrStartDate[0] + "-" + arrStartDate[1]);
+		String[] arrEndDate = endDate1.split("/");
+		Date endDate = Date.valueOf(arrEndDate[2] + "-" + arrEndDate[0] + "-" + arrEndDate[1]);
 		
 		HttpSession ss = request.getSession(true);
 		UserSession userSession = (UserSession) ss.getAttribute("usersession");
 		
+		int dateRange = DateRange(startDate, endDate) == 0?1:DateRange(startDate, endDate);
+
 		RoomDAO roomDAO = new RoomDAO();
 		WebBuildingDAO webBuildingDAO = new WebBuildingDAO();
 		

@@ -391,8 +391,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<div class="col-md-8 shop_left" style="margin-top: 6px;">
 						<!-- <img src="images/banner3.jpg" alt="">
 						<h6>40% off</h6> -->
-						There are <span style="color: red;">${requestScope.totalRecords }</span>
-						results
+						Gồm có <span style="color: red;">${requestScope.totalRecords }</span>
+						kết quả tìm kiếm
 					</div>
 					<div class="col-md-4">
 						<div class="dropdown">
@@ -433,7 +433,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 												<div class="men-cart-pro">
 													<div class="inner-men-cart-pro">
 														<a
-															href="${pageContext.request.contextPath}/single-post?buildingId=${building.buildingId}"
+															href="${pageContext.request.contextPath}/single-post?buildingId=${building.buildingId}&startDate=${param.startDate}&endDate=${param.endDate}"
 															class="link-product-add-cart">Xem chi tiết</a>
 
 													</div>

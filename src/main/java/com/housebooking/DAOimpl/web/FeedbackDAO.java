@@ -11,6 +11,33 @@ import com.housebooking.Model.User;
 import com.housebooking.Utils.DBUtils;
 
 public class FeedbackDAO {
+	
+	public int Count() {
+
+		int re = 0;
+		String sql = " Select count(feedback_id) as count\r\n"
+				+ "	 from Feedback ";
+
+		try {
+
+			Connection conn = DBUtils.getConnection();
+
+			PreparedStatement ps = conn.prepareStatement(sql);
+
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				re = rs.getInt("count");
+			}
+
+		} catch (Exception ex) {
+
+			ex.printStackTrace();
+
+		}
+
+		return re;
+	}
 
 	public List<Feedback> list(String buildingId) {
 		ArrayList<Feedback> list;

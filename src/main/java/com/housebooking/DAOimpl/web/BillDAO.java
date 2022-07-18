@@ -1,4 +1,4 @@
-package com.housebooking.DAOimpl.houseowner;
+package com.housebooking.DAOimpl.web;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,6 +17,90 @@ import com.housebooking.Model.Bill_Detail;
 import com.housebooking.Utils.DBUtils;
 
 public class BillDAO {
+	public int Count() {
+
+		int re = 0;
+		String sql = " Select count(bill_id) as count\r\n"
+				+ "	 from Bill";
+
+		try {
+
+			Connection conn = DBUtils.getConnection();
+
+			PreparedStatement ps = conn.prepareStatement(sql);
+
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				re = rs.getInt("count");
+			}
+
+		} catch (Exception ex) {
+
+			ex.printStackTrace();
+
+		}
+
+		return re;
+	}
+	
+	public boolean Insert(Bill bill) {
+
+		String sql = "   Insert into Bill\r\n"
+				+ "  Values(?,?,?,?,?) ";
+
+		try {
+
+			Connection conn = DBUtils.getConnection();
+
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, bill.getBillID());
+			ps.setDate(2, bill.getDate());
+			ps.setFloat(3, (float) bill.getTotal());
+			ps.setNString(4, bill.getStatus());
+			ps.setString(5, bill.getUserId());
+			if(ps.executeUpdate() > 0) {
+				return true;
+			}
+
+		} catch (Exception ex) {
+
+			ex.printStackTrace();
+
+		}
+
+		return false;
+	}
+	
+	public boolean InsertBillDetail(Bill bill) {
+
+		String sql = "  Insert into Bill_detail\r\n"
+				+ " Values(?,?,?,?,?,?,?) ";
+
+		try {
+
+			Connection conn = DBUtils.getConnection();
+
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, bill.getBillID());
+			ps.setString(2, bill.getBillDetail().get(0).getRoomId());
+			ps.setDate(3, bill.getBillDetail().get(0).getStartDate());
+			ps.setDate(4, bill.getBillDetail().get(0).getEndDate());
+			ps.setFloat(5, (float) bill.getBillDetail().get(0).getPrice());
+			ps.setNString(6, bill.getBillDetail().get(0).getNote());
+			ps.setFloat(7, (float)bill.getBillDetail().get(0).getExpense());
+			if(ps.executeUpdate() > 0) {
+				return true;
+			}
+
+		} catch (Exception ex) {
+
+			ex.printStackTrace();
+
+		}
+
+		return false;
+	}
 	
 	public Bill Find(String billId) {
 		Bill bill = null;
@@ -68,7 +152,7 @@ public class BillDAO {
 				billDetail.setPrice(rs.getDouble("price"));
 				billDetail.setNote(rs.getNString("note"));
 				billDetail.setExpense(rs.getDouble("expense"));
-				billDetail.setRoom(new RoomDAO().Find(rs.getString("room_id")));
+				billDetail.setRoom(new RoomDAO().find(rs.getString("room_id")));
 				list.add(billDetail);
 			}
 
@@ -135,40 +219,6 @@ public class BillDAO {
 				ps.setInt(2, start);
 				ps.setInt(3, end);
 			}
-			ResultSet rs = ps.executeQuery();
-
-			while (rs.next()) {
-				Bill bill = new Bill();
-				FillBillData(rs, bill);
-				bill.setBillDetail(listBillDetail(bill.getBillID()));
-				list.add(bill);
-			}
-
-		} catch (Exception ex) {
-
-			ex.printStackTrace();
-
-		}
-
-		return list;
-	}
-	
-	
-	public List<Bill> GetOrderHistory(String userID) {
-		ArrayList<Bill> list;
-		list = new ArrayList<Bill>();
-
-		String sql = " Select bi.*\r\n" + " From Building b join Users u on b.user_id = u.user_id\r\n"
-				+ " Join Room r on b.building_id = r.building_id\r\n"
-				+ " Join Bill_detail bd on bd.room_id = r.room_id\r\n" + " Join Bill bi on bd.bill_id = bi.bill_id\r\n"
-				+ " Where u.user_id = ? ";
-		
-		try {
-
-			Connection conn = DBUtils.getConnection();
-
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setString(1, userID);
 			ResultSet rs = ps.executeQuery();
 
 			while (rs.next()) {
@@ -430,250 +480,7 @@ public class BillDAO {
 		return list;
 	}
 
-	public List<Integer> getBillInThisWeek(String userID) {
-		List<Integer> result = new ArrayList<Integer>();
-		for (int i = 0; i < 7; i++) {
-			result.add(i, 0);
-		}
-		String sql = "Select count(bi.bill_id) as AmountBill, DATENAME(WEEKDAY, bi.date) as datename\r\n"
-				+ "From Building b join Users u on b.user_id = u.user_id\r\n"
-				+ "	Join Room r on b.building_id = r.building_id\r\n"
-				+ "	Join Bill_detail bd on bd.room_id = r.room_id\r\n"
-				+ "	Join Bill bi on bd.bill_id = bi.bill_id\r\n"
-				+ "Where u.user_id = ? AND DATEPART(DAYOFYEAR, bi.date) >= DATEPART(DAYOFYEAR,CAST( DATEADD(dd,  0, DATEADD(ww, DATEDIFF(ww, 0, DATEADD(dd, -1, GETDATE())) , 0)) AS Date)) \r\n"
-				+ "AND DATEPART(DAYOFYEAR, bi.date) <= DATEPART(DAYOFYEAR,CAST( DATEADD(dd,  6, DATEADD(ww, DATEDIFF(ww, 0, DATEADD(dd, -1, GETDATE())) , 0)) AS Date)) \r\n"
-				+ "Group by DATENAME(WEEKDAY, bi.date)";
-
-		try {
-
-			Connection conn = DBUtils.getConnection();
-
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setString(1, userID);
-			ResultSet rs = ps.executeQuery();
-
-			while (rs.next()) {
-				switch (rs.getString("datename")) {
-				case "Monday":
-					result.set(0, rs.getInt("AmountBill"));
-					break;
-				case "Tuesday":
-					result.set(1, rs.getInt("AmountBill"));
-					break;
-				case "Wednesday":
-					result.set(2, rs.getInt("AmountBill"));
-					break;
-				case "Thursday":
-					result.set(3, rs.getInt("AmountBill"));
-					break;
-				case "Friday":
-					result.set(4, rs.getInt("AmountBill"));
-					break;
-				case "Saturday":
-					result.set(5, rs.getInt("AmountBill"));
-					break;
-				case "Sunday":
-					result.set(6, rs.getInt("AmountBill"));
-					break;
-				}
-			}
-
-		} catch (Exception ex) {
-
-			ex.printStackTrace();
-
-		}
-
-		return result;
-	}
-
-	public List<Integer> getBillInLastWeek(String userID) {
-		List<Integer> result = new ArrayList<Integer>();
-		for (int i = 0; i < 7; i++) {
-			result.add(i, 0);
-		}
-		String sql = "Select count(bi.bill_id) as AmountBill, DATENAME(WEEKDAY, bi.date) as datename\r\n"
-				+ "From Building b join Users u on b.user_id = u.user_id\r\n"
-				+ "	Join Room r on b.building_id = r.building_id\r\n"
-				+ "	Join Bill_detail bd on bd.room_id = r.room_id\r\n"
-				+ "	Join Bill bi on bd.bill_id = bi.bill_id\r\n"
-				+ "Where u.user_id = ? AND DATEPART(DAYOFYEAR, bi.date) >= DATEPART(DAYOFYEAR,CAST( DATEADD(dd,  0, DATEADD(ww, DATEDIFF(ww, 0, DATEADD(dd, -1, GETDATE())) -1, 0)) AS Date)) \r\n"
-				+ "AND DATEPART(DAYOFYEAR, bi.date) <= DATEPART(DAYOFYEAR,CAST( DATEADD(dd,  6, DATEADD(ww, DATEDIFF(ww, 0, DATEADD(dd, -1, GETDATE())) -1, 0)) AS Date)) \r\n"
-				+ "Group by DATENAME(WEEKDAY, bi.date)";
-
-		try {
-
-			Connection conn = DBUtils.getConnection();
-
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setString(1, userID);
-			ResultSet rs = ps.executeQuery();
-
-			while (rs.next()) {
-				switch (rs.getString("datename")) {
-				case "Monday":
-					result.set(0, rs.getInt("AmountBill"));
-					break;
-				case "Tuesday":
-					result.set(1, rs.getInt("AmountBill"));
-					break;
-				case "Wednesday":
-					result.set(2, rs.getInt("AmountBill"));
-					break;
-				case "Thursday":
-					result.set(3, rs.getInt("AmountBill"));
-					break;
-				case "Friday":
-					result.set(4, rs.getInt("AmountBill"));
-					break;
-				case "Saturday":
-					result.set(5, rs.getInt("AmountBill"));
-					break;
-				case "Sunday":
-					result.set(6, rs.getInt("AmountBill"));
-					break;
-				}
-			}
-
-		} catch (Exception ex) {
-
-			ex.printStackTrace();
-
-		}
-
-		return result;
-	}
 	
-	public List<Integer> getBill2WeeksAgo(String userID) {
-		List<Integer> result = new ArrayList<Integer>();
-		for (int i = 0; i < 7; i++) {
-			result.add(i, 0);
-		}
-		String sql = "Select count(bi.bill_id) as AmountBill, DATENAME(WEEKDAY, bi.date) as datename\r\n"
-				+ "From Building b join Users u on b.user_id = u.user_id\r\n"
-				+ "	Join Room r on b.building_id = r.building_id\r\n"
-				+ "	Join Bill_detail bd on bd.room_id = r.room_id\r\n"
-				+ "	Join Bill bi on bd.bill_id = bi.bill_id\r\n"
-				+ "Where u.user_id = ? AND DATEPART(DAYOFYEAR, bi.date) >= DATEPART(DAYOFYEAR,CAST( DATEADD(dd,  0, DATEADD(ww, DATEDIFF(ww, 0, DATEADD(dd, -1, GETDATE())) -2, 0)) AS Date)) \r\n"
-				+ "AND DATEPART(DAYOFYEAR, bi.date) <= DATEPART(DAYOFYEAR,CAST( DATEADD(dd,  6, DATEADD(ww, DATEDIFF(ww, 0, DATEADD(dd, -1, GETDATE())) -2, 0)) AS Date)) \r\n"
-				+ "Group by DATENAME(WEEKDAY, bi.date)";
-
-
-		try {
-
-			Connection conn = DBUtils.getConnection();
-
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setString(1, userID);
-			ResultSet rs = ps.executeQuery();
-
-			while (rs.next()) {
-				switch (rs.getString("datename")) {
-				case "Monday":
-					result.set(0, rs.getInt("AmountBill"));
-					break;
-				case "Tuesday":
-					result.set(1, rs.getInt("AmountBill"));
-					break;
-				case "Wednesday":
-					result.set(2, rs.getInt("AmountBill"));
-					break;
-				case "Thursday":
-					result.set(3, rs.getInt("AmountBill"));
-					break;
-				case "Friday":
-					result.set(4, rs.getInt("AmountBill"));
-					break;
-				case "Saturday":
-					result.set(5, rs.getInt("AmountBill"));
-					break;
-				case "Sunday":
-					result.set(6, rs.getInt("AmountBill"));
-					break;
-				}
-			}
-
-		} catch (Exception ex) {
-
-			ex.printStackTrace();
-
-		}
-
-		return result;
-	}
-	
-	
-	public LinkedHashMap<String, Integer> getLast12MonthBillAmount(String userID) {
-		LinkedHashMap<String, Integer> result = new LinkedHashMap<String, Integer>();
-		
-		
-		String sql = "Select count(bi.bill_id) as totalRequestLast12Month, DATENAME(MONTH, bi.date) as month\r\n"
-				+ "From Building b join Users u on b.user_id = u.user_id\r\n"
-				+ "	Join Room r on b.building_id = r.building_id\r\n"
-				+ "	Join Bill_detail bd on bd.room_id = r.room_id\r\n"
-				+ "	Join Bill bi on bd.bill_id = bi.bill_id\r\n"
-				+ "Where u.user_id = ? \r\n"
-				+ "AND bi.date >= CAST(DATEADD(mm, DATEDIFF(mm, 1, CAST(DATEADD(month, -11, GETDATE()) as date)), 0) as date)\r\n"
-				+ "AND bi.date <= CAST( GETDATE() AS Date ) AND b.building_status not like 'Removed'\r\n"
-				+ "GROUP BY Year(bi.date), MONTH(bi.date), u.user_id, DATENAME(MONTH, bi.date)\r\n"
-				+ "Order by Year(bi.date) asc";
-
-		try {
-
-			Connection conn = DBUtils.getConnection();
-
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setString(1, userID);
-			ResultSet rs = ps.executeQuery();
-
-			while (rs.next()) {
-				result.put(rs.getString("month"),rs.getInt("totalRequestLast12Month"));
-			}
-
-		} catch (Exception ex) {
-
-			ex.printStackTrace();
-
-		}
-
-		return result;
-	}
-	
-	public LinkedHashMap<String, Integer> getLast12MonthBillTotal(String userID) {
-		LinkedHashMap<String, Integer> result = new LinkedHashMap<String, Integer>();
-		
-		
-		String sql = "Select sum(bi.total) as totalBillLast12Month, DATENAME(MONTH, bi.date) as month\r\n"
-				+ "From Building b join Users u on b.user_id = u.user_id\r\n"
-				+ "	Join Room r on b.building_id = r.building_id\r\n"
-				+ "	Join Bill_detail bd on bd.room_id = r.room_id\r\n"
-				+ "	Join Bill bi on bd.bill_id = bi.bill_id\r\n"
-				+ "Where u.user_id = ? \r\n"
-				+ "AND bi.date >= CAST(DATEADD(mm, DATEDIFF(mm, 1, CAST(DATEADD(month, -11, GETDATE()) as date)), 0) as date)\r\n"
-				+ "AND bi.date <= CAST( GETDATE() AS Date ) AND b.building_status not like 'Removed'\r\n"
-				+ "GROUP BY Year(bi.date), MONTH(bi.date), u.user_id, DATENAME(MONTH, bi.date)\r\n"
-				+ "Order by Year(bi.date) asc";
-
-		try {
-
-			Connection conn = DBUtils.getConnection();
-
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setString(1, userID);
-			ResultSet rs = ps.executeQuery();
-
-			while (rs.next()) {
-				result.put(rs.getString("month"),rs.getInt("totalBillLast12Month"));
-			}
-
-		} catch (Exception ex) {
-
-			ex.printStackTrace();
-
-		}
-
-		return result;
-	}
 	private void FillBillData(ResultSet rs, Bill bill) throws SQLException {
 		bill.setBillID(rs.getString("bill_id"));
 		bill.setDate(rs.getDate("date"));

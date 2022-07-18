@@ -60,6 +60,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	
 	
 	
+	
 
 		addEventListener("load", function () {
 			setTimeout(hideURLbar, 0);
@@ -69,6 +70,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			window.scrollTo(0, 1);
 		}
 	
+
 
 
 
@@ -413,9 +415,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						class="scroll"> (Xem đánh giá)</a></span>
 				</div>
 				<p>
-				<fmt:formatNumber var="buildingPrice" value="${building.avgPrice }"
-												type="currency" minFractionDigits="0" currencySymbol="" />
-					<span class="item_price">Giá trung bình: ${buildingPrice } /ngày</span>
+					<fmt:formatNumber var="buildingPrice" value="${building.avgPrice }"
+						type="currency" minFractionDigits="0" currencySymbol="" />
+					<span class="item_price">Giá trung bình: ${buildingPrice }
+						/ngày</span>
 				</p>
 				<div>
 					<p style="font-size: 16px;">Loại: ${building.buildingType }</p>
@@ -671,10 +674,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 													class="MuiBox-root jss1067">${room.bed } giường nằm</span>
 											</div>
 										</div>
-										<input type="hidden" name="buildingId" value="${param.buildingId }">
-										<input type="hidden" name="roomId" value="${room.roomId }">
-										<input type="hidden" name="startDate" value="2022-12-12">
-										<input type="hidden" name="endDate" value="2022-12-12">
+
+										<input type="hidden" name="buildingId"
+											value="${param.buildingId }"> <input type="hidden"
+											name="roomId" value="${room.roomId }"> <input
+											type="hidden" name="startDate" value="${param.startDate }"> <input
+											type="hidden" name="endDate" value="${param.endDate }">
 										<div class="col-md-3 discript" style="text-align: right;">
 											<fmt:formatNumber var="gia" value="${room.price }"
 												type="currency" minFractionDigits="0" currencySymbol="" />

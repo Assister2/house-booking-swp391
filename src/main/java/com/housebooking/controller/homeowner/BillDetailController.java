@@ -2,14 +2,10 @@ package com.housebooking.controller.homeowner;
 
 import java.io.IOException;
 import java.sql.Date;
-import java.time.Duration;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
-import javax.print.attribute.standard.Chromaticity;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,7 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.housebooking.DAOimpl.houseowner.BillDAO;
-import com.housebooking.DAOimpl.houseowner.BuildingDAO;
 import com.housebooking.DAOimpl.houseowner.RoomDAO;
 import com.housebooking.DAOimpl.houseowner.ServiceDAO;
 import com.housebooking.Model.Bill;

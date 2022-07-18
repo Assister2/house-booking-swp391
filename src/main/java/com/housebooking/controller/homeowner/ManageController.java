@@ -1,8 +1,5 @@
 package com.housebooking.controller.homeowner;
 import java.io.IOException;
-import java.time.Duration;
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -284,8 +281,8 @@ public class ManageController extends HttpServlet {
 	
 	protected void AddNewBuilding(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		  
-		LocalDateTime dateTime = LocalDateTime.now().plus(Duration.of(10, ChronoUnit.MINUTES));
-		String buildingId = dateTime.toString();
+		BuildingDAO buildingDAO = new BuildingDAO();
+		String buildingId = "Building_" + buildingDAO.Count();
 		String buildingName = request.getParameter("Add_buildingName");
 		String buildingNumber = request.getParameter("Add_buildingNumber");
 		float area = 0;
@@ -317,7 +314,7 @@ public class ManageController extends HttpServlet {
 					, buildingType, buildingRules, buidingStatus, imageLink
 					, null, streetNumber, userSession.getUser().getUserId(), 0, 0, area, buildingInfor, buildingNumber);
 			
-			if(new BuildingDAO().AddNewBuilding(building)) {
+			if(buildingDAO.AddNewBuilding(building)) {
 				request.setAttribute("message", "Thêm thành công!");
 			}
 			else {

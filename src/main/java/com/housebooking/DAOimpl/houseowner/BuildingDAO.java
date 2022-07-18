@@ -20,6 +20,33 @@ import com.housebooking.Model.Street;
 import com.housebooking.Utils.DBUtils;
 
 public class BuildingDAO {
+	
+	public int Count() {
+
+		int re = 0;
+		String sql = " Select count(building_id) as count\r\n"
+				+ " from Building";
+
+		try {
+
+			Connection conn = DBUtils.getConnection();
+
+			PreparedStatement ps = conn.prepareStatement(sql);
+
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				re = rs.getInt("count");
+			}
+
+		} catch (Exception ex) {
+
+			ex.printStackTrace();
+
+		}
+
+		return re;
+	}
 
 	public List<Building> list(String userID) {
 		ArrayList<Building> list;

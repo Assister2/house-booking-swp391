@@ -18,15 +18,15 @@ import javax.servlet.http.HttpSession;
  *
  * @author ACER
  */
-@WebServlet(name = "AdminControl", urlPatterns = { "/AdminControl" })
-public class AdminControl extends HttpServlet {
+@WebServlet(name = "AdminControl", urlPatterns = { "/AdminManage" })
+public class AdminManageController extends HttpServlet {
 
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");
 
 		String action = request.getParameter("action");
-		System.out.println(action);
+		//System.out.println(action);
 		if (action == null || action.equalsIgnoreCase("")) {
 			doDisplay(request, response);
 		} else {
@@ -58,7 +58,7 @@ public class AdminControl extends HttpServlet {
 		
 		List<Room> list = dao.getAllRoom();
 		request.setAttribute("listR", list);
-		request.getRequestDispatcher("/view/admin/Dashmin.jsp").forward(request, response);
+		request.getRequestDispatcher("/view/admin/request.jsp").forward(request, response);
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
