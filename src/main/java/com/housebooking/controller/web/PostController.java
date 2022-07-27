@@ -104,7 +104,16 @@ public class PostController extends HttpServlet {
 
 		List<Convenient> listConvenient = convenientDAO.list(buildingId);
 
-		List<Feedback> listFeedback = new FeedbackDAO().list(buildingId);
+		String readCmt = request.getParameter("action");
+		
+		List<Feedback> listFeedback;
+		
+		if(readCmt != null && readCmt.equals("ReadAllComment")) {
+			listFeedback =  new FeedbackDAO().list(buildingId, 0, 1000);
+		}
+		else {
+			listFeedback =  new FeedbackDAO().list(buildingId, 0, 3);
+		}
 		
 		String startDate = request.getParameter("startDate");
 		String endDate = request.getParameter("endDate");

@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -83,7 +84,14 @@
 						</button>
 					</div>
 					<div class="modal-body">
-						<p>${message }</p>
+						<p>
+						<c:if test="${param.message == 'updated'}">
+							Cập nhật thành công!
+						</c:if>
+						<c:if test="${param.message != 'updated'}">
+							Cập nhật không thành công!
+						</c:if>
+						</p>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
@@ -228,7 +236,7 @@
 												<c:if test="${item.buildingStatus == 'active' }">
 														<span class="status--process">Active</span>
 													</c:if>
-													<c:if test="${item.buildingStatus == 'Off' }">
+													<c:if test="${item.buildingStatus == 'off' }">
 														<span class="status--denied">OFF</span>
 													</c:if>
 													<c:if test="${item.buildingStatus == 'Chờ duyệt' }">
@@ -236,7 +244,11 @@
 													</c:if>
 												</td>
 												<td>
-												<i class="fa fa-mail-forward"></i>
+												<div class="table-data-feature" style="margin-top: 7px;">
+													<a href="${pageContext.request.contextPath}/AdminManage?action=off&buildingId=${item.buildingId}"><i class="fa fa-power-off" style="margin-right: 10px;"></i></a>
+													<a href="${pageContext.request.contextPath}/AdminManage?action=on&buildingId=${item.buildingId}"><i class="fa fa-check" style="margin-right: 10px;"></i></a>
+													<a href="${pageContext.request.contextPath}/single-post?buildingId=${item.buildingId}&admin=view"><i class="fa fa-mail-forward"></i></a>
+												</div>
 												</td>
 												
 											</tr>
@@ -379,7 +391,7 @@
 		}
 	</script>
 
-	<c:if test="${message != null }">
+	<c:if test="${param.message != null }">
 		<script>
 			let myModal = new bootstrap.Modal(document
 					.getElementById('smallmodal'), {});

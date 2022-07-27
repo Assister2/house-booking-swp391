@@ -34,25 +34,49 @@ public class AdminManageController extends HttpServlet {
 		if (action == null || action.equalsIgnoreCase("")) {
 			doDisplay(request, response);
 		} else {
-			String rID = request.getParameter("rID");
-			AdminDAO dao = new AdminDAO();
-
 			switch (action) {
-			case "deny":
-				dao.setRoomHiddenStatusByID(rID);
+			case "on":
+				doOn(request, response);
 				break;
-			case "approve":
-				dao.setRoomStatusByID(rID);
+			case "off":
+				doOff(request, response);
 				break;
 
 			default:
 				doDisplay(request, response);
 				break;
 			}
-
-			doDisplay(request, response);
+		
 		}
+	}
+	
+	protected void doOn(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
+		BuildingDAO buildingDAO = new BuildingDAO();
+		
+		if(buildingDAO.OnBuilding(request.getParameter("buildingId"))) {
+			response.sendRedirect("AdminManage?message=updated");
+		}
+		else {
+			response.sendRedirect("AdminManage?message=failed");
+		}
+		
+		
+	}
+	
+	protected void doOff(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		BuildingDAO buildingDAO = new BuildingDAO();
+		
+		if(buildingDAO.OffBuilding(request.getParameter("buildingId"))) {
+			response.sendRedirect("AdminManage?message=updated");
+		}
+		else {
+			response.sendRedirect("AdminManage?message=failed");
+		}
+		
 	}
 
 	protected void doDisplay(HttpServletRequest request, HttpServletResponse response)

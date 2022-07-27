@@ -39,7 +39,7 @@ public class FeedbackDAO {
 		return re;
 	}
 
-	public List<Feedback> list(String buildingId) {
+	public List<Feedback> list(String buildingId, int start, int end) {
 		ArrayList<Feedback> list;
 		list = new ArrayList<Feedback>();
 
@@ -48,7 +48,7 @@ public class FeedbackDAO {
 				+ " join Users us on fb.user_id = us.user_id\r\n"
 				+ " Where b.building_id like ? AND fb.status like 'on'\r\n"
 				+ " Order by fb.feedback_date DESC\r\n"
-				+ " OFFSET 0 ROWS FETCH NEXT 3 ROWS ONLY";
+				+ " OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
 
 		try {
 
@@ -57,6 +57,8 @@ public class FeedbackDAO {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			
 			ps.setString(1, buildingId);
+			ps.setInt(2, start);
+			ps.setInt(3, end);
 
 			ResultSet rs = ps.executeQuery();
 

@@ -55,7 +55,7 @@ public class WebBuildingDAO {
 			}
 		}
 
-		sql += " Where b.building_status not like 'Removed' AND r.room_status not like 'Removed' AND ci.city_name like @city  AND r2.room_id is null		\r\n";
+		sql += " Where b.building_status like 'active' AND r.room_status not like 'Removed' AND ci.city_name like @city  AND r2.room_id is null		\r\n";
 
 		if (buildingType != null) {
 			sql += " AND (";

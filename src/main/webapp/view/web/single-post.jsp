@@ -538,7 +538,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			style="background-color: #F7FAFC; padding-top: 20px; padding-bottom: 20px; margin-top: 30px;">
 			<div style="width: 85%; margin-left: auto; margin-right: auto;">
 				<h4 style="font-weight: bold;">Chọn phòng</h4>
-
+				<form action="single-post">
+				<input name="buildingId" value="${param.buildingId }" type="hidden">
 				<div class="MuiBox-root jss2320 jss2311"
 					style="margin-bottom: 20px;">
 					<div class="MuiBox-root jss2330 jss2321">
@@ -546,17 +547,21 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<div class="col-md-3">
 								<label>Ngày đến</label> <input type="text"
 									class="form-control col-md-7" placeholder="__/__/____"
-									name="startDate" required>
+									name="startDate" required value="${param.startDate }">
 							</div>
 							<div class="col-md-3">
 								<label>Ngày về</label> <input type="text"
 									class="form-control col-md-7" placeholder="__/__/____"
-									name="endDate" required>
+									name="endDate" required value="${param.endDate }">
 							</div>
 							<div class="col-md-3">
-								<label>Sức chứa</label> <input type="number"
-									class="form-control col-md-7" placeholder="Enter number"
-									name="person" min="0">
+								<label>Mức giá</label> 
+								<select class="form-control" name="price">
+									<option value="0-500000">0 (VNĐ) - 500,000 (VNĐ)</option>
+									<option value="500000-1000000">500,000 (VNĐ) - 1,000,000 (VNĐ)</option>
+									<option value="1000000-2000000">1,000,000 (VNĐ) - 2,000,000 (VNĐ)</option>
+									<option value="2000000-5000000">2,000,000 (VNĐ) - 5,000,000 (VNĐ)</option>
+								</select>
 							</div>
 							<div class="col-md-3" style="text-align: right;">
 								<button style="margin-top: 21px;" type="submit"
@@ -565,6 +570,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						</div>
 					</div>
 				</div>
+				</form>
 
 				<c:set var="listRoom" value="${listRoom }"></c:set>
 				<c:forEach var="room" items="${listRoom }">
@@ -753,9 +759,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<input type="hidden" name="buildingId"
 								value="${param.buildingId }">
 							<c:if test="${listFeedback[0] != null }">
-								<button type="submit"
-									style="background: unset; border: unset; color: blue;">Xem
-									tất cả bình luận</button>
+								<c:if test="${param.action != 'ReadAllComment' }">
+									<button type="submit"
+										style="background: unset; border: unset; color: blue;">Xem
+										tất cả bình luận</button>
+								</c:if>
+								<c:if test="${param.action == 'ReadAllComment' }">
+									<a href="${pageContext.request.contextPath}/single-post?buildingId=${building.buildingId}&startDate=${param.startDate}&endDate=${param.endDate}"
+										style="background: unset; border: unset; color: blue;">Ẩn bớt bình luận</a>
+								</c:if>
 							</c:if>
 						</form>
 
@@ -859,191 +871,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<!--//tabs-->
 		<hr>
 
-		<c:set var="listNear" value="${listNearRoom }"></c:set>
-		<!-- /new_arrivals -->
-		<%-- <div class="new_arrivals">
-			<h3>Near this place</h3>
-			<!-- /womens -->
-			<c:forEach var="room" items="${listNear }">
-				<c:if test="${listNearRoom.size() == 2 or listNearRoom.size() == 1}">
-					<div class="col-md-6">
-						<div class="col-md-4 product-men women_two">
-							<div class="product-shoe-info shoe">
-								<div class="men-pro-item">
-									<div class="men-thumb-item">
-										<c:set var="image"
-											value="${pageContext.request.contextPath}${room.roomImages[0]}"></c:set>
-										<c:set var="defaultImage"
-											value="https://vinhomesland.vn/wp-content/uploads/2019/10/homestay.jpg"></c:set>
-										<img width="240" height="190"
-											src="${room.roomImages[0]==null?defaultImage:image }" alt="">
-										<div class="men-cart-pro">
-											<div class="inner-men-cart-pro">
-												<a
-													href="${pageContext.request.contextPath}/single-post?roomId=${room.roomId}"
-													class="link-product-add-cart">Xem chi tiết</a>
-											</div>
-										</div>
-										<!--  <span class="product-new-top">Active</span>-->
-									</div>
-
-								</div>
-							</div>
-						</div>
-						<div class="col-md-8 info-product-price">
-							<div class="item-info-product"
-								style="text-align: left; margin-bottom: 15px;">
-								<h4>
-									<a
-										href="${pageContext.request.contextPath}/single-post?roomId=${room.roomId}">${room.roomName }</a>
-								</h4>
-								<div class="clearfix"></div>
-							</div>
-							<div class="grid_meta">
-								<div class="product_price">
-									<div class="grid-price ">
-										<span class="money ">${room.price/1000 }k/day</span>
-									</div>
-								</div>
-
-								<ul class="stars">
-									<li><a href="#"><i class="fa fa-star"
-											aria-hidden="true"></i></a></li>
-									<li><a href="#"><i class="fa fa-star"
-											aria-hidden="true"></i></a></li>
-									<li><a href="#"><i class="fa fa-star"
-											aria-hidden="true"></i></a></li>
-									<li><a href="#"><i class="fa fa-star"
-											aria-hidden="true"></i></a></li>
-									<li><a href="#"><i class="fa fa-star	"
-											aria-hidden="true"></i></a></li>
-								</ul>
-								<div>Đánh giá: ${room.rating != 0?room.rating:'Chưa có đánh giá' }</div>
-								<div>Loại phòng: ${room.typeName }</div>
-								<div>${room.roomDesc }</div>
-							</div>
-						</div>
-						<hr>
-					</div>
-				</c:if>
-
-				<c:if test="${listNearRoom.size() == 3}">
-					<div class="col-md-4 product-men women_two">
-						<div class="product-shoe-info shoe">
-							<div class="men-pro-item">
-								<c:set var="image"
-									value="${pageContext.request.contextPath}${room.roomImages[0]}"></c:set>
-								<c:set var="defaultImage"
-									value="https://vinhomesland.vn/wp-content/uploads/2019/10/homestay.jpg"></c:set>
-								<div class="men-thumb-item">
-									<img width="269" height="221"
-										src="${room.roomImages[0]==null?defaultImage:image }" alt="">
-									<div class="men-cart-pro">
-										<div class="inner-men-cart-pro">
-											<a
-												href="${pageContext.request.contextPath}/single-post?roomId=${room.roomId}"
-												class="link-product-add-cart">Xem chi tiết</a>
-										</div>
-									</div>
-									<span class="product-new-top">Active</span>
-								</div>
-								<div class="item-info-product">
-									<h4>
-										<a
-											href="${pageContext.request.contextPath}/single-post?roomId=${room.roomId}">${room.roomName }</a>
-									</h4>
-									<div class="info-product-price">
-										<div class="grid_meta">
-											<div class="product_price">
-												<div class="grid-price ">
-													<span class="money ">${room.price/1000 }k/day</span>
-												</div>
-											</div>
-											<ul class="stars">
-												<li><a href="#"><i class="fa fa-star"
-														aria-hidden="true"></i></a></li>
-												<li><a href="#"><i class="fa fa-star"
-														aria-hidden="true"></i></a></li>
-												<li><a href="#"><i class="fa fa-star"
-														aria-hidden="true"></i></a></li>
-												<li><a href="#"><i class="fa fa-star"
-														aria-hidden="true"></i></a></li>
-												<li><a href="#"><i class="fa fa-star-half-o"
-														aria-hidden="true"></i></a></li>
-											</ul>
-											<div>Đánh giá: ${room.rating != 0?room.rating:'Chưa có đánh giá' }</div>
-											<div>Loại phòng: ${room.typeName }</div>
-											<div>${room.roomDesc }</div>
-										</div>
-									</div>
-									<div class="clearfix"></div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</c:if>
-
-				<c:if test="${listNearRoom.size() == 4}">
-					<div class="col-md-3 product-men women_two">
-						<div class="product-shoe-info shoe">
-							<div class="men-pro-item">
-								<c:set var="image"
-									value="${pageContext.request.contextPath}${room.roomImages[0]}"></c:set>
-								<c:set var="defaultImage"
-									value="https://vinhomesland.vn/wp-content/uploads/2019/10/homestay.jpg"></c:set>
-								<div class="men-thumb-item">
-									<img width="269" height="221"
-										src="${room.roomImages[0]==null?defaultImage:image }" alt="">
-									<div class="men-cart-pro">
-										<div class="inner-men-cart-pro">
-											<a
-												href="${pageContext.request.contextPath}/single-post?roomId=${room.roomId}"
-												class="link-product-add-cart">Xem chi tiết</a>
-										</div>
-									</div>
-									<span class="product-new-top">Active</span>
-								</div>
-								<div class="item-info-product">
-									<h4>
-										<a
-											href="${pageContext.request.contextPath}/single-post?roomId=${room.roomId}">${room.roomName }</a>
-									</h4>
-									<div class="info-product-price">
-										<div class="grid_meta">
-											<div class="product_price">
-												<div class="grid-price ">
-													<span class="money ">${room.price/1000 }k/day</span>
-												</div>
-											</div>
-											<ul class="stars">
-												<li><a href="#"><i class="fa fa-star"
-														aria-hidden="true"></i></a></li>
-												<li><a href="#"><i class="fa fa-star"
-														aria-hidden="true"></i></a></li>
-												<li><a href="#"><i class="fa fa-star"
-														aria-hidden="true"></i></a></li>
-												<li><a href="#"><i class="fa fa-star"
-														aria-hidden="true"></i></a></li>
-												<li><a href="#"><i class="fa fa-star-half-o"
-														aria-hidden="true"></i></a></li>
-											</ul>
-											<div>Đánh giá: ${room.rating != 0?room.rating:'Chưa có đánh giá' }</div>
-											<div>Loại phòng: ${room.typeName }</div>
-											<div>${room.roomDesc }</div>
-										</div>
-									</div>
-									<div class="clearfix"></div>
-								</div>
-							</div>
-						</div>
-					</div>
-
-				</c:if>
-
-			</c:forEach>
-
-			<div class="clearfix"></div>
-		</div> --%>
 	</div>
 	</div>
 

@@ -428,6 +428,52 @@ public class BuildingDAO {
 
 		return false;
 	}
+	
+	public boolean OnBuilding(String buildingId) {
+
+		String sql = " UPDATE Building\r\n" + " SET building_status = 'active' " + " WHERE building_id = ? ";
+		try {
+
+			Connection conn = DBUtils.getConnection();
+
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, buildingId);
+
+			if (ps.executeUpdate() > 0) {
+				return true;
+			}
+
+		} catch (Exception ex) {
+
+			ex.printStackTrace();
+
+		}
+
+		return false;
+	}
+	
+	public boolean OffBuilding(String buildingId) {
+
+		String sql = " UPDATE Building\r\n" + " SET building_status = 'off' " + " WHERE building_id = ? ";
+		try {
+
+			Connection conn = DBUtils.getConnection();
+
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, buildingId);
+
+			if (ps.executeUpdate() > 0) {
+				return true;
+			}
+
+		} catch (Exception ex) {
+
+			ex.printStackTrace();
+
+		}
+
+		return false;
+	}
 
 	public boolean DeleteBuilding(String buildingId) {
 
