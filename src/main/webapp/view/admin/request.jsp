@@ -93,13 +93,13 @@
 		</div>
 		<!-- end modal small -->
 
-		<c:forEach var="item" items="${listBillDefault }">
+		<c:forEach var="item" items="${list }">
 			<!-- modal small -->
 			<form action="manage-bill">
 				<input type="hidden" name="action" value="approve"> <input
-					type="hidden" name="billId" value="${item.billID }">
+					type="hidden" name="billId" value="${item.buildingId }">
 
-				<div class="modal fade" id="approve${item.billID }" tabindex="-1"
+				<div class="modal fade" id="approve${item.buildingId }" tabindex="-1"
 					role="dialog" aria-labelledby="smallmodalLabel" aria-hidden="true">
 					<div class="modal-dialog modal-sm" role="document">
 						<div class="modal-content">
@@ -111,7 +111,7 @@
 								</button>
 							</div>
 							<div class="modal-body">
-								<p>Xác nhận yêu cầu đặt phòng ${item.billID }.</p>
+								<p>Xác nhận yêu cầu đặt phòng ${item.buildingId }.</p>
 							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-secondary"
@@ -124,15 +124,15 @@
 			</form>
 		</c:forEach>
 		<!-- end modal small -->
-
+	
 		<!-- Deny -->
-		<c:forEach var="item" items="${listBillDefault }">
+		<c:forEach var="item" items="${list }">
 			<!-- modal small -->
 			<form action="manage-bill">
 				<input type="hidden" name="action" value="deny"> <input
-					type="hidden" name="billId" value="${item.billID }">
+					type="hidden" name="billId" value="${item.buildingId }">
 
-				<div class="modal fade" id="deny${item.billID }" tabindex="-1"
+				<div class="modal fade" id="deny${item.buildingId }" tabindex="-1"
 					role="dialog" aria-labelledby="smallmodalLabel" aria-hidden="true">
 					<div class="modal-dialog modal-sm" role="document">
 						<div class="modal-content">
@@ -144,7 +144,7 @@
 								</button>
 							</div>
 							<div class="modal-body">
-								<p>Từ chối yêu cầu đặt phòng ${item.billID }.</p>
+								<p>Từ chối yêu cầu đặt phòng ${item.buildingId }.</p>
 							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-secondary"
@@ -165,11 +165,10 @@
 					<div class="row">
 						<div class="col-md-12">
 							<!-- DATA TABLE -->
-							<h3 class="title-5 m-b-35">Quản lý danh sách đặt phòng</h3>
+							<h3 class="title-5 m-b-35">Quản lý bài đăng </h3>
 							<div class="table-data__tool">
 								<div class="table-data__tool-left">
-									<form action="manage-bill" method="get">
-										<input type="hidden" name="action" value="Filter">
+									<form action="AdminManage" method="get">
 										<div class="rs-select2--light rs-select2--md">
 											<select name="properties" id="countySel" size="1"
 												class="js-select2">
@@ -200,99 +199,67 @@
 										</button>
 									</form>
 								</div>
-								<div class="table-data__tool-right">
-									<button class="au-btn au-btn-icon au-btn--green au-btn--small">
-										<i class="zmdi zmdi-plus"></i>add item
-									</button>
-									<div class="rs-select2--dark rs-select2--sm rs-select2--dark2">
-										<select class="js-select2" name="type">
-											<option selected="selected">Export</option>
-											<option value="">Option 1</option>
-											<option value="">Option 2</option>
-										</select>
-										<div class="dropDownSelect2"></div>
-									</div>
-								</div>
+								
 							</div>
 							<div class="table-responsive table-responsive-data2">
 								<table class="table table-data2">
 									<thead>
 										<tr>
 											<th>ID</th>
-											<th>Tòa</th>
-											<th>Phòng</th>
-											<th>Ngày đặt</th>
-											<th>Ngày đến</th>
-											<th>Ngày về</th>
+											<th>Tên</th>
+											<th>Địa chỉ</th>
+											<th>Loại nhà</th>
+											<th>Diện tích</th>
+											<th>Chủ nhà</th>
 											<th>Trạng thái</th>
 											<th></th>
 										</tr>
 									</thead>
 									<tbody>
-										<c:forEach var="item" items="${listBillDefault }">
+										 <c:forEach var="item" items="${list }">
 											<tr class="tr-shadow">
-												<td style="vertical-align: middle;">${item.billID }</td>
-												<td>${item.billDetail[0].room.buildingId }</td>
-												<td><span class="block-email">${item.billDetail[0].roomId }</span></td>
-												<td class="desc">${item.date }</td>
-												<td>${item.billDetail[0].startDate }</td>
-												<td>${item.billDetail[0].endDate }</td>
-												<td><c:if test="${item.status == 'Đã xác nhận' }">
-														<span class="status--process">${item.status }</span>
+												<td style="vertical-align: middle;">${item.buildingId }</td>
+												<td>${item.buildingName }</td>
+												<td>${item.buildingAddress }</td>
+												<td>${item.buildingType }</td>
+												<td>${item.buildingArea }</td>
+												<td>${item.userId }</td>
+												<td>
+												<c:if test="${item.buildingStatus == 'active' }">
+														<span class="status--process">Active</span>
 													</c:if>
-													<c:if test="${item.status == 'Chờ xác nhận' }">
-														<span style="color: blue;" class="status--warning">${item.status }</span>
+													<c:if test="${item.buildingStatus == 'Off' }">
+														<span class="status--denied">OFF</span>
 													</c:if>
-													<c:if test="${item.status == 'Đã từ chối' }">
-														<span class="status--denied">${item.status }</span>
-													</c:if>
-													<c:if test="${item.status == 'Đã thanh toán' }">
-														<span class="status--process">${item.status }</span>
+													<c:if test="${item.buildingStatus == 'Chờ duyệt' }">
+														<span class="status--warning">Chờ duyệt</span>
 													</c:if>
 												</td>
 												<td>
-													<div class="table-data-feature">
-														<c:if test="${item.status == 'Chờ xác nhận'}">
-															<button class="item" data-toggle="modal"
-															data-target="#approve${item.billID }"
-															data-placement="top" title="Xác nhận">
-															<i class="zmdi zmdi-check"></i>
-														</button>
-														<button class="item" data-toggle="modal"
-															data-target="#deny${item.billID }" data-placement="top"
-															title="Từ chối">X</button>
-														</c:if>
-														<c:if test="${item.status != 'Chờ xác nhận'}">
-															<button class="item" data-toggle="tooltip"
-															data-target="#approve${item.billID }"
-															data-placement="top" title="Không thể chỉnh sửa">
-															<i class="fa fa-eye"></i>
-														</button>
-														<button class="item" data-toggle="tooltip"
-															data-target="#deny${item.billID }" data-placement="top"
-															title="Không thể chỉnh sửa"><i class="zmdi zmdi-mail-send"></i></button>
-														</c:if>
-														<button class="item" data-toggle="tooltip"
-															data-placement="top" title="More">
-															<i class="zmdi zmdi-more"></i>
-														</button>
-													</div>
+												<i class="fa fa-mail-forward"></i>
 												</td>
+												
 											</tr>
 											<tr class="spacer"></tr>
 										</c:forEach>
 									</tbody>
 								</table>
 							</div>
-							<!-- END DATA TABLE -->
+							<!-- END DATA TABLE --> 
 						</div>
 					</div>
+					
+				<c:url var="SortUrl" value="AdminManage">
+					<c:param name="properties" value="${param.properties}" />
+	
+					<c:param name="detailProperties" value="${param.detailProperties}" />			
+				</c:url>
 
 					<div class="row text-center">
 						<ul class="pagination" style="width: fit-content; margin: auto;">
 							<c:if test="${currentPage != 1}">
 								<li class="page-item"><a
-									href="${path}?page=${currentPage - 1}" class="page-link">Previous</a></li>
+									href="${SortUrl}&page=${currentPage - 1}" class="page-link">Previous</a></li>
 							</c:if>
 							<c:forEach begin="1" end="${noOfPages}" var="i">
 								<c:choose>
@@ -300,7 +267,7 @@
 										<li class="page-item"><a class="page-link active">${i}</a></li>
 									</c:when>
 									<c:otherwise>
-										<li class="page-item"><a href="${path}?page=${i}"
+										<li class="page-item"><a href="${SortUrl}&page=${i}"
 											class="page-link">${i}</a></li>
 									</c:otherwise>
 								</c:choose>
@@ -308,7 +275,7 @@
 
 							<c:if test="${currentPage lt noOfPages}">
 								<li class="page-item"><a
-									href="${path}?page=${currentPage + 1}" class="page-link">Next</a></li>
+									href="${SortUrl}&page=${currentPage + 1}" class="page-link">Next</a></li>
 
 							</c:if>
 						</ul>
@@ -375,20 +342,17 @@
 
 	<script>
 		var stateObject = {
+			"Theo trạng thái" : {
+				"Chờ duyệt" : [ "Altona", "Euroa" ],
+				"active" : [ "Altona", "Euroa" ],
+				"off" : [ "Altona", "Euroa" ]
+			},
 			"Theo ngày" : {
 				"Hôm nay" : [ "Nguyễn Huệ", "North Delhi" ],
 				"Tuần này" : [ "Thiruvananthapuram", "Palakkad" ],
 				"Tháng này" : [ "North Goa", "South Goa" ],
 			},
-			"Theo trạng thái" : {
-				"Chờ xác nhận" : [ "Altona", "Euroa" ],
-				"Đã xác nhận" : [ "Altona", "Euroa" ],
-				"Đã thanh toán" : [ "Altona", "Euroa" ]
-			},
-			"Theo nhà" : {
-				"Alberta" : [ "Acadia", "Bighorn" ],
-				"Columbia" : [ "Washington", "" ]
-			},
+			
 		}
 
 		window.onload = function() {

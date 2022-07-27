@@ -1,9 +1,13 @@
 
 package com.housebooking.controller.admin;
 
+import com.housebooking.DAOimpl.admin.BuildingDAO;
 import com.housebooking.DAOimpl.web.AdminDAO;
+import com.housebooking.Model.Building;
 import com.housebooking.Model.Room;
 import com.housebooking.Model.User;
+import com.housebooking.Model.UserSession;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -26,7 +30,7 @@ public class AdminManageController extends HttpServlet {
 		response.setContentType("text/html;charset=UTF-8");
 
 		String action = request.getParameter("action");
-		//System.out.println(action);
+		// System.out.println(action);
 		if (action == null || action.equalsIgnoreCase("")) {
 			doDisplay(request, response);
 		} else {
@@ -54,10 +58,32 @@ public class AdminManageController extends HttpServlet {
 	protected void doDisplay(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		AdminDAO dao = new AdminDAO();
+		HttpSession ss = request.getSession(true);
+		UserSession userSession = (UserSession) ss.getAttribute("usersession");
+
+		String properties = request.getParameter("properties");
+		String detailProperties = request.getParameter("detailProperties");
 		
-		List<Room> list = dao.getAllRoom();
-		request.setAttribute("listR", list);
+		BuildingDAO buildingDAO = new BuildingDAO();
+		
+		// Lay so trang hien tai
+		int page = 1;
+		int recordsPerPage = 7;
+		if (request.getParameter("page") != null) {
+			page = Integer.parseInt(request.getParameter("page"));
+		}
+
+		List<Building> list = buildingDAO.list((page - 1) * recordsPerPage, recordsPerPage, properties!=null?properties:"", detailProperties!=null?detailProperties:"");
+		
+		// Nay la tat ca
+		int totalRecords = buildingDAO.list(-1, -1, properties!=null?properties:"", detailProperties!=null?detailProperties:"").size();
+
+		// Tinh so trang
+		int noOfPages = (int) Math.ceil(totalRecords * 1.0 / recordsPerPage);
+
+		request.setAttribute("currentPage", page);
+		request.setAttribute("noOfPages", noOfPages);
+		request.setAttribute("list", list);
 		request.getRequestDispatcher("/view/admin/request.jsp").forward(request, response);
 	}
 
