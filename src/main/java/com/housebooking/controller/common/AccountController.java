@@ -47,12 +47,19 @@ public class AccountController extends HttpServlet {
 			if (action == null) {
 				doGet_DisplayInfor(request, response);
 			} else {
-				if (action.equalsIgnoreCase("updatePassword")) {
-					doPost_UpdatePassword(request, response, us);
-				} else if (action.equalsIgnoreCase("updateInfor")) {
-					doPost_UpdateInfor(request, response, us);
-				} 
-				
+				switch (action) {
+				case "updatePassword":
+					doPost_UpdatePassword(request,response,us);
+					break;
+					
+				case "updateInfor":
+					doPost_UpdateInfor(request,response,us);
+					break;
+
+				default:
+					doGet_DisplayInfor(request, response);
+					break;
+				}
 			}
 		}
 
@@ -81,26 +88,27 @@ public class AccountController extends HttpServlet {
 		UserDAO manager = new UserDAO();
 		String msg;
 
-		RequestDispatcher rd = request.getRequestDispatcher("views/common/AccountInformation.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/view/common/myaccount.jsp");
 
 		if (!newPassword.equals(rePassword)) {
 			msg = "Mật khẩu xác nhận không khớp";
+		}
+		else if (!oldPassword.equals(us.getUser().getPassword())) {
+			msg = "Sai mật khẩu";
 		} else {
-			int changeResult = manager.changePassword(us.getUser(), oldPassword, newPassword);
+			int changeResult = manager.changePassword(us.getUser().getUserId(), newPassword);
 
 			if (changeResult > 0) {
 //                msg = "Mật khẩu đã thay đổi thành công";
 				HttpSession ss = request.getSession(true);
-				ss.setAttribute("changed", "Mật khẩu đã thay đổi thành công");
+				ss.setAttribute("message", "Mật khẩu đã thay đổi thành công");
 				String role = us.getUser().getRole();
-				if (role.equalsIgnoreCase("admin")) {
-					response.sendRedirect(request.getContextPath() + "/admin");
+				if (role.equalsIgnoreCase("Owner")) {
+					response.sendRedirect("dashboard");
 				} else {
-					response.sendRedirect(request.getContextPath() + "/home");
+					response.sendRedirect("home");
 				}
 				return;
-			} else if (changeResult == -1) {
-				msg = "Mật khẩu không đúng, vui lòng nhập lại";
 			} else {
 				msg = "Thay đổi mật khẩu thất bại";
 			}
@@ -112,11 +120,12 @@ public class AccountController extends HttpServlet {
 	private void doPost_UpdateInfor(HttpServletRequest request, HttpServletResponse response, UserSession us)
 			throws ServletException, IOException {
 		String name = request.getParameter("name");
-		String phoneNumber = request.getParameter("phoneNumber");
-		String address = request.getParameter("address");
+		String phoneNumber = request.getParameter("phone");
+		String email = request.getParameter("email");
 
 		User user = us.getUser();
 		user.setName(name);
+		user.setEmail(email);
 		user.setPhoneNumber(phoneNumber);
 
 		String updateMsg = "";
@@ -133,7 +142,7 @@ public class AccountController extends HttpServlet {
 		} else {
 			request.setAttribute("ifmsg", updateMsg); // infotmarion fail msg
 		}
-		RequestDispatcher rd = request.getRequestDispatcher("views/common/AccountInformation.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/view/common/myaccount.jsp");
 		rd.forward(request, response);
 	}
 

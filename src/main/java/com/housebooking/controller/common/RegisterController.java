@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.housebooking.DAOimpl.web.RegisterDAO;
+import com.housebooking.DAOimpl.web.UserDAO;
+import com.housebooking.Model.UserSession;
 
 /**
  * Servlet implementation class RegisterController
@@ -38,12 +40,17 @@ public class RegisterController extends HttpServlet {
 			if(register.checkUsername(username)) {
 				if(register.checkPassword(password,rePassword)) {
 					register.createUser(username, password);
+					HttpSession ss = request.getSession(true);
+					UserSession us = new UserSession();
+					us.setUser(new UserDAO().findByAccount(username, password));
+					ss.setAttribute("usersession", us);
+					response.sendRedirect("my-account");
 				} else {
-					request.setAttribute("register_mess", "Password và Re-Password không trùng nhau");
+					request.setAttribute("register_mess", "Password và Re-password không giống nhau");
 					doDisplay(request, response);
 				}
 			} else {
-				request.setAttribute("register_mess", "Tên đăng nhập đã có người sử dụng");
+				request.setAttribute("register_mess", "Đã có người đăng ký tài khoản này");
 				doDisplay(request, response);
 			}
 		}

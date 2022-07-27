@@ -203,8 +203,10 @@
 						</div>
 					</div>
 					<div class="card-body" id="main-content">
-						<form>
+						
 							<h6 class="heading-small text-muted mb-4">Thông tin cá nhân</h6>
+							<form action="my-account" method="post">
+							<input name="action" value="updateInfor" type="hidden"> 
 							<div class="pl-lg-4">
 								<div class="row">
 									<div class="col-lg-6">
@@ -212,7 +214,7 @@
 											<label class="form-control-label" for="input-username">Username</label>
 											<input type="text" id="input-username"
 												class="form-control form-control-alternative"
-												placeholder="Username" value="${usersession.user.name}">
+												placeholder="Username" value="${usersession.user.name}" name="name">
 										</div>
 									</div>
 									<div class="col-lg-6">
@@ -221,7 +223,7 @@
 												address</label> <input type="email" id="input-email"
 												class="form-control form-control-alternative"
 												placeholder="jesse@example.com"
-												value="${usersession.user.email}">
+												value="${usersession.user.email}" name="email">
 										</div>
 									</div>
 								</div>
@@ -231,7 +233,7 @@
 											<label class="form-control-label" for="input-first-name">Số
 												điện thoại</label> <input type="text" id="input-first-name"
 												class="form-control form-control-alternative"
-												placeholder="First name"
+												placeholder="" name="phone"
 												value="${usersession.user.phoneNumber}">
 										</div>
 									</div>
@@ -245,22 +247,40 @@
 										</div>
 									</div>
 								</div>
+								<c:if test="${ismsg != null}">
+									<c:if test="${ismsg == 'Cập nhật thông tin cá nhân thành công' }">
+										<div style="text-align: right;">
+											<p style="color: green;">${ismsg }</p>
+										</div>
+									</c:if>
+									<c:if test="${ismsg != 'Cập nhật thông tin cá nhân thành công' }">
+										<div style="text-align: right;">
+											<p style="color: red;">${ismsg }</p>
+										</div>
+									</c:if>
+									</c:if>
 								<div class="col-md-12"
 									style="text-align: right; padding-right: 0px;">
 									<button type="submit" class="btn btn-info">Xác nhận</button>
 								</div>
+								
+							</form>
 							</div>
 							<hr class="my-4">
 							<!-- Address -->
 							<h6 class="heading-small text-muted mb-4">Thay đổi mật khẩu</h6>
+							
+							<form action="my-account" method="post">
 							<div class="pl-lg-4">
+							
+							<input name="action" value="updatePassword" type="hidden">
 								<div class="row">
 									<div class="col-md-12">
 										<div class="form-group focused">
 											<label class="form-control-label" for="input-address">Mật
 												khẩu hiện tại</label> <input id="input-address"
 												class="form-control form-control-alternative" placeholder=""
-												type="password">
+												type="password" name="oldPassword">
 										</div>
 									</div>
 								</div>
@@ -270,7 +290,7 @@
 											<label class="form-control-label" for="input-city">Mật
 												khẩu mới</label> <input id="input-newPassword"
 												class="form-control form-control-alternative" placeholder=""
-												type="password">
+												type="password" name="newPassword">
 										</div>
 									</div>
 									<div class="col-lg-6">
@@ -278,15 +298,21 @@
 											<label class="form-control-label" for="input-country">Nhập
 												lại mật khẩu mới</label> <input id="input-country"
 												class="form-control form-control-alternative" placeholder=""
-												type="password">
+												type="password"  name="rePassword">
 										</div>
 									</div>
+									<c:if test="${msg != null}">
+										<div style="text-align: right;">
+											<p style="color: red;">${msg }</p>
+										</div>
+									</c:if>
 									<div class="col-md-12" style="text-align: right;">
 										<button type="submit" class="btn btn-info">Xác nhận</button>
 									</div>
-
-								</div>
+								</div>							
 							</div>
+							</form>
+							
 							<hr class="my-4">
 							<!-- Description -->
 							<div id="panel">
@@ -300,7 +326,6 @@
 									</div>
 								</div>
 							</div>
-						</form>
 					</div>
 
 					<div class="card-body" id="history">

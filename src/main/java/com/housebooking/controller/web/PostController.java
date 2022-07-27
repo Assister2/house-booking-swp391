@@ -129,8 +129,20 @@ public class PostController extends HttpServlet {
 			}
 		}
 		
-		List<Room> listRoom = ((RoomDAO)roomDAO).list(date1, date2, buildingId);
-
+		String price = request.getParameter("price");
+		
+		List<Room> listRoom;
+		
+		if(price != null && !price.equals("")) {
+			String[] priceRange = price.split("-");
+			float startPrice = Float.parseFloat(priceRange[0]);
+			float endPrice = Float.parseFloat(priceRange[1]);
+			listRoom = ((RoomDAO)roomDAO).list(date1, date2, buildingId, startPrice, endPrice);
+		}
+		else {
+			listRoom = ((RoomDAO)roomDAO).list(date1, date2, buildingId, 0, 100000000);
+		}
+		
 		request.setAttribute("listFeedback", listFeedback);
 		request.setAttribute("listConvenient", listConvenient);
 		request.setAttribute("listRoom", listRoom);

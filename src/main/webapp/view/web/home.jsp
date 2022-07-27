@@ -116,7 +116,7 @@
 	text-transform: uppercase;
 }
 
-h2 {
+.h2 {
 	color: #6bc4ac;
 	font-size: 32px;
 	font-weight: 800;
@@ -249,7 +249,7 @@ select::-ms-expand {
 		</div>
 		<hr style="width: 50%; text-align: center;">
 		<div class="text-center" style="margin: 30px auto;">
-			<h2>Những địa điểm du lịch nổi tiếng</h2>
+			<h2 class="h2">Những địa điểm du lịch nổi tiếng</h2>
 
 			<div class="row center">
 				<div class="col-md-2">
@@ -303,7 +303,6 @@ select::-ms-expand {
 		</div>
 
 	</div>
-
 
 	<div class="clearfix"></div>
 

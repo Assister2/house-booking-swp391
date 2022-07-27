@@ -142,6 +142,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	href="${pageContext.request.contextPath}/view/web/css/jquery-ui1.css">
 <link href="${pageContext.request.contextPath}/view/web/css/style.css"
 	rel="stylesheet" type="text/css" media="all" />
+	
+	<!-- Linked datepicker -->
+<link
+	href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/ui-lightness/jquery-ui.css'
+	rel='stylesheet'>
+
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <!-- font-awesome-icons -->
 <link
 	href="${pageContext.request.contextPath}/view/web/css/font-awesome.css"
@@ -182,20 +190,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	padding-top: 20px;
 	padding-bottom: 20px;
 }
-/*
-.a {
-	color: #ffffff;
-	height: 32px;
-	margin: -1px -1px 0;
-	display: flex;
-	padding: 8px 12px;
-	font-size: 16px;
-	background: linear-gradient(90deg, #00B6F3 0%, #007FF3 100%);
-	align-items: center;
-	font-weight: 600;
-	line-height: 19px;
-	border-radius: 8px 8px 0px 0px;
-}*/
+
 .b {
 	width: 100%;
 	display: flex;
@@ -361,6 +356,30 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 .roomInfor p {
 	margin-top: 5px;
 	margin-bottom: 5px;
+}
+
+.main-filter {
+	background: #b0a7a7;
+}
+
+.ui-datepicker {
+	margin-top: 0px;
+	margin-bottom: 0px;
+	width: 20em;
+}
+
+.ui-state-default, .ui-widget-content .ui-state-default {
+	border-radius: 0px;
+	height: fit-content;
+	width: 29.33px;
+}
+
+.ui-slider-handle {
+	display: none;
+}
+
+.infor{
+	margin-top: 5px;
 }
 </style>
 
@@ -539,24 +558,36 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<div style="width: 85%; margin-left: auto; margin-right: auto;">
 				<h4 style="font-weight: bold;">Chọn phòng</h4>
 				<form action="single-post">
+				<!-- <input name="action" value="filter" type="hidden"> -->
 				<input name="buildingId" value="${param.buildingId }" type="hidden">
 				<div class="MuiBox-root jss2320 jss2311"
 					style="margin-bottom: 20px;">
 					<div class="MuiBox-root jss2330 jss2321">
 						<div class="row" style="width: 100%;">
 							<div class="col-md-3">
-								<label>Ngày đến</label> <input type="text"
-									class="form-control col-md-7" placeholder="__/__/____"
-									name="startDate" required value="${param.startDate }">
+								<label>Ngày đến</label><input autocomplete="off"
+								type="text" name="startDate" id="my_date_picker1"
+								class="form-control"
+								placeholder="${param.startDate!=null?param.startDate:'MM/dd/yyyy' }"
+								value="${param.startDate!=null?param.startDate:null }" required>
 							</div>
 							<div class="col-md-3">
 								<label>Ngày về</label> <input type="text"
-									class="form-control col-md-7" placeholder="__/__/____"
-									name="endDate" required value="${param.endDate }">
+								name="endDate" id="my_date_picker2" class="form-control"
+								placeholder="${param.endDate!=null?param.endDate:'MM/dd/yyyy' }"
+								value="${param.endDate!=null?param.endDate:null }" required
+								autocomplete="off">
 							</div>
 							<div class="col-md-3">
 								<label>Mức giá</label> 
 								<select class="form-control" name="price">
+								<c:if test="${param.price == null or param.price == ''}"><option value="">All</option></c:if>
+								<c:if test="${param.price eq '0-500000'}"><option value="0-500000">0 (VNĐ) - 500,000 (VNĐ)</option></c:if> 
+								<c:if test="${param.price eq '500000-1000000'}"><option value="500000-1000000">500,000 (VNĐ) - 1,000,000 (VNĐ)</option></c:if>
+								<c:if test="${param.price eq '1000000-2000000'}"><option value="1000000-2000000">1,000,000 (VNĐ) - 2,000,000 (VNĐ)</option></c:if>
+								<c:if test="${param.price eq '2000000-5000000'}"><option value="2000000-5000000">2,000,000 (VNĐ) - 5,000,000 (VNĐ)</option></c:if>
+									
+									<c:if test="${param.price != null and param.price != ''}"><option value="">All</option></c:if>
 									<option value="0-500000">0 (VNĐ) - 500,000 (VNĐ)</option>
 									<option value="500000-1000000">500,000 (VNĐ) - 1,000,000 (VNĐ)</option>
 									<option value="1000000-2000000">1,000,000 (VNĐ) - 2,000,000 (VNĐ)</option>
@@ -760,9 +791,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								value="${param.buildingId }">
 							<c:if test="${listFeedback[0] != null }">
 								<c:if test="${param.action != 'ReadAllComment' }">
-									<button type="submit"
-										style="background: unset; border: unset; color: blue;">Xem
-										tất cả bình luận</button>
+									<a href="${pageContext.request.contextPath}/single-post?buildingId=${building.buildingId}&startDate=${param.startDate}&endDate=${param.endDate}&action=ReadAllComment"
+										style="background: unset; border: unset; color: blue;">Xem tất cả bình luận</a>
 								</c:if>
 								<c:if test="${param.action == 'ReadAllComment' }">
 									<a href="${pageContext.request.contextPath}/single-post?buildingId=${building.buildingId}&startDate=${param.startDate}&endDate=${param.endDate}"
@@ -983,6 +1013,44 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				$("#panel").slideToggle("slow");
 			});
 		});
+	</script>
+	
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js">
+		
+		
+	</script>
+	<script>
+		$(document).ready(
+				function() {
+
+					$(function() {
+						$("#my_date_picker1").datepicker({
+							minDate : 0
+						});
+					});
+
+					$(function() {
+						$("#my_date_picker2").datepicker({
+							minDate : 0
+						});
+					});
+
+					$('#my_date_picker1').change(
+							function() {
+
+								startDate = $(this).datepicker('getDate');
+								$("#my_date_picker2").datepicker("option",
+										"minDate", startDate);
+							})
+
+					$('#my_date_picker2').change(
+							function() {
+								endDate = $(this).datepicker('getDate');
+								$("#my_date_picker1").datepicker("option",
+										"maxDate", endDate);
+							})
+				})
 	</script>
 
 

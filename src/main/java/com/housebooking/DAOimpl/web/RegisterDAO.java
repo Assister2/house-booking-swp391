@@ -50,7 +50,6 @@ public class RegisterDAO {
 	public void createUser(String username,String password) {
 		int idNumber = ( Integer.parseInt(getLastestNumberID() ) + 1 );
 		String id = "User_" + String.valueOf(idNumber);
-		System.out.println(id);
 		 String sql = "insert into users \r\n"
 		 		+ "values(?,Null,Null,?,?,?,Null,Null)";
  

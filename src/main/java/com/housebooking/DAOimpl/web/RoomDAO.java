@@ -434,7 +434,7 @@ public class RoomDAO implements IRoomDAO {
 		return "";
 	}
 	
-	public List<Room> list(LocalDate startDate, LocalDate endDate, String buildingId) {
+	public List<Room> list(LocalDate startDate, LocalDate endDate, String buildingId, float startPrice, float endPrice) {
 		ArrayList<Room> list;
 		list = new ArrayList<Room>();
 
@@ -465,7 +465,7 @@ public class RoomDAO implements IRoomDAO {
 				+ "						AND  @endDate >= de.end_date\r\n"
 				+ "					)\r\n"
 				+ "			) as r2 on r.room_id = r2.room_id\r\n"
-				+ " Where b.building_id like ? AND r2.room_id is null AND r.room_status like 'active'\r\n"
+				+ " Where b.building_id like ? AND r2.room_id is null AND r.room_status like 'active' AND r.room_price >= ? and r.room_price <= ?\r\n"
 				+ " Group by r.room_id, r.room_name, r.room_desc, r.room_price, r.room_area, r.room_bed, r.room_status, r.building_id, r.type_id, t.type_name";
 
 		try {
@@ -476,6 +476,8 @@ public class RoomDAO implements IRoomDAO {
 			ps.setDate(1, Date.valueOf(startDate));
 			ps.setDate(2, Date.valueOf(endDate));
 			ps.setString(3, buildingId);
+			ps.setFloat(4, startPrice);
+			ps.setFloat(5, endPrice);
 
 			ResultSet rs = ps.executeQuery();
 
