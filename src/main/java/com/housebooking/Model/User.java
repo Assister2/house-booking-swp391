@@ -8,7 +8,17 @@ public class User {
 	private String username;
 	private String password;
 	private String phoneNumber;
-	private String email;
+	private String email;	
+	private String status;
+
+	
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
 	public String getUserId() {
 		return userId;
