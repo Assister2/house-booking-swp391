@@ -39,4 +39,32 @@ public class ConvenientDAO {
 
 		return list;
 	}
+	
+	public boolean DeleteConvenient(String convenientId) {
+
+		String sql = " Delete\r\n"
+				+ " From Building_Convenient \r\n"
+				+ " Where convenient_id = ?\r\n"
+				+ " \r\n"
+				+ " Delete From Convenient Where convenient_id = ?";
+		try {
+
+			Connection conn = DBUtils.getConnection();
+
+			PreparedStatement ps = conn.prepareStatement(sql);
+			
+			ps.setString(1, convenientId);
+			ps.setString(2, convenientId);
+
+			
+			if (ps.executeUpdate() > 0) {
+				return true;
+			}
+
+		} catch (Exception ex) {
+			return false;
+		}
+
+		return false;
+	}
 }

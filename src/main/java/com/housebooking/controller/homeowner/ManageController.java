@@ -251,6 +251,7 @@ public class ManageController extends HttpServlet {
 		String buildingType = request.getParameter("Update_buildingType");
 		String buildingInfor = request.getParameter("Update_buildingInfor");
 		String buildingRules = request.getParameter("Update_buildingRule");
+		String status = request.getParameter("status");
 		String buildingDescrip = request.getParameter("Update_Descrip");
 		
 		String imageLink = "";
@@ -264,7 +265,7 @@ public class ManageController extends HttpServlet {
 			
 			BuildingDAO buildingDAO = new BuildingDAO();
 			if(buildingDAO.UpdateBuilding(buildingId, buildingName, area, buildingType, buildingInfor
-					, buildingRules, buildingDescrip, imageLink.equals("")?null:imageLink)) {
+					, buildingRules, buildingDescrip,status, imageLink.equals("")?null:imageLink)) {
 				request.setAttribute("message", "Cập nhật thành công!");
 			}
 			else {
@@ -293,7 +294,7 @@ public class ManageController extends HttpServlet {
 		String buildingInfor = request.getParameter("Add_Infor");
 		String buildingRules = request.getParameter("Add_Rules");
 		String buildingDescrip = request.getParameter("Add_Descrip");
-		String buidingStatus = "Waiting";
+		String buidingStatus = "active";
 		
 		String city = request.getParameter("Add_city");
 		String district = request.getParameter("Add_disctrict");

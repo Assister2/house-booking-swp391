@@ -32,22 +32,22 @@ public class LoginController extends HttpServlet {
 		String password = request.getParameter("password");
 
 		AccessManager accessManager = new AccessManager();
-			if ((username == null) && (password == null) && (code == null)) {
-				RequestDispatcher rd = request.getRequestDispatcher("/view/common/login.jsp");
-				rd.forward(request, response);
-			} else if ((username == null) && (password == null) && (code != null)) {
-				String accessToken = GoogleUtils.getToken(code);
-				GooglePojo googlePojo = GoogleUtils.getUserInfo(accessToken);
-				String id = googlePojo.getId();
-				String name = googlePojo.getName();
-				String email = googlePojo.getEmail();
-				us = accessManager.loginGoogle(id, name, email);
-				doDisplay(request, response);
-			} else if ((username != null) && (password != null) && (code == null)) {
-				us = accessManager.login(username, password);
-				doDisplay(request, response);
-			}
-		
+		if ((username == null) && (password == null) && (code == null)) {
+			RequestDispatcher rd = request.getRequestDispatcher("/view/common/login.jsp");
+			rd.forward(request, response);
+		} else if ((username == null) && (password == null) && (code != null)) {
+			String accessToken = GoogleUtils.getToken(code);
+			GooglePojo googlePojo = GoogleUtils.getUserInfo(accessToken);
+			String id = googlePojo.getId();
+			String name = googlePojo.getName();
+			String email = googlePojo.getEmail();
+			us = accessManager.loginGoogle(id, name, email);
+			doDisplay(request, response);
+		} else if ((username != null) && (password != null) && (code == null)) {
+			us = accessManager.login(username, password);
+			doDisplay(request, response);
+		}
+
 	}
 
 //	    if ( code == null || code.isEmpty() ) {
@@ -87,20 +87,25 @@ public class LoginController extends HttpServlet {
 			throws ServletException, IOException {
 		HttpSession ss = request.getSession(true);
 		if (us.getUser() != null) {
-			ss.setAttribute("usersession", us);
-			switch (us.getUser().getRole()) {
-			case "Admin":
-				response.sendRedirect(request.getContextPath() + "/admin");
-				break;
-			case "Owner":
-				response.sendRedirect(request.getContextPath() + "/dashboard");
-				break;
-			case "User":
-				response.sendRedirect(request.getContextPath() + "/home");
-				break;
+			if (us.getUser().getStatus().equals("ban")) {
+				request.setAttribute("login_mess", "Tài khoản của bạn đã bị khóa");
+				RequestDispatcher rd = request.getRequestDispatcher("/view/common/login.jsp");
+				rd.forward(request, response);
+			} else {
+				ss.setAttribute("usersession", us);
+				switch (us.getUser().getRole()) {
+				case "Admin":
+					response.sendRedirect(request.getContextPath() + "/AdminDashboard");
+					break;
+				case "Owner":
+					response.sendRedirect(request.getContextPath() + "/dashboard");
+					break;
+				case "User":
+					response.sendRedirect(request.getContextPath() + "/home");
+					break;
+				}
 			}
-		}
-		else {
+		} else {
 			request.setAttribute("login_mess", "Tên đăng nhập hoặc mật khẩu không đúng");
 			RequestDispatcher rd = request.getRequestDispatcher("/view/common/login.jsp");
 			rd.forward(request, response);

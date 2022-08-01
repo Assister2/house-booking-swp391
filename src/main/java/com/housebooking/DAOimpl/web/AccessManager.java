@@ -14,7 +14,7 @@ public class AccessManager {
 	        UserSession userSession =  new UserSession();
 
 	        String sql = "select * from Users "
-	                + "Where username like ? AND password like ?";
+	                + "Where username like ? AND password like ? ";
 
 	        try {
 
@@ -37,6 +37,7 @@ public class AccessManager {
 	                user.setPassword(rs.getString("password"));
 	                user.setPhoneNumber(rs.getString("phone"));
 	                user.setEmail(rs.getString("Email"));
+	                user.setStatus(rs.getString("status"));
 	                Date date = new Date();	    
 	                
 	                userSession.setUser(user);

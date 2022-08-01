@@ -5,6 +5,21 @@ public class Service {
 	private String serviceID;
 	private String serviceName;
 	private float price;
+	private String description;
+	private String status;
+	
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
 	public Service() {
 	}
 	public Service(String buildingID, String serviceID, String serviceName, float price) {

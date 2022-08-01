@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.housebooking.DAOimpl.houseowner.BillDAO;
 import com.housebooking.DAOimpl.houseowner.RoomDAO;
@@ -40,6 +41,9 @@ public class BillDetailController extends HttpServlet {
 			case "save":
 				Save(request, response);
 				break;
+			case "cancel":
+				Cancel(request, response);
+				break;
 
 			default:
 				doDisplay(request, response);
@@ -51,7 +55,30 @@ public class BillDetailController extends HttpServlet {
 		}	
 	}
 	
+	protected void Cancel(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession ss = request.getSession(true);
+		ss.setAttribute("bill_detail_message", null);
+		
+		String billId = request.getParameter("billId");
+		
+		BillDAO billDAO = new BillDAO();
+		
+		if(billDAO.Cancel(billId)) {
+			request.setAttribute("message", "Cập nhật thành công");
+			ss.setAttribute("bill_detail_message", "Cập nhật trạng thái thành công");
+		}
+		else {
+			request.setAttribute("message", "Cập nhật không thành công");
+			ss.setAttribute("bill_detail_message", "Cập nhật trạng thái không thành công");
+		}
+		
+		response.sendRedirect("manage-BillDetail?billId=" + billId);
+	}
+	
 	protected void Save(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession ss = request.getSession(true);
+		ss.setAttribute("bill_detail_message", null);
+		
 		String billId = request.getParameter("billId");
 		float total = 0;
 		if (!(request.getParameter("total") == null) && !request.getParameter("total").equals("")) {
@@ -67,15 +94,20 @@ public class BillDetailController extends HttpServlet {
 //		Service service = serviceDAO.FindInABuilding(serviceId, room.getBuildingId());
 		if(billDAO.SavePaidBill(billId, total)) {
 			request.setAttribute("message", "Cập nhật thành công");
+			ss.setAttribute("bill_detail_message", "Cập nhật thành công");
 		}
 		else {
 			request.setAttribute("message", "Cập nhật không thành công");
+			ss.setAttribute("bill_detail_message", "Cập nhật không thành công");
 		}
 		
 		response.sendRedirect("manage-BillDetail?billId=" + billId);
 	}
 	
 	protected void DeleteService(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession ss = request.getSession(true);
+		ss.setAttribute("bill_detail_message", null);
+		
 		String billId = request.getParameter("billId");
 		String serviceId = request.getParameter("serviceId");
 		String roomId = request.getParameter("roomId");
@@ -89,15 +121,20 @@ public class BillDetailController extends HttpServlet {
 //		Service service = serviceDAO.FindInABuilding(serviceId, room.getBuildingId());
 		if(serviceDAO.DeleteServiceUsed(serviceId, roomId, billId)) {
 			request.setAttribute("message", "Thêm thành công");
+			ss.setAttribute("bill_detail_message", "Xóa thành công");
 		}
 		else {
-			request.setAttribute("message", "Thêm không thành công");
+			request.setAttribute("message", "Xóa không thành công");
+			ss.setAttribute("bill_detail_message", "Thêm không thành công");
 		}
 		
 		response.sendRedirect("manage-BillDetail?billId=" + billId);
 	}
 	
 	protected void AddService(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession ss = request.getSession(true);
+		ss.setAttribute("bill_detail_message", null);
+		
 		String billId = request.getParameter("billId");
 		String serviceId = request.getParameter("serviceId");
 		String roomId = request.getParameter("roomId");
@@ -116,9 +153,11 @@ public class BillDetailController extends HttpServlet {
 		Service service = serviceDAO.FindInABuilding(serviceId, room.getBuildingId());
 		if(serviceDAO.AddServiceUsed(serviceId, roomId, billId, service.getPrice(), amount)) {
 			request.setAttribute("message", "Thêm thành công");
+			ss.setAttribute("bill_detail_message", "Thêm thành công");
 		}
 		else {
 			request.setAttribute("message", "Thêm không thành công");
+			ss.setAttribute("bill_detail_message", "Thêm không thành công");
 		}
 		
 		response.sendRedirect("manage-BillDetail?billId=" + billId);

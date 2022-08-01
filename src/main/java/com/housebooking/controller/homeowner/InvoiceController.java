@@ -30,21 +30,24 @@ public class InvoiceController extends HttpServlet {
 		
 		HttpSession ss = request.getSession(true);
 		UserSession userSession = (UserSession) ss.getAttribute("usersession");
+		
+		String properties = request.getParameter("properties");
+		String detailProperties = request.getParameter("detailProperties");
 
 		BillDAO billDAO = new BillDAO();
 
 		// Lay so trang hien tai
 		int page = 1;
-		int recordsPerPage = 7;
+		int recordsPerPage = 6;
 		if (request.getParameter("page") != null) {
 			page = Integer.parseInt(request.getParameter("page"));
 		}
 
 		List<Bill> listBillDefault = billDAO.GetAllButNotDenied(userSession.getUser().getUserId(), (page - 1) * recordsPerPage,
-				recordsPerPage,"","");
+				recordsPerPage, properties!=null?properties:"", detailProperties!=null?detailProperties:"");
 
 		// Nay la tat ca
-		int totalRecords = billDAO.GetAllButNotDenied(userSession.getUser().getUserId(), -1, -1, "", "").size();
+		int totalRecords = billDAO.GetAllButNotDenied(userSession.getUser().getUserId(), -1, -1,properties!=null?properties:"", detailProperties!=null?detailProperties:"").size();
 
 		// Tinh so trang
 		int noOfPages = (int) Math.ceil(totalRecords * 1.0 / recordsPerPage);

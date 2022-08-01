@@ -97,7 +97,7 @@
 						</button>
 					</div>
 					<div class="modal-body">
-						<p>${message }</p>
+						<p>${building_detail_message }</p>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
@@ -138,9 +138,9 @@
 											<div class="file-upload-content_1_0">
 												<img class="file-upload-image_1_0" src="#" alt="your image" />
 												<div class="image-title-wrap_1_0">
-													<button type="button" onclick="removeUpload_1_0()"
+													<button style="width: 90%;" type="button" onclick="removeUpload_1_0()"
 														class="remove-image_1_0">
-														Remove <span class="image-title_1_0">Uploaded Image</span>
+														Remove 
 													</button>
 												</div>
 											</div>
@@ -161,9 +161,9 @@
 											<div class="file-upload-content_2_0">
 												<img class="file-upload-image_2_0" src="#" alt="your image" />
 												<div class="image-title-wrap_2_0">
-													<button type="button" onclick="removeUpload_2_0()"
+													<button style="width: 90%;" type="button" onclick="removeUpload_2_0()"
 														class="remove-image_2_0">
-														Remove <span class="image-title_2_0">Uploaded Image</span>
+														Remove 
 													</button>
 												</div>
 											</div>
@@ -184,9 +184,9 @@
 											<div class="file-upload-content_3_0">
 												<img class="file-upload-image_3_0" src="#" alt="your image" />
 												<div class="image-title-wrap_3_0">
-													<button type="button" onclick="removeUpload_3_0()"
+													<button style="width: 90%;" type="button" onclick="removeUpload_3_0()"
 														class="remove-image_3_0">
-														Remove <span class="image-title_3_0">Uploaded Image</span>
+														Remove
 													</button>
 												</div>
 											</div>
@@ -200,7 +200,7 @@
 									<div class="form-group">
 										<label for="roomName">Tên phòng:</label> <input type="text"
 											class="form-control" id="roomName"
-											placeholder="Enter Last Name" name="roomName" value=""
+											placeholder="Nhập tên phòng" name="roomName" value=""
 											required>
 									</div>
 
@@ -225,7 +225,7 @@
 
 									<div class="form-group">
 										<label for="price">Giá (VNĐ):</label> <input type="number"
-											class="form-control" id="price" placeholder="Enter Last Name"
+											class="form-control" id="price" placeholder="Giá tiền/ngày"
 											name="price" value="" required>
 									</div>
 
@@ -417,9 +417,9 @@
 									<div class="card-body">
 
 										<div class="form-group">
-											<label for="roomName">Tên phòng:</label> <input type="text"
+											<label for="roomName">Tên phòng: </label> <input type="text"
 												class="form-control" id="roomName"
-												placeholder="Enter Last Name" name="roomName"
+												placeholder="Nhập tên phòng" name="roomName"
 												value="${listRoom[i-1].roomName}" required>
 										</div>
 
@@ -441,7 +441,7 @@
 										<div class="form-group">
 											<label for="price">Giá (VNĐ):</label> <input type="text"
 												class="form-control" id="price"
-												placeholder="Enter Last Name" name="price"
+												placeholder="Giá tiền/ngày" name="price"
 												value="${listRoom[i-1].price}" required>
 										</div>
 
@@ -490,7 +490,7 @@
 						<div class="col-md-12">
 							<div class="card">
 								<div class="card-header">
-									<strong class="card-title">${building.buildingName } <small>
+									<strong class="card-title">${building.buildingName } ${building_detail_message == null}<small>
 											<c:if test="${building.buildingStatus == 'active'}">
 												<span class="badge badge-success float-right mt-1">Active</span>
 											</c:if> <c:if test="${building.buildingStatus == 'not active'}">
@@ -504,7 +504,7 @@
 									<p class="card-text">
 										Số phòng: ${building.numRoom} <a style="margin-left: 5px;"
 											href="" data-toggle="modal" data-target="#AddModal"
-											class="badge badge-success mt-1"> Thêm</a>
+											class="badge badge-success mt-1"> Thêm + </a>
 									</p>
 									<p class="card-text">Địa chỉ: ${building.buildingAddress}</p>
 									<p class="card-text">${building.buildingDesc}</p>
@@ -542,7 +542,14 @@
 										</c:if>
 									</p>
 									<p>
-										<b>Trạng thái hiển thị:</b> ${listRoom[i-1].roomStatus}
+										<b>Trạng thái hiển thị:</b>
+											<c:if test="${listRoom[i-1].roomStatus == 'active'}">
+												<span class="badge badge-success mt-1">Active</span>
+											</c:if> 
+											<c:if test="${listRoom[i-1].roomStatus != 'active'}">
+												<span class="badge badge-danger r-activity">Not
+													active</span>
+											</c:if>
 									</p>
 									<fmt:formatNumber var="gia" value=" ${listRoom[i-1].price}"
 										type="currency" minFractionDigits="0" currencySymbol="" />
@@ -641,12 +648,18 @@
 			CKEDITOR.replace('Update_Descript');
 	</script>
 
-	<c:if test="${message != null }">
+	<c:if test="${building_detail_message != null }">
 		<script>
 			let myModal = new bootstrap.Modal(document
 					.getElementById('smallmodal'), {});
 			myModal.show();
 		</script>
+		<%   
+  
+		HttpSession ss = request.getSession(true);
+		ss.setAttribute("building_detail_message", null);
+  
+		%>  
 	</c:if>
 
 </body>

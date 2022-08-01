@@ -197,7 +197,7 @@ public class WebBuildingDAO {
 	public Building find(String buildingId) {
 		Building building = new Building();
 		String sql = "  Select  b.building_id, b.building_number,b.building_name, b.building_desc, \r\n"
-				+ " b.buiding_image, b.building_type, b.building_rule, \r\n"
+				+ " b.buiding_image, b.building_type, b.building_rule, b.building_status, \r\n"
 				+ " ( b.building_number + ' ' + st.street_name + ' '+ dis.district_name +' '+ ci.city_name ) as address,\r\n"
 				+ " ISNULL(Round(AVG(rating*1.0),1),0) as rating\r\n"
 				+ " from Room r join Type_Of_Room t on r.type_id = t.type_id\r\n"
@@ -208,7 +208,7 @@ public class WebBuildingDAO {
 				+ "	left join Feedback fb on b.building_id = fb.building_id\r\n"
 				+ " Where b.building_id like ?\r\n"
 				+ " Group by b.building_id, b.building_number,b.building_name, b.building_desc, \r\n"
-				+ " b.buiding_image, b.building_type, b.building_rule, b.building_number,st.street_name,dis.district_name , ci.city_name\r\n";
+				+ " b.buiding_image, b.building_type, b.building_rule, b.building_number,st.street_name,dis.district_name , ci.city_name, b.building_status\r\n";
 
 		try {
 
@@ -221,6 +221,7 @@ public class WebBuildingDAO {
 
 			while (rs.next()) {
 				fillBuildingData(building, rs);
+				building.setBuildingStatus(rs.getString("building_status"));
 				building.setAvgPrice(getAvgPrice(buildingId));
 			}
 

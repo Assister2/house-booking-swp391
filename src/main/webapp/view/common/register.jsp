@@ -39,8 +39,8 @@
 </head>
 
 <body>
-     <div class="page-wrapper">
-        <div style="background:-webkit-gradient(linear,left bottom,right top,from(#fc2c77),to(#6c4079))" class="page-content--bge5">
+     <div class="page-wrapper" style="padding-bottom: 0px;">
+        <div style="background:-webkit-gradient(linear,left bottom,right top,from(#fc2c77),to(#6c4079))">
             <div class="container">
                 <div class="login-wrap">
                     <div class="login-content">
@@ -51,6 +51,25 @@
                         </div>
                         <div class="login-form">
                             <form action="" method="post">
+                             <div class="form-group">
+                                    <label>Tên</label>
+                                    <input class="au-input au-input--full" type="text" name="username" placeholder="Tên" required="required">
+                                </div>
+                                 <div class="form-group">
+                                    <label>Số điện thoại</label>
+                                    <input class="au-input au-input--full" type="text" name="username" placeholder="Số điện thoại" required="required">
+                                </div>
+                                 <div class="form-group">
+                                    <label>Email</label>
+                                    <input class="au-input au-input--full" type="text" name="username" placeholder="example@gmail.com" required="required">
+                                </div>
+                                <div class="form-group">
+                                <label>Vai trò</label>
+                                   <select class="form-control">
+									  <option>Người thuê</option>
+									  <option>Người cho thuê</option>
+									</select>
+                                </div>
                                 <div class="form-group">
                                     <label>Username</label>
                                     <input class="au-input au-input--full" type="text" name="username" placeholder="Username" required="required">

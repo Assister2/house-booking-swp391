@@ -37,12 +37,71 @@ public class GeneralController extends HttpServlet {
 			case "unban":
 				doUnBan(request, response);
 				break;
-
+			case "deleteConve":
+				doDeleteConve(request, response);
+				break;
+			case "deleteService":
+				doDeleteService(request, response);
+				break;
+			case "addService":
+				doAddService(request, response);
+				break;
 			default:
 				doDisplay(request, response);
 				break;
 			}
 		}
+	}
+	
+	protected void doAddService(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String name = request.getParameter("name");
+		String description = request.getParameter("description");
+		
+		ServiceDAO serviceDAO = new ServiceDAO();
+		Service service = new Service();
+		service.setServiceID("SV" + serviceDAO.listService().size());
+		service.setServiceName(name);
+		service.setDescription(description);
+		service.setStatus("active");
+		
+		if(serviceDAO.AddService(service)) {
+			request.setAttribute("message", "Thêm thành công");
+		}
+		else {
+			request.setAttribute("message", "Thêm không thành công");
+		}
+		
+		response.sendRedirect("AdminGeneralControl");
+	}
+	
+	protected void doDeleteConve(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String conveId = request.getParameter("conveId");
+		
+		ConvenientDAO convenientDAO = new ConvenientDAO();
+		if(convenientDAO.DeleteConvenient(conveId)) {
+			request.setAttribute("message", "Xóa thành công");
+		}
+		else {
+			request.setAttribute("message", "Xóa không thành công");
+		}
+		response.sendRedirect("AdminGeneralControl");
+	}
+	
+	protected void doDeleteService(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String serviceId = request.getParameter("serviceId");
+		
+		ServiceDAO serviceDAO = new ServiceDAO();
+		if(serviceDAO.DeleteService(serviceId)) {
+			request.setAttribute("message", "Xóa thành công");
+		}
+		else {
+			request.setAttribute("message", "Xóa không thành công");
+		}
+		
+		response.sendRedirect("AdminGeneralControl");
 	}
 	
 	protected void doBan(HttpServletRequest request, HttpServletResponse response)
@@ -83,6 +142,8 @@ public class GeneralController extends HttpServlet {
 		UserDAO userDAO = new UserDAO();
 
 		String search = request.getParameter("search");
+		String properties = request.getParameter("properties");
+		String detailProperties = request.getParameter("detailProperties");
 
 		// Lay so trang hien tai
 		int page = 1;
@@ -92,10 +153,10 @@ public class GeneralController extends HttpServlet {
 		}
 
 		List<User> listUser = userDAO.listUser((page - 1) * recordsPerPage, recordsPerPage,
-				search != null ? search : "");
+				search != null ? search : "", properties != null ? properties: "", detailProperties != null?detailProperties:"");
 
 		// Nay la tat ca
-		int totalRecords = userDAO.listUser(-1, -1, search != null ? search : "").size();
+		int totalRecords = userDAO.listUser(-1, -1, search != null ? search : "",properties != null ? properties: "", detailProperties != null?detailProperties:"").size();
 
 		// Tinh so trang
 		int noOfPages = (int) Math.ceil(totalRecords * 1.0 / recordsPerPage);

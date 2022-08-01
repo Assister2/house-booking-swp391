@@ -67,12 +67,36 @@ public class UserDAO {
 		return re;
 	}
 	
-	public List<User> listUser(int start, int end, String search){
+	public List<User> listUser(int start, int end, String search, String properties, String by){
 		ArrayList<User> list;
 		list = new ArrayList<User>();
 
 		String sql = " select * from Users "
 				+ " Where user_name like N'%" + search + "%' ";
+		
+		if (properties.equals("Theo trạng thái")) {
+			switch (by) {
+			case "Active account":
+				sql += " AND status like N'%active%' ";
+				break;
+			case "Banned account": 
+				sql +=  " AND status like N'%banned%' ";
+				break;
+			default:
+				break;
+			}
+		} else if (properties.equals("Theo vai trò")) {
+			switch (by) {
+			case "Chủ nhà":
+				sql += " AND role like N'%Owner%' ";
+				break;
+			case "Khách thuê": 
+				sql +=  " AND role like N'%User%' ";
+				break;
+			default:
+				break;
+			}
+		} 
 		
 		if (start != -1 && end != -1) {
 			sql += " Order by user_id ASC\r\n" + " OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
@@ -88,7 +112,7 @@ public class UserDAO {
 				ps.setInt(1, start);
 				ps.setInt(2, end);
 			}
-			
+			System.out.println(sql);
 			ResultSet rs = ps.executeQuery();
 
 			while (rs.next()) {

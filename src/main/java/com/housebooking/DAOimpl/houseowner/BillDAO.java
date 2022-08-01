@@ -88,7 +88,7 @@ public class BillDAO {
 		String sql = " Select bi.*\r\n" + " From Building b join Users u on b.user_id = u.user_id\r\n"
 				+ " Join Room r on b.building_id = r.building_id\r\n"
 				+ " Join Bill_detail bd on bd.room_id = r.room_id\r\n" + " Join Bill bi on bd.bill_id = bi.bill_id\r\n"
-				+ " Where u.user_id = ? AND b.building_status not like 'Removed' AND bi.status not like N'%Đã thanh toán%'";
+				+ " Where u.user_id = ? AND b.building_status not like 'Removed' AND bi.status not like N'%Đã thanh toán%' AND bi.status not like N'%Đã hủy%'";
 
 		if (properties.equalsIgnoreCase("Theo ngày")) {
 			switch (detailProperties) {
@@ -161,7 +161,7 @@ public class BillDAO {
 		String sql = " Select bi.*\r\n" + " From Building b join Users u on b.user_id = u.user_id\r\n"
 				+ " Join Room r on b.building_id = r.building_id\r\n"
 				+ " Join Bill_detail bd on bd.room_id = r.room_id\r\n" + " Join Bill bi on bd.bill_id = bi.bill_id\r\n"
-				+ " Where u.user_id = ? ";
+				+ " Where bi.user_id = ? ";
 		
 		try {
 
@@ -169,6 +169,7 @@ public class BillDAO {
 
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, userID);
+			//System.out.println(sql);
 			ResultSet rs = ps.executeQuery();
 
 			while (rs.next()) {
@@ -220,6 +221,9 @@ public class BillDAO {
 				break;
 			case "Đã thanh toán": 
 				sql +=  " AND bi.status like N'%Đã thanh toán%' ";
+				break;
+			case "Chưa thanh toán": 
+				sql +=  " AND bi.status like N'%Đã xác nhận%' ";
 				break;
 			default:
 				break;
@@ -296,6 +300,31 @@ public class BillDAO {
 
 		String sql = " Update Bill\r\n"
 				+ " SET status = N'Đã xác nhận'\r\n"
+				+ " Where bill_id = ? ";
+
+		try {
+
+			Connection conn = DBUtils.getConnection();
+
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, billId);
+			if(ps.executeUpdate() > 0) {
+				return true;
+			}
+
+		} catch (Exception ex) {
+
+			ex.printStackTrace();
+
+		}
+
+		return false;
+	}
+	
+	public boolean Cancel(String billId) {
+
+		String sql = " Update Bill\r\n"
+				+ " SET status = N'Đã hủy'\r\n"
 				+ " Where bill_id = ? ";
 
 		try {

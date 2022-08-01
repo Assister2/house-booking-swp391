@@ -430,10 +430,10 @@ public class BuildingDAO {
 	}
 
 	public boolean UpdateBuilding(String buildingId, String buildingName, float area, String buildingType,
-			String buildingInfor, String buildingRules, String buildingDescrip, String imageLink) {
+			String buildingInfor, String buildingRules, String buildingDescrip, String status, String imageLink) {
 
 		String sql = " UPDATE Building\r\n"
-				+ " SET building_name = ?, building_area = ?, building_type = ?, building_infor = ?, building_rule = ?, building_desc = ? ";
+				+ " SET building_name = ?, building_area = ?, building_type = ?, building_infor = ?, building_rule = ?, building_desc = ?, building_status = ? ";
 
 		if (imageLink != null) {
 			sql += " , buiding_image = ? \r\n";
@@ -451,7 +451,8 @@ public class BuildingDAO {
 			ps.setNString(4, buildingInfor);
 			ps.setNString(5, buildingRules);
 			ps.setNString(6, buildingDescrip);
-			int count = 7;
+			ps.setNString(7, status);
+			int count = 8;
 			if (imageLink != null) {
 				ps.setString(count++, imageLink);
 			}

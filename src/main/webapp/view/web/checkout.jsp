@@ -407,7 +407,12 @@ body {
 				<c:if test="${param.message == 'success' }">
 					<p>Gửi yêu cầu đặt phòng thành công, chủ phòng sẽ liên hệ với bạn trong thời gian sớm nhất</p>
 					<p>Xin cảm ơn quý khách đã sử dụng dụng vụ!</p>
-					<a href="${pageContext.request.contextPath}/sa">Xem yêu cầu</a>
+					<form action="my-account">
+						<input name="trigger" value="viewOrder" type="hidden">
+						<button type="sumbit">Xem lịch sử đặt phòng</button>
+					</form>
+					<%-- 
+					<a href="${pageContext.request.contextPath}/my-account?trigger=viewOrder">Xem yêu cầu</a> --%>
 				</c:if>
 					
 				</div>
@@ -492,11 +497,19 @@ body {
 			<div id="panel" class="main col-md-12">
 				<form action="check-out" method="get">
 					<h2 class="form-field">Xác nhận thông tin</h2>
-					<label for="name">Khách hàng</label> <input
+					<label for="name">Khách hàng</label> 
+					<input
 						class="form-control form-field" type="text"
 						placeholder="tên khách hàng" name="name" id="name"
-						value="${usersession.user.name }" disabled="disabled"> <label
-						for="phone">Số điện thoại</label> <input
+						value="${usersession.user.name }" disabled="disabled"> 
+						<input
+						class="form-control form-field" type="hidden"
+						placeholder="tên khách hàng" name="name" id="name"
+						value="${usersession.user.name }" > 
+						
+						<label
+						for="phone">Số điện thoại</label> 
+						<input
 						class="form-control form-field" type="text"
 						placeholder="tên khách hàng" name="phone" id="phone"
 						value="${usersession.user.phoneNumber }" disabled="disabled">
@@ -516,7 +529,13 @@ body {
 						<input type="hidden" name="startDate" value="${param.startDate }">
 						<input type="hidden" name="endDate" value="${param.endDate }">
 						<input type="hidden" name="price" value="${room.price }">
-						<button type="submit" class="btn btn-primary">Xác nhận</button>
+						
+						<c:if test="${usersession != null}">
+							<button type="submit" class="btn btn-primary">Xác nhận</button>
+						</c:if>
+						<c:if test="${	usersession == null}">
+							<a href="${pageContext.request.contextPath}/login" class="btn btn-primary">Đăng nhập</a>
+						</c:if>
 					</div>
 
 				</form>

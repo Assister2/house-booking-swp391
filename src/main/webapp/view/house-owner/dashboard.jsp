@@ -1,6 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -178,7 +179,9 @@
 											<i class="zmdi zmdi-money"></i>
 										</div>
 										<div class="text">
-											<h2>${totalBillInLast12Moth}VND</h2>
+										<fmt:formatNumber var="total12Moth" value="${totalBillInLast12Moth}"
+									type="currency" minFractionDigits="0" currencySymbol="" />
+											<h2>${total12Moth } VNĐ</h2>
 											<span>Doanh thu tháng</span>
 										</div>
 									</div>

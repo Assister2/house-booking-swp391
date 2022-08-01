@@ -224,7 +224,7 @@ hr {
 						</button>
 					</div>
 					<div class="modal-body">
-						<p>${message }</p>
+						<p>${bill_detail_message }</p>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
@@ -359,7 +359,12 @@ hr {
 													</div>
 
 													<div class="my-2">
-														<c:if test="${bill.status != 'Đã thanh toán'}">
+														<c:if test="${bill.status == 'Đã hủy'}">
+															<i class="fa fa-circle text-blue-m2 text-xs mr-1"></i>
+															<span class="text-600 text-90">Status:</span>
+															<span class="badge badge-danger badge-pill px-25">Đã hủy</span>
+														</c:if>
+														<c:if test="${bill.status == 'Đã xác nhận'}">
 															<i class="fa fa-circle text-blue-m2 text-xs mr-1"></i>
 															<span class="text-600 text-90">Status:</span>
 															<span class="badge badge-warning badge-pill px-25">Chưa
@@ -511,10 +516,13 @@ hr {
 												<span class="text-secondary-d1 text-105">thank you
 													for trusting our business</span>
 												<c:if test="${bill.status != 'Đã thanh toán' }">
+													
 													<a
 														href="${pageContext.request.contextPath}/manage-BillDetail?action=save&billId=${param.billId}&total=${totalPay}"
-														class="btn btn-info btn-bold px-4 float-right mt-3 mt-lg-0">Lưu
-														hóa đơn</a>
+														class="btn btn-info btn-bold px-4 float-right mt-3 mt-lg-0">Xác nhận thanh toán</a>
+														<a style="margin-right: 7px;"
+														href="${pageContext.request.contextPath}/manage-BillDetail?action=cancel&billId=${param.billId}"
+														class="btn btn-danger btn-bold px-4 float-right mt-3 mt-lg-0">Hủy hóa đơn</a>
 												</c:if>
 
 											</div>
@@ -626,12 +634,18 @@ hr {
 		}
 	</script>
 
-	<c:if test="${message != null }">
+	<c:if test="${bill_detail_message != null }">
 		<script>
 			let myModal = new bootstrap.Modal(document
 					.getElementById('smallmodal'), {});
 			myModal.show();
 		</script>
+		<%   
+  
+		HttpSession ss = request.getSession(true);
+		ss.setAttribute("bill_detail_message", null);
+  
+		%>  
 	</c:if>
 
 </body>

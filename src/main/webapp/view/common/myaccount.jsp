@@ -60,11 +60,194 @@
 #panel, #history {
 	display: none;
 }
+
+.file-upload {
+	background-color: #ffffff;
+	margin: 0 auto;
+}
+
+.file-upload-btn {
+	width: 100%;
+	margin: 0;
+	color: #fff;
+	background: #1FB264;
+	border: none;
+	padding: 10px;
+	border-radius: 4px;
+	border-bottom: 4px solid #15824B;
+	transition: all .2s ease;
+	outline: none;
+	text-transform: uppercase;
+	font-weight: 700;
+}
+
+.file-upload-btn:hover {
+	background: #1AA059;
+	color: #ffffff;
+	transition: all .2s ease;
+	cursor: pointer;
+}
+
+.file-upload-btn:active {
+	border: 0;
+	transition: all .2s ease;
+}
+
+.file-upload-content {
+	display: none;
+	text-align: center;
+}
+
+.file-upload-input {
+	position: absolute;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: 100%;
+	outline: none;
+	opacity: 0;
+	cursor: pointer;
+}
+
+.image-upload-wrap {
+	margin-top: 20px;
+	border: 2px dashed #666867;
+	position: relative;
+}
+
+.image-dropping, .image-upload-wrap:hover {
+	background-color: gray;
+	border: 2px dashed #green;
+}
+
+.image-title-wrap {
+	padding: 0 15px 15px 15px;
+	color: #222;
+}
+
+.drag-text {
+	text-align: center;
+}
+
+.drag-text h3 {
+	font-weight: 100;
+	text-transform: uppercase;
+	color: #666a68;
+	padding: 60px 0;
+}
+
+.file-upload-image {
+	max-height: 200px;
+	max-width: 200px;
+	margin: auto;
+	padding: 20px;
+}
+
+.remove-image {
+	width: 200px;
+	margin: 0;
+	color: #fff;
+	background: #cd4535;
+	border: none;
+	padding: 10px;
+	border-radius: 4px;
+	border-bottom: 4px solid #b02818;
+	transition: all .2s ease;
+	outline: none;
+	text-transform: uppercase;
+	font-weight: 700;
+}
+
+.remove-image:hover {
+	background: #c13b2a;
+	color: #ffffff;
+	transition: all .2s ease;
+	cursor: pointer;
+}
+
+.remove-image:active {
+	border: 0;
+	transition: all .2s ease;
+}
+
+.form-field {
+	margin-bottom: 15px;
+}
 </style>
 
 </head>
 <div class="main-content">
-	<!-- Top navbar -->
+
+			<!-- modal small -->
+			<form action="AdminGeneralControl" method="post">
+				<input type="hidden" name="action" value="addService">
+				<div class="modal fade" id="changeImage" tabindex="-1"
+					role="dialog" aria-labelledby="smallmodalLabel" aria-hidden="true">
+					<div class="modal-dialog modal-sm" role="document">
+						<div class="modal-content">
+							
+							<div class="modal-body">
+							<div class="file-upload">
+											<button class="file-upload-btn" type="button"
+												onclick="$('.file-upload-input').trigger( 'click' )">Add
+												Image</button>
+
+											<div class="image-upload-wrap">
+												<input class="file-upload-input" type='file'
+													onchange="readURL(this);" accept="image/*"
+													name="Update_image" multiple="multiple"  required="required" value=""/>
+												<div class="drag-text">
+													<h3>Drag and drop a file or select add Image</h3>
+												</div>
+											</div>
+											<div class="file-upload-content">
+												<img class="file-upload-image" src="#" alt="your image" />
+												<div class="image-title-wrap">
+													<button type="button" onclick="removeUpload()"
+														class="remove-image">
+														Remove <span class="image-title">Uploaded Image</span>
+													</button>
+												</div>
+											</div>
+										</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary"
+									data-dismiss="modal">Cancel</button>
+								<button type="submit" class="btn btn-primary">Confirm</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+			
+			
+			<!-- modal small -->
+			<c:forEach var="item" items="${listBill }">
+			<form action="my-account" method="post">
+				<input type="hidden" name="action" value="cancelInvoice">
+				<input type="hidden" name="billId" value="${item.billID }">
+				<div class="modal fade" id="cancelInvoice${item.billID }" tabindex="-1"
+					role="dialog" aria-labelledby="smallmodalLabel" aria-hidden="true">
+					<div class="modal-dialog modal-sm" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								Thông báo
+							</div>
+							<div class="modal-body">
+								Bạn có chắc hủy đơn này?
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary"
+									data-dismiss="modal">Cancel</button>
+								<button type="submit" class="btn btn-primary">Xác nhận</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+			</c:forEach>
+			
 	<nav class="navbar navbar-top navbar-expand-md navbar-dark"
 		id="navbar-main">
 		<div class="container-fluid">
@@ -121,7 +304,7 @@
 	</nav>
 	<!-- Header -->
 	<div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center"
-		style="min-height: 600px; background-image: url(${pageContext.request.contextPath}/view/web/images/nam.jpeg); background-size: cover; background-position: center;">
+		style="min-height: 200px; background-image: url(${pageContext.request.contextPath}/view/web/images/nam.jpeg); background-size: cover; background-position: center;">
 		<!-- Mask -->
 		<span class="mask bg-gradient-default opacity-8"></span>
 		<!-- Header container -->
@@ -145,7 +328,7 @@
 					<div class="row justify-content-center">
 						<div class="col-lg-3 order-lg-2">
 							<div class="card-profile-image">
-								<a href="#"> <img
+								<a href="" data-toggle="modal" data-target="#changeImage"> <img
 									src="${pageContext.request.contextPath}${usersession.user.avatar}"
 									class="rounded-circle">
 								</a>
@@ -161,30 +344,25 @@
 							<div class="col">
 								<div
 									class="card-profile-stats d-flex justify-content-center mt-md-5">
+									<c:if test="${usersession.user.role == 'Owner' }">
 									<div>
-										<span class="heading">22</span> <span class="description">Friends</span>
-									</div>
-									<div>
-										<span class="heading">10</span> <span class="description">Photos</span>
+										<span class="heading">10</span> <span class="description">Bài đăng</span>
 									</div>
 									<div>
 										<span class="heading">89</span> <span class="description">Comments</span>
 									</div>
+									</c:if>
+									
 								</div>
 							</div>
 						</div>
 						<div class="text-center">
 							<h3>
-								${usersession.user.name }<span class="font-weight-light">,
-									27</span>
+								${usersession.user.name }
 							</h3>
-							<div class="h5 font-weight-300">
-								<i class="ni location_pin mr-2"></i>Bucharest, Romania
-							</div>
 
 							<hr class="my-4">
 
-							<a href="#">Show more</a>
 						</div>
 					</div>
 				</div>
@@ -196,10 +374,13 @@
 							<div class="col-8">
 								<h3 class="mb-0">Quản lý thông tin</h3>
 							</div>
-							<div id="flip" class="col-4 text-right">
-								<a class="btn btn-sm btn-primary" style="color: white;">Xem
+							<c:if test="${usersession.user.role == 'User' }">
+								<div id="flip" class="col-4 text-right">
+								<a class="btn btn-sm btn-primary" id="viewOrders" style="color: white;">Xem
 									lịch sử đặt phòng</a>
+									<a class="btn btn-sm btn-primary" href="${pageContext.request.contextPath}/log-out" style="color: white;">Đăng xuất</a>
 							</div>
+							</c:if>							
 						</div>
 					</div>
 					<div class="card-body" id="main-content">
@@ -240,10 +421,24 @@
 									<div class="col-lg-6">
 										<div class="form-group focused">
 											<label class="form-control-label" for="input-last-name">Role</label>
-											<input type="text" id="input-last-name"
+											<c:if test="${usersession.user.role == 'Owner'}">
+												<input type="text" id="input-last-name"
 												class="form-control form-control-alternative"
-												placeholder="Last name" value="${usersession.user.role}"
+												placeholder="Last name" value="Người cho thuê"
 												disabled="disabled">
+											</c:if>	
+											<c:if test="${usersession.user.role == 'Admin'}">
+												<input type="text" id="input-last-name"
+												class="form-control form-control-alternative"
+												placeholder="Last name" value="Admin"
+												disabled="disabled">
+											</c:if>	
+											<c:if test="${usersession.user.role == 'Admin'}">
+												<input type="text" id="input-last-name"
+												class="form-control form-control-alternative"
+												placeholder="Last name" value="Khách hàng"
+												disabled="disabled">
+											</c:if>									
 										</div>
 									</div>
 								</div>
@@ -261,7 +456,7 @@
 									</c:if>
 								<div class="col-md-12"
 									style="text-align: right; padding-right: 0px;">
-									<button type="submit" class="btn btn-info">Xác nhận</button>
+									<button type="submit" class="btn btn-info">Cập nhật</button>
 								</div>
 								
 							</form>
@@ -307,7 +502,7 @@
 										</div>
 									</c:if>
 									<div class="col-md-12" style="text-align: right;">
-										<button type="submit" class="btn btn-info">Xác nhận</button>
+										<button type="submit" class="btn btn-info">Cập nhật</button>
 									</div>
 								</div>							
 							</div>
@@ -347,29 +542,35 @@
 											<td>${item.billID }</td>
 											<td>${item.date }</td>											
 											<c:if test="${item.status == 'Chờ xác nhận'}">
-												<td style="color: 	gold;">Not approve yet</td>
+												<td style="color: blue;">Chờ xác nhận</td>
 											</c:if>
 											<c:if test="${item.status == 'Đã xác nhận'}">
-												<td>Comming</td>
+												<td>Up Comming</td>
 											</c:if>
 											<c:if test="${item.status == 'Đã thanh toán'}">
-												<td style="color: green;">Done</td>
+												<td style="color: green;">Đã thanh toán</td>
 											</c:if>
 											<c:if test="${item.status == 'Đã từ chối'}">
-												<td style="color: black;">Canceled</td>
+												<td style="color: red;">Canceled</td>
 											</c:if>
 											
-											<fmt:formatNumber var="total" value="${item.total }"
-					type="currency" minFractionDigits="0" currencySymbol="" />
-											<td>${total } </td>
+											<c:if test="${item.status == 'Đã hủy'}">
+												<td style="color: red;">Canceled</td>
+											</c:if>
+																				
+										<%-- 	<fmt:formatNumber var="total" value="${item.total }"
+					type="currency" minFractionDigits="0" currencySymbol="" /> --%>
+											<td>
+											${total }
+											${total == 0? 'Not yet':total}
+											 </td>
 											<td>
 											<c:if test="${item.status == 'Chờ xác nhận'}">
-												<a type="button" style="color: white;" class="btn btn-danger btn-sm">Hủy</a>
+												<a href="" data-toggle="modal" data-target="#cancelInvoice${item.billID }" class="btn btn-danger btn-sm">Hủy</a>
 											</c:if>
-											<c:if test="${item.status != 'Chờ xác nhận'}">
-												<button type="button"  disabled="disabled" style="color: white;" class="btn btn-danger btn-sm">Hủy</button>
+											<c:if test="${item.status == 'Đã thanh toán'}">	
+												<a type="button" style="color: white;" class="btn btn-primary btn-sm">Xem</a>
 											</c:if>
-											<a type="button" style="color: white;" class="btn btn-primary btn-sm">Xem</a>
 											</td>
 										</tr>
 									</c:forEach>
@@ -403,5 +604,87 @@
 		});
 	});
 </script>
+
+<script
+		src="${pageContext.request.contextPath}/view/house-owner/vendor/jquery-3.2.1.min.js"></script>
+	<!-- Bootstrap JS-->
+	<script
+		src="${pageContext.request.contextPath}/view/house-owner/vendor/bootstrap-4.1/popper.min.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/view/house-owner/vendor/bootstrap-4.1/bootstrap.min.js"></script>
+	<!-- Vendor JS       -->
+	<script
+		src="${pageContext.request.contextPath}/view/house-owner/vendor/slick/slick.min.js">
+		
+	</script>
+	<script
+		src="${pageContext.request.contextPath}/view/house-owner/vendor/wow/wow.min.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/view/house-owner/vendor/animsition/animsition.min.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/view/house-owner/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
+		
+	</script>
+	<script
+		src="${pageContext.request.contextPath}/view/house-owner/vendor/counter-up/jquery.waypoints.min.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/view/house-owner/vendor/counter-up/jquery.counterup.min.js">
+		
+	</script>
+	<script
+		src="${pageContext.request.contextPath}/view/house-owner/vendor/circle-progress/circle-progress.min.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/view/house-owner/vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/view/house-owner/vendor/chartjs/Chart.bundle.min.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/view/house-owner/vendor/select2/select2.min.js">
+		
+	</script>
+	
+	
+	<script>
+		function readURL(input) {
+			if (input.files && input.files[0]) {
+
+				var reader = new FileReader();
+
+				reader.onload = function(e) {
+					$('.image-upload-wrap').hide();
+
+					$('.file-upload-image').attr('src', e.target.result);
+					$('.file-upload-content').show();
+
+					$('.image-title').html(input.files[0].name);
+				};
+
+				reader.readAsDataURL(input.files[0]);
+
+			} else {
+				removeUpload();
+			}
+		}
+
+		function removeUpload() {
+			$('.file-upload-input')
+					.replaceWith($('.file-upload-input').clone());
+			$('.file-upload-content').hide();
+			$('.image-upload-wrap').show();
+		}
+		$('.image-upload-wrap').bind('dragover', function() {
+			$('.image-upload-wrap').addClass('image-dropping');
+		});
+		$('.image-upload-wrap').bind('dragleave', function() {
+			$('.image-upload-wrap').removeClass('image-dropping');
+		});
+	</script>
+	
+	<c:if test="${trigger != null }">
+		<script>
+			var a = document.getElementById("viewOrders");
+			a.click();
+		</script>
+	</c:if>
+	
 </body>
 </html>

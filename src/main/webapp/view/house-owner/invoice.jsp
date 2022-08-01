@@ -225,11 +225,10 @@
 							<h3 class="title-5 m-b-35">Thiết lập hóa đơn</h3>
 							<div class="table-data__tool">
 								<div class="table-data__tool-left">
-									<form action="manage-bill" method="get">
-										<input type="hidden" name="action" value="Filter">
+									<form action="invoice-manage" method="get">
 										<div class="rs-select2--light rs-select2--md">
-											<select name="properties" id="countySel" size="1"
-												class="js-select2">
+											<select name="properties" id="properties" size="1"
+												class="js-select2" required="required">
 												<c:if test="${properties != null}">
 													<option value="" selected="selected">${properties }</option>
 												</c:if>
@@ -241,8 +240,8 @@
 											<div class="dropDownSelect2"></div>
 										</div>
 										<div class="rs-select2--light rs-select2--md">
-											<select name="detailProperties" id="stateSel" size="1"
-												class="js-select2">
+											<select name="detailProperties" id="by" size="1"
+												class="js-select2" required="required">
 												<c:if test="${detailProperties != null}">
 													<option value="" selected="selected">${detailProperties }</option>
 												</c:if>
@@ -255,6 +254,9 @@
 										<button type="submit" class="au-btn-filter">
 											<i class="zmdi zmdi-filter-list"></i>Lọc
 										</button>
+										<a type="button" href="${pageContext.request.contextPath}/invoice-manage" class="au-btn-filter">
+											<i class="zmdi zmdi-filter-list"></i>Xóa lọc
+										</a>
 									</form>
 								</div>
 								<div class="table-data__tool-right">
@@ -262,14 +264,7 @@
 										data-toggle="modal" data-target="#addBill">
 										<i class="zmdi zmdi-plus"></i>add item
 									</button>
-									<div class="rs-select2--dark rs-select2--sm rs-select2--dark2">
-										<select class="js-select2" name="type">
-											<option selected="selected">Export</option>
-											<option value="">Option 1</option>
-											<option value="">Option 2</option>
-										</select>
-										<div class="dropDownSelect2"></div>
-									</div>
+									
 								</div>
 							</div>
 							<div class="table-responsive table-responsive-data2">
@@ -318,10 +313,7 @@
 															</a>
 
 														</c:if>
-														<button class="item" data-toggle="tooltip"
-															data-placement="top" title="More">
-															<i class="zmdi zmdi-more"></i>
-														</button>
+														
 													</div>
 												</td>
 											</tr>
@@ -495,6 +487,7 @@
 	<script
 		src="${pageContext.request.contextPath}/view/house-owner/js/main.js"></script>
 
+	
 	<script>
 		var stateObject = {
 			"Theo ngày" : {
@@ -503,61 +496,14 @@
 				"Tháng này" : [ "North Goa", "South Goa" ],
 			},
 			"Theo trạng thái" : {
-				"Chờ xác nhận" : [ "Altona", "Euroa" ],
-				"Đã xác nhận" : [ "Altona", "Euroa" ],
+				"Chưa thanh toán" : [ "Altona", "Euroa" ],
 				"Đã thanh toán" : [ "Altona", "Euroa" ]
-			},
-			"Theo nhà" : {
-				"Alberta" : [ "Acadia", "Bighorn" ],
-				"Columbia" : [ "Washington", "" ]
-			},
+			}
 		}
 
 		window.onload = function() {
-			var countySel = document.getElementById("countySel"), stateSel = document
-					.getElementById("stateSel");
-			for ( var country in stateObject) {
-				countySel.options[countySel.options.length] = new Option(
-						country, country);
-			}
-			countySel.onchange = function() {
-				stateSel.length = 1; // remove all options bar first
-				if (this.selectedIndex < 1)
-					return; // done 
-				for ( var state in stateObject[this.value]) {
-					stateSel.options[stateSel.options.length] = new Option(
-							state, state);
-				}
-			}
-			countySel.onchange(); // reset in case page is reloaded
-			stateSel.onchange = function() {
-				if (this.selectedIndex < 1)
-					return; // done 
-			}
-		}
-	</script>
-
-	<script>
-		var stateObject = {
-			"Theo ngày" : {
-				"Hôm nay" : [ "Nguyễn Huệ", "North Delhi" ],
-				"Tuần này" : [ "Thiruvananthapuram", "Palakkad" ],
-				"Tháng này" : [ "North Goa", "South Goa" ],
-			},
-			"Theo trạng thái" : {
-				"Chờ xác nhận" : [ "Altona", "Euroa" ],
-				"Đã xác nhận" : [ "Altona", "Euroa" ],
-				"Đã thanh toán" : [ "Altona", "Euroa" ]
-			},
-			"Theo nhà" : {
-				"Alberta" : [ "Acadia", "Bighorn" ],
-				"Columbia" : [ "Washington", "" ]
-			},
-		}
-
-		window.onload = function() {
-			var countySel = document.getElementById("addBuilding"), stateSel = document
-					.getElementById("addRoom");
+			var countySel = document.getElementById("properties"), stateSel = document
+					.getElementById("by");
 			for ( var country in stateObject) {
 				countySel.options[countySel.options.length] = new Option(
 						country, country);

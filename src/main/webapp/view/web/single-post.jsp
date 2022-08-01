@@ -397,6 +397,36 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<jsp:include page="commontool.jsp"></jsp:include>
 
 	</div>
+	
+	 <!-- Deny -->
+			<!-- modal small -->
+			<form action="AdminManage" method="get">
+				<input type="hidden" name="buildingId" value="${building.buildingId }">
+				<input type="hidden" name="action" value="off">
+				<div class="modal fade" id="Hide" tabindex="-1"
+					role="dialog" aria-labelledby="smallmodalLabel" aria-hidden="true">
+					<div class="modal-dialog modal-sm" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="smallmodalLabel">Thông báo</h5>
+								<button type="button" class="close" data-dismiss="modal"
+									aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								<p>Bạn có chắc muốn ẩn bài đăng này?</p>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary"
+									data-dismiss="modal">Cancel</button>
+								<button type="submit" class="btn btn-primary">Confirm</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		<!-- end modal small -->
 
 	<!-- //banner -->
 
@@ -449,10 +479,21 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<!-- Booking -->
 
 				<div>
-					<a type="button" href="#chonphong" class="btn btn-primary scroll">Chọn
+					<c:if test="${usersession.user.role == 'Admin' and building.buildingStatus == 'active'}">
+						<a href="" data-toggle="modal" data-target="#Hide" class="btn btn-danger">Ẩn bài đăng</a>
+					</c:if>
+					
+					<c:if test="${usersession.user.role == 'Admin' and building.buildingStatus == 'off'}">
+						<a type="button" href="${pageContext.request.contextPath}/AdminManage?action=off&buildingId=${building.buildingId}" class="btn btn-danger">Ẩn bài đăng</a>
+					</c:if>
+					
+					<c:if test="${usersession.user.role != 'Admin'}">
+						<a type="button" href="#chonphong" class="btn btn-primary scroll">Chọn
 						phòng</a>
+					</c:if>
+					
 				</div>
-
+	
 				<!-- ENd Booking -->
 
 

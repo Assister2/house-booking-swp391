@@ -55,6 +55,9 @@ public class AccountController extends HttpServlet {
 				case "updateInfor":
 					doPost_UpdateInfor(request,response,us);
 					break;
+				case "cancelInvoice":
+					doCancelBill(request,response);
+					break;
 
 				default:
 					doGet_DisplayInfor(request, response);
@@ -64,13 +67,31 @@ public class AccountController extends HttpServlet {
 		}
 
 	}
+	
+	private void doCancelBill(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		BillDAO billDAO = new BillDAO();
+		String billId = request.getParameter("billId");
+		if (billDAO.Cancel(billId)) {
+			request.setAttribute("message", "Hủy đặt phòng thành công");
+		} else {
+			request.setAttribute("message", "Có lỗi xảy ra");
+		}
+		
+		response.sendRedirect("my-account");
+	}
 
 	private void doGet_DisplayInfor(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		BillDAO billDAO = new BillDAO();
 		HttpSession ss = request.getSession();
 		UserSession us = (UserSession) ss.getAttribute("usersession");
+		ss.setAttribute("trigger", null);
+		String trigger = request.getParameter("trigger");
 		
+		if(trigger != null && !trigger.equals("")) {
+			ss.setAttribute("trigger", trigger);
+		}
 		List<Bill> listBill = billDAO.GetOrderHistory(us.getUser().getUserId());
 		
 		request.setAttribute("listBill", listBill);

@@ -120,13 +120,13 @@
 
 .image-upload-wrap {
 	margin-top: 20px;
-	border: 4px dashed #666867;
+	border: 2px dashed #666867;
 	position: relative;
 }
 
 .image-dropping, .image-upload-wrap:hover {
 	background-color: #55e46f;
-	border: 4px dashed #ffffff;
+	border: 2px dashed #ffffff;
 }
 
 .image-title-wrap {
@@ -153,7 +153,7 @@
 }
 
 .remove-image {
-	width: 200px;
+	width: 100%;
 	margin: 0;
 	color: #fff;
 	background: #cd4535;
@@ -222,7 +222,8 @@
 													onchange="readURL(this);" accept="image/*"
 													name="Update_image" multiple="multiple" />
 												<div class="drag-text">
-													<h3>Drag and drop a file or select add Image</h3>
+													<img alt="" style="max-height: 450px;"
+															src="${pageContext.request.contextPath}${listBuilding[i-1].buildingImage}">
 												</div>
 											</div>
 											<div class="file-upload-content">
@@ -260,14 +261,21 @@
 											<div class="col-md-12">
 												<span style="font-weight: bolder;">Thông tin chi tiết</span>
 											</div>
-											<div class="col-md-4">
+											<div class="col-md-3">
 												<input type="number" id="" name="Update_area"
 													placeholder="Diện tích" class="form-control"
 													required="required"
 													value="${listBuilding[i-1].buildingArea}">
 											</div>
-
-											<div class="form-group col-md-8">
+											<div class="form-group col-md-4">
+												<select class="form-control" id=""
+													name="status" required="required">
+													<option value="${listBuilding[i-1].buildingStatus}">${listBuilding[i-1].buildingStatus}</option>
+													<option value="active">active</option>
+													<option value="hide">hide</option>
+												</select>
+											</div>
+											<div class="form-group col-md-5">
 												<select class="form-control" id=""
 													name="Update_buildingType" required="required">
 													<option value="${listBuilding[i-1].buildingType}">${listBuilding[i-1].buildingType}</option>
@@ -578,8 +586,14 @@
 																${listBuilding[a-1].buildingType }
 															</p>
 															<p>
-																<span style="font-weight: bolder;">Trạng thái:</span> <a
-																	href="">${listBuilding[a-1].buildingStatus }</a>
+																<span style="font-weight: bolder;">Trạng thái:</span>
+																					<c:if test="${listBuilding[a-1].buildingStatus == 'active'}">
+																<span class="badge badge-success mt-1">Active</span>
+															</c:if> 
+															<c:if test="${listBuilding[a-1].buildingStatus != 'active'}">
+																<span class="badge badge-danger r-activity">Not
+																	active</span>
+															</c:if>
 															</p>
 															<p>
 																<span style="font-weight: bolder;">Địa chỉ:</span>
@@ -778,8 +792,13 @@
 																${listBuilding[a-1].buildingType }
 															</p>
 															<p>
-																<span style="font-weight: bolder;">Trạng thái:</span> <a
-																	href="">${listBuilding[a-1].buildingStatus }</a>
+																<span style="font-weight: bolder;">Trạng thái:</span><c:if test="${listBuilding[a-1].buildingStatus == 'active'}">
+																<span class="badge badge-success mt-1">Active</span>
+															</c:if> 
+															<c:if test="${listBuilding[a-1].buildingStatus != 'active'}">
+																<span class="badge badge-danger r-activity">Not
+																	active</span>
+															</c:if>
 															</p>
 															<p>
 																<span style="font-weight: bolder;">Địa chỉ:</span>
@@ -850,11 +869,13 @@
 																							<h6>${listService[s-1].serviceName }</h6>
 																						</div>
 																					</td>
-																					<td>
-																						<div class="table-data__info">
-																							<h6>${listService[s-1].price }k</h6>
-																						</div>
-																					</td>
+																					<td><fmt:formatNumber var="gia"
+																								value="${listService[s-1].price }" type="currency"
+																								minFractionDigits="0" currencySymbol="" />
+
+																							<div class="table-data__info">
+																								<h6>${gia } VNĐ</h6>
+																							</div></td>
 																					<td class="table-data-feature">
 																						<button class="item" data-toggle="modal"
 																							data-target="#edit${listBuilding[a-1].buildingId}${listService[s-1].serviceID }">
@@ -968,7 +989,7 @@
 																	</div>
 																</div>
 																<div class="file-upload-content">
-																	<img class="file-upload-image" src="#" alt="your image" />
+																	<img style="max-height: 100%; max-width: 100%;" class="file-upload-image" src="#" alt="your image" />
 																	<div class="image-title-wrap">
 																		<button type="button" onclick="removeUpload()"
 																			class="remove-image">
@@ -1357,19 +1378,128 @@
 
 	<script>
 		var stateObject = {
+			"An Giang" : {
+				"Quận 1" : [ "Nguyễn Huệ", "North Delhi" ],
+				"QUận 2" : [ "Thiruvananthapuram", "Palakkad" ],
+				"Thủ Đức" : [ "North Goa", "South Goa" ],
+			},
+			"Bà Rịa - Vũng Tàu" : {
+				"Quận 1" : [ "Nguyễn Huệ", "North Delhi" ],
+				"QUận 2" : [ "Thiruvananthapuram", "Palakkad" ],
+				"Thủ Đức" : [ "North Goa", "South Goa" ],
+			},
+			"Bạc Liêu" : {
+				"Quận 1" : [ "Nguyễn Huệ", "North Delhi" ],
+				"QUận 2" : [ "Thiruvananthapuram", "Palakkad" ],
+				"Thủ Đức" : [ "North Goa", "South Goa" ],
+			},
+			"Bình Định" : {
+				"Quận 1" : [ "Nguyễn Huệ", "North Delhi" ],
+				"QUận 2" : [ "Thiruvananthapuram", "Palakkad" ],
+				"Thủ Đức" : [ "North Goa", "South Goa" ],
+			},
+			"Bà Thuận" : {
+				"Quận 1" : [ "Nguyễn Huệ", "North Delhi" ],
+				"QUận 2" : [ "Thiruvananthapuram", "Palakkad" ],
+				"Thủ Đức" : [ "North Goa", "South Goa" ],
+			},
+			"Cà Mau" : {
+				"Quận 1" : [ "Nguyễn Huệ", "North Delhi" ],
+				"QUận 2" : [ "Thiruvananthapuram", "Palakkad" ],
+				"Thủ Đức" : [ "North Goa", "South Goa" ],
+			},
+			"Đà Nẵng" : {
+				"Quận 1" : [ "Nguyễn Huệ", "North Delhi" ],
+				"QUận 2" : [ "Thiruvananthapuram", "Palakkad" ],
+				"Thủ Đức" : [ "North Goa", "South Goa" ],
+			},
+			"Đồng Nai" : {
+				"Quận 1" : [ "Nguyễn Huệ", "North Delhi" ],
+				"QUận 2" : [ "Thiruvananthapuram", "Palakkad" ],
+				"Thủ Đức" : [ "North Goa", "South Goa" ],
+			},
+			"Hải Phòng" : {
+				"Quận 1" : [ "Nguyễn Huệ", "North Delhi" ],
+				"QUận 2" : [ "Thiruvananthapuram", "Palakkad" ],
+				"Thủ Đức" : [ "North Goa", "South Goa" ],
+			},
+			"Hà Giang" : {
+				"Quận 1" : [ "Nguyễn Huệ", "North Delhi" ],
+				"QUận 2" : [ "Thiruvananthapuram", "Palakkad" ],
+				"Thủ Đức" : [ "North Goa", "South Goa" ],
+			},
+			"Hà Nam" : {
+				"Quận 1" : [ "Nguyễn Huệ", "North Delhi" ],
+				"QUận 2" : [ "Thiruvananthapuram", "Palakkad" ],
+				"Thủ Đức" : [ "North Goa", "South Goa" ],
+			},
+			"Hà Nội" : {
+				"Quận 1" : [ "Nguyễn Huệ", "North Delhi" ],
+				"QUận 2" : [ "Thiruvananthapuram", "Palakkad" ],
+				"Thủ Đức" : [ "North Goa", "South Goa" ],
+			},
+			"Hưng Yên" : {
+				"Quận 1" : [ "Nguyễn Huệ", "North Delhi" ],
+				"QUận 2" : [ "Thiruvananthapuram", "Palakkad" ],
+				"Thủ Đức" : [ "North Goa", "South Goa" ],
+			},
+			"Kom Tum" : {
+				"Quận 1" : [ "Nguyễn Huệ", "North Delhi" ],
+				"QUận 2" : [ "Thiruvananthapuram", "Palakkad" ],
+				"Thủ Đức" : [ "North Goa", "South Goa" ],
+			},
+			"Lai Châu" : {
+				"Quận 1" : [ "Nguyễn Huệ", "North Delhi" ],
+				"QUận 2" : [ "Thiruvananthapuram", "Palakkad" ],
+				"Thủ Đức" : [ "North Goa", "South Goa" ],
+			},
+			"Lâm Đồng" : {
+				"Bảo Lâm" : [ "Âu Cơ", "Bạch Đằng", "Bà Triệu" ],
+				"Đà Lạt" : [ "Yết Kiêu", "Yersin", "Xô Viết Nghệ Tĩnh" ],
+				"Phường 4" : [ "North Goa", "South Goa" ],
+				"Phường 8" : [ "North Goa", "South Goa" ],
+			},
+			"Lào Cai" : {
+				"Quận 1" : [ "Nguyễn Huệ", "North Delhi" ],
+				"QUận 2" : [ "Thiruvananthapuram", "Palakkad" ],
+				"Thủ Đức" : [ "North Goa", "South Goa" ],
+			},
+			"Phú Thọ" : {
+				"Quận 1" : [ "Nguyễn Huệ", "North Delhi" ],
+				"QUận 2" : [ "Thiruvananthapuram", "Palakkad" ],
+				"Thủ Đức" : [ "North Goa", "South Goa" ],
+			},
+			"Phú Yên" : {
+				"Quận 1" : [ "Nguyễn Huệ", "North Delhi" ],
+				"QUận 2" : [ "Thiruvananthapuram", "Palakkad" ],
+				"Thủ Đức" : [ "North Goa", "South Goa" ],
+			},
+			"Quảng Bình" : {
+				"Quận 1" : [ "Nguyễn Huệ", "North Delhi" ],
+				"QUận 2" : [ "Thiruvananthapuram", "Palakkad" ],
+				"Thủ Đức" : [ "North Goa", "South Goa" ],
+			},
+			"Phú Thọ" : {
+				"Quận 1" : [ "Nguyễn Huệ", "North Delhi" ],
+				"QUận 2" : [ "Thiruvananthapuram", "Palakkad" ],
+				"Thủ Đức" : [ "North Goa", "South Goa" ],
+			},
+			"Thanh Hóa" : {
+				"Quận 1" : [ "Nguyễn Huệ", "North Delhi" ],
+				"QUận 2" : [ "Thiruvananthapuram", "Palakkad" ],
+				"Thủ Đức" : [ "North Goa", "South Goa" ],
+			},
 			"Hồ Chí Minh" : {
 				"Quận 1" : [ "Nguyễn Huệ", "North Delhi" ],
 				"QUận 2" : [ "Thiruvananthapuram", "Palakkad" ],
 				"Thủ Đức" : [ "North Goa", "South Goa" ],
 			},
-			"Australia" : {
-				"South Australia" : [ "Dunstan", "Mitchell" ],
-				"Victoria" : [ "Altona", "Euroa" ]
+			"Yên Bái" : {
+				"Quận 1" : [ "Nguyễn Huệ", "Lê Lợi" ],
+				"QUận 2" : [ "Thiruvananthapuram", "Palakkad" ],
+				"Thủ Đức" : [ "North Goa", "South Goa" ],
 			},
-			"Canada" : {
-				"Alberta" : [ "Acadia", "Bighorn" ],
-				"Columbia" : [ "Washington", "" ]
-			},
+			
 		}
 
 		window.onload = function() {
