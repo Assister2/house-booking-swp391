@@ -30,9 +30,11 @@ public class InvoiceController extends HttpServlet {
 	}
 	
 	protected void doDisplay(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Notification(request, response);
 		HttpSession ss = request.getSession(true);
 		UserSession userSession = (UserSession) ss.getAttribute("usersession");
+		if(userSession != null) {
+			Notification(request, response);
+		}
 		
 		String properties = request.getParameter("properties");
 		String detailProperties = request.getParameter("detailProperties");

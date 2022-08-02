@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>User Account</title>
+<title>Tài khoản</title>
 
 <link
 	href="${pageContext.request.contextPath}/view/house-owner/css/font-face.css"

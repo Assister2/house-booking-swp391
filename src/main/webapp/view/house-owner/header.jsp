@@ -298,7 +298,7 @@
 											</a>
 										</div>
 										<div class="account-dropdown__item">
-											<a href="#"> <i class="zmdi zmdi-money-box"></i>Billing
+											<a href="${pageContext.request.contextPath}/invoice-manage"> <i class="zmdi zmdi-money-box"></i>Billing
 											</a>
 										</div>
 									</div>

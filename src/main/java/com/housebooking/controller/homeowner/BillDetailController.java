@@ -222,7 +222,11 @@ public class BillDetailController extends HttpServlet {
 	}
 	
 	protected void doDisplay(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Notification(request, response);
+		HttpSession ss = request.getSession(true);
+		UserSession us = (UserSession) ss.getAttribute("usersession");
+		if(us != null) {
+			Notification(request, response);
+		}	
 		String billId = request.getParameter("billId");
 		
 		BillDAO billDAO = new BillDAO();

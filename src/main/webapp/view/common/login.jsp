@@ -14,7 +14,7 @@
 <meta name="keywords" content="au theme template">
 
 <!-- Title Page-->
-<title>Register</title>
+<title>Đăng nhập</title>
 
 <!-- Fontfaces CSS-->
 <link

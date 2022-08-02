@@ -7,7 +7,7 @@
 <html lang="eng">
 
 <head>
-<title>Booking | SinglePost</title>
+<title>Chi tiết</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords"
@@ -788,8 +788,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 												type="currency" minFractionDigits="0" currencySymbol="" />
 
 											<p>Giá: ${gia } VNĐ</p>
-											<button type="submit" class="btn btn-primary">Đặt
+											<c:if test="${param.startDate != null and param.endDate != null}">
+												<button type="submit" class="btn btn-primary">Đặt
 												phòng</button>
+											</c:if>
+											<c:if test="${param.startDate == null or param.endDate == null}">
+												<a disabled="disabled" type="tooltip" title="dsa" class="btn btn-primary">Đặt
+												phòng</a>
+											</c:if>
 										</div>
 								</form>
 							</div>

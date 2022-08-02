@@ -1,6 +1,7 @@
 package com.housebooking.controller.homeowner;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -86,10 +87,17 @@ public class RequestManageController extends HttpServlet {
 		HttpSession ss = request.getSession(true);
 		ss.setAttribute("manage_bill_message", null);
 		
+		String billId = request.getParameter("billId");
+		
 		BillDAO billDAO = new BillDAO();
-		if(billDAO.Deny(request.getParameter("billId"))) {
+		if(billDAO.Deny(billId)) {
 			request.setAttribute("message", "Cập nhật trạng thái thành công");
 			ss.setAttribute("manage_bill_message", "Cập nhật trạng thái thành công");
+			
+			Date date = new Date(System.currentTimeMillis());
+			NotificationDAO notificationDAO = new NotificationDAO();
+			Notification notification = new Notification("notification_" + (notificationDAO.Count() + 1),billDAO.Find(billId).getUserId(), date, "bị từ chối", "unseen", billId);
+			notificationDAO.add(notification);
 		}
 		else {
 			request.setAttribute("message", "Cập nhật trạng thái không thành công");
@@ -109,13 +117,22 @@ public class RequestManageController extends HttpServlet {
 		BillDAO billDAO = new BillDAO();
 		if(billDAO.Approve(billId)) {
 			Bill bill = billDAO.Find(billId);
+			
+			Date date = new Date(System.currentTimeMillis());
+			NotificationDAO notificationDAO = new NotificationDAO();
+			Notification notification = new Notification("notification_" + (notificationDAO.Count() + 1), bill.getUserId(), date, "đã được xác nhận", "unseen", billId);
+			notificationDAO.add(notification);
+			
 			List<Bill> denyBills = billDAO.listCommingDenyBill(bill.getBillDetail().get(0).getStartDate(),
-					bill.getBillDetail().get(0).getEndDate(),  bill.getBillDetail().get(0).getRoomId());
+					bill.getBillDetail().get(0).getEndDate(),  bill.getBillDetail().get(0).getRoomId(), billId);
 			for(Bill b: denyBills) {
 				billDAO.DenyConflictDate(b.getBillID());
+				notification = new Notification("notification_" + (notificationDAO.Count() + 1), b.getUserId(), date, "bị từ chối", "unseen", b.getBillID());
+				notificationDAO.add(notification);
 			}
 			request.setAttribute("message", "Cập nhật trạng thái thành công");
 			ss.setAttribute("manage_bill_message", "Cập nhật trạng thái thành công");
+			
 		}
 		else {
 			ss.setAttribute("manage_bill_message",  "Cập nhật trạng thái không thành công");
@@ -172,9 +189,11 @@ public class RequestManageController extends HttpServlet {
 
 	protected void doDisplay(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		Notification(request, response);
 		HttpSession ss = request.getSession(true);
 		UserSession userSession = (UserSession) ss.getAttribute("usersession");
+		if(userSession != null) {
+			Notification(request, response);
+		}
 
 		BillDAO billDAO = new BillDAO();
 

@@ -131,7 +131,20 @@ public class CheckOutController extends HttpServlet {
 //		rd.forward(request, response);
 	}
 	
+	private void Notification(HttpServletRequest request, HttpServletResponse response) {
+		HttpSession ss = request.getSession(true);
+		UserSession us = (UserSession) ss.getAttribute("usersession");
+		
+		List<Notification> listNotification = new NotificationDAO().list(us.getUser().getUserId());
+		ss.setAttribute("listNotification", listNotification);
+	}
+	
 	protected void doDisplay(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession ss = request.getSession(true);
+		UserSession userSession = (UserSession) ss.getAttribute("usersession");
+		if(userSession != null) {
+			Notification(request, response);
+		}	
 		String buildingId = request.getParameter("buildingId");
 		String roomId = request.getParameter("roomId");
 		String startDate1 = request.getParameter("startDate");
@@ -141,9 +154,6 @@ public class CheckOutController extends HttpServlet {
 		Date startDate = Date.valueOf(arrStartDate[2] + "-" + arrStartDate[0] + "-" + arrStartDate[1]);
 		String[] arrEndDate = endDate1.split("/");
 		Date endDate = Date.valueOf(arrEndDate[2] + "-" + arrEndDate[0] + "-" + arrEndDate[1]);
-		
-		HttpSession ss = request.getSession(true);
-		UserSession userSession = (UserSession) ss.getAttribute("usersession");
 		
 		int dateRange = DateRange(startDate, endDate) == 0?1:DateRange(startDate, endDate);
 

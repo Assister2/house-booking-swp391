@@ -17,7 +17,7 @@
 <meta name="keywords" content="au theme template">
 
 <!-- Title Page-->
-<title>Bill Management</title>
+<title>Chi tiết hóa đơn</title>
 
 <!-- Fontfaces CSS-->
 <link

@@ -82,7 +82,7 @@ public class BillDAO {
 		return list;
 	}
 	
-	public List<Bill> listCommingDenyBill(Date startDate, Date endDate, String roomId) {
+	public List<Bill> listCommingDenyBill(Date startDate, Date endDate, String roomId, String billId) {
 		ArrayList<Bill> list;
 		list = new ArrayList<Bill>();
 
@@ -94,7 +94,7 @@ public class BillDAO {
 				+ "	 Or (bd.start_date between @startDate and @endDate)\r\n"
 				+ "	 Or (bd.end_date between @startDate and @endDate)\r\n"
 				+ "	 Or (bd.start_date <= @startDate and bd.end_date >= @endDate))\r\n"
-				+ "	 AND bd.room_id = ?";
+				+ "	 AND bd.room_id = ? AND b.bill_id not like ?";
 
 		try {
 
@@ -104,6 +104,7 @@ public class BillDAO {
 			ps.setDate(1, startDate);
 			ps.setDate(2, endDate);
 			ps.setString(3, roomId);
+			ps.setString(4, billId);
 			ResultSet rs = ps.executeQuery();
 
 			while (rs.next()) {

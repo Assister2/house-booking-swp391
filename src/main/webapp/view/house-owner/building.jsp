@@ -17,7 +17,7 @@
 <meta name="keywords" content="au theme template">
 
 <!-- Title Page-->
-<title>Tab</title>
+<title>Quản lý bài đăng</title>
 
 <!-- Fontfaces CSS-->
 <link

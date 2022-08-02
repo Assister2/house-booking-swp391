@@ -377,9 +377,11 @@ public class ManageController extends HttpServlet {
 	protected void doDisplay(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		Notification(request, response);
-		HttpSession session = request.getSession();
-		UserSession userSession = (UserSession) session.getAttribute("usersession");
-
+		HttpSession ss = request.getSession(true);
+		UserSession userSession = (UserSession) ss.getAttribute("usersession");
+		if(userSession != null) {
+			Notification(request, response);
+		}
 		// String buildingID = request.getParameter("buildingID");
 
 		BuildingDAO buildingDAO = new BuildingDAO();

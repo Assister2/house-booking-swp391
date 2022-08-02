@@ -67,6 +67,12 @@ public class NotificationDAO {
 			else if (item.getContent().contains("Yêu cầu đặt phòng")) {
 				item.setBill(billDAO.Find(item.getTarget()));
 			}
+			else if (item.getContent().contains("bị từ chối")) {
+				item.setBill(billDAO.Find(item.getTarget()));
+			}
+			else if (item.getContent().contains("được xác nhận")) {
+				item.setBill(billDAO.Find(item.getTarget()));
+			}
 		}
 		
 	}

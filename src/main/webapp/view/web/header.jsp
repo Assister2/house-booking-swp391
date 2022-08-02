@@ -2,12 +2,47 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
+<!-- modal medium -->
+			<div class="modal fade" id="notification" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-lg" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="mediumModalLabel">(${sessionScope.listNotification.size() }) Thông báo mới</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<ul>
+							<c:forEach var="notification" items="${sessionScope.listNotification }">
+								<li style="margin-left: 20px;">Yêu cầu đặt phòng ${notification.bill.billDetail[0].roomId} của homestay 
+								<a href="${pageContext.request.contextPath}/single-post?buildingId=${notification.bill.billDetail[0].room.buildingId}">${notification.bill.billDetail[0].room.buildingId}</a> 
+								<c:if test="${notification.content == 'bị từ chối'}">
+									<span style="color:red;">${notification.content}</span>
+								</c:if>
+								<c:if test="${notification.content == 'đã được xác nhận'}">
+									<span style="color:green;">${notification.content}</span>
+								</c:if>
+								</li>
+							</c:forEach>
+							</ul>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+							<button type="button" class="btn btn-primary">Đánh dấu đã đọc</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- end modal medium -->
+
 <div class="header_agileits">
 
 	<c:set var="theString" value="${pageContext.request.requestURI }" />
 
 	<c:if test="${fn:contains(theString, 'home.jsp')}">
-		<div class="logo" style="position: absolute; top: 0; left: 10px;">
+		<div class="logo"
+			style="position: absolute; top: 0; left: 10px; margin-top: -15px;">
 			<h1>
 				<a href="${pageContext.request.contextPath}/home"> <img
 					width="180px;" style="margin-left: 20px;"
@@ -66,7 +101,15 @@
 							style="background-color: rgba(27, 25, 25, 0.27); color: white; height: 36px; width: 36px;"
 							id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true"
 							aria-expanded="false">
-							<i class="fa fa-user" aria-hidden="true"></i>
+							<i class="fa fa-user zmdi" aria-hidden="true"></i>
+							<c:if test="${sessionScope.usersession.user.role == 'User'}">
+								<c:if test="${sessionScope.listNotification.size() > 0}">
+									<span class="quantity"
+										style="position: absolute; display: inline-block; top: -4px; right: -7px; height: 15px; width: 15px; line-height: 15px; text-align: center; background: #ff4b5a; color: #fff; - webkit-border-radius: 100%; -moz-border-radius: 100%; border-radius: 100%; font-size: 12px;">
+										${sessionScope.listNotification.size() } </span>
+								</c:if>								
+							</c:if>
+
 						</button>
 						<ul class="dropdown-menu  dropdown-menu-right"
 							aria-labelledby="dropdownMenu">
@@ -77,12 +120,28 @@
 									href="${pageContext.request.contextPath}/sign-up">Đăng ký</a></li>
 							</c:if>
 
-							<c:if test="${usersession.user != null }">
+							<c:if test="${usersession.user.role == 'User' }">
 								<li style="width: 100%;"><a
 									href="${pageContext.request.contextPath}/my-account">Quản
 										lý tài khoản</a></li>
 								<li style="width: 100%;"><a
-									href="${pageContext.request.contextPath}/#">Xem đơn đặt</a></li>
+									href="${pageContext.request.contextPath}/my-account">Xem
+										lịch sử</a></li>
+								<li style="width: 100%;"><a
+									href="" data-toggle="modal" data-target="#notification">Thông
+										báo <span style="color: red;">(${sessionScope.listNotification.size() } tin mới)</span></a>
+																			
+										</li>
+								<li style="width: 100%;"><a
+									href="${pageContext.request.contextPath}/log-out">Đăng xuất</a></li>
+							</c:if>
+							<c:if test="${usersession.user.role == 'Owner' }">
+								<li style="width: 100%;"><a
+									href="${pageContext.request.contextPath}/my-account">Quản
+										lý tài khoản</a></li>
+								<li style="width: 100%;"><a
+									href="${pageContext.request.contextPath}/dashboard">Trang
+										quản lý</a></li>
 								<li style="width: 100%;"><a
 									href="${pageContext.request.contextPath}/log-out">Đăng xuất</a></li>
 							</c:if>
@@ -99,7 +158,7 @@
 
 	<c:if test="${not fn:contains(theString, 'home.jsp')}">
 		<div class="logo inner_page_log"
-			style="margin-top: 0; top: 0; left: 5%;">
+			style="margin-top: -15px; top: 0; left: 5%;">
 			<h1>
 				<a href="${pageContext.request.contextPath}/home"> <img
 					width="180px;"

@@ -4,7 +4,7 @@
 <html lang="eng">
 
 <head>
-<title>Booking</title>
+<title>Trang chủ</title>
 <!-- custom-theme -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -143,6 +143,7 @@ select {
 select::-ms-expand {
 	display: none;
 }
+
 </style>
 </head>
 

@@ -61,6 +61,14 @@ public class PostController extends HttpServlet {
 		}
 
 	}
+	
+	private void Notification(HttpServletRequest request, HttpServletResponse response) {
+		HttpSession ss = request.getSession(true);
+		UserSession us = (UserSession) ss.getAttribute("usersession");
+		
+		List<Notification> listNotification = new NotificationDAO().list(us.getUser().getUserId());
+		ss.setAttribute("listNotification", listNotification);
+	}
 
 	protected void doComment(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -100,6 +108,12 @@ public class PostController extends HttpServlet {
 
 	protected void doDisplay(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		HttpSession ss = request.getSession(true);
+		UserSession us = (UserSession) ss.getAttribute("usersession");
+		if(us != null) {
+			Notification(request, response);
+		}	
+		
 		String buildingId = request.getParameter("buildingId");
 		
 		WebBuildingDAO webBuildingDAO = new WebBuildingDAO();

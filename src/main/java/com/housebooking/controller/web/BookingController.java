@@ -16,19 +16,23 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.housebooking.DAO.IRoomDAO;
 import com.housebooking.DAOimpl.houseowner.BuildingDAO;
 import com.housebooking.DAOimpl.web.ConvenientDAO;
 import com.housebooking.DAOimpl.web.DistrictDAO;
+import com.housebooking.DAOimpl.web.NotificationDAO;
 import com.housebooking.DAOimpl.web.RoomDAO;
 import com.housebooking.DAOimpl.web.TypeOfRoomDAO;
 import com.housebooking.DAOimpl.web.WebBuildingDAO;
 import com.housebooking.Model.Building;
 import com.housebooking.Model.Convenient;
 import com.housebooking.Model.District;
+import com.housebooking.Model.Notification;
 import com.housebooking.Model.Room;
 import com.housebooking.Model.TypeOfRoom;
+import com.housebooking.Model.UserSession;
 
 @WebServlet("/booking")
 public class BookingController extends HttpServlet {
@@ -50,10 +54,23 @@ public class BookingController extends HttpServlet {
 		doDisplay(request, response);
 
 	}
+	
+	private void Notification(HttpServletRequest request, HttpServletResponse response) {
+		HttpSession ss = request.getSession(true);
+		UserSession us = (UserSession) ss.getAttribute("usersession");
+		
+		List<Notification> listNotification = new NotificationDAO().list(us.getUser().getUserId());
+		ss.setAttribute("listNotification", listNotification);
+	}
 
 	// Without filter
 	protected void doDisplay(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		HttpSession ss = request.getSession(true);
+		UserSession us = (UserSession) ss.getAttribute("usersession");
+		if(us != null) {
+			Notification(request, response);
+		}	
 
 		String city = request.getParameter("city");
 		String startDate = request.getParameter("startDate");

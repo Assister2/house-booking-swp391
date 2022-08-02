@@ -16,7 +16,7 @@
 <meta name="keywords" content="au theme template">
 
 <!-- Title Page-->
-<title>Card</title>
+<title>Chi tiết bài đăng</title>
 
 <!-- Fontfaces CSS-->
 <link

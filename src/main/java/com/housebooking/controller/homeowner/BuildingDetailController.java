@@ -292,7 +292,11 @@ public class BuildingDetailController extends HttpServlet {
 
 	protected void doDisplay(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		Notification(request, response);
+		HttpSession ss = request.getSession(true);
+		UserSession us = (UserSession) ss.getAttribute("usersession");
+		if(us != null) {
+			Notification(request, response);
+		}
 		String buildingId = request.getParameter("buildingId");
 
 		RoomDAO roomDAO = new RoomDAO();

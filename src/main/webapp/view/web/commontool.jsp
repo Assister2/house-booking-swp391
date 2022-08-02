@@ -18,6 +18,13 @@
 						id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true"
 						aria-expanded="false">
 						<i class="fa fa-user" aria-hidden="true"></i>
+						<c:if test="${sessionScope.usersession.user.role == 'User'}">
+								<c:if test="${sessionScope.listNotification.size() > 0}">
+									<span class="quantity"
+										style="position: absolute; display: inline-block; top: -4px; right: -7px; height: 15px; width: 15px; line-height: 15px; text-align: center; background: #ff4b5a; color: #fff; - webkit-border-radius: 100%; -moz-border-radius: 100%; border-radius: 100%; font-size: 12px;">
+										${sessionScope.listNotification.size() } </span>
+								</c:if>								
+							</c:if>
 					</button>
 					<ul class="dropdown-menu  dropdown-menu-right"
 						aria-labelledby="dropdownMenu"> 
@@ -26,9 +33,14 @@
 							<li style="width: 100%;"><a href="${pageContext.request.contextPath}/sign-up">Đăng ký</a></li>
 						</c:if>
 						
-						<c:if test="${usersession.user != null }">
+						<c:if test="${usersession.user.role == 'User' }">
 							<li style="width: 100%;"><a href="${pageContext.request.contextPath}/my-account">Quản lý tài khoản</a></li>
-							<li style="width: 100%;"><a href="${pageContext.request.contextPath}/#">Xem đơn đặt</a></li>
+							<li style="width: 100%;"><a href="${pageContext.request.contextPath}/#">Xem lịch sử</a></li>
+							<li style="width: 100%;"><a
+									href="" data-toggle="modal" data-target="#notification">Thông
+										báo <span style="color: red;">(${sessionScope.listNotification.size() } tin mới)</span></a>
+																			
+										</li>
 							<li style="width: 100%;"><a href="${pageContext.request.contextPath}/log-out">Đăng xuất</a></li>
 						</c:if>
 						

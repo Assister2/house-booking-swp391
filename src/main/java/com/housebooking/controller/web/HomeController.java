@@ -3,6 +3,7 @@ package com.housebooking.controller.web;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -11,9 +12,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.housebooking.DAOimpl.web.CityDAO;
+import com.housebooking.DAOimpl.web.NotificationDAO;
 import com.housebooking.Model.City;
+import com.housebooking.Model.Notification;
+import com.housebooking.Model.UserSession;
 
 /**
  * Servlet implementation class HomeController
@@ -42,11 +47,24 @@ public class HomeController extends HttpServlet {
 
 	}
 	
+	private void Notification(HttpServletRequest request, HttpServletResponse response) {
+		HttpSession ss = request.getSession(true);
+		UserSession us = (UserSession) ss.getAttribute("usersession");
+		
+		List<Notification> listNotification = new NotificationDAO().list(us.getUser().getUserId());
+		ss.setAttribute("listNotification", listNotification);
+	}
+	
 	protected void doDisplay(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession ss = request.getSession(true);
+		UserSession us = (UserSession) ss.getAttribute("usersession");
+		if(us != null) {
+			Notification(request, response);
+		}		
 		List<City> listCity = new CityDAO().list();
 		request.setAttribute("listCity", listCity);
 		
-		System.out.println(request.getContextPath());
+		//System.out.println(request.getContextPath());
 		RequestDispatcher rd = request.getRequestDispatcher("/view/web/home.jsp");
 		rd.forward(request, response);
 	}

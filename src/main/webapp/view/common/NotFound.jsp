@@ -3,7 +3,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>404 Not Found</title>
+        <title>Có lỗi rồiii</title>
         <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@600;900&display=swap" rel="stylesheet">
         <script src="https://kit.fontawesome.com/4b9ba14b0f.js" crossorigin="anonymous"></script>
         <style>
