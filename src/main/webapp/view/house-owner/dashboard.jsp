@@ -64,6 +64,10 @@
 <link
 	href="${pageContext.request.contextPath}/view/house-owner/css/theme.css"
 	rel="stylesheet" media="all">
+	
+	<link
+	href="${pageContext.request.contextPath}/view/house-owner/css/logo.css"
+	rel="stylesheet" media="all">
 
 </head>
 

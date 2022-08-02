@@ -9,8 +9,15 @@ public class Bill {
 	private double total;
 	private String status;
 	private String userId;
+	private User user;
 	private List<Bill_Detail> billDetail;
 	
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
 	public List<Bill_Detail> getBillDetail() {
 		return billDetail;
 	}

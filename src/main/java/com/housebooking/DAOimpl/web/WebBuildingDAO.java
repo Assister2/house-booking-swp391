@@ -55,7 +55,7 @@ public class WebBuildingDAO {
 			}
 		}
 
-		sql += " Where b.building_status like 'active' AND r.room_status not like 'Removed' AND ci.city_name like @city  AND r2.room_id is null		\r\n";
+		sql += " Where b.building_status like 'active' AND r.room_status like 'active' AND ci.city_name like @city  AND r2.room_id is null		\r\n";
 
 		if (buildingType != null) {
 			sql += " AND (";
@@ -197,7 +197,7 @@ public class WebBuildingDAO {
 	public Building find(String buildingId) {
 		Building building = new Building();
 		String sql = "  Select  b.building_id, b.building_number,b.building_name, b.building_desc, \r\n"
-				+ " b.buiding_image, b.building_type, b.building_rule, b.building_status, \r\n"
+				+ " b.buiding_image, b.building_type, b.building_rule, b.building_status, b.building_infor, \r\n"
 				+ " ( b.building_number + ' ' + st.street_name + ' '+ dis.district_name +' '+ ci.city_name ) as address,\r\n"
 				+ " ISNULL(Round(AVG(rating*1.0),1),0) as rating\r\n"
 				+ " from Room r join Type_Of_Room t on r.type_id = t.type_id\r\n"
@@ -207,7 +207,7 @@ public class WebBuildingDAO {
 				+ "	join City ci on ci.city_id = dis.city_id\r\n"
 				+ "	left join Feedback fb on b.building_id = fb.building_id\r\n"
 				+ " Where b.building_id like ?\r\n"
-				+ " Group by b.building_id, b.building_number,b.building_name, b.building_desc, \r\n"
+				+ " Group by b.building_id, b.building_number,b.building_name, b.building_desc, b.building_infor, \r\n"
 				+ " b.buiding_image, b.building_type, b.building_rule, b.building_number,st.street_name,dis.district_name , ci.city_name, b.building_status\r\n";
 
 		try {
@@ -221,6 +221,7 @@ public class WebBuildingDAO {
 
 			while (rs.next()) {
 				fillBuildingData(building, rs);
+				building.setBuildingDetailInfor(rs.getString("building_infor"));
 				building.setBuildingStatus(rs.getString("building_status"));
 				building.setAvgPrice(getAvgPrice(buildingId));
 			}
@@ -239,7 +240,7 @@ public class WebBuildingDAO {
 
 		String sql = " Select AVG(r.room_price) as averagePrice\r\n"
 				+ " From Building b join Room r on r.building_id = b.building_id\r\n"
-				+ " Where b.building_id like ?\r\n"
+				+ " Where b.building_id like ? AND r.room_status like 'active' \r\n"
 				+ " Group by b.building_id";
 		try {
 

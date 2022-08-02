@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.housebooking.DAO.IRoomDAO;
+import com.housebooking.DAOimpl.houseowner.ServiceDAO;
 import com.housebooking.DAOimpl.web.ConvenientDAO;
 import com.housebooking.DAOimpl.web.FeedbackDAO;
 import com.housebooking.DAOimpl.web.RoomDAO;
@@ -24,6 +25,7 @@ import com.housebooking.Model.Building;
 import com.housebooking.Model.Convenient;
 import com.housebooking.Model.Feedback;
 import com.housebooking.Model.Room;
+import com.housebooking.Model.Service;
 import com.housebooking.Model.UserSession;
 
 @WebServlet("/single-post")
@@ -101,6 +103,10 @@ public class PostController extends HttpServlet {
 //		Room room = roomDAO.find(roomId);
 
 		ConvenientDAO convenientDAO = new ConvenientDAO();
+		
+		ServiceDAO serviceDAO = new ServiceDAO();
+		
+		List<Service> listService = serviceDAO.listService(buildingId);
 
 		List<Convenient> listConvenient = convenientDAO.list(buildingId);
 
@@ -143,6 +149,7 @@ public class PostController extends HttpServlet {
 			listRoom = ((RoomDAO)roomDAO).list(date1, date2, buildingId, 0, 100000000);
 		}
 		
+		request.setAttribute("listService", listService);
 		request.setAttribute("listFeedback", listFeedback);
 		request.setAttribute("listConvenient", listConvenient);
 		request.setAttribute("listRoom", listRoom);

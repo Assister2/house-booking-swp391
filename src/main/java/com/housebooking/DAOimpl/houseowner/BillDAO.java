@@ -1,6 +1,7 @@
 package com.housebooking.DAOimpl.houseowner;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -80,6 +81,71 @@ public class BillDAO {
 
 		return list;
 	}
+	
+	public List<Bill> listCommingDenyBill(Date startDate, Date endDate, String roomId) {
+		ArrayList<Bill> list;
+		list = new ArrayList<Bill>();
+
+		String sql = " DECLARE @startDate as date = ?\r\n"
+				+ " DECLARE @endDate as date = ?\r\n"
+				+ " Select b.* \r\n"
+				+ " from Bill b join Bill_detail bd on bd.bill_id = b.bill_id\r\n"
+				+ " Where ((bd.start_date >= @startDate and bd.end_date <= @endDate)\r\n"
+				+ "	 Or (bd.start_date between @startDate and @endDate)\r\n"
+				+ "	 Or (bd.end_date between @startDate and @endDate)\r\n"
+				+ "	 Or (bd.start_date <= @startDate and bd.end_date >= @endDate))\r\n"
+				+ "	 AND bd.room_id = ?";
+
+		try {
+
+			Connection conn = DBUtils.getConnection();
+
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setDate(1, startDate);
+			ps.setDate(2, endDate);
+			ps.setString(3, roomId);
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				Bill bill = new Bill();
+					FillBillData(rs, bill);
+					bill.setBillDetail(listBillDetail(bill.getBillID()));
+				list.add(bill);
+			}
+
+		} catch (Exception ex) {
+
+			ex.printStackTrace();
+
+		}
+
+		return list;
+	}
+	
+	public boolean DenyConflictDate(String billId) {
+		
+		String sql = " Update Bill\r\n"
+				+ " Set status = N'Đã từ chối' \r\n"
+				+ " Where bill_id = ? And status like N'Chờ xác nhận'";
+
+		try {
+
+			Connection conn = DBUtils.getConnection();
+
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, billId);
+			if(ps.executeUpdate() > 0) {
+				return true;
+			}
+
+		} catch (Exception ex) {
+
+			return false;
+
+		}
+
+		return false;
+	}
 
 	public List<Bill> GetAll(String userID, int start, int end, String properties, String detailProperties) {
 		ArrayList<Bill> list;
@@ -141,6 +207,7 @@ public class BillDAO {
 				Bill bill = new Bill();
 				FillBillData(rs, bill);
 				bill.setBillDetail(listBillDetail(bill.getBillID()));
+				bill.setUser(new UserDAO().find(bill.getUserId()));
 				list.add(bill);
 			}
 

@@ -83,6 +83,7 @@ public class CheckOutController extends HttpServlet {
 		String status = "Chờ xác nhận";
 		HttpSession ss = request.getSession(true);
 		UserSession userSession = (UserSession) ss.getAttribute("usersession");
+		ss.setAttribute("checkout_message", null);
 		
 		Bill bill = new Bill(billId, date, 0, status, userSession.getUser().getUserId());
 		List<Bill_Detail> lisBill_Details = new ArrayList<Bill_Detail>();
@@ -94,9 +95,11 @@ public class CheckOutController extends HttpServlet {
 		BillDAO billDAO = new BillDAO();
 		if(billDAO.Insert(bill)) {
 			billDAO.InsertBillDetail(bill);
+			ss.setAttribute("checkout_message","Gửi yêu cầu thành công");
 			request.setAttribute("message", "Đặt phòng thành công");
 		}
 		else {
+			ss.setAttribute("checkout_message", "Gửi yêu cầu không thành công");
 			request.setAttribute("message", "Đặt phòng không thành công");
 		}
 		
@@ -113,7 +116,8 @@ public class CheckOutController extends HttpServlet {
 		request.setAttribute("endDate", endDate);
 		request.setAttribute("room", room);
 		request.setAttribute("building", building);
-		response.sendRedirect("check-out?buildingId=" + buildingId + "&roomId=" + roomId + "&startDate=" +startDate1 + "&endDate=" + endDate1 + "&message=success");
+				
+		response.sendRedirect("check-out?buildingId=" + buildingId + "&roomId=" + roomId + "&startDate=" +startDate1 + "&endDate=" + endDate1 );
 //		RequestDispatcher rd = request.getRequestDispatcher("/view/web/checkout.jsp");
 //		rd.forward(request, response);
 	}

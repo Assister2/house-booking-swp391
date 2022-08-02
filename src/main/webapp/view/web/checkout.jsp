@@ -67,6 +67,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	
 	
 	
+	
 
 		addEventListener("load", function () {
 			setTimeout(hideURLbar, 0);
@@ -76,6 +77,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			window.scrollTo(0, 1);
 		}
 	
+
 
 
 
@@ -404,17 +406,8 @@ body {
 					<h4 class="modal-title">Thông báo</h4>
 				</div>
 				<div class="modal-body">
-				<c:if test="${param.message == 'success' }">
-					<p>Gửi yêu cầu đặt phòng thành công, chủ phòng sẽ liên hệ với bạn trong thời gian sớm nhất</p>
-					<p>Xin cảm ơn quý khách đã sử dụng dụng vụ!</p>
-					<form action="my-account">
-						<input name="trigger" value="viewOrder" type="hidden">
-						<button type="sumbit">Xem lịch sử đặt phòng</button>
-					</form>
-					<%-- 
-					<a href="${pageContext.request.contextPath}/my-account?trigger=viewOrder">Xem yêu cầu</a> --%>
-				</c:if>
-					
+					<p>${checkout_message }</p>
+
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -430,7 +423,7 @@ body {
 		class="showMess btn btn-info btn-lg" data-toggle="modal"
 		data-target="#smallModel">Open Modal</button>
 
-	<div style="width: 80%; margin-left: auto; margin-right: auto;">
+	<div style="width: 80%; margin-left: auto; margin-right: auto; margin-top: 30px;">
 		<div class="col-md-7">
 			<div id="panel" class="main col-md-12" style="margin-top: 20px;">
 				<div class="b row">
@@ -447,7 +440,7 @@ body {
 					</div>
 					<div class="col-md-8">
 						<div class="c">${building.buildingName }</div>
-						<div class="d"
+						<%-- <div class="d"
 							style="display: flex; z-index: 1; position: sticky; transition: all .4s; align-items: center; border-bottom: 1px solid #E2E8F0;">
 							<span style="width: 16px; height: 16px; margin-right: 6px;"><svg
 									width="16" height="16" fill="none">
@@ -467,23 +460,25 @@ body {
 										stroke="#4A5568" stroke-miterlimit="10" stroke-linecap="round"
 										stroke-linejoin="round"></path></svg></span><span
 								class="MuiBox-root jss1075">${building.buildingArea } m2</span>
-						</div>
+						</div> --%>
 						<div class="row" style="height: 75%;">
-							<div class="col-md-12 discript">
-								<div
-									style="display: flex; font-size: 14px; font-weight: normal; line-height: 17px; padding-top: 8px;">
-									<svg width="16" height="16" fill="none">
-									<path d="M8 9.333a2 2 0 100-4 2 2 0 000 4z" stroke="#1A202C"
-											stroke-linecap="round" stroke-linejoin="round"></path>
-									<path
-											d="M11.771 11.105l-2.828 2.828a1.333 1.333 0 01-1.885 0l-2.83-2.828a5.333 5.333 0 117.543 0v0z"
-											stroke="#1A202C" stroke-linecap="round"
-											stroke-linejoin="round"></path></svg>
-									<p>Địa chỉ: ${building.buildingAddress }</p>
+							<div class="col-md-12">
+								<div>
+									<p style="margin-top: 10px;">Địa chỉ:
+										${building.buildingAddress }</p>
 								</div>
 								<div class="row" style="margin-top: 10px;">
-									<div class="col-md-6">Ngày đến: ${startDate }</div>
-									<div class="col-md-6">Ngày về: ${endDate }</div>
+									<jsp:useBean id="now" class="java.util.Date" />
+									<fmt:formatDate var="year" value="${now}" pattern="yyyy-MM-dd" />
+									<div class="col-md-12">Ngày đặt phòng: <b style="color: green;">${year}</b></div>
+								</div>
+								<div class="row" style="margin-top: 10px;">
+									<div class="col-md-6">
+										Ngày đến: <b>${startDate }</b>
+									</div>
+									<div class="col-md-6">
+										Ngày về: <b>${endDate }</b>
+									</div>
 								</div>
 
 							</div>
@@ -497,20 +492,14 @@ body {
 			<div id="panel" class="main col-md-12">
 				<form action="check-out" method="get">
 					<h2 class="form-field">Xác nhận thông tin</h2>
-					<label for="name">Khách hàng</label> 
-					<input
+					<label for="name">Khách hàng</label> <input
 						class="form-control form-field" type="text"
 						placeholder="tên khách hàng" name="name" id="name"
-						value="${usersession.user.name }" disabled="disabled"> 
-						<input
+						value="${usersession.user.name }" disabled="disabled"> <input
 						class="form-control form-field" type="hidden"
 						placeholder="tên khách hàng" name="name" id="name"
-						value="${usersession.user.name }" > 
-						
-						<label
-						for="phone">Số điện thoại</label> 
-						<input
-						class="form-control form-field" type="text"
+						value="${usersession.user.name }"> <label for="phone">Số
+						điện thoại</label> <input class="form-control form-field" type="text"
 						placeholder="tên khách hàng" name="phone" id="phone"
 						value="${usersession.user.phoneNumber }" disabled="disabled">
 
@@ -519,9 +508,11 @@ body {
 						placeholder="tên khách hàng" name="email" id="email"
 						value="${usersession.user.email }" disabled="disabled"> <label
 						for="note">Note</label>
-					<textarea rows="5" cols="" name="note" class="form-control form-field"></textarea>
-					<input id="approve" type="checkbox" required="required" class="form-field"> <label for="approve">Tôi
-					đã đọc kỹ thông tin</label> <br>
+					<textarea rows="5" cols="" name="note"
+						class="form-control form-field"></textarea>
+					<input id="approve" type="checkbox" required="required"
+						class="form-field"> <label for="approve">Tôi đã
+						đọc kỹ thông tin</label> <br>
 					<div style="text-align: right;">
 						<input type="hidden" name="action" value="approve"> <input
 							type="hidden" name="buildingId" value="${building.buildingId }">
@@ -529,12 +520,13 @@ body {
 						<input type="hidden" name="startDate" value="${param.startDate }">
 						<input type="hidden" name="endDate" value="${param.endDate }">
 						<input type="hidden" name="price" value="${room.price }">
-						
+
 						<c:if test="${usersession != null}">
 							<button type="submit" class="btn btn-primary">Xác nhận</button>
 						</c:if>
 						<c:if test="${	usersession == null}">
-							<a href="${pageContext.request.contextPath}/login" class="btn btn-primary">Đăng nhập</a>
+							<a href="${pageContext.request.contextPath}/login"
+								class="btn btn-primary">Đăng nhập</a>
 						</c:if>
 					</div>
 
@@ -550,9 +542,9 @@ body {
 					style="height: 100%; width: 100%; border-radius: 5px;"
 					src="${pageContext.request.contextPath}${room.roomImages[0]}">
 			</div>
-			
+
 			<div>
-				<h3>${room.roomName } </h3>
+				<h3>${room.roomName }</h3>
 			</div>
 			<div>
 				<fmt:formatNumber var="roomPrice" value="${room.price }"
@@ -564,23 +556,23 @@ body {
 			</div>
 			<div>
 
-				<p>Số ngày ở: ${dateRange } ngày</p>
+				<p>Số ngày ở: <b style="font-size: 20px;">${dateRange }</b> ngày</p>
 			</div>
 			<div>
 				<fmt:formatNumber var="total" value="${dateRange*room.price }"
 					type="currency" minFractionDigits="0" currencySymbol="" />
-				<p>Tổng tiền: ${total  } VNĐ</p>
+				<p>Tổng tiền (tạm thời): <b style="font-size: 20px;">${total  } VNĐ</b></p>
 			</div>
 
 			<div>
-				<p>Note: Chưa bao gồm các chi phí dịch vụ</p>
+				<p><b style="color: gold;">Note:</b> Chưa bao gồm các chi phí dịch vụ phát sinh trong quá trình ở</p>
 			</div>
 
 		</div>
 	</div>
 
 
-	<div class="clearfix"></div>
+	<div class="clearfix" style=" margin-bottom: 30px;"></div>
 
 	</div>
 	<!-- //top products -->
@@ -689,14 +681,18 @@ body {
 		});
 	</script>
 
-	<c:if test="${param.message != null}">
+	<c:if test="${checkout_message != null }">
 		<script>
-			function myFunction() {
-				document.getElementById("showMessage").click();
-			}
-
-			myFunction();
+			let myModal = new bootstrap.Modal(document
+					.getElementById('smallmodal'), {});
+			myModal.show();
 		</script>
+		<%   
+  
+		HttpSession ss = request.getSession(true);
+		ss.setAttribute("checkout_message", null);
+  
+		%>  
 	</c:if>
 
 </body>

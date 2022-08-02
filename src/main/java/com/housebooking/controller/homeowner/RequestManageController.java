@@ -50,28 +50,46 @@ public class RequestManageController extends HttpServlet {
 	}
 
 	private void doDeny(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession ss = request.getSession(true);
+		ss.setAttribute("manage_bill_message", null);
+		
 		BillDAO billDAO = new BillDAO();
 		if(billDAO.Deny(request.getParameter("billId"))) {
 			request.setAttribute("message", "Cập nhật trạng thái thành công");
+			ss.setAttribute("manage_bill_message", "Cập nhật trạng thái thành công");
 		}
 		else {
 			request.setAttribute("message", "Cập nhật trạng thái không thành công");
+			ss.setAttribute("manage_bill_message",  "Cập nhật trạng thái không thành công");
 		}
 		
-		doDisplay(request, response);
+		response.sendRedirect("manage-bill");
 		
 	}
 
 	private void doApprove(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession ss = request.getSession(true);
+		ss.setAttribute("manage_bill_message", null);
+		
+		String billId = request.getParameter("billId");
+		
 		BillDAO billDAO = new BillDAO();
-		if(billDAO.Approve(request.getParameter("billId"))) {
+		if(billDAO.Approve(billId)) {
+			Bill bill = billDAO.Find(billId);
+			List<Bill> denyBills = billDAO.listCommingDenyBill(bill.getBillDetail().get(0).getStartDate(),
+					bill.getBillDetail().get(0).getEndDate(),  bill.getBillDetail().get(0).getRoomId());
+			for(Bill b: denyBills) {
+				billDAO.DenyConflictDate(b.getBillID());
+			}
 			request.setAttribute("message", "Cập nhật trạng thái thành công");
+			ss.setAttribute("manage_bill_message", "Cập nhật trạng thái thành công");
 		}
 		else {
+			ss.setAttribute("manage_bill_message",  "Cập nhật trạng thái không thành công");
 			request.setAttribute("message", "Cập nhật trạng thái không thành công");
 		}
 		
-		doDisplay(request, response);
+		response.sendRedirect("manage-bill");
 	}
 
 	protected void doFilter(HttpServletRequest request, HttpServletResponse response)
@@ -148,11 +166,8 @@ public class RequestManageController extends HttpServlet {
 		RequestDispatcher rd = request.getRequestDispatcher("/view/house-owner/request.jsp");
 		rd.forward(request, response);
 	}
+	
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		Proccess(request, response);

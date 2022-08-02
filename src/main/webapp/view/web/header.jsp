@@ -7,16 +7,17 @@
 	<c:set var="theString" value="${pageContext.request.requestURI }" />
 
 	<c:if test="${fn:contains(theString, 'home.jsp')}">
-		<div class="logo">
+		<div class="logo" style="position: absolute; top: 0; left: 10px;">
 			<h1>
-				<a class="navbar-brand"
-					href="${pageContext.request.contextPath}/home"><span>Home</span></a>
-				<a class="navbar-brand"
-					href="${pageContext.request.contextPath}/home"> <i> 
-						Booking</i></a>
+				<a href="${pageContext.request.contextPath}/home"> <img
+					width="180px;" style="margin-left: 20px;"
+					src="${pageContext.request.contextPath}/view/common/image/logo.png"
+					alt="Cool Admin" />
+				</a>
 			</h1>
 		</div>
-		<div class="overlay overlay-contentpush" style=" box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; ">
+		<div class="overlay overlay-contentpush"
+			style="box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;">
 			<button type="button" class="overlay-close">
 				<i class="fa fa-times" aria-hidden="true"></i>
 			</button>
@@ -25,15 +26,22 @@
 				<ul>
 					<li><a href="${pageContext.request.contextPath}/home"
 						class="active">Trang chủ</a></li>
-					<li><a href="${pageContext.request.contextPath}/about">About Us</a></li>
+					<li><a href="${pageContext.request.contextPath}/about">About
+							Us</a></li>
 					<c:if test="${usersession != null }">
-					<li><a href="${pageContext.request.contextPath}/NotFoundException">Xem đơn hàng</a></li>
-					<li><a href="${pageContext.request.contextPath}/my-account">Tài khoản</a></li>
-						<li><a href="${pageContext.request.contextPath}/log-out">Đăng Xuất</a></li>
+						<li><a
+							href="${pageContext.request.contextPath}/NotFoundException">Xem
+								đơn hàng</a></li>
+						<li><a href="${pageContext.request.contextPath}/my-account">Tài
+								khoản</a></li>
+						<li><a href="${pageContext.request.contextPath}/log-out">Đăng
+								Xuất</a></li>
 					</c:if>
 					<c:if test="${usersession == null }">
-						<li><a href="${pageContext.request.contextPath}/login">Đăng nhập</a></li>
-						<li><a href="${pageContext.request.contextPath}/sign-up">Đăng ký</a></li>
+						<li><a href="${pageContext.request.contextPath}/login">Đăng
+								nhập</a></li>
+						<li><a href="${pageContext.request.contextPath}/sign-up">Đăng
+								ký</a></li>
 					</c:if>
 
 				</ul>
@@ -44,7 +52,7 @@
 				<i class="fa fa-bars" aria-hidden="true"></i>
 			</button>
 		</div>
-		
+
 		<!-- search -->
 
 		<!-- //search -->
@@ -53,45 +61,55 @@
 		<div class="search_w3ls_agileinfo">
 			<div>
 				<div class="cd-main-header">
-			<ul class="cd-header-buttons">
-					<button class="btn btn-secondary dropdown-toggle" type="button"
-						style="background-color: rgba(27, 25, 25, 0.27); color: white; height: 36px; width: 36px;"
-						id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true"
-						aria-expanded="false">
-						<i class="fa fa-user" aria-hidden="true"></i>
-					</button>
-					<ul class="dropdown-menu  dropdown-menu-right"
-						aria-labelledby="dropdownMenu"> 
-						<c:if test="${usersession.user == null }">
-							<li style="width: 100%;"><a href="${pageContext.request.contextPath}/login">Đăng nhập</a></li>
-							<li style="width: 100%;"><a href="${pageContext.request.contextPath}/sign-up">Đăng ký</a></li>
-						</c:if>
-						
-						<c:if test="${usersession.user != null }">
-							<li style="width: 100%;"><a href="${pageContext.request.contextPath}/my-account">Quản lý tài khoản</a></li>
-							<li style="width: 100%;"><a href="${pageContext.request.contextPath}/#">Xem đơn đặt</a></li>
-							<li style="width: 100%;"><a href="${pageContext.request.contextPath}/log-out">Đăng xuất</a></li>
-						</c:if>
-						
+					<ul class="cd-header-buttons">
+						<button class="btn btn-secondary dropdown-toggle" type="button"
+							style="background-color: rgba(27, 25, 25, 0.27); color: white; height: 36px; width: 36px;"
+							id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true"
+							aria-expanded="false">
+							<i class="fa fa-user" aria-hidden="true"></i>
+						</button>
+						<ul class="dropdown-menu  dropdown-menu-right"
+							aria-labelledby="dropdownMenu">
+							<c:if test="${usersession.user == null }">
+								<li style="width: 100%;"><a
+									href="${pageContext.request.contextPath}/login">Đăng nhập</a></li>
+								<li style="width: 100%;"><a
+									href="${pageContext.request.contextPath}/sign-up">Đăng ký</a></li>
+							</c:if>
+
+							<c:if test="${usersession.user != null }">
+								<li style="width: 100%;"><a
+									href="${pageContext.request.contextPath}/my-account">Quản
+										lý tài khoản</a></li>
+								<li style="width: 100%;"><a
+									href="${pageContext.request.contextPath}/#">Xem đơn đặt</a></li>
+								<li style="width: 100%;"><a
+									href="${pageContext.request.contextPath}/log-out">Đăng xuất</a></li>
+							</c:if>
+
+						</ul>
 					</ul>
-			</ul>
-		</div>
+				</div>
 			</div>
 		</div>
 
 		<!-- //search -->
-		
+
 	</c:if>
 
 	<c:if test="${not fn:contains(theString, 'home.jsp')}">
-		<div class="logo inner_page_log">
+		<div class="logo inner_page_log"
+			style="margin-top: 0; top: 0; left: 5%;">
 			<h1>
-				<a class="navbar-brand"
-					href="${pageContext.request.contextPath}/home"><span>House</span>
-					<i>Booking</i></a>
+				<a href="${pageContext.request.contextPath}/home"> <img
+					width="180px;"
+					src="${pageContext.request.contextPath}/view/common/image/logo.png"
+					alt="Cool Admin" />
+				</a>
 			</h1>
 		</div>
-		<div class="overlay overlay-contentpush" style=" box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; ">
+		<div class="overlay overlay-contentpush"
+			style="box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;">
 			<button type="button" class="overlay-close">
 				<i class="fa fa-times" aria-hidden="true"></i>
 			</button>
@@ -108,7 +126,8 @@
 					</c:if>
 					<c:if test="${usersession == null }">
 						<li><a href="${pageContext.request.contextPath}/login">Login</a></li>
-						<li><a href="${pageContext.request.contextPath}/sign-up">Sign up</a></li>
+						<li><a href="${pageContext.request.contextPath}/sign-up">Sign
+								up</a></li>
 					</c:if>
 				</ul>
 			</nav>
@@ -118,7 +137,7 @@
 				<i class="fa fa-bars" aria-hidden="true"></i>
 			</button>
 		</div>
-		
+
 	</c:if>
 	<div class="clearfix"></div>
 </div>

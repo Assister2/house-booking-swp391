@@ -506,9 +506,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<div id="horizontalTab">
 					<ul class="resp-tabs-list">
 						<li>Nơi này có gì?</li>
-						<li>Chính sách</li>
-						<li>Thông tin hữu ích</li>
-						<li>Chủ sở hữu</li>
+						<li>Có những dịch vụ nào?</li>
+						<li>Nội quy ra sao?</li>
+						<li>Ai là chủ nhà?</li>
 					</ul>
 					<div class="resp-tabs-container">
 						<!--/tab_one-->
@@ -552,8 +552,42 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 						<!--//tab_one-->
 
-						<div class="tab3">
-							<p>${building.buildingRule }</p>
+						<div class="tab3">							
+							<table class="table table-striped">
+								<tbody>
+									<c:set var="count" value="${1 }"></c:set>
+									<c:if test="${listService[0] == null}">
+										<td>Không có thông tin</td>
+									</c:if>
+									<c:forEach var="item" items="${listService }">
+
+										<c:if test="${count%4 == 1 }">
+											<tr>
+										</c:if>
+										<td>${item.serviceName}</td>
+										<c:if test="${count%4 == 0}">
+											</tr>
+										</c:if>
+
+										<c:set var="count" value="${count + 1 }"></c:set>
+									</c:forEach>
+									<c:if test="${count%4 == 3}">
+										<td></td>
+										<td></td>
+										<td></td>
+										</tr>
+									</c:if>
+									<c:if test="${count%4 == 2}">
+										<td></td>
+										<td></td>
+										</tr>
+									</c:if>
+									<c:if test="${count%4 == 1}">
+										<td></td>
+										</tr>
+									</c:if>
+								</tbody>
+							</table>
 						</div>
 
 						<!-- tab 3 -->
@@ -561,23 +595,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<div class="table-responsive">
 								<table class="table table-striped">
 									<tbody>
-										<tr>
-											<td>Tình trạng: Còn phòng</td>
-											<td>Sức chứa (tối đa): 6 người</td>
-										</tr>
-
-										<tr>
-											<td>Thời hạn cho thuê: Thương lượng</td>
-											<td>Tiền Cọc: 50$</td>
-										</tr>
-
-										<tr>
-											<td>Địa chỉ: Chỗ này ghi địa chỉ cụ thể, thành phố Đà
-												Lạt, tỉnh Lâm Đồng</td>
-											<td></td>
-										</tr>
-
+									<tr>
+										<td>Thông tin thêm về nơi đây: ${building.buildingDetailInfor == null?'Chưa có thông tin':building.buildingDetailInfor}</td>
+									</tr>
+									<tr>
+										<td>Nội quy: ${building.buildingRule }</td>
+									</tr>
 									</tbody>
+									
 								</table>
 							</div>
 
