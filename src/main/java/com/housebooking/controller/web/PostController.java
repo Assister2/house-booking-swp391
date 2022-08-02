@@ -16,14 +16,17 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.housebooking.DAO.IRoomDAO;
+import com.housebooking.DAOimpl.houseowner.BuildingDAO;
 import com.housebooking.DAOimpl.houseowner.ServiceDAO;
 import com.housebooking.DAOimpl.web.ConvenientDAO;
 import com.housebooking.DAOimpl.web.FeedbackDAO;
+import com.housebooking.DAOimpl.web.NotificationDAO;
 import com.housebooking.DAOimpl.web.RoomDAO;
 import com.housebooking.DAOimpl.web.WebBuildingDAO;
 import com.housebooking.Model.Building;
 import com.housebooking.Model.Convenient;
 import com.housebooking.Model.Feedback;
+import com.housebooking.Model.Notification;
 import com.housebooking.Model.Room;
 import com.housebooking.Model.Service;
 import com.housebooking.Model.UserSession;
@@ -81,10 +84,15 @@ public class PostController extends HttpServlet {
 		
 	
 		if(feedbackDAO.add(feedback)) {
-			request.setAttribute("mess", "Comment th‡nh cÙng!");
+			request.setAttribute("mess", "Comment th√†nh c√¥ng!");
+			NotificationDAO notificationDAO = new NotificationDAO();
+			com.housebooking.DAOimpl.admin.BuildingDAO buildingDAO = new com.housebooking.DAOimpl.admin.BuildingDAO();
+			Building building = buildingDAO.Find(buildingId);
+			Notification notification = new Notification("notification_" + (notificationDAO.Count() + 1), building.getUserId(), date, "B√¨nh lu·∫≠n m·ªõi", "unseen", feedbackId);
+			notificationDAO.add(notification);
 		}
 		else {
-			request.setAttribute("mess", "Comment khÙng th‡nh cÙng!");
+			request.setAttribute("mess", "Comment kh√¥ng th√†nh c√¥ng!");
 		}
 
 		doDisplay(request, response);

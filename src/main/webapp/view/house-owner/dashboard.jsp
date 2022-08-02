@@ -80,34 +80,6 @@
 
 		<!-- End - Nav -->
 
-		<div class="modal fade" id="mediumModal" tabindex="-1" role="dialog"
-			aria-labelledby="mediumModalLabel" aria-hidden="true">
-			<div class="modal-dialog modal-lg" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="mediumModalLabel">Medium Modal</h5>
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="modal-body">
-						<p>There are three species of zebras: the plains zebra, the
-							mountain zebra and the Grévy's zebra. The plains zebra and the
-							mountain zebra belong to the subgenus Hippotigris, but Grévy's
-							zebra is the sole species of subgenus Dolichohippus. The latter
-							resembles an ass, to which it is closely related, while the
-							former two are more horse-like. All three belong to the genus
-							Equus, along with other living equids.</p>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary"
-							data-dismiss="modal">Cancel</button>
-						<button type="button" class="btn btn-primary">Confirm</button>
-					</div>
-				</div>
-			</div>
-		</div>
 
 		<!-- MAIN CONTENT-->
 		<div class="main-content">
@@ -116,7 +88,7 @@
 					<div class="row">
 						<div class="col-md-12">
 							<div class="overview-wrap">
-								<h2 class="title-1">Statistics</h2>
+								<h2 class="title-1">Thống kê ${sessionScope.countRequestNotification }</h2>
 							</div>
 						</div>
 					</div>
@@ -179,14 +151,12 @@
 							<div class="overview-item overview-item--c4">
 								<div class="overview__inner">
 									<div class="overview-box clearfix">
-										<div class="icon">
-											<i class="zmdi zmdi-money"></i>
-										</div>
+										
 										<div class="text">
 										<fmt:formatNumber var="total12Moth" value="${totalBillInLast12Moth}"
 									type="currency" minFractionDigits="0" currencySymbol="" />
 											<h2>${total12Moth } VNĐ</h2>
-											<span>Doanh thu tháng</span>
+											<span>Doanh thu theo tháng</span>
 										</div>
 									</div>
 									<div class="overview-chart">
@@ -201,7 +171,7 @@
 						<div class="col-lg-6">
 							<div class="au-card m-b-30" style="height: 90%;">
 								<div class="au-card-inner">
-									<h3 class="title-2 m-b-40">Tình trạng 2 tuần gần nhất</h3>
+									<h3 class="title-2 m-b-40">Tình trạng 3 tuần gần nhất</h3>
 									<canvas id="lineChart"></canvas>
 								</div>
 							</div>
@@ -209,7 +179,7 @@
 						<div class="col-lg-6">
 							<div class="au-card chart-percent-card" style="height: 90%;">
 								<div class="au-card-inner">
-									<h3 class="title-2 tm-b-5">Thu nhập theo nhà</h3>
+									<h3 class="title-2 tm-b-5">Thu nhập theo nhà (%)</h3>
 									<div class="row no-gutters">
 										<div class="col-xl-6">
 											<div class="chart-note-wrap">
@@ -273,7 +243,7 @@
 						</div>
 					</div>
 
-					<div class="row">
+					<%-- <div class="row">
 						<jsp:useBean id="now" class="java.util.Date" />
 						<fmt:formatDate var="date" value="${now}" pattern="dd - MM - yyyy" />
 						<div class="col-lg-6">
@@ -486,7 +456,7 @@
 						</div>
 						<!-- END MAIN CONTENT-->
 						<!-- END PAGE CONTAINER-->
-					</div>
+					</div> --%>
 
 
 					<!-- Jquery JS-->

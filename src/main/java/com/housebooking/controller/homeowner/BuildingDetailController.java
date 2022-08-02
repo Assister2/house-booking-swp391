@@ -1,6 +1,7 @@
 package com.housebooking.controller.homeowner;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -17,9 +18,12 @@ import javax.servlet.http.Part;
 import com.housebooking.DAOimpl.houseowner.BuildingDAO;
 import com.housebooking.DAOimpl.houseowner.RoomDAO;
 import com.housebooking.DAOimpl.houseowner.TypeOfRoomDAO;
+import com.housebooking.DAOimpl.web.NotificationDAO;
 import com.housebooking.Model.Building;
+import com.housebooking.Model.Notification;
 import com.housebooking.Model.Room;
 import com.housebooking.Model.TypeOfRoom;
+import com.housebooking.Model.UserSession;
 
 /**
  * Servlet implementation class BuildingDetailController
@@ -58,6 +62,36 @@ public class BuildingDetailController extends HttpServlet {
 			}
 		}
 
+	}
+	
+	private void Notification(HttpServletRequest request, HttpServletResponse response) {
+		HttpSession ss = request.getSession(true);
+		UserSession us = (UserSession) ss.getAttribute("usersession");
+		
+		List<Notification> listNotification = new NotificationDAO().list(us.getUser().getUserId());
+		ss.setAttribute("listNotification", listNotification);
+
+//		List<com.housebooking.Model.Notification> listNotification = (List<com.housebooking.Model.Notification>) ss
+//				.getAttribute("listNotification");
+		List<com.housebooking.Model.Notification> listFeedbackNotification = new ArrayList<>();
+		List<com.housebooking.Model.Notification> listRequestNotification = new ArrayList<>();
+
+//		int countFeedbackNotification = 0;
+//		int countRequestNotification = 0;
+
+		for (com.housebooking.Model.Notification item : listNotification) {
+			if (item.getContent().contains("Bình luận")) {
+				// countFeedbackNotification++;
+				listFeedbackNotification.add(item);
+			}
+			if (item.getContent().contains("Yêu cầu")) {
+				// countRequestNotification++;
+				listRequestNotification.add(item);
+			}
+		}
+
+		ss.setAttribute("listFeedbackNotification", listFeedbackNotification);
+		ss.setAttribute("listRequestNotification", listRequestNotification);
 	}
 
 	protected void DeleteRoom(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -258,7 +292,7 @@ public class BuildingDetailController extends HttpServlet {
 
 	protected void doDisplay(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		Notification(request, response);
 		String buildingId = request.getParameter("buildingId");
 
 		RoomDAO roomDAO = new RoomDAO();

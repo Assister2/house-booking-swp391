@@ -17,10 +17,12 @@ import javax.servlet.http.HttpSession;
 
 import com.housebooking.DAOimpl.houseowner.RoomDAO;
 import com.housebooking.DAOimpl.web.BillDAO;
+import com.housebooking.DAOimpl.web.NotificationDAO;
 import com.housebooking.DAOimpl.web.WebBuildingDAO;
 import com.housebooking.Model.Bill;
 import com.housebooking.Model.Bill_Detail;
 import com.housebooking.Model.Building;
+import com.housebooking.Model.Notification;
 import com.housebooking.Model.Room;
 import com.housebooking.Model.UserSession;
 
@@ -97,6 +99,13 @@ public class CheckOutController extends HttpServlet {
 			billDAO.InsertBillDetail(bill);
 			ss.setAttribute("checkout_message","Gửi yêu cầu thành công");
 			request.setAttribute("message", "Đặt phòng thành công");
+			
+			NotificationDAO notificationDAO = new NotificationDAO();
+			com.housebooking.DAOimpl.admin.BuildingDAO buildingDAO = new com.housebooking.DAOimpl.admin.BuildingDAO();
+			Building building = buildingDAO.Find(buildingId);
+			
+			Notification notification = new Notification("notification_" + (notificationDAO.Count() + 1), building.getUserId(), date, "Yêu cầu đặt phòng", "unseen", billId);
+			notificationDAO.add(notification);
 		}
 		else {
 			ss.setAttribute("checkout_message", "Gửi yêu cầu không thành công");

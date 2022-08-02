@@ -533,7 +533,7 @@ hr {
 						</div>
 					</div>
 
-					<div class="row">
+					<!-- <div class="row">
 						<div class="col-md-12">
 							<div class="copyright">
 								<p>
@@ -542,7 +542,7 @@ hr {
 								</p>
 							</div>
 						</div>
-					</div>
+					</div> -->
 				</div>
 			</div>
 		</div>

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -17,11 +18,14 @@ import javax.servlet.http.HttpSession;
 import com.housebooking.DAOimpl.houseowner.BillDAO;
 import com.housebooking.DAOimpl.houseowner.RoomDAO;
 import com.housebooking.DAOimpl.houseowner.ServiceDAO;
+import com.housebooking.DAOimpl.web.NotificationDAO;
 import com.housebooking.Model.Bill;
+import com.housebooking.Model.Notification;
 import com.housebooking.Model.Room;
 import com.housebooking.Model.Service;
 import com.housebooking.Model.ServiceUsed;
 import com.housebooking.Model.User;
+import com.housebooking.Model.UserSession;
 
 @WebServlet("/manage-BillDetail")
 public class BillDetailController extends HttpServlet {
@@ -53,6 +57,36 @@ public class BillDetailController extends HttpServlet {
 		else {
 			doDisplay(request, response);
 		}	
+	}
+	
+	private void Notification(HttpServletRequest request, HttpServletResponse response) {
+		HttpSession ss = request.getSession(true);
+		UserSession us = (UserSession) ss.getAttribute("usersession");
+		
+		List<Notification> listNotification = new NotificationDAO().list(us.getUser().getUserId());
+		ss.setAttribute("listNotification", listNotification);
+
+//		List<com.housebooking.Model.Notification> listNotification = (List<com.housebooking.Model.Notification>) ss
+//				.getAttribute("listNotification");
+		List<com.housebooking.Model.Notification> listFeedbackNotification = new ArrayList<>();
+		List<com.housebooking.Model.Notification> listRequestNotification = new ArrayList<>();
+
+//		int countFeedbackNotification = 0;
+//		int countRequestNotification = 0;
+
+		for (com.housebooking.Model.Notification item : listNotification) {
+			if (item.getContent().contains("Bình luận")) {
+				// countFeedbackNotification++;
+				listFeedbackNotification.add(item);
+			}
+			if (item.getContent().contains("Yêu cầu")) {
+				// countRequestNotification++;
+				listRequestNotification.add(item);
+			}
+		}
+
+		ss.setAttribute("listFeedbackNotification", listFeedbackNotification);
+		ss.setAttribute("listRequestNotification", listRequestNotification);
 	}
 	
 	protected void Cancel(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -188,6 +222,7 @@ public class BillDetailController extends HttpServlet {
 	}
 	
 	protected void doDisplay(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Notification(request, response);
 		String billId = request.getParameter("billId");
 		
 		BillDAO billDAO = new BillDAO();

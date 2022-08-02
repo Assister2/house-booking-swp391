@@ -123,4 +123,48 @@ public class FeedbackDAO {
 
         return false;
     }
+	 
+	 
+	 public Feedback find(String feedbackid) {
+         String sql = "Select * \r\n"
+         		+ "  from Feedback fb join Users u on fb.user_id = u.user_id \r\n"
+         		+ "  Where feedback_id = ?";
+         Feedback feedback = new Feedback();
+        try {
+
+            Connection conn = DBUtils.getConnection();
+
+            PreparedStatement ps = conn.prepareStatement(sql);
+            
+            ps.setString(1, feedbackid);
+            
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {
+						
+				feedback.setFeedbackId(rs.getString("feedback_id"));
+				feedback.setComment(rs.getNString("comment"));
+				feedback.setRating(rs.getInt("rating"));
+				feedback.setStatus(rs.getString("status"));
+				feedback.setFeedbackDate(rs.getDate("feedback_date"));
+				feedback.setReport(rs.getInt("report"));
+				
+				User user = new User();				 
+				user.setUserId(rs.getString("user_id"));
+				user.setName(rs.getNString("user_name"));
+				user.setAvatar(rs.getString("avatar"));
+				
+				feedback.setUser(user);
+			}
+            
+            return feedback;
+
+        } catch (Exception ex) {
+
+            ex.printStackTrace();
+
+        }
+
+        return feedback;
+    }
 }

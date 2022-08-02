@@ -44,12 +44,16 @@
             <div class="container">
                 <div class="login-wrap">
                     <div class="login-content">
-                        <div class="login-logo">
-                            <a href="${pageContext.request.contextPath}/home">
-                                <img style="height: 150px;weight:150px" src="${pageContext.request.contextPath}/view/house-owner/images/icon/house-booking2.png" alt="house-booking">
-                            </a>
-                        </div>
-                        <div class="login-form">
+                        <div class="login-logo" style="margin-top: -10px;">
+							<h1>
+								<a href="${pageContext.request.contextPath}/home"> <img
+									width="220px;"
+									src="${pageContext.request.contextPath}/view/common/image/logo.png"
+									alt="Cool Admin" />
+								</a>
+							</h1>
+						</div>
+                        <div class="login-form" style="margin-top: -60px;">
                             <form action="" method="post">
                              <div class="form-group">
                                     <label>Tên</label>

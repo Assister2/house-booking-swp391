@@ -1,6 +1,7 @@
 package com.housebooking.controller.common;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.housebooking.DAOimpl.web.AccessManager;
+import com.housebooking.DAOimpl.web.NotificationDAO;
+import com.housebooking.Model.Notification;
 import com.housebooking.Model.UserSession;
 
 import com.accessgoogle.common.GooglePojo;
@@ -50,39 +53,6 @@ public class LoginController extends HttpServlet {
 
 	}
 
-//	    if ( code == null || code.isEmpty() ) {
-//	    	System.out.println("asdf");
-//			AccessManager accessManager = new AccessManager();
-//			UserSession us = accessManager.login(username, password);
-//
-//			HttpSession ss = request.getSession(true);
-//
-//			if (us.getUser() != null) {
-//				ss.setAttribute("usersession", us);
-//				switch (us.getUser().getRole()) {
-//				case "Admin":
-//					response.sendRedirect(request.getContextPath() + "/admin");
-//					break;
-//				case "Owner":
-//					response.sendRedirect(request.getContextPath() + "/dashboard");
-//					break;
-//				case "User":
-//					response.sendRedirect(request.getContextPath() + "/home");
-//					break;
-//				}
-//			} else {
-//				request.setAttribute("login_mess", "TÃªn Ä‘Äƒng nháº­p hoáº·c máº­t kháº©u khÃ´ng Ä‘Ãºng");
-//				doDisplay(request, response);
-//			}
-//	    } else {
-//	        String accessToken = GoogleUtils.getToken(code);
-//	        GooglePojo googlePojo = GoogleUtils.getUserInfo(accessToken);
-//	        request.setAttribute("id", googlePojo.getId());
-//	        request.setAttribute("name", googlePojo.getName());
-//	        request.setAttribute("email", googlePojo.getEmail());
-//	        response.sendRedirect(request.getContextPath() + "/home");
-//	      }
-
 	protected void doDisplay(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession ss = request.getSession(true);
@@ -93,6 +63,8 @@ public class LoginController extends HttpServlet {
 				rd.forward(request, response);
 			} else {
 				ss.setAttribute("usersession", us);
+				List<Notification> listNotification = new NotificationDAO().list(us.getUser().getUserId());
+				ss.setAttribute("listNotification", listNotification);
 				switch (us.getUser().getRole()) {
 				case "Admin":
 					response.sendRedirect(request.getContextPath() + "/AdminDashboard");

@@ -1,5 +1,6 @@
 package com.housebooking.controller.homeowner;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -16,8 +17,10 @@ import com.housebooking.DAOimpl.houseowner.BuildingDAO;
 import com.housebooking.DAOimpl.houseowner.ConvenientDAO;
 import com.housebooking.DAOimpl.houseowner.ServiceDAO;
 import com.housebooking.DAOimpl.houseowner.StreetDAO;
+import com.housebooking.DAOimpl.web.NotificationDAO;
 import com.housebooking.Model.Building;
 import com.housebooking.Model.Convenient;
+import com.housebooking.Model.Notification;
 import com.housebooking.Model.Service;
 import com.housebooking.Model.UserSession;
 
@@ -77,6 +80,36 @@ public class ManageController extends HttpServlet {
 			}
 		}
 
+	}
+	
+	private void Notification(HttpServletRequest request, HttpServletResponse response) {
+		HttpSession ss = request.getSession(true);
+		UserSession us = (UserSession) ss.getAttribute("usersession");
+		
+		List<Notification> listNotification = new NotificationDAO().list(us.getUser().getUserId());
+		ss.setAttribute("listNotification", listNotification);
+
+//		List<com.housebooking.Model.Notification> listNotification = (List<com.housebooking.Model.Notification>) ss
+//				.getAttribute("listNotification");
+		List<com.housebooking.Model.Notification> listFeedbackNotification = new ArrayList<>();
+		List<com.housebooking.Model.Notification> listRequestNotification = new ArrayList<>();
+
+//		int countFeedbackNotification = 0;
+//		int countRequestNotification = 0;
+
+		for (com.housebooking.Model.Notification item : listNotification) {
+			if (item.getContent().contains("Bình luận")) {
+				// countFeedbackNotification++;
+				listFeedbackNotification.add(item);
+			}
+			if (item.getContent().contains("Yêu cầu")) {
+				// countRequestNotification++;
+				listRequestNotification.add(item);
+			}
+		}
+
+		ss.setAttribute("listFeedbackNotification", listFeedbackNotification);
+		ss.setAttribute("listRequestNotification", listRequestNotification);
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -343,6 +376,7 @@ public class ManageController extends HttpServlet {
 
 	protected void doDisplay(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		Notification(request, response);
 		HttpSession session = request.getSession();
 		UserSession userSession = (UserSession) session.getAttribute("usersession");
 

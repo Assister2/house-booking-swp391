@@ -340,12 +340,7 @@
 										</a>
 									</form>
 								</div>
-								<div class="table-data__tool-right">
-									<button class="au-btn au-btn-icon au-btn--green au-btn--small">
-										<i class="zmdi zmdi-plus"></i>add item
-									</button>
-
-								</div>
+								
 							</div>
 							<div class="table-responsive table-responsive-data2">
 								<table class="table table-data2">
@@ -401,7 +396,7 @@
 																</button>
 																<div class="dropdown-content">
 																	<a href="" data-toggle="modal"
-																		data-target="#view${item.billID }">Xem</a> <a href=""
+																		data-target="#view${item.billID }">Xem chi tiết</a> <a href=""
 																		data-toggle="modal"
 																		data-target="#approve${item.billID }"">Xác nhận</a> <a
 																		href="" data-toggle="modal"
@@ -417,7 +412,7 @@
 																</button>
 																<div class="dropdown-content">
 																	<a href="" data-toggle="modal"
-																		data-target="#view${item.billID }">Xem</a>
+																		data-target="#view${item.billID }">Xem chi tiết</a>
 																</div>
 															</div>
 														</c:if>
@@ -431,9 +426,9 @@
 																</button>
 																<div class="dropdown-content">
 																	<a href="" data-toggle="modal"
-																		data-target="#view${item.billID }">Xem</a> <a href=""
-																		data-toggle="modal"
-																		data-target="#approve${item.billID }"">Xem hóa đơn</a>
+																		data-target="#view${item.billID }">Xem chi tiết</a> 
+																		<a href="${pageContext.request.contextPath}/manage-BillDetail?billId=${item.billID }"
+																			 >Xem hóa đơn</a>
 																</div>
 															</div>
 														</c:if>
@@ -476,7 +471,7 @@
 						</ul>
 					</div>
 
-					<div class="row">
+					<!-- <div class="row">
 						<div class="col-md-12">
 							<div class="copyright">
 								<p>
@@ -485,7 +480,7 @@
 								</p>
 							</div>
 						</div>
-					</div>
+					</div> -->
 				</div>
 			</div>
 		</div>

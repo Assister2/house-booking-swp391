@@ -466,8 +466,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<p>
 					<fmt:formatNumber var="buildingPrice" value="${building.avgPrice }"
 						type="currency" minFractionDigits="0" currencySymbol="" />
-					<span class="item_price">Giá trung bình: ${buildingPrice }
-						/ngày</span>
+					Giá trung bình:<span class="item_price"> ${buildingPrice }
+						</span>VNĐ/ngày
 				</p>
 				<div>
 					<p style="font-size: 16px;">Loại: ${building.buildingType }</p>
@@ -533,8 +533,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									</c:forEach>
 									<c:if test="${count%4 == 3}">
 										<td></td>
-										<td></td>
-										<td></td>
 										</tr>
 									</c:if>
 									<c:if test="${count%4 == 2}">
@@ -543,6 +541,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 										</tr>
 									</c:if>
 									<c:if test="${count%4 == 1}">
+										<td></td>										
+										<td></td>
 										<td></td>
 										</tr>
 									</c:if>
