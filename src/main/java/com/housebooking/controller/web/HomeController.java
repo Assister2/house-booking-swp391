@@ -42,9 +42,44 @@ public class HomeController extends HttpServlet {
 	protected void Process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
-		
-		doDisplay(request, response);
 
+		String action = request.getParameter("action");
+
+		if (action == null || action.equals("")) {
+			doDisplay(request, response);
+		} else {
+			switch (action) {
+			case "readAllNotification":
+				doReadAllNotification(request, response);
+				break;
+				
+			default:
+				doDisplay(request, response);
+				break;
+			}
+		}
+
+	}
+	
+	protected void doReadAllNotification(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession ss = request.getSession(true);
+		List<com.housebooking.Model.Notification> listNotification = (List<com.housebooking.Model.Notification>) ss
+				.getAttribute("listNotification");
+		NotificationDAO notificationDAO = new NotificationDAO();
+		for (com.housebooking.Model.Notification item : listNotification) {
+			notificationDAO.Seen(item.getId());
+		}
+
+		ss.setAttribute("listNotification", null);
+
+		String path = request.getParameter("path");
+
+		if (path.contains("home.jsp")) {
+			response.sendRedirect("home");
+		}  else {
+			response.sendRedirect("home");
+		}
+		
 	}
 	
 	private void Notification(HttpServletRequest request, HttpServletResponse response) {

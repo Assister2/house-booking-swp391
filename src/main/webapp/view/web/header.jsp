@@ -14,6 +14,9 @@
 						</div>
 						<div class="modal-body">
 							<ul>
+							<c:if test="${sessionScope.listNotification.size() == 0}">
+									Không có thông báo mới
+							</c:if>
 							<c:forEach var="notification" items="${sessionScope.listNotification }">
 								<li style="margin-left: 20px;">Yêu cầu đặt phòng ${notification.bill.billDetail[0].roomId} của homestay 
 								<a href="${pageContext.request.contextPath}/single-post?buildingId=${notification.bill.billDetail[0].room.buildingId}">${notification.bill.billDetail[0].room.buildingId}</a> 
@@ -29,7 +32,7 @@
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-							<button type="button" class="btn btn-primary">Đánh dấu đã đọc</button>
+							<a href="${pageContext.request.contextPath}/home?action=readAllNotification&path=${pageContext.request.requestURI }" type="button" class="btn btn-primary">Đánh dấu đã đọc</a>
 						</div>
 					</div>
 				</div>
