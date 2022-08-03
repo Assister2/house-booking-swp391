@@ -315,8 +315,11 @@ hr {
 										<div class="row">
 											<div class="col-12">
 												<div class="text-center text-150">
-													<i class="fa fa-book fa-2x text-success-m2 mr-1"></i> <span
-														class="text-default-d3">Booking Home</span>
+													<!-- <i class="fa fa-book fa-2x text-success-m2 mr-1"></i> <span
+														class="text-default-d3">Booking Home</span> -->
+														<img width="200px;" class="img-responsive"
+					src="${pageContext.request.contextPath}/view/common/image/logo.png"
+					alt="CoolAdmin" />
 												</div>
 											</div>
 										</div>

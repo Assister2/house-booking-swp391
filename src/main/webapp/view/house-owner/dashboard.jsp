@@ -115,16 +115,16 @@
 							<div class="overview-item overview-item--c2">
 								<div class="overview__inner">
 									<div class="overview-box clearfix">
-										<div class="icon">
-											<i class="zmdi zmdi-shopping-cart"></i>
-										</div>
+										
 										<div class="text">
-											<h2>388,688</h2>
+										<fmt:formatNumber var="totalThisWeek" value="${TongTienTuanNay}"
+									type="currency" minFractionDigits="0" currencySymbol="" />
+											<h2>${totalThisWeek } VNĐ</h2>
 											<span>Doanh thu trong tuần</span>
 										</div>
 									</div>
 									<div class="overview-chart">
-										<canvas id="widgetChart2"></canvas>
+										<canvas id="widgetChart22"></canvas>
 									</div>
 								</div>
 							</div>
@@ -833,6 +833,95 @@
 		      });
 		    }
 			
+			
+			    })(jQuery);
+			</script>
+
+					</c:if>
+					
+					
+					
+					
+					<c:if test="${1 != 0 }">
+						<script>
+			(function($) { </c:if> <c:if test="${1 != 0 }"> 
+					
+			
+			  var ctx = document.getElementById("widgetChart22");
+			    if (ctx) {
+			      ctx.height = 130;
+			      var myChart = new Chart(ctx, {
+			        type: 'line',
+			        data: {
+			          labels: ['Mon', 'Stu', 'Wen', 'Thu', 'Fri', 'Sat', 'Sun'],
+			          type: 'line',
+			          datasets: [{
+			            data: [
+			            	<c:set var="count" value="${1}"></c:set>
+			            	  <c:forEach var="item" items="${Tuannay }">		            	  
+			            	  "${item}" 
+			            	  <c:if test="${count < Tuannay.size()}">,</c:if>
+				        	  <c:set var="count" value="${count + 1}"></c:set>
+								</c:forEach>
+			            ],
+			            label: 'VND',
+			            backgroundColor: 'transparent',
+			            borderColor: 'rgba(255,255,255,.55)',
+			          },]
+			        },
+			        options: {
+
+			          maintainAspectRatio: false,
+			          legend: {
+			            display: false
+			          },
+			          responsive: true,
+			          tooltips: {
+			            mode: 'index',
+			            titleFontSize: 12,
+			            titleFontColor: '#000',
+			            bodyFontColor: '#000',
+			            backgroundColor: '#fff',
+			            titleFontFamily: 'Montserrat',
+			            bodyFontFamily: 'Montserrat',
+			            cornerRadius: 3,
+			            intersect: false,
+			          },
+			          scales: {
+			            xAxes: [{
+			              gridLines: {
+			                color: 'transparent',
+			                zeroLineColor: 'transparent'
+			              },
+			              ticks: {
+			                fontSize: 2,
+			                fontColor: 'transparent'
+			              }
+			            }],
+			            yAxes: [{
+			              display: false,
+			              ticks: {
+			                display: false,
+			              }
+			            }]
+			          },
+			          title: {
+			            display: false,
+			          },
+			          elements: {
+			            line: {
+			              tension: 0.00001,
+			              borderWidth: 1
+			            },
+			            point: {
+			              radius: 4,
+			              hitRadius: 10,
+			              hoverRadius: 4
+			            }
+			          }
+			        }
+			      });
+			    }
 			
 			    })(jQuery);
 			</script>

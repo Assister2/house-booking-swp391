@@ -157,6 +157,7 @@ public class DashboardController extends HttpServlet {
 		List<Integer> AmountBillInThisWeek = billDAO.getBillInThisWeek(userID);
 		List<Integer> AmountBillInLastWeek = billDAO.getBillInLastWeek(userID);
 		List<Integer> AmountBill2WeeksAgo = billDAO.getBill2WeeksAgo(userID);
+		List<Integer> Tuannay = billDAO.getTotalInThisWeek(userID);
 		LinkedHashMap<String, Integer> listLast12MonthBillAmount = billDAO.getLast12MonthBillAmount(userID);
 		LinkedHashMap<String, Integer> listLast12MonthBillTotal = billDAO.getLast12MonthBillTotal(userID);
 		int amountBillInLast12Moth = 0;
@@ -167,7 +168,14 @@ public class DashboardController extends HttpServlet {
 		for (Integer i : listLast12MonthBillTotal.values()) {
 			totalBillInLast12Moth += i;
 		}
+		
+		int TongTienTuanNay = 0;
+		for (Integer i : Tuannay) {
+			TongTienTuanNay += i;
+		}
 
+		request.setAttribute("TongTienTuanNay", TongTienTuanNay);
+		request.setAttribute("Tuannay", Tuannay);
 		request.setAttribute("totalBillInLast12Moth", totalBillInLast12Moth);
 		request.setAttribute("amountBillInLast12Moth", amountBillInLast12Moth);
 		request.setAttribute("listLast12MonthBillTotal", listLast12MonthBillTotal);

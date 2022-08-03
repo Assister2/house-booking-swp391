@@ -411,7 +411,7 @@ body {
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					<a type="button" href="${pageContext.request.contextPath}/home" class="btn btn-success" data-dismiss="modal">Trở về trang chủ</a>
+					<a type="button" href="${pageContext.request.contextPath}/home" class="btn btn-success">Trở về trang chủ</a>
 				</div>
 			</div>
 
