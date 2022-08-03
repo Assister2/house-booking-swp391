@@ -238,7 +238,7 @@ public class RoomDAO implements IRoomDAO {
 				+ "				Select r3.*\r\n"
 				+ "					from Room r3 left join Bill_detail de on r3.room_id = de.room_id\r\n"
 				+ "						left join Bill bi on de.bill_id = bi.bill_id\r\n"
-				+ "					WHERE (\r\n" + "						@startDate >= de.start_date\r\n"
+				+ "					WHERE ((\r\n" + "						@startDate >= de.start_date\r\n"
 				+ "						AND  @endDate <= de.end_date\r\n" + "					)\r\n"
 				+ "					OR(\r\n"
 				+ "						@startDate Between de.start_date and de.end_date\r\n"
@@ -246,7 +246,7 @@ public class RoomDAO implements IRoomDAO {
 				+ "						 @endDate  Between de.start_date and de.end_date\r\n"
 				+ "					)\r\n" + "					OR(\r\n"
 				+ "						@startDate <= de.start_date\r\n"
-				+ "						AND  @endDate >= de.end_date\r\n" + "					)\r\n"
+				+ "						AND  @endDate >= de.end_date\r\n" + "					))  AND bi.status like N'Đã xác nhận' \r\n"
 				+ "			) as r2 on r.room_id = r2.room_id\r\n"
 				+ "			left join Feedback f on r.room_id = f.room_id\r\n";
 		
@@ -447,10 +447,10 @@ public class RoomDAO implements IRoomDAO {
 				+ "	join District dis on st.district_id = dis.district_id\r\n"
 				+ "	join City ci on ci.city_id = dis.city_id\r\n"
 				+ "	left join (\r\n"
-				+ "				Select r3.*\r\n"
+				+ "				Select r3.*, bi.*\r\n"
 				+ "					from Room r3 left join Bill_detail de on r3.room_id = de.room_id\r\n"
 				+ "						left join Bill bi on de.bill_id = bi.bill_id\r\n"
-				+ "					WHERE (\r\n"
+				+ "					WHERE ((\r\n"
 				+ "						@startDate >= de.start_date\r\n"
 				+ "						AND  @endDate <= de.end_date\r\n"
 				+ "					)\r\n"
@@ -463,7 +463,7 @@ public class RoomDAO implements IRoomDAO {
 				+ "					OR(\r\n"
 				+ "						@startDate <= de.start_date\r\n"
 				+ "						AND  @endDate >= de.end_date\r\n"
-				+ "					)\r\n"
+				+ "					)) AND bi.status like N'Đã xác nhận' \r\n"
 				+ "			) as r2 on r.room_id = r2.room_id\r\n"
 				+ " Where b.building_id like ? AND r2.room_id is null AND r.room_status like 'active' AND r.room_price >= ? and r.room_price <= ?\r\n"
 				+ " Group by r.room_id, r.room_name, r.room_desc, r.room_price, r.room_area, r.room_bed, r.room_status, r.building_id, r.type_id, t.type_name";
@@ -479,6 +479,7 @@ public class RoomDAO implements IRoomDAO {
 			ps.setFloat(4, startPrice);
 			ps.setFloat(5, endPrice);
 
+			//System.out.println(sql);
 			ResultSet rs = ps.executeQuery();
 
 			while (rs.next()) {

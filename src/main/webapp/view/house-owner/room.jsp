@@ -490,7 +490,7 @@
 						<div class="col-md-12">
 							<div class="card">
 								<div class="card-header">
-									<strong class="card-title">${building.buildingName } ${building_detail_message == null}<small>
+									<strong class="card-title">${building.buildingName } <small>
 											<c:if test="${building.buildingStatus == 'active'}">
 												<span class="badge badge-success float-right mt-1">Active</span>
 											</c:if> <c:if test="${building.buildingStatus == 'not active'}">

@@ -508,7 +508,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 									<c:if test="${currentPage != 1}">
 										<li class="page-item"><a
-											href="product?action=sort&direction=${param.direction}&by=${param.by}&page=${currentPage - 1}">Previous</a></li>
+											href="${SortUrl}&page=${currentPage - 1}">Previous</a></li>
 									</c:if>
 									<c:forEach begin="1" end="${noOfPages}" var="i">
 										<c:choose>
@@ -517,14 +517,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 											</c:when>
 											<c:otherwise>
 												<li class="page-item"><a
-													href="product?action=sort&direction=${param.direction}&by=${param.by}&page=${i}"
+													href="${SortUrl}&page=${i}"
 													class="page-link">${i}</a></li>
 											</c:otherwise>
 										</c:choose>
 									</c:forEach>
 									<c:if test="${currentPage lt noOfPages}">
 										<li class="page-item"><a
-											href="product?action=sort&direction=${param.direction}&by=${param.by}&page=${currentPage + 1}">Next</a></li>
+											href="${SortUrl}&page=${currentPage + 1}">Next</a></li>
 									</c:if>
 								</ul>
 							</c:when>
@@ -534,7 +534,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 									<c:if test="${currentPage != 1}">
 										<li class="page-item"><a
-											href="product?action=listBy&category=${param.category}&page=${currentPage - 1}">Previous</a></li>
+											href="${SortUrl}&page=${currentPage - 1}">Previous</a></li>
 									</c:if>
 									<c:forEach begin="1" end="${noOfPages}" var="i">
 										<c:choose>
@@ -543,7 +543,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 											</c:when>
 											<c:otherwise>
 												<li class="page-item"><a
-													href="product?action=listBy&category=${param.category}&page=${i}"
+													href="${SortUrl}&page=${i}"
 													class="page-link">${i}</a></li>
 											</c:otherwise>
 										</c:choose>
@@ -551,7 +551,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 									<c:if test="${currentPage lt noOfPages}">
 										<li class="page-item"><a
-											href="product?action=listBy&category=${param.category}&page=${currentPage + 1}">Next</a></li>
+											href="${SortUrl}&page=${currentPage + 1}">Next</a></li>
 									</c:if>
 								</ul>
 							</c:when>
@@ -561,7 +561,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 									<c:if test="${currentPage != 1}">
 										<li class="page-item"><a
-											href="product?action=search&by=${param.by}&keyword=${param.keyword}&page=${currentPage - 1}">Previous</a></li>
+											href="${SortUrl}&page=${currentPage - 1}">Previous</a></li>
 									</c:if>
 									<c:forEach begin="1" end="${noOfPages}" var="i">
 										<c:choose>
@@ -570,7 +570,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 											</c:when>
 											<c:otherwise>
 												<li class="page-item"><a
-													href="product?action=search&by=${param.by}&keyword=${param.keyword}&page=${i}"
+													href="${SortUrl}&page=${i}"
 													class="page-link">${i}</a></li>
 											</c:otherwise>
 										</c:choose>
@@ -578,7 +578,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 									<c:if test="${currentPage lt noOfPages}">
 										<li class="page-item"><a
-											href="product?action=search&by=${param.by}&keyword=${param.keyword}&page=${currentPage + 1}">Next</a></li>
+											href="${SortUrl}&page=${currentPage + 1}">Next</a></li>
 									</c:if>
 								</ul>
 							</c:when>
@@ -588,7 +588,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									<ul class="pagination">
 										<c:if test="${currentPage != 1}">
 											<li class="page-item"><a
-												href="${path}?page=${currentPage - 1}">Previous</a></li>
+												href="${SortUrl}&page=${currentPage - 1}">Previous</a></li>
 										</c:if>
 										<c:forEach begin="1" end="${noOfPages}" var="i">
 											<c:choose>
@@ -596,7 +596,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 													<li class="page-item"><a class="page-link active">${i}</a></li>
 												</c:when>
 												<c:otherwise>
-													<li class="page-item"><a href="${path}?page=${i}"
+													<li class="page-item"><a href="${SortUrl}&page=${i}"
 														class="page-link">${i}</a></li>
 												</c:otherwise>
 											</c:choose>
@@ -604,7 +604,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 										<c:if test="${currentPage lt noOfPages}">
 											<li class="page-item"><a
-												href="${path}?page=${currentPage + 1}">Next</a></li>
+												href="${SortUrl}&page=${currentPage + 1}">Next</a></li>
 
 										</c:if>
 									</ul>

@@ -80,6 +80,15 @@ public class PostController extends HttpServlet {
 		//String email = request.getParameter("email");
 		String comment = request.getParameter("message");
 		String buildingId = request.getParameter("buildingId");
+		
+		String startDate1 = request.getParameter("startDate");
+		String endDate1 = request.getParameter("endDate");
+		
+		String[] arrStartDate = startDate1.split("/");
+		Date startDate = Date.valueOf(arrStartDate[2] + "-" + arrStartDate[0] + "-" + arrStartDate[1]);
+		String[] arrEndDate = endDate1.split("/");
+		Date endDate = Date.valueOf(arrEndDate[2] + "-" + arrEndDate[0] + "-" + arrEndDate[1]);
+		
 		String replyTo = request.getParameter("replyTo");
 		int report = 0;
 		Date date = new Date(System.currentTimeMillis());
@@ -93,6 +102,7 @@ public class PostController extends HttpServlet {
 	
 		if(feedbackDAO.add(feedback)) {
 			request.setAttribute("mess", "Comment thành công!");
+			session.setAttribute("mess", "Comment thành công!");
 			NotificationDAO notificationDAO = new NotificationDAO();
 			com.housebooking.DAOimpl.admin.BuildingDAO buildingDAO = new com.housebooking.DAOimpl.admin.BuildingDAO();
 			Building building = buildingDAO.Find(buildingId);
@@ -100,10 +110,11 @@ public class PostController extends HttpServlet {
 			notificationDAO.add(notification);
 		}
 		else {
+			session.setAttribute("mess", "Comment thành công!");
 			request.setAttribute("mess", "Comment không thành công!");
 		}
 
-		doDisplay(request, response);
+		response.sendRedirect("single-post?buildingId=" + buildingId + "&startDate=" + startDate+ "&startDate=" + endDate);
 	}
 
 	protected void doDisplay(HttpServletRequest request, HttpServletResponse response)

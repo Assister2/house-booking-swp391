@@ -915,6 +915,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					</c:if> --%>
 
 					<form action="single-post" method="post">
+						<input type="hidden" name="startDate" value="${param.startDate }">
+						<input type="hidden" name="endDate" value="${param.endDate }">
 						<input type="hidden" name="action" value="comment"> <input
 							type="hidden" name="buildingId" value="${param.buildingId }">
 						<span class="star-rating"> <input type="radio"
