@@ -130,7 +130,7 @@
 						<div class="col-lg-12">
 							<div class="au-card m-b-30">
 								<div class="au-card-inner">
-									<h3 class="title-2 m-b-40">Thống kê bài đăng gần đây</h3>
+									<h3 class="title-2 m-b-40">Thống kê bài đăng trong tuần</h3>
 									<canvas id="singelBarChart21"></canvas>
 								</div>
 							</div>
@@ -533,11 +533,18 @@
 	      var myChart = new Chart(ctx, {
 	        type: 'bar',
 	        data: {
-	          labels: ["Sun", "Mon", "Tu", "Wed", "Th", "Fri", "Sat"],
+	          labels: ["Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6", "Thứ 7", "CN"],
 	          datasets: [
 	            {
 	              label: "Số lượng bài đăng",
-	              data: [40, 55, 75, 81, 56, 55, 40],
+	              data: [
+	            	  <c:set var="count" value="${1}"></c:set>
+	            	  <c:forEach var="item" items="${Thongke }">
+					${item}
+					<c:if test="${count < Thongke.size()}">,</c:if>
+	        	  <c:set var="count" value="${count + 1}"></c:set>
+					</c:forEach>
+	              ],
 	              borderColor: "rgba(0, 123, 255, 0.9)",
 	              borderWidth: "0",
 	              backgroundColor: "rgba(0, 123, 255, 0.5)"

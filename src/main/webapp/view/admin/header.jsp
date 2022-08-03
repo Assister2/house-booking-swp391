@@ -65,6 +65,9 @@
 				<li><a href="${pageContext.request.contextPath}/AdminGeneralControl"> <i
 						class="fas fa-table"></i>Quản lý chung
 				</a></li>
+				<li><a href="${pageContext.request.contextPath}/missing-admin-feature">
+												<i class="zmdi zmdi-settings"></i>Setting
+											</a></li>
 
 				<li><a href="${pageContext.request.contextPath}/my-account">
 						<i class="fa fa-user"></i>Tài khoản
@@ -83,8 +86,98 @@
 		<div class="section__content section__content--p30">
 			<div class="container-fluid">
 				<div class="header-wrap">
-					<h4 style="">The quality - the successful</h4>
+					<form class="form-header" action="" method="POST">
+						<input class="au-input au-input--xl" type="text" name="search"
+							placeholder="Search for datas &amp; reports..." />
+						<button class="au-btn--submit" type="submit">
+							<i class="zmdi zmdi-search"></i>
+						</button>
+					</form>
 					<div class="header-button">
+						<div class="noti-wrap">
+							<div class="noti__item js-item-menu">
+								<i class="zmdi zmdi-comment-more"></i> 
+								<c:if test="${sessionScope.listFeedbackNotification.size() > 0}">
+									<span class="quantity">${sessionScope.listFeedbackNotification.size() }</span>
+								</c:if>							
+								<div class="mess-dropdown js-dropdown">
+									<div class="mess__title">
+										<c:if test="${sessionScope.listFeedbackNotification.size() > 0}">
+											<p>Bạn có ${sessionScope.listFeedbackNotification.size() }
+											bình luận mới chưa đọc</p>
+										</c:if>
+										<c:if test="${sessionScope.listFeedbackNotification.size() == 0}">
+											<p>Không có bình luận hay đánh giá mới</p>
+										</c:if>
+									</div>
+
+									<c:forEach var="feedback"
+										items="${sessionScope.listFeedbackNotification}">
+										
+											<div class="mess__item">
+												<div class="image img-cir img-40">
+													<img
+														src="${pageContext.request.contextPath}${feedback.feedback.user.avatar }"
+														alt="Michelle Moreno" />
+												</div>
+												<div class="content">
+													<h6>${feedback.feedback.user.name } </h6>
+													<p>${feedback.content}</p>
+													<span class="time">${feedback.date }</span>
+												</div>
+											</div>
+										
+									</c:forEach>
+
+									<div class="mess__footer">
+									<c:if test="${sessionScope.listFeedbackNotification.size() > 0}">
+											<a href="${pageContext.request.contextPath}/dashboard?action=readAllFeedback&path=${pageContext.request.requestURI }">Đánh dấu tất cả đã đọc</a>
+										</c:if>
+										
+									</div>
+								</div>
+							</div>
+
+							<div class="noti__item js-item-menu">
+								<i class="zmdi zmdi-notifications"></i> 
+								<c:if test="${sessionScope.listRequestNotification.size() > 0}">
+									<span class="quantity">${sessionScope.listRequestNotification.size() }</span>
+								</c:if>	
+								
+								<div class="notifi-dropdown js-dropdown">
+									<div class="notifi__title">
+										<c:if test="${sessionScope.listRequestNotification.size() > 0}">
+											<p>Có ${sessionScope.listRequestNotification.size() } yêu
+											cầu đặt phòng mới</p>
+										</c:if>
+										<c:if test="${sessionScope.listRequestNotification.size() == 0}">
+											<p>Đã xem tất cả yêu cầu đặt phòng</p>
+										</c:if>
+									</div>
+									<c:forEach var="request"
+										items="${sessionScope.listRequestNotification}">
+										<div class="notifi__item">
+											<div class="bg-c1 img-cir img-40">
+												<i class="zmdi zmdi-file-text"></i>
+											</div>
+											<div class="content">
+												<p>${request.content }</p>
+												<span class="date">${request.date }</span>
+											</div>
+										</div>
+									</c:forEach>
+
+									<div class="notifi__footer">
+									<c:if test="${sessionScope.listRequestNotification.size() == 0}">
+											
+										</c:if>
+										<c:if test="${sessionScope.listRequestNotification.size() > 0}">
+											<a href="${pageContext.request.contextPath}/dashboard?action=readAllRequest&path=${pageContext.request.requestURI }">Đánh dấu tất cả đã đọc</a>
+										</c:if>
+										
+									</div>
+								</div>
+							</div>
 						
 						<div class="account-wrap">
 							<div class="account-item clearfix js-item-menu">

@@ -1,5 +1,6 @@
 package com.housebooking.Model;
 
+import java.sql.Date;
 import java.util.Comparator;
 
 public class Building implements Comparator<Building>{
@@ -22,7 +23,22 @@ public class Building implements Comparator<Building>{
 	private String buildingDetailInfor;
 	private String buildingNumber;
 	private float avgPrice;
+	private int report;
+	private Date date;
 	
+	
+	public int getReport() {
+		return report;
+	}
+	public void setReport(int report) {
+		this.report = report;
+	}
+	public Date getDate() {
+		return date;
+	}
+	public void setDate(Date date) {
+		this.date = date;
+	}
 	public float getAvgPrice() {
 		return avgPrice;
 	}
@@ -50,7 +66,7 @@ public class Building implements Comparator<Building>{
 	public Building(String buildingId, String buildingDesc, String buildingName, String buildingType,
 			String buildingRule, String buildingStatus, String buildingImage, String buildingAddress, String streetId,
 			String userId, int numRoom, float rating, float buildingArea, String buildingDetailInfor,
-			String buildingNumber) {
+			String buildingNumber,int report, Date date) {
 		super();
 		this.buildingId = buildingId;
 		this.buildingDesc = buildingDesc;
@@ -67,6 +83,8 @@ public class Building implements Comparator<Building>{
 		this.buildingArea = buildingArea;
 		this.buildingDetailInfor = buildingDetailInfor;
 		this.buildingNumber = buildingNumber;
+		this.report = report;
+		this.date = date;
 	}
 	public String getBuildingStatus() {
 		return buildingStatus;

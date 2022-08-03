@@ -1,5 +1,6 @@
 package com.housebooking.controller.homeowner;
 import java.io.IOException;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -338,6 +339,7 @@ public class ManageController extends HttpServlet {
 		String imageLink = "";
 		HttpSession ss = request.getSession(true);
 		UserSession userSession = (UserSession) ss.getAttribute("usersession");
+		Date date = new Date(System.currentTimeMillis());
 		
 		try {
 			Part part = request.getPart("image");
@@ -346,7 +348,7 @@ public class ManageController extends HttpServlet {
 			
 			Building building = new Building(buildingId, buildingDescrip, buildingName
 					, buildingType, buildingRules, buidingStatus, imageLink
-					, null, streetNumber, userSession.getUser().getUserId(), 0, 0, area, buildingInfor, buildingNumber);
+					, null, streetNumber, userSession.getUser().getUserId(), 0, 0, area, buildingInfor, buildingNumber,0, date);
 			
 			if(buildingDAO.AddNewBuilding(building)) {
 				request.setAttribute("message", "Thêm thành công!");

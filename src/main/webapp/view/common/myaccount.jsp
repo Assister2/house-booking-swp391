@@ -527,15 +527,15 @@
 												placeholder="Last name" value="Người cho thuê"
 												disabled="disabled">
 										</c:if>
-										<c:if test="${usersession.user.role == 'Admin'}">
+										<c:if test="${usersession.user.role == 'User'}">
 											<input type="text" id="input-last-name"
 												class="form-control form-control-alternative"
-												placeholder="Last name" value="Admin" disabled="disabled">
+												placeholder="Last name" value="Khách thuể" disabled="disabled">
 										</c:if>
 										<c:if test="${usersession.user.role == 'Admin'}">
 											<input type="text" id="input-last-name"
 												class="form-control form-control-alternative"
-												placeholder="Last name" value="Khách hàng"
+												placeholder="Last name" value="Admin"
 												disabled="disabled">
 										</c:if>
 									</div>

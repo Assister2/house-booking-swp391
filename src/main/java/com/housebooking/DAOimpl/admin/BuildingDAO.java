@@ -13,6 +13,60 @@ import com.housebooking.Model.Service;
 import com.housebooking.Utils.DBUtils;
 
 public class BuildingDAO {
+	
+	public List<Integer> GetStatistic() {
+		List<Integer> result = new ArrayList<Integer>();
+		for (int i = 0; i < 7; i++) {
+			result.add(i, 0);
+		}
+		String sql = " Select count(b.building_id) as amount, DATENAME(WEEKDAY, b.date) as datename, b.date\r\n"
+				+ " From Building b join Users u on b.user_id = u.user_id\r\n"
+				+ " Where DATEPART(DAYOFYEAR, b.date) >= DATEPART(DAYOFYEAR,CAST( DATEADD(dd,  0, DATEADD(ww, DATEDIFF(ww, 0, DATEADD(dd, -1, GETDATE())) , 0)) AS Date)) \r\n"
+				+ " AND DATEPART(DAYOFYEAR,b.date) <= DATEPART(DAYOFYEAR,CAST( DATEADD(dd,  6, DATEADD(ww, DATEDIFF(ww, 0, DATEADD(dd, -1, GETDATE())) , 0)) AS Date)) \r\n"
+				+ " Group by DATENAME(WEEKDAY, b.date), b.date\r\n"
+				+ " Order by b.date ASC";
+
+		try {
+
+			Connection conn = DBUtils.getConnection();
+
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				switch (rs.getString("datename")) {
+				case "Monday":
+					result.set(0, rs.getInt("amount"));
+					break;
+				case "Tuesday":
+					result.set(1, rs.getInt("amount"));
+					break;
+				case "Wednesday":
+					result.set(2, rs.getInt("amount"));
+					break;
+				case "Thursday":
+					result.set(3, rs.getInt("amount"));
+					break;
+				case "Friday":
+					result.set(4, rs.getInt("amount"));
+					break;
+				case "Saturday":
+					result.set(5, rs.getInt("amount"));
+					break;
+				case "Sunday":
+					result.set(6, rs.getInt("amount"));
+					break;
+				}
+			}
+
+		} catch (Exception ex) {
+
+			ex.printStackTrace();
+
+		}
+
+		return result;
+	}
 
 	public int Count() {
 

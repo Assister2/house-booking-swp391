@@ -1,6 +1,8 @@
 package com.housebooking.controller.admin;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -45,7 +47,9 @@ public class DashboardController extends HttpServlet {
 		int owner = userDAO.OwnerCount();
 		int user = userDAO.NormalUserCount();
 		int totalPost = buildingDAO.list(-1, -1, "", "").size();
+		List<Integer> Thongke = buildingDAO.GetStatistic();
 		
+		request.setAttribute("Thongke", Thongke);
 		request.setAttribute("totalBill", totalBill);
 		request.setAttribute("user", user);
 		request.setAttribute("owner", owner);

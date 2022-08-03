@@ -374,7 +374,7 @@ public class BuildingDAO {
 
 	public boolean AddNewBuilding(Building building) {
 
-		String sql = "Insert into Building\r\n" + "Values(?,?,?,?,?,?,?,?,?,?,?,?) ";
+		String sql = "Insert into Building\r\n" + "Values(?,?,?,?,?,?,?,?,?,?,?,?,?,?) ";
 		try {
 
 			Connection conn = DBUtils.getConnection();
@@ -392,6 +392,8 @@ public class BuildingDAO {
 			ps.setNString(10, building.getBuildingRule());
 			ps.setString(11, building.getStreetId());
 			ps.setString(12, building.getUserId());
+			ps.setInt(13, building.getReport());
+			ps.setDate(14, building.getDate());
 
 			if (ps.executeUpdate() > 0) {
 				return true;

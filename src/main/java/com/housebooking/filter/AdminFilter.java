@@ -15,15 +15,30 @@ import javax.servlet.http.HttpSession;
 import com.housebooking.Model.UserSession;
 
 /**
- * Servlet Filter implementation class OwnerFilter
+ * Servlet Filter implementation class AdminFilter
  */
-@WebFilter(filterName = "LoginFilter", urlPatterns = {"/dashboard", "/manage", "/manage-bill", "/invoice-manage", "/manage-BillDetail", "/building-detail"})
-public class OwnerFilter implements Filter {
+@WebFilter(urlPatterns = {"/AdminDashboard", "/AdminManage", "/AdminGeneralControl", "/missing-admin-feature"})
+public class AdminFilter implements Filter {
 
-    /**
-     * Default constructor. 
-     */
-    public OwnerFilter() {
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+		HttpServletRequest req = (HttpServletRequest) request;
+        HttpServletResponse res = (HttpServletResponse) response;
+        
+        HttpSession session = req.getSession();
+        String loginURI = req.getContextPath() + "/home";
+
+        boolean loggedIn = ((UserSession)session.getAttribute("usersession")) != null && 
+                ((UserSession)session.getAttribute("usersession")).getUser().getRole().equals("Admin");
+        //boolean loginRequest = req.getRequestURI().equals(loginURI);
+
+        if (loggedIn) {
+            chain.doFilter(request, response);
+        } else {
+            res.sendRedirect(loginURI);
+        }
+	}
+	
+    public AdminFilter() {
         // TODO Auto-generated constructor stub
     }
 
@@ -34,26 +49,6 @@ public class OwnerFilter implements Filter {
 		// TODO Auto-generated method stub
 	}
 
-	/**
-	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
-	 */
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		HttpServletRequest req = (HttpServletRequest) request;
-        HttpServletResponse res = (HttpServletResponse) response;
-        
-        HttpSession session = req.getSession();
-        String loginURI = req.getContextPath() + "/home";
-
-        boolean loggedIn = ((UserSession)session.getAttribute("usersession")) != null && 
-                ((UserSession)session.getAttribute("usersession")).getUser().getRole().equals("Owner");
-        //boolean loginRequest = req.getRequestURI().equals(loginURI);
-
-        if (loggedIn) {
-            chain.doFilter(request, response);
-        } else {
-            res.sendRedirect(loginURI);
-        }
-	}
 
 	/**
 	 * @see Filter#init(FilterConfig)
