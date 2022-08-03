@@ -2,6 +2,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
+
 <!-- modal medium -->
 			<div class="modal fade" id="notification" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
 				<div class="modal-dialog modal-lg" role="document">

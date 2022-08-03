@@ -398,6 +398,33 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 	</div>
 	
+	<div id="smallModel" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Thông báo</h4>
+				</div>
+				<div class="modal-body">
+				<p>${sessionScope.mess }</p>
+					
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	<!-- end modal small -->
+
+	<!-- Trigger the modal with a button -->
+	<button type="button" style="display: none;" id="showMessage"
+		class="showMess btn btn-info btn-lg" data-toggle="modal"
+		data-target="#smallModel">Open Modal</button>
+	
 	 <!-- Deny -->
 			<!-- modal small -->
 			<form action="AdminManage" method="get">
@@ -878,14 +905,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 				<div class="blog-comment-form">
 					<h3>Leave a Comment</h3>
-					<c:if test="${mess != null}">
+					<%-- <c:if test="${mess != null}">
 						<c:if test="${mess != 'Comment thành công!'}">
 							<p style="color: red;">${mess }</p>
 						</c:if>
 						<c:if test="${mess == 'Comment thành công!'}">
 							<p style="color: green;">${mess }</p>
 						</c:if>
-					</c:if>
+					</c:if> --%>
 
 					<form action="single-post" method="post">
 						<input type="hidden" name="action" value="comment"> <input
@@ -1125,6 +1152,21 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				})
 	</script>
 
+	<c:if test="${sessionScope.mess != null}">
+		<script>
+			function myFunction() {
+				document.getElementById("showMessage").click();
+			}
+			myFunction();
+		</script>
+		
+		<%   
+  
+		HttpSession ss = request.getSession(true);
+		ss.setAttribute("mess", null);
+  
+		%>  
+	</c:if>
 
 </body>
 

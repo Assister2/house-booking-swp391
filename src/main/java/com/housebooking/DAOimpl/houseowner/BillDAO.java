@@ -243,6 +243,7 @@ public class BillDAO {
 			while (rs.next()) {
 				Bill bill = new Bill();
 				FillBillData(rs, bill);
+				bill.setUser(new UserDAO().find(bill.getUserId()));
 				bill.setBillDetail(listBillDetail(bill.getBillID()));
 				list.add(bill);
 			}

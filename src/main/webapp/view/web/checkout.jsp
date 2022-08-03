@@ -406,11 +406,12 @@ body {
 					<h4 class="modal-title">Thông báo</h4>
 				</div>
 				<div class="modal-body">
-					<p>${checkout_message }</p>
-
+				<p>${sessionScope.checkout_message }</p>
+					
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<a type="button" href="${pageContext.request.contextPath}/home" class="btn btn-success" data-dismiss="modal">Trở về trang chủ</a>
 				</div>
 			</div>
 
@@ -440,27 +441,7 @@ body {
 					</div>
 					<div class="col-md-8">
 						<div class="c">${building.buildingName }</div>
-						<%-- <div class="d"
-							style="display: flex; z-index: 1; position: sticky; transition: all .4s; align-items: center; border-bottom: 1px solid #E2E8F0;">
-							<span style="width: 16px; height: 16px; margin-right: 6px;"><svg
-									width="16" height="16" fill="none">
-									<path
-										d="M2 14v-1.333A2.667 2.667 0 014.667 10h2.666A2.667 2.667 0 0110 12.667V14m.667-11.913a2.667 2.667 0 010 5.166M14 14v-1.333a2.667 2.667 0 00-2-2.567M8.667 4.667a2.667 2.667 0 11-5.334 0 2.667 2.667 0 015.334 0z"
-										stroke="#4A5568" stroke-linecap="round"
-										stroke-linejoin="round"></path></svg></span> <span
-								class="MuiBox-root jss1071">Sức chứa tối đa 2 người</span> <span
-								class="MuiBox-root jss1074"
-								style="margin-left: 30%; width: 16px; height: 16px; margin-right: 6px;"><svg
-									width="16" height="16" fill="none">
-									<path
-										d="M12 2H4a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2V4a2 2 0 00-2-2z"
-										stroke="#4A5568" stroke-miterlimit="10"
-										stroke-linecap="square"></path>
-									<path d="M11.333 11.333L5 5M11.334 8.333v3h-3M4.667 7.667v-3h3"
-										stroke="#4A5568" stroke-miterlimit="10" stroke-linecap="round"
-										stroke-linejoin="round"></path></svg></span><span
-								class="MuiBox-root jss1075">${building.buildingArea } m2</span>
-						</div> --%>
+						
 						<div class="row" style="height: 75%;">
 							<div class="col-md-12">
 								<div>
@@ -680,13 +661,26 @@ body {
 			});
 		});
 	</script>
-
-	<c:if test="${checkout_message != null }">
+	<script
+		src="${pageContext.request.contextPath}/view/house-owner/vendor/jquery-3.2.1.min.js"></script>
+<%-- 
+	<c:if test="${param.startDate != null }">
 		<script>
 			let myModal = new bootstrap.Modal(document
-					.getElementById('smallmodal'), {});
+					.getElementById('message_session'), {});
 			myModal.show();
 		</script>
+		
+	</c:if> --%>
+	
+	<c:if test="${sessionScope.checkout_message != null}">
+		<script>
+			function myFunction() {
+				document.getElementById("showMessage").click();
+			}
+			myFunction();
+		</script>
+		
 		<%   
   
 		HttpSession ss = request.getSession(true);
@@ -694,6 +688,7 @@ body {
   
 		%>  
 	</c:if>
+	
 
 </body>
 

@@ -120,7 +120,7 @@
 										</div>
 										<div class="text">
 											<h2>388,688</h2>
-											<span>Request đã giải quyết</span>
+											<span>Doanh thu trong tuần</span>
 										</div>
 									</div>
 									<div class="overview-chart">
